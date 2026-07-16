@@ -1,29 +1,17 @@
-node_modules
-
-.next
-
-dist
+.turbo
 
 coverage
 
-.turbo
+dist
 
-.env
+.next
 
-.env.*
+.env.local
 
-!.env.example
+.env.development.local
 
-pnpm-lock.yaml
+.env.test.local
 
-.DS_Store
+.env.production.local
 
-.idea
-
-.vscode/settings.json
-
-.prisma
-
-generated
-
-tmp
+*.tsbuildinfo

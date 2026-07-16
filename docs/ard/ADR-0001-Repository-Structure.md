@@ -30,7 +30,7 @@ The repository must support:
 Caelix will use a **Turborepo Monorepo**.
 
 ```
-caelix-platform/
+caelix-business-os/
 
 apps/
 
@@ -48,7 +48,7 @@ docs/
 # Repository Layout
 
 ```
-caelix-platform/
+caelix-business-os/
 
 apps/
     admin/

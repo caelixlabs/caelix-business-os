@@ -1,5 +1,5 @@
 {
-  "name": "caelix-platform",
+  "name": "caelix-business-os",
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@10.15.0",
@@ -11,14 +11,23 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
+    "lint:fix": "biome check --write .",
     "test": "turbo test",
     "typecheck": "turbo typecheck",
     "clean": "turbo clean",
-    "format": "prettier --write ."
+    "format": "biome format --write .",
+    "prepare": "husky"
   },
   "devDependencies": {
-    "turbo": "^2.1.1",
-    "typescript": "^5.8.3",
-    "prettier": "^3.5.3"
+    "@biomejs/biome": "^2.5.4",
+    "@changesets/cli": "^2.31.1",
+    "husky": "^9.1.7",
+    "prettier": "^3.5.3",
+    "turbo": "^2.10.5",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.10"
+  },
+  "dependencies": {
+    "pnpm": "^10.34.5"
   }
 }
