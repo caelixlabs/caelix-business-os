@@ -8,6 +8,12 @@ dist
 
 .env.local
 
+.env
+
+.env.*
+
+!.env.example
+
 .env.development.local
 
 .env.test.local
@@ -15,3 +21,11 @@ dist
 .env.production.local
 
 *.tsbuildinfo
+
+node_modules
+
+/generated/prisma
+
+/generated/prisma
+
+/generated/prisma

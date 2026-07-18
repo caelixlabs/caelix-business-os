@@ -18,8 +18,5 @@
     "test": {
       "dependsOn": ["^test"]
     },
-    "clean": {
-      "cache": false
-    }
   }
 }
