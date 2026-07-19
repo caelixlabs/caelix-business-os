@@ -3,15 +3,13 @@ import { prisma } from '@caelix-business-os/database';
 
 @Injectable()
 export class PrismaService implements OnModuleInit, OnModuleDestroy {
+  readonly client = prisma;
+
   async onModuleInit() {
-    await prisma.$connect();
+    await this.client.$connect();
   }
 
   async onModuleDestroy() {
-    await prisma.$disconnect();
-  }
-
-  get client() {
-    return prisma;
+    await this.client.$disconnect();
   }
 }

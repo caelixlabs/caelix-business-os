@@ -1,0 +1,5 @@
+export class GetOrganizationQuery {
+  constructor(public readonly id: string) {}
+}
+
+export class GetOrganizationsQuery {}

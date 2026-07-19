@@ -1,4 +1,4 @@
-import { CreateOrganizationDto } from '../dto/create-organization.dto';
+import { CreateOrganizationDto } from './create-organization.dto';
 
 export class CreateOrganizationCommand {
   constructor(

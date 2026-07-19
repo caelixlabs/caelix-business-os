@@ -12,12 +12,14 @@
     }
   },
   "scripts": {
-    "generate": "prisma generate --schema prisma/schema.prisma",
-    "build": "tsc -p tsconfig.json && npm run sync:generated",
-    "dev": "npm run sync:generated && tsc -p tsconfig.json --watch --preserveWatchOutput",
-    "migrate": "prisma migrate dev --schema prisma/schema.prisma",
-    "studio": "prisma studio --schema prisma/schema.prisma",
-    "db:push": "prisma db push --schema prisma/schema.prisma"
+    "prepare": "pnpm build",
+    "build": "tsc -p tsconfig.json && node scripts/sync-generated.mjs",
+    "dev": "node scripts/sync-generated.mjs && tsc -p tsconfig.json --watch --preserveWatchOutput",
+    "sync:generated": "node scripts/sync-generated.mjs",
+    "generate": "dotenv -e ../../.env -- prisma generate --schema prisma/schema.prisma && node scripts/sync-generated.mjs",
+    "migrate": "dotenv -e ../../.env -- prisma migrate dev --schema prisma/schema.prisma",
+    "studio": "dotenv -e ../../.env -- prisma studio --schema prisma/schema.prisma",
+    "db:push": "dotenv -e ../../.env -- prisma db push --schema prisma/schema.prisma"
   },
   "dependencies": {
     "@prisma/client": "^6.16.3"

@@ -1,7 +1,8 @@
-import Module from '@nestjs/common';
+import { Module } from "@nestjs/common";
+import { OrganizationModule } from "src/core/organization/organization.module";
 
 @Module({
-  imports: [],
+  imports: [OrganizationModule],
   exports: [],
 })
 export class KernelModule {}
