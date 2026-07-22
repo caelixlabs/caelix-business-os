@@ -1,11 +1,14 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { OrganizationRepository } from "../../domain/repositories/organization.repository";
+import { Inject, Injectable } from '@nestjs/common';
+import type { OrganizationRepository } from "../../domain/repositories/organization.repository";
 import { Organization } from "../../domain/entities/organization.entity";
 import { UpdateOrganizationCommand } from './update-organization.command';
+import { ORGANIZATION_REPOSITORY } from '../../domain/repositories';
+import { ConflictException } from '@/common/framework/exceptions';
 
 @Injectable()
 export class UpdateOrganizationHandler {
   constructor(
+    @Inject(ORGANIZATION_REPOSITORY)
     private readonly repository: OrganizationRepository,
   ) {}
 
@@ -13,7 +16,7 @@ export class UpdateOrganizationHandler {
     const existing = await this.repository.findById(command.id);
 
     if (!existing) {
-      throw new NotFoundException('Organization not found');
+      throw new ConflictException('Organization already exists.');
     }
 
     const organization = new Organization(

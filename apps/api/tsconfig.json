@@ -6,8 +6,10 @@
     "target": "ES2023",
 
     "outDir": "./dist",
-    "baseUrl": "./",
-
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    },
     "declaration": true,
     "sourceMap": true,
 

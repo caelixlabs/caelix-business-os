@@ -1,18 +1,16 @@
 import { Injectable } from "@nestjs/common";
-import { PrismaService } from "src/common/prisma";
-import { OrganizationRepository } from "../../domain/repositories/organization.repository";
+import type { OrganizationRepository } from "../../domain/repositories/organization.repository";
 import { Organization } from "../../domain/entities/organization.entity";
 import { OrganizationMapper } from "../organization.mapper";
+import { PrismaService } from "@/common/prisma";
 
 @Injectable()
 export class OrganizationPrismaRepository
-  extends OrganizationRepository
+  implements OrganizationRepository
 {
   constructor(
     private readonly prisma: PrismaService,
-  ) {
-    super();
-  }
+  ) {}
 
   async findBySlug(slug: string): Promise<Organization | null> {
     const model = await this.prisma.client.organization.findUnique({

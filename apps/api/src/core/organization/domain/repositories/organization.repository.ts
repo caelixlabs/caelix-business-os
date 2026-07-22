@@ -1,24 +1,25 @@
 import { Organization } from '../entities/organization.entity';
+import { Repository } from '@/common/ddd';
 
-export abstract class OrganizationRepository {
-  abstract create(
+export interface OrganizationRepository extends Repository<Organization> {
+  create(
     organization: Organization,
   ): Promise<Organization>;
 
-  abstract findBySlug(
+  findBySlug(
     slug: string,
   ): Promise<Organization | null>;
   
   //GET Organization
-  abstract findById(id: string): Promise<Organization | null>;
+  findById(id: string): Promise<Organization | null>;
   
   //list Organizations
-  abstract findAll(): Promise<Organization[]>;
+  findAll(): Promise<Organization[]>;
 
   //update organization
-  abstract update(entity: Organization): Promise<Organization>;
+  update(entity: Organization): Promise<Organization>;
 
   //delete organization
-  abstract delete(id: string): Promise<void>;
+  delete(id: string): Promise<void>;
   
 }

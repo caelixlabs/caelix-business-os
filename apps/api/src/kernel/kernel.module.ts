@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { OrganizationModule } from "src/core/organization/organization.module";
+import { OrganizationModule } from "@/core/organization/organization.module";
 
 @Module({
   imports: [OrganizationModule],

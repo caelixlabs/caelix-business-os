@@ -1,9 +1,9 @@
 import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
-import { prisma } from '@caelix-business-os/database';
+import { PrismaClient, prisma } from '@caelix-business-os/database';
 
 @Injectable()
 export class PrismaService implements OnModuleInit, OnModuleDestroy {
-  readonly client = prisma;
+  readonly client: PrismaClient = prisma;
 
   async onModuleInit() {
     await this.client.$connect();

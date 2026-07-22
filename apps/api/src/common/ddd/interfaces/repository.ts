@@ -1,4 +1,4 @@
-export interface Repository<TEntity, TId> {
+export interface Repository<TEntity, TId = String> {
   findById(id: TId): Promise<TEntity | null>;
 
   findAll(): Promise<TEntity[]>;
