@@ -12,9 +12,17 @@ export abstract class AggregateRoot<TId = string> extends Entity<TId> {
     this.domainEvents.push(event);
   }
 
+  public getDomainEvents(): DomainEvent[] {
+    return [...this.domainEvents];
+  }
+
+   public clearDomainEvents(): void {
+    this.domainEvents.length = 0;
+  }
+
   public pullDomainEvents(): DomainEvent[] {
     const events = [...this.domainEvents];
-    this.domainEvents.length = 0;
+    this.clearDomainEvents();
     return events;
   }
 }

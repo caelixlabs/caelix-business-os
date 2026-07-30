@@ -12,9 +12,11 @@ dist
 *.tsbuildinfo
 node_modules
 /generated/prisma
-node_modules
+node_modules/
 build/
 *.log
 .DS_Store
 .vscode/
 .idea/
+apps/api/src/**/*.js
+apps/api/src/**/*.js.map

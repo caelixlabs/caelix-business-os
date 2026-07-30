@@ -19,7 +19,34 @@ model Organization {
   name      String
   slug      String   @unique
   description String?
+  branches Branch[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+enum BranchStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+model Branch {
+  id             String       @id @db.Char(32)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  name           String
+  code           String
+  description    String?
+
+  status         BranchStatus
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([organizationId, code])
+  @@unique([organizationId, name])
+
+  @@index([organizationId])
 }

@@ -3,6 +3,7 @@ import type { OrganizationRepository } from "../../domain/repositories/organizat
 import { Organization } from "../../domain/entities/organization.entity";
 import { OrganizationMapper } from "../organization.mapper";
 import { PrismaService } from "@/common/prisma";
+import { EventBus } from "@/common/ddd";
 
 @Injectable()
 export class OrganizationPrismaRepository
@@ -10,6 +11,7 @@ export class OrganizationPrismaRepository
 {
   constructor(
     private readonly prisma: PrismaService,
+    private readonly eventBus: EventBus,
   ) {}
 
   async findBySlug(slug: string): Promise<Organization | null> {
@@ -24,6 +26,10 @@ export class OrganizationPrismaRepository
     const model = await this.prisma.client.organization.create({
       data: OrganizationMapper.toPersistence(entity),
     });
+
+    await this.eventBus.publishAll(
+      entity.pullDomainEvents(),
+    );
 
     return OrganizationMapper.toDomain(model);
   }

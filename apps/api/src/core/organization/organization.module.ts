@@ -6,6 +6,8 @@ import { UpdateOrganizationHandler } from "./application/update-organization/upd
 import { ListOrganizationsHandler } from "./application/list-organizations/list-organizations.handler";
 import { DeleteOrganizationHandler } from "./application/delete-organization/delete-organizations.handler";
 import { ORGANIZATION_REPOSITORY } from "./domain/repositories";
+import { SendWelcomeEmailHandler } from "./application/event-handlers/send-welcome-email.handler";
+import { AuditLogHandler } from "./application/event-handlers";
 
 @Module({
   controllers: [
@@ -18,6 +20,9 @@ import { ORGANIZATION_REPOSITORY } from "./domain/repositories";
     UpdateOrganizationHandler,
     ListOrganizationsHandler,
     DeleteOrganizationHandler,
+    SendWelcomeEmailHandler,
+    CreateOrganizationHandler,
+    AuditLogHandler,
     {
       provide: ORGANIZATION_REPOSITORY,
       useClass: OrganizationPrismaRepository,

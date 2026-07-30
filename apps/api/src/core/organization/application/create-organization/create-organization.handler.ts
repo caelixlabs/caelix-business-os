@@ -10,9 +10,9 @@ import { ORGANIZATION_REPOSITORY } from "../../domain/repositories";
 @Injectable()
 export class CreateOrganizationHandler {
   constructor(
-     @Inject(ORGANIZATION_REPOSITORY)
+    @Inject(ORGANIZATION_REPOSITORY)
     private readonly repository: OrganizationRepository,
-  ) {}
+  ) { }
 
   async execute(command: CreateOrganizationCommand) {
     const { name, slug, description } = command.dto;
@@ -23,13 +23,13 @@ export class CreateOrganizationHandler {
         `Organization '${slug}' already exists`,
       );
     }
-    const organization = new Organization(
-      customUUID.generate(),
+    const organization = Organization.create({
+      id: customUUID.generate(),
       name,
       slug,
       description,
-    );
-    console.log("organization", organization);
+    });
+    console.log("organization creation log", organization);
     return this.repository.create(organization);
   }
 }
@@ -39,15 +39,15 @@ export class GetOrganizationHandler {
   constructor(
     @Inject(ORGANIZATION_REPOSITORY)
     private readonly repository: OrganizationRepository,
-  ) {}
+  ) { }
 
   async execute(command: GetOrganizationQuery) {
     const organization = await this.repository.findById(command.id);
-    
+
     if (!organization) {
       throw new EntityNotFoundException(
-          'Organization',
-          command.id,
+        'Organization',
+        command.id,
       );
     }
 
@@ -60,7 +60,7 @@ export class GetOrganizationsHandler {
   constructor(
     @Inject(ORGANIZATION_REPOSITORY)
     private readonly repository: OrganizationRepository,
-  ) {}
+  ) { }
 
   execute() {
     return this.repository.findAll();
