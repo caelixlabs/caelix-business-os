@@ -1,4 +1,4 @@
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { Inject, Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
 
 import { USER_REPOSITORY } from '@/core/users/domain/repositories';
 import type { UserRepository } from '@/core/users/domain/repositories';
@@ -21,7 +21,7 @@ export class LoginHandler {
     private readonly organizationRepository: OrganizationRepository,
     private readonly passwordHasher: PasswordHasherService,
     private readonly authSessionService: AuthSessionService,
-  ) {}
+  ) { }
 
   async execute(command: LoginCommand) {
     const { dto } = command;
@@ -29,9 +29,12 @@ export class LoginHandler {
     const organization = await this.organizationRepository.findBySlug(
       dto.organizationSlug,
     );
-    console.log("org data", organization);
+
     if (!organization) {
       throw new UnauthorizedException(INVALID_CREDENTIALS_MESSAGE);
+    }
+    if (!organization.industry) {
+      throw new InternalServerErrorException('Organization configuration is invalid');
     }
 
     const user = await this.userRepository.findByEmail(
@@ -61,7 +64,7 @@ export class LoginHandler {
 
     user.recordLogin();
     const savedUser = await this.userRepository.update(user);
-    const session = await this.authSessionService.issueSession(savedUser, {replaceExistingSession: true});
+    const session = await this.authSessionService.issueSession(savedUser);
 
     return { user: savedUser, session };
   }

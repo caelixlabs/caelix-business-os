@@ -1,4 +1,8 @@
-import { UnauthorizedException } from '@nestjs/common';
+
+import {
+  InternalServerErrorException,
+  UnauthorizedException,
+} from '@nestjs/common';
 
 import { LoginHandler } from '@/core/auth/application/login/login.handler';
 import { LoginCommand } from '@/core/auth/application/login/login.command';
@@ -6,8 +10,12 @@ import { PasswordHasherService } from '@/common/security/password-hasher.service
 import { AuthSessionService } from '@/core/auth/application/services/auth-session.service';
 import { User } from '@/core/users/domain/entities/user.entity';
 import type { UserRepository } from '@/core/users/domain/repositories';
-import { Organization } from '@/core/organization/domain/entities/organization.entity';
+import {
+  Organization,
+  
+} from '@/core/organization/domain/entities/organization.entity';
 import type { OrganizationRepository } from '@/core/organization/domain/repositories';
+import { IndustryType } from '@/core/organization/domain/enums/industry-type.enum';
 
 describe('LoginHandler', () => {
   let userRepository: jest.Mocked<UserRepository>;
@@ -20,6 +28,9 @@ describe('LoginHandler', () => {
     id: 'org-1',
     name: 'Acme Gym',
     slug: 'acme-gym',
+    industry: IndustryType.GYM,
+    createdAt: new Date,
+    updatedAt: new Date,
   });
 
   const existingUser = User.register({
@@ -81,14 +92,47 @@ describe('LoginHandler', () => {
   it('throws UnauthorizedException when the organization slug does not exist', async () => {
     organizationRepository.findBySlug.mockResolvedValue(null);
 
-    await expect(handler.execute(command)).rejects.toThrow(UnauthorizedException);
+    await expect(handler.execute(command)).rejects.toThrow(
+      UnauthorizedException,
+    );
+
+    expect(userRepository.findByEmail).not.toHaveBeenCalled();
+  });
+
+  it('throws InternalServerErrorException when the organization has no industry', async () => {
+    const organizationWithoutIndustry = Organization.create({
+      id: 'org-2',
+    name: 'Acme Gym',
+    slug: 'acme-gym',
+    industry: IndustryType.GYM,
+    createdAt: new Date,
+    updatedAt: new Date,
+    });
+
+    // Simulate legacy/corrupt persisted data.
+    Object.defineProperty(organizationWithoutIndustry, 'industry', {
+      value: null,
+      writable: true,
+    });
+
+    organizationRepository.findBySlug.mockResolvedValue(
+      organizationWithoutIndustry,
+    );
+
+    await expect(handler.execute(command)).rejects.toThrow(
+      InternalServerErrorException,
+    );
+
     expect(userRepository.findByEmail).not.toHaveBeenCalled();
   });
 
   it('throws UnauthorizedException when no user exists for the email', async () => {
     userRepository.findByEmail.mockResolvedValue(null);
 
-    await expect(handler.execute(command)).rejects.toThrow(UnauthorizedException);
+    await expect(handler.execute(command)).rejects.toThrow(
+      UnauthorizedException,
+    );
+
     expect(passwordHasher.compare).not.toHaveBeenCalled();
   });
 
@@ -96,23 +140,32 @@ describe('LoginHandler', () => {
     userRepository.findByEmail.mockResolvedValue(existingUser);
     passwordHasher.compare.mockResolvedValue(false);
 
-    await expect(handler.execute(command)).rejects.toThrow(UnauthorizedException);
+    await expect(handler.execute(command)).rejects.toThrow(
+      UnauthorizedException,
+    );
+
     expect(authSessionService.issueSession).not.toHaveBeenCalled();
   });
 
   it('never reveals whether the org, email, or password was wrong', async () => {
     organizationRepository.findBySlug.mockResolvedValue(null);
+
     let noOrgError: Error | undefined;
+
     try {
       await handler.execute(command);
     } catch (e) {
       noOrgError = e as Error;
     }
 
-    organizationRepository.findBySlug.mockResolvedValue(existingOrganization);
+    organizationRepository.findBySlug.mockResolvedValue(
+      existingOrganization,
+    );
     userRepository.findByEmail.mockResolvedValue(existingUser);
     passwordHasher.compare.mockResolvedValue(false);
+
     let wrongPasswordError: Error | undefined;
+
     try {
       await handler.execute(command);
     } catch (e) {
@@ -131,29 +184,38 @@ describe('LoginHandler', () => {
       firstName: 'S',
       lastName: 'U',
     });
+
     suspended.suspend();
 
     userRepository.findByEmail.mockResolvedValue(suspended);
     passwordHasher.compare.mockResolvedValue(true);
 
-    await expect(handler.execute(command)).rejects.toThrow(UnauthorizedException);
+    await expect(handler.execute(command)).rejects.toThrow(
+      UnauthorizedException,
+    );
   });
 
   it('records login, persists it, and issues a session on success', async () => {
     userRepository.findByEmail.mockResolvedValue(existingUser);
     passwordHasher.compare.mockResolvedValue(true);
+
     userRepository.update.mockImplementation(async (u) => u);
+
     authSessionService.issueSession.mockResolvedValue({
-      accessToken: 'access-token',
-      refreshToken: 'refresh-token',
-      tokenType: 'Bearer',
-    });
+  accessToken: 'access-token',
+  refreshToken: 'refresh-token',
+  tokenType: 'Bearer',
+  roles: [],
+  permissions: [],
+});
 
     const result = await handler.execute(command);
 
     expect(userRepository.update).toHaveBeenCalledWith(existingUser);
     expect(existingUser.lastLoginAt).toBeInstanceOf(Date);
-    expect(authSessionService.issueSession).toHaveBeenCalledWith(existingUser);
+    expect(authSessionService.issueSession).toHaveBeenCalledWith(
+      existingUser,
+    );
     expect(result.session.accessToken).toBe('access-token');
   });
 });

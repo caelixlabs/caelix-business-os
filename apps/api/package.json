@@ -81,7 +81,8 @@
       ]
     },
     "moduleNameMapper": {
-      "^@/(.*)$": "<rootDir>/src/$1"
+      "^@/(.*)$": "<rootDir>/src/$1",
+      "^@caelix-business-os/database$": "<rootDir>/src/__mocks__/database.ts"
     },
     "collectCoverageFrom": [
       "**/*.(t|j)s"
