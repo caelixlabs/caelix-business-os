@@ -1,8 +1,8 @@
-import { Inject, Injectable } from "@nestjs/common";
-import type { OrganizationRepository } from "../../domain/repositories/organization.repository";
-import { DeleteOrganizationCommand } from "./delete-organizations.command";
-import { EntityNotFoundException } from "@/common/framework/exceptions";
-import { ORGANIZATION_REPOSITORY } from "../../domain/repositories";
+import { Inject, Injectable } from '@nestjs/common';
+import type { OrganizationRepository } from '../../domain/repositories/organization.repository';
+import { DeleteOrganizationCommand } from './delete-organizations.command';
+import { EntityNotFoundException } from '@/common/framework/exceptions';
+import { ORGANIZATION_REPOSITORY } from '../../domain/repositories';
 
 @Injectable()
 export class DeleteOrganizationHandler {
@@ -15,10 +15,7 @@ export class DeleteOrganizationHandler {
     const organization = await this.repository.findById(command.id);
 
     if (!organization) {
-       throw new EntityNotFoundException(
-          'Organization',
-          command.id,
-        );
+      throw new EntityNotFoundException('Organization', command.id);
     }
 
     await this.repository.delete(command.id);

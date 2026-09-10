@@ -1,26 +1,15 @@
 import { Global, Module } from '@nestjs/common';
-import {
-  DiscoveryModule,
-} from '@nestjs/core';
+import { DiscoveryModule } from '@nestjs/core';
 import { EventBus } from './bus';
 import { EventDiscoveryService } from './discovery';
 import { EventRegistry } from './registry';
 
 @Global()
 @Module({
-  imports: [
-    DiscoveryModule,
-  ],
+  imports: [DiscoveryModule],
 
-  providers: [
-    EventRegistry,
-    EventBus,
-    EventDiscoveryService,
-  ],
+  providers: [EventRegistry, EventBus, EventDiscoveryService],
 
-  exports: [
-    EventRegistry,
-    EventBus,
-  ],
+  exports: [EventRegistry, EventBus],
 })
 export class EventsModule {}

@@ -28,7 +28,6 @@
 
     "noImplicitReturns": true,
 
-    "noFallthroughCasesInSwitch": true,
-
+    "noFallthroughCasesInSwitch": true
   }
 }

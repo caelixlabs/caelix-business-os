@@ -1,4 +1,4 @@
-import { DomainEvent } from "@/common/ddd/events/interfaces";
+import { DomainEvent } from '@/common/ddd/events/interfaces';
 
 export class OrganizationCreatedEvent implements DomainEvent {
   readonly occurredOn = new Date();

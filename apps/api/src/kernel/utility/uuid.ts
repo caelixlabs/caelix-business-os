@@ -1,7 +1,7 @@
-import { v7 as uuidv7 } from 'uuid';
+import { randomUUID } from 'crypto';
 
 export class customUUID {
   static generate(): string {
-    return uuidv7().replace(/-/g, '');
+    return randomUUID().replace(/-/g, '');
   }
 }

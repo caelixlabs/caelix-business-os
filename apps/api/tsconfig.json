@@ -18,5 +18,4 @@
   },
   "include": ["src/**/*", "src/**/*.spec.ts", "src/**/*.test.ts", "test/**/*.ts"],
   "exclude": ["dist", "node_modules"]
-  
 }

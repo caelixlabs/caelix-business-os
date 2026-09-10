@@ -108,7 +108,7 @@ Primary
 
 - Gym
 - Fitness Centers
-- Music Academy
+- Music Org
 - Dance Studio
 - Yoga Studio
 
@@ -226,7 +226,7 @@ Industry Packs provide industry-specific business logic.
 Examples
 
 - Gym
-- Music Academy
+- Music Org
 - Restaurant
 - Salon
 - Clinic

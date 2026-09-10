@@ -13,13 +13,52 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum IndustryType {
+  MUSIC_ORG
+  GYM
+}
+
 model Organization {
   id String @id @db.Char(32)
 
   name        String
-  slug        String   @unique
+  slug        String  @unique
   description String?
-  branches    Branch[]
+
+  industry      IndustryType
+  branches      Branch[]
+  users         User[]
+  roles         Role[]
+  auditLogs     AuditLog[]
+  settings      OrganizationSetting[]
+  notifications Notification[]
+
+  // Music Org - current feature set
+  musicStudents     MusicStudent[]
+  musicCourses      MusicCourse[]
+  musicBatches      MusicBatch[]
+  musicEnrollments  MusicEnrollment[]
+  musicAttendance   MusicAttendance[]
+  musicPracticeLogs MusicPracticeLog[]
+
+  // Existing Music Academy domain
+  musicInquiries     MusicInquiry[]
+  courses            Course[]
+  instructorProfiles InstructorProfile[]
+  studentProfiles    StudentProfile[]
+  musicPackages      MusicPackage[]
+  musicDiscounts     MusicDiscount[]
+  musicSubscriptions MusicSubscription[]
+  lessonSessions     LessonSession[]
+  lessonAttendances  LessonAttendance[]
+  videoLessons       VideoLesson[]
+  musicInvoices      MusicInvoice[]
+  musicPayments      MusicPayment[]
+  contacts           Contact[]
+  products           Product[]
+  inventory          InventoryItem[]
+  enquiries          Enquiry[]
+  bookings           Booking[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -31,8 +70,870 @@ enum BranchStatus {
   ARCHIVED
 }
 
+enum BranchType {
+  PRIMARY
+  STANDARD
+}
+
 model Branch {
+  id             String @id @db.Char(32)
+  organizationId String
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  name        String
+  code        String
+  type        BranchType   @default(STANDARD)
+  description String?
+  status      BranchStatus
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users    User[]
+  contacts Contact[]
+
+  // New Music Org
+  musicStudents MusicStudent[]
+  musicBatches  MusicBatch[]
+
+  // Existing Music Academy domain
+  musicInquiries MusicInquiry[]
+  lessonSessions LessonSession[]
+
+  //inventory
+  inventory InventoryItem[]
+  enquiries Enquiry[]
+  bookings  Booking[]
+
+  @@unique([organizationId, code])
+  @@unique([organizationId, name])
+  @@index([organizationId])
+}
+
+model DomainEvent {
+  id            String    @id @db.Char(32)
+  aggregateId   String
+  aggregateType String
+  eventName     String
+  payload       Json
+  occurredAt    DateTime
+  publishedAt   DateTime?
+
+  @@index([aggregateId])
+  @@index([publishedAt])
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  INVITED
+  SUSPENDED
+}
+
+model User {
+  id String @id @db.Char(32)
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  branchId String?
+  branch   Branch? @relation(fields: [branchId], references: [id], onDelete: SetNull)
+
+  email        String
+  passwordHash String
+  firstName    String
+  lastName     String
+  status       UserStatus @default(INVITED)
+  lastLoginAt  DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  refreshTokens RefreshToken[]
+  userRoles     UserRole[]
+  notifications Notification[]
+
+  // Existing Music Academy domain
+  instructorProfile InstructorProfile?
+  studentProfile    StudentProfile?
+
+  // New Music Org batches
+  musicTeachingBatches MusicBatch[]
+  enquiries            Enquiry[]
+
+  @@unique([organizationId, email])
+  @@index([organizationId])
+  @@index([organizationId, branchId])
+}
+
+model RefreshToken {
+  id     String @id @db.Char(32)
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  tokenHash String    @unique
+  expiresAt DateTime
+  revokedAt DateTime?
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+// Fixed hierarchy: OWNER > ADMIN > MANAGER > EMPLOYEE > VIEWER.
+enum RoleLevel {
+  OWNER
+  ADMIN
+  MANAGER
+  EMPLOYEE
+  VIEWER
+}
+
+model Role {
+  id             String        @id @db.Char(32)
+  organizationId String? // null = system-defined role template, seeded once and reused by every org
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  name     String
+  level    RoleLevel
+  isSystem Boolean   @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  rolePermissions RolePermission[]
+  userRoles       UserRole[]
+
+  @@unique([organizationId, name])
+  @@index([organizationId])
+}
+
+model Permission {
+  id          String @id @db.Char(32)
+  code        String @unique // e.g. "organization:update", "branch:create"
+  description String
+  module      String // e.g. "organization", "branch", "users"
+
+  createdAt DateTime @default(now())
+
+  rolePermissions RolePermission[]
+
+  @@index([module])
+}
+
+model RolePermission {
+  roleId String
+  role   Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  permissionId String
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+}
+
+model UserRole {
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  roleId String
+  role   Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  branchId String? // null = organization-wide grant
+
+  @@id([userId, roleId])
+  @@index([userId])
+}
+
+model AuditLog {
   id             String       @id @db.Char(32)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  branchId    String?
+  actorUserId String? // null = system-initiated action (e.g. auto-created primary branch)
+
+  action     String // e.g. "organization.created", "branch.created", "user.registered"
+  entityType String // e.g. "Organization", "Branch", "User"
+  entityId   String
+
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  @@index([organizationId, entityType])
+  @@index([entityType, entityId])
+}
+
+model OrganizationSetting {
+  id             String       @id @db.Char(32)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  key   String
+  value Json
+
+  updatedAt DateTime @updatedAt
+
+  @@unique([organizationId, key])
+  @@index([organizationId])
+}
+
+model Notification {
+  id             String       @id @db.Char(32)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  userId String // recipient
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type     String // e.g. "user.registered", "branch.created", "role.changed"
+  title    String
+  message  String
+  metadata Json?
+  readAt   DateTime?
+
+  createdAt DateTime @default(now())
+
+  @@index([userId, readAt])
+  @@index([organizationId])
+}
+
+enum InquiryStatus {
+  NEW
+  CONTACTED
+  TRIAL_SCHEDULED
+  ENROLLED
+  LOST
+}
+
+enum SkillLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum SessionStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+  RESCHEDULED
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  EXCUSED
+  LATE
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+  PAST_DUE
+}
+
+enum DiscountType {
+  PERCENTAGE
+  FIXED_AMOUNT
+}
+
+enum InvoiceStatus {
+  DRAFT
+  ISSUED
+  PAID
+  OVERDUE
+  VOID
+}
+
+enum PaymentMethod {
+  STRIPE
+  CASH
+  BANK_TRANSFER
+  UPI
+  POS
+}
+
+model MusicInquiry {
+  id              String        @id @default(uuid())
+  organizationId  String
+  branchId        String?
+  studentName     String
+  guardianName    String?
+  email           String
+  phone           String
+  instrument      String
+  skillLevel      SkillLevel    @default(BEGINNER)
+  status          InquiryStatus @default(NEW)
+  trialSessionAt  DateTime?
+  notes           String?
+  assignedStaffId String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  branch       Branch?      @relation(fields: [branchId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, status])
+  @@index([organizationId, branchId])
+  @@map("music_inquiries")
+}
+
+model Course {
+  id             String     @id @default(uuid())
+  organizationId String
+  title          String
+  slug           String
+  instrument     String
+  description    String?
+  skillLevel     SkillLevel
+  isIndividual   Boolean    @default(true) // true = 1-on-1, false = Group class
+  maxCapacity    Int        @default(1)
+  isActive       Boolean    @default(true)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+
+  organization Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  packages     MusicPackage[]
+  sessions     LessonSession[]
+  videoLessons VideoLesson[]
+
+  @@unique([organizationId, slug])
+  @@index([organizationId, instrument])
+  @@map("music_courses")
+}
+
+model InstructorProfile {
+  id                String   @id @default(uuid())
+  organizationId    String
+  userId            String   @unique
+  specialties       String[] // e.g. ["Guitar", "Bass", "Music Production"]
+  hourlyRate        Decimal  @db.Decimal(10, 2)
+  commissionRatePct Decimal  @default(0) @db.Decimal(5, 2)
+  workingHours      Json // Weekly availability: { "monday": [{ "start": "09:00", "end": "18:00" }] }
+  bio               String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  organization Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sessions     LessonSession[]
+
+  @@index([organizationId])
+  @@map("music_instructor_profiles")
+}
+
+model StudentProfile {
+  id               String    @id @default(uuid())
+  organizationId   String
+  userId           String?   @unique
+  fullName         String
+  email            String
+  phone            String
+  guardianName     String?
+  guardianPhone    String?
+  guardianEmail    String?
+  emergencyContact String?
+  dob              DateTime?
+  registeredAt     DateTime  @default(now())
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  organization  Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user          User?               @relation(fields: [userId], references: [id], onDelete: SetNull)
+  subscriptions MusicSubscription[]
+  attendances   LessonAttendance[]
+
+  @@index([organizationId])
+  @@map("music_student_profiles")
+}
+
+model MusicPackage {
+  id             String   @id @default(uuid())
+  organizationId String
+  courseId       String
+  name           String
+  description    String?
+  price          Decimal  @db.Decimal(10, 2)
+  discountPrice  Decimal? @db.Decimal(10, 2)
+  currency       String   @default("USD")
+  totalSessions  Int // e.g., 8, 12, 24 lessons
+  validityDays   Int // e.g., 30, 60, 90 days
+  isFeatured     Boolean  @default(false)
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  organization  Organization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  course        Course                 @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  subscriptions MusicSubscription[]
+  discounts     MusicPackageDiscount[]
+
+  @@index([organizationId, courseId])
+  @@map("music_packages")
+}
+
+model MusicDiscount {
+  id             String       @id @default(uuid())
+  organizationId String
+  code           String // e.g., "SUMMER20", "EARLYBIRD"
+  description    String?
+  type           DiscountType @default(PERCENTAGE)
+  value          Decimal      @db.Decimal(10, 2) // 20% or $50.00
+  startsAt       DateTime
+  expiresAt      DateTime
+  maxUses        Int?
+  usedCount      Int          @default(0)
+  isActive       Boolean      @default(true)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  organization  Organization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  packages      MusicPackageDiscount[]
+  subscriptions MusicSubscription[]
+
+  @@unique([organizationId, code])
+  @@map("music_discounts")
+}
+
+model MusicPackageDiscount {
+  packageId  String
+  discountId String
+
+  package  MusicPackage  @relation(fields: [packageId], references: [id], onDelete: Cascade)
+  discount MusicDiscount @relation(fields: [discountId], references: [id], onDelete: Cascade)
+
+  @@id([packageId, discountId])
+  @@map("music_package_discounts")
+}
+
+model MusicSubscription {
+  id                String             @id @default(uuid())
+  organizationId    String
+  studentId         String
+  packageId         String
+  discountId        String?
+  status            SubscriptionStatus @default(ACTIVE)
+  sessionsTotal     Int
+  sessionsRemaining Int
+  startsAt          DateTime
+  expiresAt         DateTime
+  autoRenew         Boolean            @default(false)
+  renewalNotifiedAt DateTime?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+
+  organization Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  student      StudentProfile  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  package      MusicPackage    @relation(fields: [packageId], references: [id], onDelete: Restrict)
+  discount     MusicDiscount?  @relation(fields: [discountId], references: [id], onDelete: SetNull)
+  invoices     MusicInvoice[]
+  sessions     LessonSession[]
+
+  @@index([organizationId, status, expiresAt])
+  @@index([studentId])
+  @@map("music_subscriptions")
+}
+
+model LessonSession {
+  id             String        @id @default(uuid())
+  organizationId String
+  branchId       String
+  courseId       String
+  instructorId   String
+  subscriptionId String?
+  title          String
+  roomNumber     String? // e.g. "Studio 2", "Piano Room A"
+  startTime      DateTime
+  endTime        DateTime
+  status         SessionStatus @default(SCHEDULED)
+  notes          String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  organization Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  branch       Branch             @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  course       Course             @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  instructor   InstructorProfile  @relation(fields: [instructorId], references: [id], onDelete: Restrict)
+  subscription MusicSubscription? @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
+  attendances  LessonAttendance[]
+
+  @@index([organizationId, branchId, startTime])
+  @@index([instructorId, startTime])
+  @@map("music_lesson_sessions")
+}
+
+model LessonAttendance {
+  id               String           @id @default(uuid())
+  organizationId   String
+  sessionId        String
+  studentId        String
+  status           AttendanceStatus @default(PRESENT)
+  markedAt         DateTime         @default(now())
+  remarks          String?
+  homeworkAssigned String?
+
+  organization Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  session      LessonSession  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  student      StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([sessionId, studentId])
+  @@index([organizationId, studentId, status])
+  @@map("music_lesson_attendances")
+}
+
+model VideoLesson {
+  id              String   @id @default(uuid())
+  organizationId  String
+  courseId        String?
+  title           String
+  description     String?
+  videoUrl        String // S3/CloudFront URL or external stream link
+  thumbnailUrl    String?
+  durationSeconds Int
+  attachments     Json? // PDF sheet music, tabs, chords: [{ "name": "Sheet.pdf", "url": "..." }]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  course       Course?      @relation(fields: [courseId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, courseId])
+  @@map("music_video_lessons")
+}
+
+model MusicInvoice {
+  id             String        @id @default(uuid())
+  organizationId String
+  subscriptionId String?
+  invoiceNumber  String
+  subtotal       Decimal       @db.Decimal(10, 2)
+  discountAmount Decimal       @default(0) @db.Decimal(10, 2)
+  taxAmount      Decimal       @default(0) @db.Decimal(10, 2)
+  totalAmount    Decimal       @db.Decimal(10, 2)
+  status         InvoiceStatus @default(DRAFT)
+  dueDate        DateTime
+  paidAt         DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  organization Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  subscription MusicSubscription? @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
+  payments     MusicPayment[]
+
+  @@unique([organizationId, invoiceNumber])
+  @@index([organizationId, status])
+  @@map("music_invoices")
+}
+
+model MusicPayment {
+  id             String        @id @default(uuid())
+  organizationId String
+  invoiceId      String
+  amount         Decimal       @db.Decimal(10, 2)
+  paymentMethod  PaymentMethod
+  referenceId    String? // Gateway transaction ID or receipt code
+  paidAt         DateTime      @default(now())
+  createdAt      DateTime      @default(now())
+
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  invoice      MusicInvoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, invoiceId])
+  @@map("music_payments")
+}
+
+enum MusicStudentStatus {
+  ACTIVE
+  INACTIVE
+  GRADUATED
+  ON_HOLD
+}
+
+enum MusicSkillLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  PROFESSIONAL
+}
+
+enum MusicCourseStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum MusicBatchStatus {
+  PLANNED
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+enum MusicEnrollmentStatus {
+  ACTIVE
+  PAUSED
+  COMPLETED
+  CANCELLED
+}
+
+enum MusicAttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+  EXCUSED
+}
+
+model MusicStudent {
+  id String @id @db.Char(32)
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  branchId String?
+  branch   Branch? @relation(fields: [branchId], references: [id], onDelete: SetNull)
+
+  studentNo String
+
+  firstName String
+  lastName  String
+
+  email String?
+  phone String?
+
+  dateOfBirth DateTime?
+
+  guardianName  String?
+  guardianPhone String?
+  guardianEmail String?
+
+  instrument String?
+  skillLevel MusicSkillLevel    @default(BEGINNER)
+  status     MusicStudentStatus @default(ACTIVE)
+
+  joinedAt DateTime @default(now())
+  notes    String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  enrollments  MusicEnrollment[]
+  attendance   MusicAttendance[]
+  practiceLogs MusicPracticeLog[]
+
+  @@unique([organizationId, studentNo])
+  @@index([organizationId])
+  @@index([organizationId, branchId])
+  @@index([organizationId, status])
+}
+
+model MusicCourse {
+  id String @id @db.Char(32)
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  code        String
+  name        String
+  description String?
+
+  instrument String?
+  skillLevel MusicSkillLevel @default(BEGINNER)
+
+  durationWeeks        Int?
+  classDurationMinutes Int  @default(60)
+
+  status MusicCourseStatus @default(ACTIVE)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  batches MusicBatch[]
+
+  @@unique([organizationId, code])
+  @@index([organizationId])
+  @@index([organizationId, status])
+}
+
+model MusicBatch {
+  id String @id @db.Char(32)
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  branchId String
+  branch   Branch @relation(fields: [branchId], references: [id], onDelete: Cascade)
+
+  courseId String
+  course   MusicCourse @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  teacherUserId String?
+  teacher       User?   @relation(fields: [teacherUserId], references: [id], onDelete: SetNull)
+
+  name     String
+  capacity Int    @default(20)
+
+  startDate DateTime
+  endDate   DateTime?
+
+  days String[]
+
+  startTime String
+  endTime   String
+
+  status MusicBatchStatus @default(PLANNED)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  enrollments MusicEnrollment[]
+  attendance  MusicAttendance[]
+
+  @@index([organizationId])
+  @@index([organizationId, branchId])
+  @@index([organizationId, status])
+}
+
+model MusicEnrollment {
+  id String @id @db.Char(32)
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  studentId String
+  student   MusicStudent @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  batchId String
+  batch   MusicBatch @relation(fields: [batchId], references: [id], onDelete: Cascade)
+
+  enrolledAt DateTime @default(now())
+
+  feeAmount      Int @default(0)
+  discountAmount Int @default(0)
+
+  status MusicEnrollmentStatus @default(ACTIVE)
+
+  notes String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([studentId, batchId])
+  @@index([organizationId])
+  @@index([organizationId, status])
+}
+
+model MusicAttendance {
+  id String @id @db.Char(32)
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  studentId String
+  student   MusicStudent @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  batchId String
+  batch   MusicBatch @relation(fields: [batchId], references: [id], onDelete: Cascade)
+
+  date DateTime
+
+  status MusicAttendanceStatus @default(PRESENT)
+
+  notes String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([studentId, batchId, date])
+  @@index([organizationId, date])
+  @@index([organizationId, batchId, date])
+}
+
+model MusicPracticeLog {
+  id String @id @db.Char(32)
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  studentId String
+  student   MusicStudent @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  date DateTime @default(now())
+
+  minutes Int
+
+  instrument      String?
+  piece           String?
+  notes           String?
+  teacherFeedback String?
+
+  rating Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId, studentId, date])
+}
+
+//Contacts
+enum ContactType {
+  PERSON
+  BUSINESS
+}
+
+enum ContactStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+model Contact {
+  id String @id @db.Char(32)
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  branchId String?
+  branch   Branch? @relation(fields: [branchId], references: [id], onDelete: SetNull)
+
+  type   ContactType
+  status ContactStatus @default(ACTIVE)
+
+  firstName   String?
+  lastName    String?
+  companyName String?
+
+  email String?
+  phone String?
+
+  notes String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  enquiries Enquiry[]
+  bookings  Booking[]
+
+  @@index([organizationId])
+  @@index([organizationId, branchId])
+  @@index([organizationId, status])
+  @@index([organizationId, email])
+  @@index([organizationId, phone])
+}
+
+enum ProductType {
+  PRODUCT
+  SERVICE
+}
+
+enum ProductStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+model Product {
+  id String @id @db.Char(32)
+
   organizationId String
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
@@ -40,12 +941,138 @@ model Branch {
   code        String
   description String?
 
-  status BranchStatus
+  type   ProductType
+  status ProductStatus
+
+  price    Decimal  @db.Decimal(12, 2)
+  currency String   @default("INR")
+  taxRate  Decimal? @db.Decimal(5, 2)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  inventory InventoryItem[]
+
   @@unique([organizationId, code])
   @@unique([organizationId, name])
   @@index([organizationId])
+  @@index([organizationId, status])
+}
+
+enum InventoryStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+model InventoryItem {
+  id String @id @db.Char(32)
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  branchId String
+  branch   Branch @relation(fields: [branchId], references: [id], onDelete: Cascade)
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  quantityOnHand   Int @default(0)
+  quantityReserved Int @default(0)
+  reorderLevel     Int @default(0)
+
+  status InventoryStatus @default(ACTIVE)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([organizationId, branchId, productId])
+  @@index([organizationId])
+  @@index([organizationId, branchId])
+  @@index([organizationId, productId])
+  @@index([branchId, productId])
+}
+
+enum EnquiryStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  CONVERTED
+  LOST
+}
+
+enum EnquirySource {
+  WEBSITE
+  PHONE
+  EMAIL
+  WALK_IN
+  REFERRAL
+  SOCIAL_MEDIA
+  OTHER
+}
+
+model Enquiry {
+  id String @id @db.Char(32)
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  branchId String?
+  branch   Branch? @relation(fields: [branchId], references: [id], onDelete: SetNull)
+
+  contactId String
+  contact   Contact @relation(fields: [contactId], references: [id], onDelete: Cascade)
+
+  assignedUserId String?
+  assignedUser   User?   @relation(fields: [assignedUserId], references: [id], onDelete: SetNull)
+
+  source EnquirySource
+  status EnquiryStatus @default(NEW)
+
+  subject     String
+  description String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId])
+  @@index([organizationId, branchId])
+  @@index([organizationId, contactId])
+  @@index([organizationId, status])
+  @@index([assignedUserId])
+}
+
+enum BookingStatus {
+  DRAFT
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+model Booking {
+  id String @id @db.Char(32)
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  branchId String?
+  branch   Branch? @relation(fields: [branchId], references: [id], onDelete: SetNull)
+
+  contactId String
+  contact   Contact @relation(fields: [contactId], references: [id], onDelete: Cascade)
+
+  scheduledAt DateTime
+
+  status BookingStatus @default(DRAFT)
+
+  notes String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId])
+  @@index([organizationId, branchId])
+  @@index([organizationId, contactId])
+  @@index([organizationId, status])
+  @@index([scheduledAt])
 }

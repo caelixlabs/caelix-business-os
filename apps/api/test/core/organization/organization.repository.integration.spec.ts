@@ -14,15 +14,20 @@ jest.mock('@/common/prisma', () => ({
 describe('OrganizationPrismaRepository Integration', () => {
   let repository: OrganizationPrismaRepository;
 
-  let prisma: PrismaService;
-
-  let eventBus: EventBus;
+  const txClient = {
+    organization: {
+      create: jest.fn(),
+    },
+    domainEvent: {
+      createMany: jest.fn(),
+    },
+  };
 
   const prismaMock = {
     client: {
-      organization: {
-        create: jest.fn(),
-      },
+      $transaction: jest.fn(async (work: (tx: typeof txClient) => Promise<unknown>) =>
+        work(txClient),
+      ),
     },
   };
 
@@ -36,12 +41,10 @@ describe('OrganizationPrismaRepository Integration', () => {
     const moduleRef = await Test.createTestingModule({
       providers: [
         OrganizationPrismaRepository,
-
         {
           provide: PrismaService,
           useValue: prismaMock,
         },
-
         {
           provide: EventBus,
           useValue: eventBusMock,
@@ -49,23 +52,15 @@ describe('OrganizationPrismaRepository Integration', () => {
       ],
     }).compile();
 
-    repository = moduleRef.get(
-      OrganizationPrismaRepository,
-    );
-
-    prisma = moduleRef.get(PrismaService);
-
-    eventBus = moduleRef.get(EventBus);
+    repository = moduleRef.get(OrganizationPrismaRepository);
   });
 
-  it('should persist organization and publish domain events', async () => {
-
-    prismaMock.client.organization.create.mockResolvedValue({
+  it('should persist organization and its domain event atomically, then publish', async () => {
+    txClient.organization.create.mockResolvedValue({
       id: 'org-1',
       name: 'Caelix',
       slug: 'caelix',
       description: 'Business OS',
-
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -77,55 +72,28 @@ describe('OrganizationPrismaRepository Integration', () => {
       description: 'Business OS',
     });
 
-    const publishSpy = jest.spyOn(
-      eventBus,
-      'publishAll',
-    );
+    const result = await repository.create(organization);
 
-    const result = await repository.create(
-      organization,
-    );
+    expect(prismaMock.client.$transaction).toHaveBeenCalledTimes(1);
+    expect(txClient.organization.create).toHaveBeenCalledTimes(1);
+    expect(txClient.domainEvent.createMany).toHaveBeenCalledTimes(1);
 
-    expect(
-      prisma.client.organization.create,
-    ).toHaveBeenCalledTimes(1);
+    const outboxRows = txClient.domainEvent.createMany.mock.calls[0][0].data;
+    expect(outboxRows).toHaveLength(1);
+    expect(outboxRows[0].eventName).toBe('OrganizationCreatedEvent');
 
-    expect(publishSpy)
-      .toHaveBeenCalledTimes(1);
-
-    const events =
-      publishSpy.mock.calls[0][0];
-
+    expect(eventBusMock.publishAll).toHaveBeenCalledTimes(1);
+    const events = eventBusMock.publishAll.mock.calls[0][0];
     expect(events).toHaveLength(1);
 
-    const event =
-    events[0] as OrganizationCreatedEvent;
+    const event = events[0] as OrganizationCreatedEvent;
+    expect(event.organizationId).toBe('org-1');
+    expect(event.name).toBe('Caelix');
+    expect(event.slug).toBe('caelix');
 
-expect(event.organizationId)
-    .toBe('org-1');
-
-expect(event.name)
-    .toBe('Caelix');
-
-expect(event.slug)
-    .toBe('caelix');
-
-    expect(
-      (events[0] as OrganizationCreatedEvent)
-        .organizationId,
-    ).toBe('org-1');
-
-    expect(
-      organization.pullDomainEvents(),
-    ).toHaveLength(0);
-
-    expect(result)
-      .toBeInstanceOf(Organization);
-
-    expect(result.id)
-      .toBe('org-1');
-
-    expect(result.slug)
-      .toBe('caelix');
+    expect(organization.pullDomainEvents()).toHaveLength(0);
+    expect(result).toBeInstanceOf(Organization);
+    expect(result.id).toBe('org-1');
+    expect(result.slug).toBe('caelix');
   });
 });

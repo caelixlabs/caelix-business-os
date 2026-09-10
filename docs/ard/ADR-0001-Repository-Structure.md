@@ -168,7 +168,7 @@ Industry-specific business behavior.
 Examples
 
 - Gym
-- Music Academy
+- Music Org
 - Restaurant
 - Salon
 - Clinic
@@ -244,7 +244,7 @@ payments
 Industry Packs use kebab-case.
 
 ```
-music-academy
+music-Org
 
 sports-club
 ```

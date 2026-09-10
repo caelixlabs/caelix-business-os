@@ -16,7 +16,7 @@ export abstract class AggregateRoot<TId = string> extends Entity<TId> {
     return [...this.domainEvents];
   }
 
-   public clearDomainEvents(): void {
+  public clearDomainEvents(): void {
     this.domainEvents.length = 0;
   }
 

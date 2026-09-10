@@ -1,71 +1,63 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
-import { CreateOrganizationHandler, GetOrganizationHandler, GetOrganizationsHandler } from "../../application/create-organization/create-organization.handler";
+
+import { Public, CurrentUser } from "@/core/auth/application/decorators";
+import type { AccessTokenPayload } from "@/core/auth/application/services/token.service";
+import { RequirePermissions } from "@/core/rbac/application/decorators";
+import { PermissionCode } from "@/core/rbac/domain/enums";
+
+import { CreateOrganizationHandler } from "../../application/create-organization/create-organization.handler";
 import { CreateOrganizationDto } from "../../application/create-organization/create-organization.dto";
 import { CreateOrganizationCommand } from "../../application/create-organization/create-organization.command";
+import { GetOrganizationHandler } from "../../application/get-organization/get-organization.handler";
 import { GetOrganizationQuery } from "../../application/get-organization/get-organization.query";
 import { UpdateOrganizationDto } from "../../application/update-organization/update-organization.dto";
 import { UpdateOrganizationCommand } from "../../application/update-organization/update-organization.command";
 import { UpdateOrganizationHandler } from "../../application/update-organization/update-organization.handler";
-import { ListOrganizationsHandler } from "../../application/list-organizations/list-organizations.handler";
-import { ListOrganizationsQuery } from "../../application/list-organizations/list-organizations.query";
 import { DeleteOrganizationCommand } from "../../application/delete-organization/delete-organizations.command";
 import { DeleteOrganizationHandler } from "../../application/delete-organization/delete-organizations.handler";
+import { OrganizationResponseDto } from "../../application/dto/organization-response.dto";
+import { assertSameOrganization } from "@/core/audit/guards/assert-same-organization";
 
 @Controller('organizations')
 export class OrganizationController {
   constructor(
-  private readonly createOrganizationHandler: CreateOrganizationHandler,
-  private readonly getOrganizationHandler: GetOrganizationHandler,
-  private readonly getOrganizationsHandler: GetOrganizationsHandler,
-  private readonly updateOrganizationHandler: UpdateOrganizationHandler,
-  private readonly listOrganizationsHandler: ListOrganizationsHandler,
-  private readonly deleteOrganizationHandler: DeleteOrganizationHandler,
-) {}
+    private readonly createOrganizationHandler: CreateOrganizationHandler,
+    private readonly getOrganizationHandler: GetOrganizationHandler,
+    private readonly updateOrganizationHandler: UpdateOrganizationHandler,
+    private readonly deleteOrganizationHandler: DeleteOrganizationHandler,
+  ) {}
 
+  @Public()
   @Post()
-  create(
-    @Body() dto: CreateOrganizationDto
-  ) {
-    return this.createOrganizationHandler.execute(
-      new CreateOrganizationCommand(dto),
-    );
+  async create(@Body() dto: CreateOrganizationDto) {
+    const org = await this.createOrganizationHandler.execute(new CreateOrganizationCommand(dto));
+    return OrganizationResponseDto.fromDomain(org);
   }
 
   @Get(':id')
-  findOne(
-    @Param('id') id: string
-  ) {
-    return this.getOrganizationHandler.execute(
-      new GetOrganizationQuery(id),
-    );
+  @RequirePermissions(PermissionCode.ORGANIZATION_READ)
+  async findOne(@Param('id') id: string, @CurrentUser() currentUser: AccessTokenPayload) {
+    assertSameOrganization(currentUser.organizationId, id);
+    const org = await this.getOrganizationHandler.execute(new GetOrganizationQuery(id));
+    return OrganizationResponseDto.fromDomain(org);
   }
 
-  @Get()
-  findAll() {
-    return this.getOrganizationsHandler.execute();
-  }
-  
   @Patch(':id')
-  update(
+  @RequirePermissions(PermissionCode.ORGANIZATION_UPDATE)
+  async update(
     @Param('id') id: string,
     @Body() dto: UpdateOrganizationDto,
+    @CurrentUser() currentUser: AccessTokenPayload,
   ) {
-    return this.updateOrganizationHandler.execute(
-      new UpdateOrganizationCommand(id, dto),
-    );
+    assertSameOrganization(currentUser.organizationId, id);
+    const org = await this.updateOrganizationHandler.execute(new UpdateOrganizationCommand(id, dto));
+    return OrganizationResponseDto.fromDomain(org);
   }
-  @Get()
-  list() {
-    return this.listOrganizationsHandler.execute(
-      new ListOrganizationsQuery(),
-    );
-  }
+
   @Delete(':id')
-  delete(
-    @Param('id') id: string,
-  ) {
-    return this.deleteOrganizationHandler.execute(
-      new DeleteOrganizationCommand(id),
-    );
+  @RequirePermissions(PermissionCode.ORGANIZATION_DELETE)
+  async delete(@Param('id') id: string, @CurrentUser() currentUser: AccessTokenPayload) {
+    assertSameOrganization(currentUser.organizationId, id);
+    await this.deleteOrganizationHandler.execute(new DeleteOrganizationCommand(id));
   }
 }

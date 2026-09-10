@@ -1,21 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 
-import {
-  EventHandler,
-  IEventHandler
-} from '@/common/ddd';
+import { EventHandler, IEventHandler } from '@/common/ddd';
 
 import { OrganizationCreatedEvent } from '../../domain/events';
 
 @Injectable()
 @EventHandler(OrganizationCreatedEvent)
-export class SendWelcomeEmailHandler
-  implements IEventHandler<OrganizationCreatedEvent>
-{
-  async handle(
-    event: OrganizationCreatedEvent,
-  ): Promise<void> {
-    console.log(
+export class SendWelcomeEmailHandler implements IEventHandler<OrganizationCreatedEvent> {
+  private readonly logger = new Logger(SendWelcomeEmailHandler.name);
+
+  async handle(event: OrganizationCreatedEvent): Promise<void> {
+    this.logger.log(
       `Sending welcome email for organization ${event.organizationId}`,
     );
 

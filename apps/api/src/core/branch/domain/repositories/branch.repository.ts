@@ -2,11 +2,10 @@ import { Repository } from '@/common/ddd';
 
 import { Branch } from '../entities/branch.entity';
 
-export interface BranchRepository
-  extends Repository<Branch>
-{
-  findByCode(
-    organizationId: string,
-    code: string,
-  ): Promise<Branch | null>;
+export interface BranchRepository extends Repository<Branch> {
+  findByCode(organizationId: string, code: string): Promise<Branch | null>;
+
+  existsPrimaryBranch(organizationId: string): Promise<boolean>;
+
+  findByOrganization(organizationId: string): Promise<Branch[]>;
 }

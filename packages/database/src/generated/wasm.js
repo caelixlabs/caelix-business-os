@@ -98,6 +98,7 @@ exports.Prisma.OrganizationScalarFieldEnum = {
   name: 'name',
   slug: 'slug',
   description: 'description',
+  industry: 'industry',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -107,8 +108,456 @@ exports.Prisma.BranchScalarFieldEnum = {
   organizationId: 'organizationId',
   name: 'name',
   code: 'code',
+  type: 'type',
   description: 'description',
   status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DomainEventScalarFieldEnum = {
+  id: 'id',
+  aggregateId: 'aggregateId',
+  aggregateType: 'aggregateType',
+  eventName: 'eventName',
+  payload: 'payload',
+  occurredAt: 'occurredAt',
+  publishedAt: 'publishedAt'
+};
+
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  email: 'email',
+  passwordHash: 'passwordHash',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  status: 'status',
+  lastLoginAt: 'lastLoginAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RefreshTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  revokedAt: 'revokedAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.RoleScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  level: 'level',
+  isSystem: 'isSystem',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PermissionScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  description: 'description',
+  module: 'module',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.RolePermissionScalarFieldEnum = {
+  roleId: 'roleId',
+  permissionId: 'permissionId'
+};
+
+exports.Prisma.UserRoleScalarFieldEnum = {
+  userId: 'userId',
+  roleId: 'roleId',
+  branchId: 'branchId'
+};
+
+exports.Prisma.AuditLogScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  actorUserId: 'actorUserId',
+  action: 'action',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  metadata: 'metadata',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.OrganizationSettingScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  key: 'key',
+  value: 'value',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  userId: 'userId',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  metadata: 'metadata',
+  readAt: 'readAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.MusicInquiryScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  studentName: 'studentName',
+  guardianName: 'guardianName',
+  email: 'email',
+  phone: 'phone',
+  instrument: 'instrument',
+  skillLevel: 'skillLevel',
+  status: 'status',
+  trialSessionAt: 'trialSessionAt',
+  notes: 'notes',
+  assignedStaffId: 'assignedStaffId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CourseScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  title: 'title',
+  slug: 'slug',
+  instrument: 'instrument',
+  description: 'description',
+  skillLevel: 'skillLevel',
+  isIndividual: 'isIndividual',
+  maxCapacity: 'maxCapacity',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.InstructorProfileScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  userId: 'userId',
+  specialties: 'specialties',
+  hourlyRate: 'hourlyRate',
+  commissionRatePct: 'commissionRatePct',
+  workingHours: 'workingHours',
+  bio: 'bio',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.StudentProfileScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  userId: 'userId',
+  fullName: 'fullName',
+  email: 'email',
+  phone: 'phone',
+  guardianName: 'guardianName',
+  guardianPhone: 'guardianPhone',
+  guardianEmail: 'guardianEmail',
+  emergencyContact: 'emergencyContact',
+  dob: 'dob',
+  registeredAt: 'registeredAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MusicPackageScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  courseId: 'courseId',
+  name: 'name',
+  description: 'description',
+  price: 'price',
+  discountPrice: 'discountPrice',
+  currency: 'currency',
+  totalSessions: 'totalSessions',
+  validityDays: 'validityDays',
+  isFeatured: 'isFeatured',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MusicDiscountScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  code: 'code',
+  description: 'description',
+  type: 'type',
+  value: 'value',
+  startsAt: 'startsAt',
+  expiresAt: 'expiresAt',
+  maxUses: 'maxUses',
+  usedCount: 'usedCount',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MusicPackageDiscountScalarFieldEnum = {
+  packageId: 'packageId',
+  discountId: 'discountId'
+};
+
+exports.Prisma.MusicSubscriptionScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  studentId: 'studentId',
+  packageId: 'packageId',
+  discountId: 'discountId',
+  status: 'status',
+  sessionsTotal: 'sessionsTotal',
+  sessionsRemaining: 'sessionsRemaining',
+  startsAt: 'startsAt',
+  expiresAt: 'expiresAt',
+  autoRenew: 'autoRenew',
+  renewalNotifiedAt: 'renewalNotifiedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.LessonSessionScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  courseId: 'courseId',
+  instructorId: 'instructorId',
+  subscriptionId: 'subscriptionId',
+  title: 'title',
+  roomNumber: 'roomNumber',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  status: 'status',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.LessonAttendanceScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  sessionId: 'sessionId',
+  studentId: 'studentId',
+  status: 'status',
+  markedAt: 'markedAt',
+  remarks: 'remarks',
+  homeworkAssigned: 'homeworkAssigned'
+};
+
+exports.Prisma.VideoLessonScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  courseId: 'courseId',
+  title: 'title',
+  description: 'description',
+  videoUrl: 'videoUrl',
+  thumbnailUrl: 'thumbnailUrl',
+  durationSeconds: 'durationSeconds',
+  attachments: 'attachments',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MusicInvoiceScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  subscriptionId: 'subscriptionId',
+  invoiceNumber: 'invoiceNumber',
+  subtotal: 'subtotal',
+  discountAmount: 'discountAmount',
+  taxAmount: 'taxAmount',
+  totalAmount: 'totalAmount',
+  status: 'status',
+  dueDate: 'dueDate',
+  paidAt: 'paidAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MusicPaymentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  invoiceId: 'invoiceId',
+  amount: 'amount',
+  paymentMethod: 'paymentMethod',
+  referenceId: 'referenceId',
+  paidAt: 'paidAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.MusicStudentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  studentNo: 'studentNo',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  email: 'email',
+  phone: 'phone',
+  dateOfBirth: 'dateOfBirth',
+  guardianName: 'guardianName',
+  guardianPhone: 'guardianPhone',
+  guardianEmail: 'guardianEmail',
+  instrument: 'instrument',
+  skillLevel: 'skillLevel',
+  status: 'status',
+  joinedAt: 'joinedAt',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MusicCourseScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  code: 'code',
+  name: 'name',
+  description: 'description',
+  instrument: 'instrument',
+  skillLevel: 'skillLevel',
+  durationWeeks: 'durationWeeks',
+  classDurationMinutes: 'classDurationMinutes',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MusicBatchScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  courseId: 'courseId',
+  teacherUserId: 'teacherUserId',
+  name: 'name',
+  capacity: 'capacity',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  days: 'days',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MusicEnrollmentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  studentId: 'studentId',
+  batchId: 'batchId',
+  enrolledAt: 'enrolledAt',
+  feeAmount: 'feeAmount',
+  discountAmount: 'discountAmount',
+  status: 'status',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MusicAttendanceScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  studentId: 'studentId',
+  batchId: 'batchId',
+  date: 'date',
+  status: 'status',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MusicPracticeLogScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  studentId: 'studentId',
+  date: 'date',
+  minutes: 'minutes',
+  instrument: 'instrument',
+  piece: 'piece',
+  notes: 'notes',
+  teacherFeedback: 'teacherFeedback',
+  rating: 'rating',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ContactScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  type: 'type',
+  status: 'status',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  companyName: 'companyName',
+  email: 'email',
+  phone: 'phone',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProductScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  code: 'code',
+  description: 'description',
+  type: 'type',
+  status: 'status',
+  price: 'price',
+  currency: 'currency',
+  taxRate: 'taxRate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.InventoryItemScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  productId: 'productId',
+  quantityOnHand: 'quantityOnHand',
+  quantityReserved: 'quantityReserved',
+  reorderLevel: 'reorderLevel',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EnquiryScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  contactId: 'contactId',
+  assignedUserId: 'assignedUserId',
+  source: 'source',
+  status: 'status',
+  subject: 'subject',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BookingScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  contactId: 'contactId',
+  scheduledAt: 'scheduledAt',
+  status: 'status',
+  notes: 'notes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -116,6 +565,15 @@ exports.Prisma.BranchScalarFieldEnum = {
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -127,15 +585,229 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+exports.IndustryType = exports.$Enums.IndustryType = {
+  MUSIC_ORG: 'MUSIC_ORG',
+  GYM: 'GYM'
+};
+
 exports.BranchStatus = exports.$Enums.BranchStatus = {
   ACTIVE: 'ACTIVE',
   INACTIVE: 'INACTIVE',
   ARCHIVED: 'ARCHIVED'
 };
 
+exports.BranchType = exports.$Enums.BranchType = {
+  PRIMARY: 'PRIMARY',
+  STANDARD: 'STANDARD'
+};
+
+exports.UserStatus = exports.$Enums.UserStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  INVITED: 'INVITED',
+  SUSPENDED: 'SUSPENDED'
+};
+
+exports.RoleLevel = exports.$Enums.RoleLevel = {
+  OWNER: 'OWNER',
+  ADMIN: 'ADMIN',
+  MANAGER: 'MANAGER',
+  EMPLOYEE: 'EMPLOYEE',
+  VIEWER: 'VIEWER'
+};
+
+exports.InquiryStatus = exports.$Enums.InquiryStatus = {
+  NEW: 'NEW',
+  CONTACTED: 'CONTACTED',
+  TRIAL_SCHEDULED: 'TRIAL_SCHEDULED',
+  ENROLLED: 'ENROLLED',
+  LOST: 'LOST'
+};
+
+exports.SkillLevel = exports.$Enums.SkillLevel = {
+  BEGINNER: 'BEGINNER',
+  INTERMEDIATE: 'INTERMEDIATE',
+  ADVANCED: 'ADVANCED'
+};
+
+exports.SessionStatus = exports.$Enums.SessionStatus = {
+  SCHEDULED: 'SCHEDULED',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
+  RESCHEDULED: 'RESCHEDULED'
+};
+
+exports.AttendanceStatus = exports.$Enums.AttendanceStatus = {
+  PRESENT: 'PRESENT',
+  ABSENT: 'ABSENT',
+  EXCUSED: 'EXCUSED',
+  LATE: 'LATE'
+};
+
+exports.SubscriptionStatus = exports.$Enums.SubscriptionStatus = {
+  ACTIVE: 'ACTIVE',
+  EXPIRED: 'EXPIRED',
+  CANCELLED: 'CANCELLED',
+  PAST_DUE: 'PAST_DUE'
+};
+
+exports.DiscountType = exports.$Enums.DiscountType = {
+  PERCENTAGE: 'PERCENTAGE',
+  FIXED_AMOUNT: 'FIXED_AMOUNT'
+};
+
+exports.InvoiceStatus = exports.$Enums.InvoiceStatus = {
+  DRAFT: 'DRAFT',
+  ISSUED: 'ISSUED',
+  PAID: 'PAID',
+  OVERDUE: 'OVERDUE',
+  VOID: 'VOID'
+};
+
+exports.PaymentMethod = exports.$Enums.PaymentMethod = {
+  STRIPE: 'STRIPE',
+  CASH: 'CASH',
+  BANK_TRANSFER: 'BANK_TRANSFER',
+  UPI: 'UPI',
+  POS: 'POS'
+};
+
+exports.MusicStudentStatus = exports.$Enums.MusicStudentStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  GRADUATED: 'GRADUATED',
+  ON_HOLD: 'ON_HOLD'
+};
+
+exports.MusicSkillLevel = exports.$Enums.MusicSkillLevel = {
+  BEGINNER: 'BEGINNER',
+  INTERMEDIATE: 'INTERMEDIATE',
+  ADVANCED: 'ADVANCED',
+  PROFESSIONAL: 'PROFESSIONAL'
+};
+
+exports.MusicCourseStatus = exports.$Enums.MusicCourseStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+};
+
+exports.MusicBatchStatus = exports.$Enums.MusicBatchStatus = {
+  PLANNED: 'PLANNED',
+  ACTIVE: 'ACTIVE',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.MusicEnrollmentStatus = exports.$Enums.MusicEnrollmentStatus = {
+  ACTIVE: 'ACTIVE',
+  PAUSED: 'PAUSED',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.MusicAttendanceStatus = exports.$Enums.MusicAttendanceStatus = {
+  PRESENT: 'PRESENT',
+  ABSENT: 'ABSENT',
+  LATE: 'LATE',
+  EXCUSED: 'EXCUSED'
+};
+
+exports.ContactType = exports.$Enums.ContactType = {
+  PERSON: 'PERSON',
+  BUSINESS: 'BUSINESS'
+};
+
+exports.ContactStatus = exports.$Enums.ContactStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  ARCHIVED: 'ARCHIVED'
+};
+
+exports.ProductType = exports.$Enums.ProductType = {
+  PRODUCT: 'PRODUCT',
+  SERVICE: 'SERVICE'
+};
+
+exports.ProductStatus = exports.$Enums.ProductStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  ARCHIVED: 'ARCHIVED'
+};
+
+exports.InventoryStatus = exports.$Enums.InventoryStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  ARCHIVED: 'ARCHIVED'
+};
+
+exports.EnquiryStatus = exports.$Enums.EnquiryStatus = {
+  NEW: 'NEW',
+  CONTACTED: 'CONTACTED',
+  QUALIFIED: 'QUALIFIED',
+  CONVERTED: 'CONVERTED',
+  LOST: 'LOST'
+};
+
+exports.EnquirySource = exports.$Enums.EnquirySource = {
+  WEBSITE: 'WEBSITE',
+  PHONE: 'PHONE',
+  EMAIL: 'EMAIL',
+  WALK_IN: 'WALK_IN',
+  REFERRAL: 'REFERRAL',
+  SOCIAL_MEDIA: 'SOCIAL_MEDIA',
+  OTHER: 'OTHER'
+};
+
+exports.BookingStatus = exports.$Enums.BookingStatus = {
+  DRAFT: 'DRAFT',
+  CONFIRMED: 'CONFIRMED',
+  CANCELLED: 'CANCELLED',
+  COMPLETED: 'COMPLETED'
+};
+
 exports.Prisma.ModelName = {
   Organization: 'Organization',
-  Branch: 'Branch'
+  Branch: 'Branch',
+  DomainEvent: 'DomainEvent',
+  User: 'User',
+  RefreshToken: 'RefreshToken',
+  Role: 'Role',
+  Permission: 'Permission',
+  RolePermission: 'RolePermission',
+  UserRole: 'UserRole',
+  AuditLog: 'AuditLog',
+  OrganizationSetting: 'OrganizationSetting',
+  Notification: 'Notification',
+  MusicInquiry: 'MusicInquiry',
+  Course: 'Course',
+  InstructorProfile: 'InstructorProfile',
+  StudentProfile: 'StudentProfile',
+  MusicPackage: 'MusicPackage',
+  MusicDiscount: 'MusicDiscount',
+  MusicPackageDiscount: 'MusicPackageDiscount',
+  MusicSubscription: 'MusicSubscription',
+  LessonSession: 'LessonSession',
+  LessonAttendance: 'LessonAttendance',
+  VideoLesson: 'VideoLesson',
+  MusicInvoice: 'MusicInvoice',
+  MusicPayment: 'MusicPayment',
+  MusicStudent: 'MusicStudent',
+  MusicCourse: 'MusicCourse',
+  MusicBatch: 'MusicBatch',
+  MusicEnrollment: 'MusicEnrollment',
+  MusicAttendance: 'MusicAttendance',
+  MusicPracticeLog: 'MusicPracticeLog',
+  Contact: 'Contact',
+  Product: 'Product',
+  InventoryItem: 'InventoryItem',
+  Enquiry: 'Enquiry',
+  Booking: 'Booking'
 };
 /**
  * Create the Client
@@ -176,7 +848,6 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -185,13 +856,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Get a free hosted Postgres database in seconds: `npx create-db`\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Organization {\n  id String @id @db.Char(32)\n\n  name        String\n  slug        String   @unique\n  description String?\n  branches    Branch[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nenum BranchStatus {\n  ACTIVE\n  INACTIVE\n  ARCHIVED\n}\n\nmodel Branch {\n  id             String       @id @db.Char(32)\n  organizationId String\n  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n\n  name        String\n  code        String\n  description String?\n\n  status BranchStatus\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@unique([organizationId, code])\n  @@unique([organizationId, name])\n  @@index([organizationId])\n}\n",
-  "inlineSchemaHash": "e0cf47bf1065151434dd83d93ac431016fe0a82a3a46b96b453e70d48378705f",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Get a free hosted Postgres database in seconds: `npx create-db`\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum IndustryType {\n  MUSIC_ORG\n  GYM\n}\n\nmodel Organization {\n  id String @id @db.Char(32)\n\n  name        String\n  slug        String  @unique\n  description String?\n\n  industry      IndustryType\n  branches      Branch[]\n  users         User[]\n  roles         Role[]\n  auditLogs     AuditLog[]\n  settings      OrganizationSetting[]\n  notifications Notification[]\n\n  // Music Org - current feature set\n  musicStudents     MusicStudent[]\n  musicCourses      MusicCourse[]\n  musicBatches      MusicBatch[]\n  musicEnrollments  MusicEnrollment[]\n  musicAttendance   MusicAttendance[]\n  musicPracticeLogs MusicPracticeLog[]\n\n  // Existing Music Academy domain\n  musicInquiries     MusicInquiry[]\n  courses            Course[]\n  instructorProfiles InstructorProfile[]\n  studentProfiles    StudentProfile[]\n  musicPackages      MusicPackage[]\n  musicDiscounts     MusicDiscount[]\n  musicSubscriptions MusicSubscription[]\n  lessonSessions     LessonSession[]\n  lessonAttendances  LessonAttendance[]\n  videoLessons       VideoLesson[]\n  musicInvoices      MusicInvoice[]\n  musicPayments      MusicPayment[]\n  contacts           Contact[]\n  products           Product[]\n  inventory          InventoryItem[]\n  enquiries          Enquiry[]\n  bookings           Booking[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nenum BranchStatus {\n  ACTIVE\n  INACTIVE\n  ARCHIVED\n}\n\nenum BranchType {\n  PRIMARY\n  STANDARD\n}\n\nmodel Branch {\n  id             String @id @db.Char(32)\n  organizationId String\n\n  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n\n  name        String\n  code        String\n  type        BranchType   @default(STANDARD)\n  description String?\n  status      BranchStatus\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  users    User[]\n  contacts Contact[]\n\n  // New Music Org\n  musicStudents MusicStudent[]\n  musicBatches  MusicBatch[]\n\n  // Existing Music Academy domain\n  musicInquiries MusicInquiry[]\n  lessonSessions LessonSession[]\n\n  //inventory\n  inventory InventoryItem[]\n  enquiries Enquiry[]\n  bookings  Booking[]\n\n  @@unique([organizationId, code])\n  @@unique([organizationId, name])\n  @@index([organizationId])\n}\n\nmodel DomainEvent {\n  id            String    @id @db.Char(32)\n  aggregateId   String\n  aggregateType String\n  eventName     String\n  payload       Json\n  occurredAt    DateTime\n  publishedAt   DateTime?\n\n  @@index([aggregateId])\n  @@index([publishedAt])\n}\n\nenum UserStatus {\n  ACTIVE\n  INACTIVE\n  INVITED\n  SUSPENDED\n}\n\nmodel User {\n  id String @id @db.Char(32)\n\n  organizationId String\n  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n\n  branchId String?\n  branch   Branch? @relation(fields: [branchId], references: [id], onDelete: SetNull)\n\n  email        String\n  passwordHash String\n  firstName    String\n  lastName     String\n  status       UserStatus @default(INVITED)\n  lastLoginAt  DateTime?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  refreshTokens RefreshToken[]\n  userRoles     UserRole[]\n  notifications Notification[]\n\n  // Existing Music Academy domain\n  instructorProfile InstructorProfile?\n  studentProfile    StudentProfile?\n\n  // New Music Org batches\n  musicTeachingBatches MusicBatch[]\n  enquiries            Enquiry[]\n\n  @@unique([organizationId, email])\n  @@index([organizationId])\n  @@index([organizationId, branchId])\n}\n\nmodel RefreshToken {\n  id     String @id @db.Char(32)\n  userId String\n  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  tokenHash String    @unique\n  expiresAt DateTime\n  revokedAt DateTime?\n\n  createdAt DateTime @default(now())\n\n  @@index([userId])\n}\n\n// Fixed hierarchy: OWNER > ADMIN > MANAGER > EMPLOYEE > VIEWER.\nenum RoleLevel {\n  OWNER\n  ADMIN\n  MANAGER\n  EMPLOYEE\n  VIEWER\n}\n\nmodel Role {\n  id             String        @id @db.Char(32)\n  organizationId String? // null = system-defined role template, seeded once and reused by every org\n  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n\n  name     String\n  level    RoleLevel\n  isSystem Boolean   @default(false)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  rolePermissions RolePermission[]\n  userRoles       UserRole[]\n\n  @@unique([organizationId, name])\n  @@index([organizationId])\n}\n\nmodel Permission {\n  id          String @id @db.Char(32)\n  code        String @unique // e.g. \"organization:update\", \"branch:create\"\n  description String\n  module      String // e.g. \"organization\", \"branch\", \"users\"\n\n  createdAt DateTime @default(now())\n\n  rolePermissions RolePermission[]\n\n  @@index([module])\n}\n\nmodel RolePermission {\n  roleId String\n  role   Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)\n\n  permissionId String\n  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)\n\n  @@id([roleId, permissionId])\n}\n\nmodel UserRole {\n  userId String\n  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  roleId String\n  role   Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)\n\n  branchId String? // null = organization-wide grant\n\n  @@id([userId, roleId])\n  @@index([userId])\n}\n\nmodel AuditLog {\n  id             String       @id @db.Char(32)\n  organizationId String\n  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n\n  branchId    String?\n  actorUserId String? // null = system-initiated action (e.g. auto-created primary branch)\n\n  action     String // e.g. \"organization.created\", \"branch.created\", \"user.registered\"\n  entityType String // e.g. \"Organization\", \"Branch\", \"User\"\n  entityId   String\n\n  metadata  Json?\n  createdAt DateTime @default(now())\n\n  @@index([organizationId, entityType])\n  @@index([entityType, entityId])\n}\n\nmodel OrganizationSetting {\n  id             String       @id @db.Char(32)\n  organizationId String\n  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n\n  key   String\n  value Json\n\n  updatedAt DateTime @updatedAt\n\n  @@unique([organizationId, key])\n  @@index([organizationId])\n}\n\nmodel Notification {\n  id             String       @id @db.Char(32)\n  organizationId String\n  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n\n  userId String // recipient\n  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  type     String // e.g. \"user.registered\", \"branch.created\", \"role.changed\"\n  title    String\n  message  String\n  metadata Json?\n  readAt   DateTime?\n\n  createdAt DateTime @default(now())\n\n  @@index([userId, readAt])\n  @@index([organizationId])\n}\n\nenum InquiryStatus {\n  NEW\n  CONTACTED\n  TRIAL_SCHEDULED\n  ENROLLED\n  LOST\n}\n\nenum SkillLevel {\n  BEGINNER\n  INTERMEDIATE\n  ADVANCED\n}\n\nenum SessionStatus {\n  SCHEDULED\n  COMPLETED\n  CANCELLED\n  RESCHEDULED\n}\n\nenum AttendanceStatus {\n  PRESENT\n  ABSENT\n  EXCUSED\n  LATE\n}\n\nenum SubscriptionStatus {\n  ACTIVE\n  EXPIRED\n  CANCELLED\n  PAST_DUE\n}\n\nenum DiscountType {\n  PERCENTAGE\n  FIXED_AMOUNT\n}\n\nenum InvoiceStatus {\n  DRAFT\n  ISSUED\n  PAID\n  OVERDUE\n  VOID\n}\n\nenum PaymentMethod {\n  STRIPE\n  CASH\n  BANK_TRANSFER\n  UPI\n  POS\n}\n\nmodel MusicInquiry {\n  id              String        @id @default(uuid())\n  organizationId  String\n  branchId        String?\n  studentName     String\n  guardianName    String?\n  email           String\n  phone           String\n  instrument      String\n  skillLevel      SkillLevel    @default(BEGINNER)\n  status          InquiryStatus @default(NEW)\n  trialSessionAt  DateTime?\n  notes           String?\n  assignedStaffId String?\n  createdAt       DateTime      @default(now())\n  updatedAt       DateTime      @updatedAt\n\n  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n  branch       Branch?      @relation(fields: [branchId], references: [id], onDelete: SetNull)\n\n  @@index([organizationId, status])\n  @@index([organizationId, branchId])\n  @@map(\"music_inquiries\")\n}\n\nmodel Course {\n  id             String     @id @default(uuid())\n  organizationId String\n  title          String\n  slug           String\n  instrument     String\n  description    String?\n  skillLevel     SkillLevel\n  isIndividual   Boolean    @default(true) // true = 1-on-1, false = Group class\n  maxCapacity    Int        @default(1)\n  isActive       Boolean    @default(true)\n  createdAt      DateTime   @default(now())\n  updatedAt      DateTime   @updatedAt\n\n  organization Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n  packages     MusicPackage[]\n  sessions     LessonSession[]\n  videoLessons VideoLesson[]\n\n  @@unique([organizationId, slug])\n  @@index([organizationId, instrument])\n  @@map(\"music_courses\")\n}\n\nmodel InstructorProfile {\n  id                String   @id @default(uuid())\n  organizationId    String\n  userId            String   @unique\n  specialties       String[] // e.g. [\"Guitar\", \"Bass\", \"Music Production\"]\n  hourlyRate        Decimal  @db.Decimal(10, 2)\n  commissionRatePct Decimal  @default(0) @db.Decimal(5, 2)\n  workingHours      Json // Weekly availability: { \"monday\": [{ \"start\": \"09:00\", \"end\": \"18:00\" }] }\n  bio               String?\n  createdAt         DateTime @default(now())\n  updatedAt         DateTime @updatedAt\n\n  organization Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n  user         User            @relation(fields: [userId], references: [id], onDelete: Cascade)\n  sessions     LessonSession[]\n\n  @@index([organizationId])\n  @@map(\"music_instructor_profiles\")\n}\n\nmodel StudentProfile {\n  id               String    @id @default(uuid())\n  organizationId   String\n  userId           String?   @unique\n  fullName         String\n  email            String\n  phone            String\n  guardianName     String?\n  guardianPhone    String?\n  guardianEmail    String?\n  emergencyContact String?\n  dob              DateTime?\n  registeredAt     DateTime  @default(now())\n  createdAt        DateTime  @default(now())\n  updatedAt        DateTime  @updatedAt\n\n  organization  Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n  user          User?               @relation(fields: [userId], references: [id], onDelete: SetNull)\n  subscriptions MusicSubscription[]\n  attendances   LessonAttendance[]\n\n  @@index([organizationId])\n  @@map(\"music_student_profiles\")\n}\n\nmodel MusicPackage {\n  id             String   @id @default(uuid())\n  organizationId String\n  courseId       String\n  name           String\n  description    String?\n  price          Decimal  @db.Decimal(10, 2)\n  discountPrice  Decimal? @db.Decimal(10, 2)\n  currency       String   @default(\"USD\")\n  totalSessions  Int // e.g., 8, 12, 24 lessons\n  validityDays   Int // e.g., 30, 60, 90 days\n  isFeatured     Boolean  @default(false)\n  isActive       Boolean  @default(true)\n  createdAt      DateTime @default(now())\n  updatedAt      DateTime @updatedAt\n\n  organization  Organization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n  course        Course                 @relation(fields: [courseId], references: [id], onDelete: Cascade)\n  subscriptions MusicSubscription[]\n  discounts     MusicPackageDiscount[]\n\n  @@index([organizationId, courseId])\n  @@map(\"music_packages\")\n}\n\nmodel MusicDiscount {\n  id             String       @id @default(uuid())\n  organizationId String\n  code           String // e.g., \"SUMMER20\", \"EARLYBIRD\"\n  description    String?\n  type           DiscountType @default(PERCENTAGE)\n  value          Decimal      @db.Decimal(10, 2) // 20% or $50.00\n  startsAt       DateTime\n  expiresAt      DateTime\n  maxUses        Int?\n  usedCount      Int          @default(0)\n  isActive       Boolean      @default(true)\n  createdAt      DateTime     @default(now())\n  updatedAt      DateTime     @updatedAt\n\n  organization  Organization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n  packages      MusicPackageDiscount[]\n  subscriptions MusicSubscription[]\n\n  @@unique([organizationId, code])\n  @@map(\"music_discounts\")\n}\n\nmodel MusicPackageDiscount {\n  packageId  String\n  discountId String\n\n  package  MusicPackage  @relation(fields: [packageId], references: [id], onDelete: Cascade)\n  discount MusicDiscount @relation(fields: [discountId], references: [id], onDelete: Cascade)\n\n  @@id([packageId, discountId])\n  @@map(\"music_package_discounts\")\n}\n\nmodel MusicSubscription {\n  id                String             @id @default(uuid())\n  organizationId    String\n  studentId         String\n  packageId         String\n  discountId        String?\n  status            SubscriptionStatus @default(ACTIVE)\n  sessionsTotal     Int\n  sessionsRemaining Int\n  startsAt          DateTime\n  expiresAt         DateTime\n  autoRenew         Boolean            @default(false)\n  renewalNotifiedAt DateTime?\n  createdAt         DateTime           @default(now())\n  updatedAt         DateTime           @updatedAt\n\n  organization Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n  student      StudentProfile  @relation(fields: [studentId], references: [id], onDelete: Cascade)\n  package      MusicPackage    @relation(fields: [packageId], references: [id], onDelete: Restrict)\n  discount     MusicDiscount?  @relation(fields: [discountId], references: [id], onDelete: SetNull)\n  invoices     MusicInvoice[]\n  sessions     LessonSession[]\n\n  @@index([organizationId, status, expiresAt])\n  @@index([studentId])\n  @@map(\"music_subscriptions\")\n}\n\nmodel LessonSession {\n  id             String        @id @default(uuid())\n  organizationId String\n  branchId       String\n  courseId       String\n  instructorId   String\n  subscriptionId String?\n  title          String\n  roomNumber     String? // e.g. \"Studio 2\", \"Piano Room A\"\n  startTime      DateTime\n  endTime        DateTime\n  status         SessionStatus @default(SCHEDULED)\n  notes          String?\n  createdAt      DateTime      @default(now())\n  updatedAt      DateTime      @updatedAt\n\n  organization Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n  branch       Branch             @relation(fields: [branchId], references: [id], onDelete: Cascade)\n  course       Course             @relation(fields: [courseId], references: [id], onDelete: Cascade)\n  instructor   InstructorProfile  @relation(fields: [instructorId], references: [id], onDelete: Restrict)\n  subscription MusicSubscription? @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)\n  attendances  LessonAttendance[]\n\n  @@index([organizationId, branchId, startTime])\n  @@index([instructorId, startTime])\n  @@map(\"music_lesson_sessions\")\n}\n\nmodel LessonAttendance {\n  id               String           @id @default(uuid())\n  organizationId   String\n  sessionId        String\n  studentId        String\n  status           AttendanceStatus @default(PRESENT)\n  markedAt         DateTime         @default(now())\n  remarks          String?\n  homeworkAssigned String?\n\n  organization Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n  session      LessonSession  @relation(fields: [sessionId], references: [id], onDelete: Cascade)\n  student      StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)\n\n  @@unique([sessionId, studentId])\n  @@index([organizationId, studentId, status])\n  @@map(\"music_lesson_attendances\")\n}\n\nmodel VideoLesson {\n  id              String   @id @default(uuid())\n  organizationId  String\n  courseId        String?\n  title           String\n  description     String?\n  videoUrl        String // S3/CloudFront URL or external stream link\n  thumbnailUrl    String?\n  durationSeconds Int\n  attachments     Json? // PDF sheet music, tabs, chords: [{ \"name\": \"Sheet.pdf\", \"url\": \"...\" }]\n  createdAt       DateTime @default(now())\n  updatedAt       DateTime @updatedAt\n\n  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n  course       Course?      @relation(fields: [courseId], references: [id], onDelete: SetNull)\n\n  @@index([organizationId, courseId])\n  @@map(\"music_video_lessons\")\n}\n\nmodel MusicInvoice {\n  id             String        @id @default(uuid())\n  organizationId String\n  subscriptionId String?\n  invoiceNumber  String\n  subtotal       Decimal       @db.Decimal(10, 2)\n  discountAmount Decimal       @default(0) @db.Decimal(10, 2)\n  taxAmount      Decimal       @default(0) @db.Decimal(10, 2)\n  totalAmount    Decimal       @db.Decimal(10, 2)\n  status         InvoiceStatus @default(DRAFT)\n  dueDate        DateTime\n  paidAt         DateTime?\n  createdAt      DateTime      @default(now())\n  updatedAt      DateTime      @updatedAt\n\n  organization Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n  subscription MusicSubscription? @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)\n  payments     MusicPayment[]\n\n  @@unique([organizationId, invoiceNumber])\n  @@index([organizationId, status])\n  @@map(\"music_invoices\")\n}\n\nmodel MusicPayment {\n  id             String        @id @default(uuid())\n  organizationId String\n  invoiceId      String\n  amount         Decimal       @db.Decimal(10, 2)\n  paymentMethod  PaymentMethod\n  referenceId    String? // Gateway transaction ID or receipt code\n  paidAt         DateTime      @default(now())\n  createdAt      DateTime      @default(now())\n\n  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n  invoice      MusicInvoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)\n\n  @@index([organizationId, invoiceId])\n  @@map(\"music_payments\")\n}\n\nenum MusicStudentStatus {\n  ACTIVE\n  INACTIVE\n  GRADUATED\n  ON_HOLD\n}\n\nenum MusicSkillLevel {\n  BEGINNER\n  INTERMEDIATE\n  ADVANCED\n  PROFESSIONAL\n}\n\nenum MusicCourseStatus {\n  ACTIVE\n  INACTIVE\n}\n\nenum MusicBatchStatus {\n  PLANNED\n  ACTIVE\n  COMPLETED\n  CANCELLED\n}\n\nenum MusicEnrollmentStatus {\n  ACTIVE\n  PAUSED\n  COMPLETED\n  CANCELLED\n}\n\nenum MusicAttendanceStatus {\n  PRESENT\n  ABSENT\n  LATE\n  EXCUSED\n}\n\nmodel MusicStudent {\n  id String @id @db.Char(32)\n\n  organizationId String\n  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n\n  branchId String?\n  branch   Branch? @relation(fields: [branchId], references: [id], onDelete: SetNull)\n\n  studentNo String\n\n  firstName String\n  lastName  String\n\n  email String?\n  phone String?\n\n  dateOfBirth DateTime?\n\n  guardianName  String?\n  guardianPhone String?\n  guardianEmail String?\n\n  instrument String?\n  skillLevel MusicSkillLevel    @default(BEGINNER)\n  status     MusicStudentStatus @default(ACTIVE)\n\n  joinedAt DateTime @default(now())\n  notes    String?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  enrollments  MusicEnrollment[]\n  attendance   MusicAttendance[]\n  practiceLogs MusicPracticeLog[]\n\n  @@unique([organizationId, studentNo])\n  @@index([organizationId])\n  @@index([organizationId, branchId])\n  @@index([organizationId, status])\n}\n\nmodel MusicCourse {\n  id String @id @db.Char(32)\n\n  organizationId String\n  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n\n  code        String\n  name        String\n  description String?\n\n  instrument String?\n  skillLevel MusicSkillLevel @default(BEGINNER)\n\n  durationWeeks        Int?\n  classDurationMinutes Int  @default(60)\n\n  status MusicCourseStatus @default(ACTIVE)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  batches MusicBatch[]\n\n  @@unique([organizationId, code])\n  @@index([organizationId])\n  @@index([organizationId, status])\n}\n\nmodel MusicBatch {\n  id String @id @db.Char(32)\n\n  organizationId String\n  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n\n  branchId String\n  branch   Branch @relation(fields: [branchId], references: [id], onDelete: Cascade)\n\n  courseId String\n  course   MusicCourse @relation(fields: [courseId], references: [id], onDelete: Cascade)\n\n  teacherUserId String?\n  teacher       User?   @relation(fields: [teacherUserId], references: [id], onDelete: SetNull)\n\n  name     String\n  capacity Int    @default(20)\n\n  startDate DateTime\n  endDate   DateTime?\n\n  days String[]\n\n  startTime String\n  endTime   String\n\n  status MusicBatchStatus @default(PLANNED)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  enrollments MusicEnrollment[]\n  attendance  MusicAttendance[]\n\n  @@index([organizationId])\n  @@index([organizationId, branchId])\n  @@index([organizationId, status])\n}\n\nmodel MusicEnrollment {\n  id String @id @db.Char(32)\n\n  organizationId String\n  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n\n  studentId String\n  student   MusicStudent @relation(fields: [studentId], references: [id], onDelete: Cascade)\n\n  batchId String\n  batch   MusicBatch @relation(fields: [batchId], references: [id], onDelete: Cascade)\n\n  enrolledAt DateTime @default(now())\n\n  feeAmount      Int @default(0)\n  discountAmount Int @default(0)\n\n  status MusicEnrollmentStatus @default(ACTIVE)\n\n  notes String?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@unique([studentId, batchId])\n  @@index([organizationId])\n  @@index([organizationId, status])\n}\n\nmodel MusicAttendance {\n  id String @id @db.Char(32)\n\n  organizationId String\n  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n\n  studentId String\n  student   MusicStudent @relation(fields: [studentId], references: [id], onDelete: Cascade)\n\n  batchId String\n  batch   MusicBatch @relation(fields: [batchId], references: [id], onDelete: Cascade)\n\n  date DateTime\n\n  status MusicAttendanceStatus @default(PRESENT)\n\n  notes String?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@unique([studentId, batchId, date])\n  @@index([organizationId, date])\n  @@index([organizationId, batchId, date])\n}\n\nmodel MusicPracticeLog {\n  id String @id @db.Char(32)\n\n  organizationId String\n  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n\n  studentId String\n  student   MusicStudent @relation(fields: [studentId], references: [id], onDelete: Cascade)\n\n  date DateTime @default(now())\n\n  minutes Int\n\n  instrument      String?\n  piece           String?\n  notes           String?\n  teacherFeedback String?\n\n  rating Int?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([organizationId, studentId, date])\n}\n\n//Contacts\nenum ContactType {\n  PERSON\n  BUSINESS\n}\n\nenum ContactStatus {\n  ACTIVE\n  INACTIVE\n  ARCHIVED\n}\n\nmodel Contact {\n  id String @id @db.Char(32)\n\n  organizationId String\n  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n\n  branchId String?\n  branch   Branch? @relation(fields: [branchId], references: [id], onDelete: SetNull)\n\n  type   ContactType\n  status ContactStatus @default(ACTIVE)\n\n  firstName   String?\n  lastName    String?\n  companyName String?\n\n  email String?\n  phone String?\n\n  notes String?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  enquiries Enquiry[]\n  bookings  Booking[]\n\n  @@index([organizationId])\n  @@index([organizationId, branchId])\n  @@index([organizationId, status])\n  @@index([organizationId, email])\n  @@index([organizationId, phone])\n}\n\nenum ProductType {\n  PRODUCT\n  SERVICE\n}\n\nenum ProductStatus {\n  ACTIVE\n  INACTIVE\n  ARCHIVED\n}\n\nmodel Product {\n  id String @id @db.Char(32)\n\n  organizationId String\n  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n\n  name        String\n  code        String\n  description String?\n\n  type   ProductType\n  status ProductStatus\n\n  price    Decimal  @db.Decimal(12, 2)\n  currency String   @default(\"INR\")\n  taxRate  Decimal? @db.Decimal(5, 2)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  inventory InventoryItem[]\n\n  @@unique([organizationId, code])\n  @@unique([organizationId, name])\n  @@index([organizationId])\n  @@index([organizationId, status])\n}\n\nenum InventoryStatus {\n  ACTIVE\n  INACTIVE\n  ARCHIVED\n}\n\nmodel InventoryItem {\n  id String @id @db.Char(32)\n\n  organizationId String\n  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n\n  branchId String\n  branch   Branch @relation(fields: [branchId], references: [id], onDelete: Cascade)\n\n  productId String\n  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)\n\n  quantityOnHand   Int @default(0)\n  quantityReserved Int @default(0)\n  reorderLevel     Int @default(0)\n\n  status InventoryStatus @default(ACTIVE)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@unique([organizationId, branchId, productId])\n  @@index([organizationId])\n  @@index([organizationId, branchId])\n  @@index([organizationId, productId])\n  @@index([branchId, productId])\n}\n\nenum EnquiryStatus {\n  NEW\n  CONTACTED\n  QUALIFIED\n  CONVERTED\n  LOST\n}\n\nenum EnquirySource {\n  WEBSITE\n  PHONE\n  EMAIL\n  WALK_IN\n  REFERRAL\n  SOCIAL_MEDIA\n  OTHER\n}\n\nmodel Enquiry {\n  id String @id @db.Char(32)\n\n  organizationId String\n  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n\n  branchId String?\n  branch   Branch? @relation(fields: [branchId], references: [id], onDelete: SetNull)\n\n  contactId String\n  contact   Contact @relation(fields: [contactId], references: [id], onDelete: Cascade)\n\n  assignedUserId String?\n  assignedUser   User?   @relation(fields: [assignedUserId], references: [id], onDelete: SetNull)\n\n  source EnquirySource\n  status EnquiryStatus @default(NEW)\n\n  subject     String\n  description String?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([organizationId])\n  @@index([organizationId, branchId])\n  @@index([organizationId, contactId])\n  @@index([organizationId, status])\n  @@index([assignedUserId])\n}\n\nenum BookingStatus {\n  DRAFT\n  CONFIRMED\n  CANCELLED\n  COMPLETED\n}\n\nmodel Booking {\n  id String @id @db.Char(32)\n\n  organizationId String\n  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)\n\n  branchId String?\n  branch   Branch? @relation(fields: [branchId], references: [id], onDelete: SetNull)\n\n  contactId String\n  contact   Contact @relation(fields: [contactId], references: [id], onDelete: Cascade)\n\n  scheduledAt DateTime\n\n  status BookingStatus @default(DRAFT)\n\n  notes String?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([organizationId])\n  @@index([organizationId, branchId])\n  @@index([organizationId, contactId])\n  @@index([organizationId, status])\n  @@index([scheduledAt])\n}\n",
+  "inlineSchemaHash": "2093883348b0ca9ccff672e6d9817d7786fe793072293fc10601032193d7e96d",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Organization\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"branches\",\"kind\":\"object\",\"type\":\"Branch\",\"relationName\":\"BranchToOrganization\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Branch\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"BranchToOrganization\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"code\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"BranchStatus\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Organization\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"industry\",\"kind\":\"enum\",\"type\":\"IndustryType\"},{\"name\":\"branches\",\"kind\":\"object\",\"type\":\"Branch\",\"relationName\":\"BranchToOrganization\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"OrganizationToUser\"},{\"name\":\"roles\",\"kind\":\"object\",\"type\":\"Role\",\"relationName\":\"OrganizationToRole\"},{\"name\":\"auditLogs\",\"kind\":\"object\",\"type\":\"AuditLog\",\"relationName\":\"AuditLogToOrganization\"},{\"name\":\"settings\",\"kind\":\"object\",\"type\":\"OrganizationSetting\",\"relationName\":\"OrganizationToOrganizationSetting\"},{\"name\":\"notifications\",\"kind\":\"object\",\"type\":\"Notification\",\"relationName\":\"NotificationToOrganization\"},{\"name\":\"musicStudents\",\"kind\":\"object\",\"type\":\"MusicStudent\",\"relationName\":\"MusicStudentToOrganization\"},{\"name\":\"musicCourses\",\"kind\":\"object\",\"type\":\"MusicCourse\",\"relationName\":\"MusicCourseToOrganization\"},{\"name\":\"musicBatches\",\"kind\":\"object\",\"type\":\"MusicBatch\",\"relationName\":\"MusicBatchToOrganization\"},{\"name\":\"musicEnrollments\",\"kind\":\"object\",\"type\":\"MusicEnrollment\",\"relationName\":\"MusicEnrollmentToOrganization\"},{\"name\":\"musicAttendance\",\"kind\":\"object\",\"type\":\"MusicAttendance\",\"relationName\":\"MusicAttendanceToOrganization\"},{\"name\":\"musicPracticeLogs\",\"kind\":\"object\",\"type\":\"MusicPracticeLog\",\"relationName\":\"MusicPracticeLogToOrganization\"},{\"name\":\"musicInquiries\",\"kind\":\"object\",\"type\":\"MusicInquiry\",\"relationName\":\"MusicInquiryToOrganization\"},{\"name\":\"courses\",\"kind\":\"object\",\"type\":\"Course\",\"relationName\":\"CourseToOrganization\"},{\"name\":\"instructorProfiles\",\"kind\":\"object\",\"type\":\"InstructorProfile\",\"relationName\":\"InstructorProfileToOrganization\"},{\"name\":\"studentProfiles\",\"kind\":\"object\",\"type\":\"StudentProfile\",\"relationName\":\"OrganizationToStudentProfile\"},{\"name\":\"musicPackages\",\"kind\":\"object\",\"type\":\"MusicPackage\",\"relationName\":\"MusicPackageToOrganization\"},{\"name\":\"musicDiscounts\",\"kind\":\"object\",\"type\":\"MusicDiscount\",\"relationName\":\"MusicDiscountToOrganization\"},{\"name\":\"musicSubscriptions\",\"kind\":\"object\",\"type\":\"MusicSubscription\",\"relationName\":\"MusicSubscriptionToOrganization\"},{\"name\":\"lessonSessions\",\"kind\":\"object\",\"type\":\"LessonSession\",\"relationName\":\"LessonSessionToOrganization\"},{\"name\":\"lessonAttendances\",\"kind\":\"object\",\"type\":\"LessonAttendance\",\"relationName\":\"LessonAttendanceToOrganization\"},{\"name\":\"videoLessons\",\"kind\":\"object\",\"type\":\"VideoLesson\",\"relationName\":\"OrganizationToVideoLesson\"},{\"name\":\"musicInvoices\",\"kind\":\"object\",\"type\":\"MusicInvoice\",\"relationName\":\"MusicInvoiceToOrganization\"},{\"name\":\"musicPayments\",\"kind\":\"object\",\"type\":\"MusicPayment\",\"relationName\":\"MusicPaymentToOrganization\"},{\"name\":\"contacts\",\"kind\":\"object\",\"type\":\"Contact\",\"relationName\":\"ContactToOrganization\"},{\"name\":\"products\",\"kind\":\"object\",\"type\":\"Product\",\"relationName\":\"OrganizationToProduct\"},{\"name\":\"inventory\",\"kind\":\"object\",\"type\":\"InventoryItem\",\"relationName\":\"InventoryItemToOrganization\"},{\"name\":\"enquiries\",\"kind\":\"object\",\"type\":\"Enquiry\",\"relationName\":\"EnquiryToOrganization\"},{\"name\":\"bookings\",\"kind\":\"object\",\"type\":\"Booking\",\"relationName\":\"BookingToOrganization\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Branch\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"BranchToOrganization\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"code\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"BranchType\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"BranchStatus\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"BranchToUser\"},{\"name\":\"contacts\",\"kind\":\"object\",\"type\":\"Contact\",\"relationName\":\"BranchToContact\"},{\"name\":\"musicStudents\",\"kind\":\"object\",\"type\":\"MusicStudent\",\"relationName\":\"BranchToMusicStudent\"},{\"name\":\"musicBatches\",\"kind\":\"object\",\"type\":\"MusicBatch\",\"relationName\":\"BranchToMusicBatch\"},{\"name\":\"musicInquiries\",\"kind\":\"object\",\"type\":\"MusicInquiry\",\"relationName\":\"BranchToMusicInquiry\"},{\"name\":\"lessonSessions\",\"kind\":\"object\",\"type\":\"LessonSession\",\"relationName\":\"BranchToLessonSession\"},{\"name\":\"inventory\",\"kind\":\"object\",\"type\":\"InventoryItem\",\"relationName\":\"BranchToInventoryItem\"},{\"name\":\"enquiries\",\"kind\":\"object\",\"type\":\"Enquiry\",\"relationName\":\"BranchToEnquiry\"},{\"name\":\"bookings\",\"kind\":\"object\",\"type\":\"Booking\",\"relationName\":\"BookingToBranch\"}],\"dbName\":null},\"DomainEvent\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"aggregateId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"aggregateType\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"eventName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"payload\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"occurredAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"publishedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"OrganizationToUser\"},{\"name\":\"branchId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"branch\",\"kind\":\"object\",\"type\":\"Branch\",\"relationName\":\"BranchToUser\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"passwordHash\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"firstName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"UserStatus\"},{\"name\":\"lastLoginAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"refreshTokens\",\"kind\":\"object\",\"type\":\"RefreshToken\",\"relationName\":\"RefreshTokenToUser\"},{\"name\":\"userRoles\",\"kind\":\"object\",\"type\":\"UserRole\",\"relationName\":\"UserToUserRole\"},{\"name\":\"notifications\",\"kind\":\"object\",\"type\":\"Notification\",\"relationName\":\"NotificationToUser\"},{\"name\":\"instructorProfile\",\"kind\":\"object\",\"type\":\"InstructorProfile\",\"relationName\":\"InstructorProfileToUser\"},{\"name\":\"studentProfile\",\"kind\":\"object\",\"type\":\"StudentProfile\",\"relationName\":\"StudentProfileToUser\"},{\"name\":\"musicTeachingBatches\",\"kind\":\"object\",\"type\":\"MusicBatch\",\"relationName\":\"MusicBatchToUser\"},{\"name\":\"enquiries\",\"kind\":\"object\",\"type\":\"Enquiry\",\"relationName\":\"EnquiryToUser\"}],\"dbName\":null},\"RefreshToken\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"RefreshTokenToUser\"},{\"name\":\"tokenHash\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expiresAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"revokedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Role\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"OrganizationToRole\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"level\",\"kind\":\"enum\",\"type\":\"RoleLevel\"},{\"name\":\"isSystem\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"rolePermissions\",\"kind\":\"object\",\"type\":\"RolePermission\",\"relationName\":\"RoleToRolePermission\"},{\"name\":\"userRoles\",\"kind\":\"object\",\"type\":\"UserRole\",\"relationName\":\"RoleToUserRole\"}],\"dbName\":null},\"Permission\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"code\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"module\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"rolePermissions\",\"kind\":\"object\",\"type\":\"RolePermission\",\"relationName\":\"PermissionToRolePermission\"}],\"dbName\":null},\"RolePermission\":{\"fields\":[{\"name\":\"roleId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"object\",\"type\":\"Role\",\"relationName\":\"RoleToRolePermission\"},{\"name\":\"permissionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"permission\",\"kind\":\"object\",\"type\":\"Permission\",\"relationName\":\"PermissionToRolePermission\"}],\"dbName\":null},\"UserRole\":{\"fields\":[{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserToUserRole\"},{\"name\":\"roleId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"object\",\"type\":\"Role\",\"relationName\":\"RoleToUserRole\"},{\"name\":\"branchId\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"AuditLog\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"AuditLogToOrganization\"},{\"name\":\"branchId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"actorUserId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"action\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"entityType\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"entityId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"metadata\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"OrganizationSetting\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"OrganizationToOrganizationSetting\"},{\"name\":\"key\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"value\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Notification\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"NotificationToOrganization\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"NotificationToUser\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"metadata\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"readAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"MusicInquiry\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"branchId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"studentName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"guardianName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"instrument\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"skillLevel\",\"kind\":\"enum\",\"type\":\"SkillLevel\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"InquiryStatus\"},{\"name\":\"trialSessionAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"assignedStaffId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"MusicInquiryToOrganization\"},{\"name\":\"branch\",\"kind\":\"object\",\"type\":\"Branch\",\"relationName\":\"BranchToMusicInquiry\"}],\"dbName\":\"music_inquiries\"},\"Course\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"instrument\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"skillLevel\",\"kind\":\"enum\",\"type\":\"SkillLevel\"},{\"name\":\"isIndividual\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"maxCapacity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"CourseToOrganization\"},{\"name\":\"packages\",\"kind\":\"object\",\"type\":\"MusicPackage\",\"relationName\":\"CourseToMusicPackage\"},{\"name\":\"sessions\",\"kind\":\"object\",\"type\":\"LessonSession\",\"relationName\":\"CourseToLessonSession\"},{\"name\":\"videoLessons\",\"kind\":\"object\",\"type\":\"VideoLesson\",\"relationName\":\"CourseToVideoLesson\"}],\"dbName\":\"music_courses\"},\"InstructorProfile\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"specialties\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"hourlyRate\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"commissionRatePct\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"workingHours\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"bio\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"InstructorProfileToOrganization\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"InstructorProfileToUser\"},{\"name\":\"sessions\",\"kind\":\"object\",\"type\":\"LessonSession\",\"relationName\":\"InstructorProfileToLessonSession\"}],\"dbName\":\"music_instructor_profiles\"},\"StudentProfile\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fullName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"guardianName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"guardianPhone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"guardianEmail\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"emergencyContact\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"dob\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"registeredAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"OrganizationToStudentProfile\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"StudentProfileToUser\"},{\"name\":\"subscriptions\",\"kind\":\"object\",\"type\":\"MusicSubscription\",\"relationName\":\"MusicSubscriptionToStudentProfile\"},{\"name\":\"attendances\",\"kind\":\"object\",\"type\":\"LessonAttendance\",\"relationName\":\"LessonAttendanceToStudentProfile\"}],\"dbName\":\"music_student_profiles\"},\"MusicPackage\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"courseId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"discountPrice\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"currency\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"totalSessions\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"validityDays\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"isFeatured\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"MusicPackageToOrganization\"},{\"name\":\"course\",\"kind\":\"object\",\"type\":\"Course\",\"relationName\":\"CourseToMusicPackage\"},{\"name\":\"subscriptions\",\"kind\":\"object\",\"type\":\"MusicSubscription\",\"relationName\":\"MusicPackageToMusicSubscription\"},{\"name\":\"discounts\",\"kind\":\"object\",\"type\":\"MusicPackageDiscount\",\"relationName\":\"MusicPackageToMusicPackageDiscount\"}],\"dbName\":\"music_packages\"},\"MusicDiscount\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"code\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"DiscountType\"},{\"name\":\"value\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"startsAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"expiresAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"maxUses\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"usedCount\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"MusicDiscountToOrganization\"},{\"name\":\"packages\",\"kind\":\"object\",\"type\":\"MusicPackageDiscount\",\"relationName\":\"MusicDiscountToMusicPackageDiscount\"},{\"name\":\"subscriptions\",\"kind\":\"object\",\"type\":\"MusicSubscription\",\"relationName\":\"MusicDiscountToMusicSubscription\"}],\"dbName\":\"music_discounts\"},\"MusicPackageDiscount\":{\"fields\":[{\"name\":\"packageId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"discountId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"package\",\"kind\":\"object\",\"type\":\"MusicPackage\",\"relationName\":\"MusicPackageToMusicPackageDiscount\"},{\"name\":\"discount\",\"kind\":\"object\",\"type\":\"MusicDiscount\",\"relationName\":\"MusicDiscountToMusicPackageDiscount\"}],\"dbName\":\"music_package_discounts\"},\"MusicSubscription\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"studentId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"packageId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"discountId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"SubscriptionStatus\"},{\"name\":\"sessionsTotal\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"sessionsRemaining\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"startsAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"expiresAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"autoRenew\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"renewalNotifiedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"MusicSubscriptionToOrganization\"},{\"name\":\"student\",\"kind\":\"object\",\"type\":\"StudentProfile\",\"relationName\":\"MusicSubscriptionToStudentProfile\"},{\"name\":\"package\",\"kind\":\"object\",\"type\":\"MusicPackage\",\"relationName\":\"MusicPackageToMusicSubscription\"},{\"name\":\"discount\",\"kind\":\"object\",\"type\":\"MusicDiscount\",\"relationName\":\"MusicDiscountToMusicSubscription\"},{\"name\":\"invoices\",\"kind\":\"object\",\"type\":\"MusicInvoice\",\"relationName\":\"MusicInvoiceToMusicSubscription\"},{\"name\":\"sessions\",\"kind\":\"object\",\"type\":\"LessonSession\",\"relationName\":\"LessonSessionToMusicSubscription\"}],\"dbName\":\"music_subscriptions\"},\"LessonSession\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"branchId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"courseId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"instructorId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"subscriptionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"roomNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"startTime\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"endTime\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"SessionStatus\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"LessonSessionToOrganization\"},{\"name\":\"branch\",\"kind\":\"object\",\"type\":\"Branch\",\"relationName\":\"BranchToLessonSession\"},{\"name\":\"course\",\"kind\":\"object\",\"type\":\"Course\",\"relationName\":\"CourseToLessonSession\"},{\"name\":\"instructor\",\"kind\":\"object\",\"type\":\"InstructorProfile\",\"relationName\":\"InstructorProfileToLessonSession\"},{\"name\":\"subscription\",\"kind\":\"object\",\"type\":\"MusicSubscription\",\"relationName\":\"LessonSessionToMusicSubscription\"},{\"name\":\"attendances\",\"kind\":\"object\",\"type\":\"LessonAttendance\",\"relationName\":\"LessonAttendanceToLessonSession\"}],\"dbName\":\"music_lesson_sessions\"},\"LessonAttendance\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sessionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"studentId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"AttendanceStatus\"},{\"name\":\"markedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"remarks\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"homeworkAssigned\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"LessonAttendanceToOrganization\"},{\"name\":\"session\",\"kind\":\"object\",\"type\":\"LessonSession\",\"relationName\":\"LessonAttendanceToLessonSession\"},{\"name\":\"student\",\"kind\":\"object\",\"type\":\"StudentProfile\",\"relationName\":\"LessonAttendanceToStudentProfile\"}],\"dbName\":\"music_lesson_attendances\"},\"VideoLesson\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"courseId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"videoUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"thumbnailUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"durationSeconds\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"attachments\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"OrganizationToVideoLesson\"},{\"name\":\"course\",\"kind\":\"object\",\"type\":\"Course\",\"relationName\":\"CourseToVideoLesson\"}],\"dbName\":\"music_video_lessons\"},\"MusicInvoice\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"subscriptionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"invoiceNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"subtotal\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"discountAmount\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"taxAmount\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"totalAmount\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"InvoiceStatus\"},{\"name\":\"dueDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"paidAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"MusicInvoiceToOrganization\"},{\"name\":\"subscription\",\"kind\":\"object\",\"type\":\"MusicSubscription\",\"relationName\":\"MusicInvoiceToMusicSubscription\"},{\"name\":\"payments\",\"kind\":\"object\",\"type\":\"MusicPayment\",\"relationName\":\"MusicInvoiceToMusicPayment\"}],\"dbName\":\"music_invoices\"},\"MusicPayment\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"invoiceId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"amount\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"paymentMethod\",\"kind\":\"enum\",\"type\":\"PaymentMethod\"},{\"name\":\"referenceId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"paidAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"MusicPaymentToOrganization\"},{\"name\":\"invoice\",\"kind\":\"object\",\"type\":\"MusicInvoice\",\"relationName\":\"MusicInvoiceToMusicPayment\"}],\"dbName\":\"music_payments\"},\"MusicStudent\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"MusicStudentToOrganization\"},{\"name\":\"branchId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"branch\",\"kind\":\"object\",\"type\":\"Branch\",\"relationName\":\"BranchToMusicStudent\"},{\"name\":\"studentNo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"firstName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"dateOfBirth\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"guardianName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"guardianPhone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"guardianEmail\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"instrument\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"skillLevel\",\"kind\":\"enum\",\"type\":\"MusicSkillLevel\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"MusicStudentStatus\"},{\"name\":\"joinedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"enrollments\",\"kind\":\"object\",\"type\":\"MusicEnrollment\",\"relationName\":\"MusicEnrollmentToMusicStudent\"},{\"name\":\"attendance\",\"kind\":\"object\",\"type\":\"MusicAttendance\",\"relationName\":\"MusicAttendanceToMusicStudent\"},{\"name\":\"practiceLogs\",\"kind\":\"object\",\"type\":\"MusicPracticeLog\",\"relationName\":\"MusicPracticeLogToMusicStudent\"}],\"dbName\":null},\"MusicCourse\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"MusicCourseToOrganization\"},{\"name\":\"code\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"instrument\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"skillLevel\",\"kind\":\"enum\",\"type\":\"MusicSkillLevel\"},{\"name\":\"durationWeeks\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"classDurationMinutes\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"MusicCourseStatus\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"batches\",\"kind\":\"object\",\"type\":\"MusicBatch\",\"relationName\":\"MusicBatchToMusicCourse\"}],\"dbName\":null},\"MusicBatch\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"MusicBatchToOrganization\"},{\"name\":\"branchId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"branch\",\"kind\":\"object\",\"type\":\"Branch\",\"relationName\":\"BranchToMusicBatch\"},{\"name\":\"courseId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"course\",\"kind\":\"object\",\"type\":\"MusicCourse\",\"relationName\":\"MusicBatchToMusicCourse\"},{\"name\":\"teacherUserId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"teacher\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"MusicBatchToUser\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"capacity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"startDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"endDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"days\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"startTime\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"endTime\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"MusicBatchStatus\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"enrollments\",\"kind\":\"object\",\"type\":\"MusicEnrollment\",\"relationName\":\"MusicBatchToMusicEnrollment\"},{\"name\":\"attendance\",\"kind\":\"object\",\"type\":\"MusicAttendance\",\"relationName\":\"MusicAttendanceToMusicBatch\"}],\"dbName\":null},\"MusicEnrollment\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"MusicEnrollmentToOrganization\"},{\"name\":\"studentId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"student\",\"kind\":\"object\",\"type\":\"MusicStudent\",\"relationName\":\"MusicEnrollmentToMusicStudent\"},{\"name\":\"batchId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"batch\",\"kind\":\"object\",\"type\":\"MusicBatch\",\"relationName\":\"MusicBatchToMusicEnrollment\"},{\"name\":\"enrolledAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"feeAmount\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"discountAmount\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"MusicEnrollmentStatus\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"MusicAttendance\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"MusicAttendanceToOrganization\"},{\"name\":\"studentId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"student\",\"kind\":\"object\",\"type\":\"MusicStudent\",\"relationName\":\"MusicAttendanceToMusicStudent\"},{\"name\":\"batchId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"batch\",\"kind\":\"object\",\"type\":\"MusicBatch\",\"relationName\":\"MusicAttendanceToMusicBatch\"},{\"name\":\"date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"MusicAttendanceStatus\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"MusicPracticeLog\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"MusicPracticeLogToOrganization\"},{\"name\":\"studentId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"student\",\"kind\":\"object\",\"type\":\"MusicStudent\",\"relationName\":\"MusicPracticeLogToMusicStudent\"},{\"name\":\"date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"minutes\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"instrument\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"piece\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"teacherFeedback\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"rating\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Contact\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"ContactToOrganization\"},{\"name\":\"branchId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"branch\",\"kind\":\"object\",\"type\":\"Branch\",\"relationName\":\"BranchToContact\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"ContactType\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"ContactStatus\"},{\"name\":\"firstName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"companyName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"enquiries\",\"kind\":\"object\",\"type\":\"Enquiry\",\"relationName\":\"ContactToEnquiry\"},{\"name\":\"bookings\",\"kind\":\"object\",\"type\":\"Booking\",\"relationName\":\"BookingToContact\"}],\"dbName\":null},\"Product\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"OrganizationToProduct\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"code\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"ProductType\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"ProductStatus\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"currency\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"taxRate\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"inventory\",\"kind\":\"object\",\"type\":\"InventoryItem\",\"relationName\":\"InventoryItemToProduct\"}],\"dbName\":null},\"InventoryItem\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"InventoryItemToOrganization\"},{\"name\":\"branchId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"branch\",\"kind\":\"object\",\"type\":\"Branch\",\"relationName\":\"BranchToInventoryItem\"},{\"name\":\"productId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"product\",\"kind\":\"object\",\"type\":\"Product\",\"relationName\":\"InventoryItemToProduct\"},{\"name\":\"quantityOnHand\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"quantityReserved\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"reorderLevel\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"InventoryStatus\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Enquiry\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"EnquiryToOrganization\"},{\"name\":\"branchId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"branch\",\"kind\":\"object\",\"type\":\"Branch\",\"relationName\":\"BranchToEnquiry\"},{\"name\":\"contactId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contact\",\"kind\":\"object\",\"type\":\"Contact\",\"relationName\":\"ContactToEnquiry\"},{\"name\":\"assignedUserId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"assignedUser\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"EnquiryToUser\"},{\"name\":\"source\",\"kind\":\"enum\",\"type\":\"EnquirySource\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"EnquiryStatus\"},{\"name\":\"subject\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Booking\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organizationId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"object\",\"type\":\"Organization\",\"relationName\":\"BookingToOrganization\"},{\"name\":\"branchId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"branch\",\"kind\":\"object\",\"type\":\"Branch\",\"relationName\":\"BookingToBranch\"},{\"name\":\"contactId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contact\",\"kind\":\"object\",\"type\":\"Contact\",\"relationName\":\"BookingToContact\"},{\"name\":\"scheduledAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"BookingStatus\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

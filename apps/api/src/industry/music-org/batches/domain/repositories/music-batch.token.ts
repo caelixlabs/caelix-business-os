@@ -1,0 +1,2 @@
+export const MUSIC_BATCH_REPOSITORY =
+  Symbol('MUSIC_BATCH_REPOSITORY');

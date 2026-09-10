@@ -1,8 +1,5 @@
-import {
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IndustryType } from '../../domain/enums/industry-type.enum';
 
 export class CreateOrganizationDto {
   @IsString()
@@ -16,4 +13,8 @@ export class CreateOrganizationDto {
   @IsOptional()
   @IsString()
   description?: string;
+  
+  @IsEnum(IndustryType)
+  @IsNotEmpty()
+  industry!: IndustryType;
 }

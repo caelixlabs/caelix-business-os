@@ -1,0 +1,9 @@
+export enum EnquirySource {
+  WEBSITE = 'WEBSITE',
+  PHONE = 'PHONE',
+  EMAIL = 'EMAIL',
+  WALK_IN = 'WALK_IN',
+  REFERRAL = 'REFERRAL',
+  SOCIAL_MEDIA = 'SOCIAL_MEDIA',
+  OTHER = 'OTHER',
+}

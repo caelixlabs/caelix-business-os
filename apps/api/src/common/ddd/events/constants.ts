@@ -1,5 +1,4 @@
-export const EVENT_HANDLER_METADATA =
-  Symbol('EVENT_HANDLER_METADATA');
+export const EVENT_HANDLER_METADATA = Symbol('EVENT_HANDLER_METADATA');
 
 export interface EventHandlerMetadata {
   event: Function;

@@ -342,7 +342,7 @@ Multiple words use kebab-case.
 Examples
 
 ```text
-music-academy
+music-Org
 
 starter-website
 

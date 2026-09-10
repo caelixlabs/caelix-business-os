@@ -4,9 +4,7 @@ export interface ApiResponse<T> {
   metadata?: Record<string, unknown>;
 }
 
-export function isApiResponse(
-  value: unknown,
-): value is ApiResponse<unknown> {
+export function isApiResponse(value: unknown): value is ApiResponse<unknown> {
   return (
     typeof value === 'object' &&
     value !== null &&

@@ -1,0 +1,2 @@
+export const MUSIC_COURSE_REPOSITORY =
+  Symbol('MUSIC_COURSE_REPOSITORY');

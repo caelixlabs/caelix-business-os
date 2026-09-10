@@ -1,0 +1,1 @@
+export const ENQUIRY_REPOSITORY = Symbol('ENQUIRY_REPOSITORY');

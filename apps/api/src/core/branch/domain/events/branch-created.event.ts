@@ -1,8 +1,6 @@
 import { DomainEvent } from '@/common/ddd';
 
-export class BranchCreatedEvent
-  implements DomainEvent
-{
+export class BranchCreatedEvent implements DomainEvent {
   readonly occurredOn = new Date();
 
   constructor(

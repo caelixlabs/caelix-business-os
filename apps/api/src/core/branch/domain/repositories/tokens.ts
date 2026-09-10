@@ -1,2 +1,0 @@
-export const BRANCH_REPOSITORY =
-  Symbol('BRANCH_REPOSITORY');
