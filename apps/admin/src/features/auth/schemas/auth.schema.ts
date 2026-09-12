@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { industryTypeSchema } from '@/core/industry/industry.schema';
 
 export const loginSchema = z.object({
   organizationSlug: z
@@ -16,7 +17,7 @@ export const createOrganizationSchema = z.object({
     .string()
     .min(2, 'Slug must be at least 2 characters')
     .regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, 'Lowercase letters, numbers, and hyphens only'),
-  industry: z.enum(['MUSIC_ORG', 'GYM']),
+  industry: industryTypeSchema,
 });
 export type CreateOrganizationFormValues = z.infer<typeof createOrganizationSchema>;
 

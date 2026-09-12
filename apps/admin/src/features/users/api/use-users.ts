@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { usersApi } from "./users.api";
-import { ApiError } from "@/lib/axios";
+import { ApiError } from "@/api/client";
 
 export const userKeys = {
   list: (organizationId: string) => ["users", organizationId] as const,

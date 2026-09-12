@@ -1,0 +1,16 @@
+export const MUSIC_ORG_THEME = {
+  accent: '#0eafa0',
+  accentSoft: '#e6f7f4',
+  accentInk: '#08796f',
+  success: '#1f8a5f',
+  successSoft: '#e7f5ef',
+  warning: '#9a6700',
+  warningSoft: '#fff6db',
+  danger: '#c4432b',
+  dangerSoft: '#fbeae6',
+  info: '#3d6b8a',
+  infoSoft: '#e8eff3',
+  canvas: '#f6f8fa',
+  surface: '#ffffff',
+  border: '#e5e9ee',
+};

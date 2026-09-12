@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import { apiGet, apiPatch, ApiError } from '@/lib/axios';
+import { apiGet, apiPatch, ApiError } from '@/api/client';
 import type { OrganizationSettings } from '../types';
 
 const settingsApi = {

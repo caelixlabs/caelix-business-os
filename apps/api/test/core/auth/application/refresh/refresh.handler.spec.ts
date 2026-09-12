@@ -33,7 +33,7 @@ describe('RefreshHandler', () => {
       findByHash: jest.fn(),
       findActiveByUserId : jest.fn(),
       revoke: jest.fn(),
-      revokeAllForUser: jest.fn(),
+      revokeAllByUserId: jest.fn(),
     };
 
     userRepository = {
@@ -107,6 +107,8 @@ describe('RefreshHandler', () => {
       accessToken: 'new-access',
       refreshToken: 'new-refresh',
       tokenType: 'Bearer',
+      roles: [],
+      permissions: [],
     });
 
     const result = await handler.execute(command);

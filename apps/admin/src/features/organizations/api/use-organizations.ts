@@ -1,7 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { organizationsApi } from './organizations.api';
-import { ApiError } from '@/lib/axios';
+import { ApiError } from '@/api/client';
+import type { Organization } from '../types';
 
 export const organizationKeys = {
   detail: (id: string) => ['organizations', id] as const,
@@ -9,10 +10,17 @@ export const organizationKeys = {
 
 export function useCreateOrganization() {
   return useMutation({
-    mutationFn: (input: { name: string; slug: string }) => organizationsApi.create(input),
+    mutationFn: (input: {
+      name: string;
+      slug: string;
+      description?: string;
+      industry: Organization['industry'];
+    }) => organizationsApi.create(input),
     onError: (error) => {
       toast.error(
-        error instanceof ApiError ? error.message : 'Could not create organization.',
+        error instanceof ApiError
+          ? error.message
+          : 'Could not create organization.',
       );
     },
   });
@@ -37,7 +45,11 @@ export function useUpdateOrganization(id: string) {
       toast.success('Organization settings saved.');
     },
     onError: (error) => {
-      toast.error(error instanceof ApiError ? error.message : 'Could not save changes.');
+      toast.error(
+        error instanceof ApiError
+          ? error.message
+          : 'Could not save changes.',
+      );
     },
   });
 }
@@ -51,11 +63,14 @@ export function useDeleteOrganization(id: string) {
       queryClient.removeQueries({
         queryKey: organizationKeys.detail(id),
       });
-      toast.success("Organization deleted.");
+      toast.success('Organization deleted.');
     },
     onError: (error) => {
-      toast.error(error instanceof ApiError ? error.message : "Could not delete organization.");
+      toast.error(
+        error instanceof ApiError
+          ? error.message
+          : 'Could not delete organization.',
+      );
     },
   });
 }
-

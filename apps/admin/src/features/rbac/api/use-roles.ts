@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { apiGet } from '@/lib/axios';
+import { apiGet } from '@/api/client';
 import { RoleSummary } from '@/features/auth/types';
 
 export const rbacApi = {

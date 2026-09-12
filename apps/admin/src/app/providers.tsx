@@ -3,7 +3,7 @@
 import type { ReactNode } from 'react';
 import { Toaster } from 'sonner';
 import { QueryProvider } from '@/providers/query-provider';
-import { AuthBootstrap } from '@/features/auth/components/auth-bootstrap';
+import { AuthBootstrap } from '@/contexts/auth/AuthBootstrap';
 
 export function Providers({ children }: { children: ReactNode }) {
   return (

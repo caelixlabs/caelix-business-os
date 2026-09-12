@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { apiGet, apiPatch } from '@/lib/axios';
-import type { PaginatedResult } from '@/lib/types';
+import { apiGet, apiPatch } from '@/api/client';
+import type { PaginatedResult } from '@/api/types';
 import type { NotificationItem } from '../types';
 
 interface NotificationsResponse extends PaginatedResult<NotificationItem> {

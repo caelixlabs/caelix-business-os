@@ -21,7 +21,5 @@ export interface RefreshTokenRepository {
   revoke(id: string): Promise<void>;
 
   /** Revokes every outstanding refresh token for a user (e.g. logout-all, password change). */
-  revokeAllForUser(userId: string): Promise<void>;
-
-  revokeAllByUserId(userId: String): Promise<void>;
+  revokeAllByUserId(userId: string): Promise<void>;
 }

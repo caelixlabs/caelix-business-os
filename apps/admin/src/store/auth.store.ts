@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import type { AppUser, AuthResponse } from '@/features/auth/types';
 
 const REFRESH_TOKEN_KEY = 'caelix_auth';
-/** Non-httpOnly flag cookie, read only by middleware.ts for route-gate
+/** Non-httpOnly flag cookie, read only by proxy.ts for proxy route-gate
  * redirects. Carries no secret — the real tokens never touch a cookie. */
 const SESSION_FLAG_COOKIE = 'caelix_session';
 

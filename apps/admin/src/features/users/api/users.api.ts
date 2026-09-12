@@ -1,5 +1,5 @@
 import { AppUser } from "@/features/auth/types";
-import { apiGet, apiPatch, apiPost } from "@/lib/axios";
+import { apiGet, apiPatch, apiPost } from "@/api/client";
 
 export const usersApi = {
   list: (organizationId: string) =>

@@ -1,4 +1,4 @@
-import { apiPost } from '@/lib/axios';
+import { apiPost } from '@/api/client';
 import type { AppUser, AuthResponse, LoginPayload, RegisterPayload } from '../types';
 
 export const authApi = {

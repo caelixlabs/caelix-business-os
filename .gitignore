@@ -10,6 +10,7 @@ dist
 .env.test.local
 .env.production.local
 *.tsbuildinfo
+next-env.d.ts
 node_modules
 /generated/prisma
 node_modules/

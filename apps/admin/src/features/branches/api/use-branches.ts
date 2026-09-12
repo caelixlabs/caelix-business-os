@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { branchesApi } from './branches.api';
-import { ApiError } from '@/lib/axios';
+import { ApiError } from '@/api/client';
 
 export const branchKeys = {
   list: (organizationId: string) => ['branches', organizationId] as const,

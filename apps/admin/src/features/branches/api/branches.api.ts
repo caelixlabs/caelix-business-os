@@ -1,4 +1,4 @@
-import { apiDelete, apiGet, apiPatch, apiPost } from '@/lib/axios';
+import { apiDelete, apiGet, apiPatch, apiPost } from '@/api/client';
 import type { Branch } from '../types';
 
 export const branchesApi = {

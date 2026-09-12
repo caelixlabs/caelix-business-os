@@ -8,20 +8,36 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantClasses: Record<Variant, string> = {
-  primary: 'bg-accent text-white hover:bg-accent-ink disabled:opacity-50',
-  secondary: 'bg-surface text-text border border-border hover:bg-canvas disabled:opacity-50',
-  ghost: 'bg-transparent text-text-secondary hover:bg-canvas disabled:opacity-50',
-  danger: 'bg-danger text-white hover:opacity-90 disabled:opacity-50',
+  primary:
+    'bg-accent text-white shadow-sm hover:bg-accent-ink hover:shadow-md disabled:opacity-50',
+  secondary:
+    'border border-border bg-surface text-text shadow-sm hover:bg-canvas hover:border-text-secondary/30 disabled:opacity-50',
+  ghost:
+    'bg-transparent text-text-secondary hover:bg-canvas hover:text-text disabled:opacity-50',
+  danger:
+    'bg-danger text-white shadow-sm hover:opacity-90 disabled:opacity-50',
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = 'primary', loading, className = '', children, disabled, ...props }, ref) => {
+  (
+    {
+      variant = 'primary',
+      loading,
+      className = '',
+      children,
+      disabled,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <button
         ref={ref}
         disabled={disabled || loading}
-        className={`inline-flex items-center justify-center gap-2 rounded-md px-3.5 py-2 text-sm font-medium
-          transition-colors duration-150 ease-out cursor-pointer disabled:cursor-not-allowed
+        className={`inline-flex h-10 items-center justify-center gap-2 rounded-lg px-4 text-sm font-medium
+          transition-all duration-150 ease-out cursor-pointer
+          focus-visible:ring-2 focus-visible:ring-accent/30 focus-visible:ring-offset-2
+          disabled:cursor-not-allowed disabled:opacity-50
           ${variantClasses[variant]} ${className}`}
         {...props}
       >

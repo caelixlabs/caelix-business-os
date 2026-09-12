@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { apiGet } from "@/lib/axios";
+import { apiGet } from "@/api/client";
 
-import type { PaginatedResult } from "@/lib/types";
+import type { PaginatedResult } from "@/api/types";
 import type { AuditLogEntry } from "../types";
 
 export interface AuditLogFilters {
@@ -11,7 +11,7 @@ export interface AuditLogFilters {
   actorUserId?: string;
 }
 
-export interface AuditLogResult extends PaginatedResult<AuditLogEntry> {}
+export type AuditLogResult = PaginatedResult<AuditLogEntry>;
 
 export const auditApi = {
   list: (

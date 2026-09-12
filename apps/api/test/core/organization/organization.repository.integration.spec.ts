@@ -6,6 +6,7 @@ import { EventBus } from '@/common/ddd';
 import { OrganizationPrismaRepository } from '@/core/organization/infrastructure/prisma/organization.prisma.repository';
 import { Organization } from '@/core/organization/domain/entities/organization.entity';
 import { OrganizationCreatedEvent } from '@/core/organization/domain/events';
+import { IndustryType } from '@/core/organization/domain/enums/industry-type.enum';
 
 jest.mock('@/common/prisma', () => ({
   PrismaService: jest.fn(),
@@ -70,6 +71,9 @@ describe('OrganizationPrismaRepository Integration', () => {
       name: 'Caelix',
       slug: 'caelix',
       description: 'Business OS',
+      industry: IndustryType.MUSIC_ORG,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     });
 
     const result = await repository.create(organization);

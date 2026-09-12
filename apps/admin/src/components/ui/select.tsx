@@ -15,7 +15,7 @@ export function SelectTrigger({ children, className }: { children: ReactNode; cl
         className,
       )}
     >
-      <SelectPrimitive.Value />
+      <SelectPrimitive.Value>{children}</SelectPrimitive.Value>
       <SelectPrimitive.Icon>
         <ChevronDown className="h-4 w-4 text-text-secondary" />
       </SelectPrimitive.Icon>

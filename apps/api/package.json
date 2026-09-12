@@ -84,6 +84,9 @@
       "^@/(.*)$": "<rootDir>/src/$1",
       "^@caelix-business-os/database$": "<rootDir>/src/__mocks__/database.ts"
     },
+    "modulePathIgnorePatterns": [
+      "<rootDir>/dist/"
+    ],
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],

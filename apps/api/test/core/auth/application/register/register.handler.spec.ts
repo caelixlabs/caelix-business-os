@@ -67,6 +67,8 @@ describe('RegisterHandler', () => {
       accessToken: 'a',
       refreshToken: 'r',
       tokenType: 'Bearer',
+      roles: [],
+      permissions: [],
     });
 
     await handler.execute(new RegisterCommand(dto));
@@ -84,6 +86,8 @@ describe('RegisterHandler', () => {
       accessToken: 'access-token',
       refreshToken: 'refresh-token',
       tokenType: 'Bearer',
+      roles: [],
+      permissions: [],
     });
 
     const result = await handler.execute(new RegisterCommand(dto));

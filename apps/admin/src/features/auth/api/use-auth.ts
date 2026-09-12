@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 
 
 import { useAuthStore } from '@/store/auth.store';
-import { ApiError } from '@/lib/axios';
+import { ApiError } from '@/api/client';
 import { LoginPayload, RegisterPayload } from '../types';
 import { authApi } from './auth.api';
 
