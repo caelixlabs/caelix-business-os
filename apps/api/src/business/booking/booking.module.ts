@@ -6,9 +6,13 @@ import { ConfirmBookingHandler } from "./application/confirm-booking/confirm-boo
 import { CancelBookingHandler } from "./application/cancel-booking/cancel-booking.handler";
 import { GetBookingHandler } from "./application/get-booking/get-booking.handler";
 import { ListBookingsHandler } from "./application/list-bookings/list-bookings.handler";
+import { UpdateBookingHandler } from "./application/update-booking/update-booking.handler";
+import { BookingController } from "./presentation/controllers/booking.controller";
 
 
 @Module({
+  controllers: [BookingController],
+
   providers: [
     {
       provide: BOOKING_REPOSITORY,
@@ -19,6 +23,7 @@ import { ListBookingsHandler } from "./application/list-bookings/list-bookings.h
     CancelBookingHandler,
     GetBookingHandler,
     ListBookingsHandler,
+    UpdateBookingHandler,
   ],
 
   exports: [
@@ -28,6 +33,7 @@ import { ListBookingsHandler } from "./application/list-bookings/list-bookings.h
     CancelBookingHandler,
     GetBookingHandler,
     ListBookingsHandler,
+    UpdateBookingHandler,
   ],
 })
 export class BookingModule {}

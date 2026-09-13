@@ -1,8 +1,8 @@
 export const MODULES = {
-  contacts: false,
-  bookings: false,
+  contacts: true,
+  bookings: true,
   payments: false,
-  inventory: false,
+  inventory: true,
   reports: false,
   enquiries: true,
   notifications: true,

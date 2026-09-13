@@ -12,10 +12,10 @@ export class CreateEnquiryHandler {
     private readonly repository: EnquiryRepository
   ) {}
 
-  async execute(dto: CreateEnquiryDto): Promise<Enquiry> {
+  async execute(organizationId: string, dto: CreateEnquiryDto): Promise<Enquiry> {
     const enquiry = Enquiry.create({
       id: customUUID.generate(),
-      organizationId: dto.organizationId,
+      organizationId,
       branchId: dto.branchId,
       contactId: dto.contactId,
       assignedUserId: dto.assignedUserId,

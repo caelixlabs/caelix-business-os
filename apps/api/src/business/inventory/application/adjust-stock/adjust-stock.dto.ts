@@ -1,3 +1,6 @@
-export interface AdjustStockDto {
-  quantityDelta: number;
+import { IsInt } from "class-validator";
+
+export class AdjustStockDto {
+  @IsInt()
+  quantityDelta!: number;
 }

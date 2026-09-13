@@ -16,9 +16,9 @@ export class CreateInventoryItemHandler {
     private readonly repository: InventoryItemRepository
   ) {}
 
-  async execute(dto: CreateInventoryItemDto): Promise<InventoryItem> {
+  async execute(organizationId: string, dto: CreateInventoryItemDto): Promise<InventoryItem> {
     const existing = await this.repository.findByBranchAndProduct(
-      dto.organizationId,
+      organizationId,
       dto.branchId,
       dto.productId
     );
@@ -32,7 +32,7 @@ export class CreateInventoryItemHandler {
     const inventory = InventoryItem.create({
       id: customUUID.generate(),
 
-      organizationId: dto.organizationId,
+      organizationId,
 
       branchId: dto.branchId,
 

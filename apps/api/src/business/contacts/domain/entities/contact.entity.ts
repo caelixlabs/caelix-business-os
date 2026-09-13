@@ -101,6 +101,32 @@ export class Contact {
     return this.props.notes;
   }
 
+  updateDetails(props: {
+    branchId?: string;
+    firstName?: string;
+    lastName?: string;
+    companyName?: string;
+    email?: string;
+    phone?: string;
+    notes?: string;
+  }): void {
+    if (
+      this.props.type === ContactType.PERSON &&
+      props.firstName === "" &&
+      props.lastName === ""
+    ) {
+      throw new Error("A PERSON contact must have a first name or last name.");
+    }
+
+    if (props.branchId !== undefined) this.props.branchId = props.branchId;
+    if (props.firstName !== undefined) this.props.firstName = props.firstName;
+    if (props.lastName !== undefined) this.props.lastName = props.lastName;
+    if (props.companyName !== undefined) this.props.companyName = props.companyName;
+    if (props.email !== undefined) this.props.email = props.email;
+    if (props.phone !== undefined) this.props.phone = props.phone;
+    if (props.notes !== undefined) this.props.notes = props.notes;
+  }
+
   archive(): void {
     this.props.status = ContactStatus.ARCHIVED;
   }

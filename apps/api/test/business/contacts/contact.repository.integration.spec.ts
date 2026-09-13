@@ -558,9 +558,7 @@ describe("CreateContactUseCase", () => {
     repositoryMock.findByEmail.mockResolvedValue(existingContact);
 
     await expect(
-      useCase.execute({
-        organizationId: "org-1",
-
+      useCase.execute("org-1", {
         type: ContactType.PERSON,
 
         firstName: "New",
@@ -586,9 +584,7 @@ describe("CreateContactUseCase", () => {
       async (contact: Contact) => contact
     );
 
-    const result = await useCase.execute({
-      organizationId: "org-2",
-
+    const result = await useCase.execute("org-2", {
       type: ContactType.PERSON,
 
       firstName: "John",

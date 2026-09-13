@@ -1,12 +1,42 @@
-import { ProductType } from '../../domain/enums';
+import {
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+  Max,
+  Min,
+} from "class-validator";
 
-export interface CreateProductDto {
-  organizationId: string;
-  name: string;
-  code: string;
+import { ProductType } from "../../domain/enums";
+
+export class CreateProductDto {
+  @IsString()
+  @IsNotEmpty()
+  name!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  code!: string;
+
+  @IsOptional()
+  @IsString()
   description?: string;
-  type: ProductType;
-  price: number;
+
+  @IsEnum(ProductType)
+  type!: ProductType;
+
+  @IsNumber()
+  @Min(0)
+  price!: number;
+
+  @IsOptional()
+  @IsString()
   currency?: string;
+
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(100)
   taxRate?: number;
 }

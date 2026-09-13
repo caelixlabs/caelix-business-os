@@ -9,9 +9,6 @@ import {
 } from '../../domain/enums';
 
 export class CreateEnquiryDto {
-  @IsString()
-  organizationId!: string;
-
   @IsOptional()
   @IsString()
   branchId?: string;

@@ -7,9 +7,6 @@ import {
 
 export class CreateInventoryItemDto {
   @IsString()
-  organizationId!: string;
-
-  @IsString()
   branchId!: string;
 
   @IsString()

@@ -12,10 +12,10 @@ export class CreateContactUseCase {
     private readonly repository: ContactPrismaRepository
   ) {}
 
-  async execute(dto: CreateContactDto): Promise<Contact> {
+  async execute(organizationId: string, dto: CreateContactDto): Promise<Contact> {
     if (dto.email) {
       const existing = await this.repository.findByEmail(
-        dto.organizationId,
+        organizationId,
         dto.email
       );
 
@@ -28,7 +28,7 @@ export class CreateContactUseCase {
 
     const contact = Contact.create({
       id: customUUID.generate(),
-      organizationId: dto.organizationId,
+      organizationId,
       branchId: dto.branchId,
       type: dto.type,
       firstName: dto.firstName,

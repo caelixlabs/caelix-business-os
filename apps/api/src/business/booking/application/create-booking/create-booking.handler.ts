@@ -11,10 +11,10 @@ export class CreateBookingHandler {
     private readonly repository: BookingRepository
   ) {}
 
-  async execute(dto: CreateBookingDto): Promise<Booking> {
+  async execute(organizationId: string, dto: CreateBookingDto): Promise<Booking> {
     const booking = Booking.create({
       id: customUUID.generate(),
-      organizationId: dto.organizationId,
+      organizationId,
       branchId: dto.branchId,
       contactId: dto.contactId,
       scheduledAt: new Date(dto.scheduledAt),

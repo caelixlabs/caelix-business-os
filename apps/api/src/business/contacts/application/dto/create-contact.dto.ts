@@ -2,9 +2,6 @@ import { IsEmail, IsEnum, IsOptional, IsString } from "class-validator";
 import { ContactType } from "../../domain/enums";
 
 export class CreateContactDto {
-  @IsString()
-  organizationId!: string;
-
   @IsOptional()
   @IsString()
   branchId?: string;

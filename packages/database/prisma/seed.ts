@@ -38,6 +38,28 @@ const PERMISSIONS: Array<{ code: string; description: string; module: string }> 
   { code: 'music:attendance-manage', description: 'Manage music attendance', module: 'music' },
   { code: 'music:practice-read', description: 'View music practice logs', module: 'music' },
   { code: 'music:practice-manage', description: 'Manage music practice logs', module: 'music' },
+
+  { code: 'contact:read', description: 'View contacts', module: 'contacts' },
+  { code: 'contact:create', description: 'Create contacts', module: 'contacts' },
+  { code: 'contact:update', description: 'Update contacts', module: 'contacts' },
+  { code: 'contact:archive', description: 'Archive or activate a contact', module: 'contacts' },
+
+  { code: 'booking:read', description: 'View bookings', module: 'bookings' },
+  { code: 'booking:create', description: 'Create bookings', module: 'bookings' },
+  { code: 'booking:manage', description: 'Confirm, cancel, or reschedule bookings', module: 'bookings' },
+
+  { code: 'product:read', description: 'View products and services', module: 'products' },
+  { code: 'product:create', description: 'Create products and services', module: 'products' },
+  { code: 'product:update', description: 'Update products and services', module: 'products' },
+  { code: 'product:archive', description: 'Archive or activate a product', module: 'products' },
+
+  { code: 'inventory:read', description: 'View inventory levels', module: 'inventory' },
+  { code: 'inventory:create', description: 'Create inventory records', module: 'inventory' },
+  { code: 'inventory:manage', description: 'Adjust stock and archive inventory records', module: 'inventory' },
+
+  { code: 'enquiry:read', description: 'View enquiries', module: 'enquiries' },
+  { code: 'enquiry:create', description: 'Create enquiries', module: 'enquiries' },
+  { code: 'enquiry:manage', description: 'Update enquiry status and assignment', module: 'enquiries' },
 ];
 
 async function main() {

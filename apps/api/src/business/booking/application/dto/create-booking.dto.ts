@@ -5,9 +5,6 @@ import {
 } from 'class-validator';
 
 export class CreateBookingDto {
-  @IsString()
-  organizationId!: string;
-
   @IsOptional()
   @IsString()
   branchId?: string;

@@ -35,4 +35,26 @@ export enum PermissionCode {
   MUSIC_ATTENDANCE_MANAGE = 'music:attendance-manage',
   MUSIC_PRACTICE_READ = 'music:practice-read',
   MUSIC_PRACTICE_MANAGE ='music:practice-manage',
+
+  CONTACT_READ = 'contact:read',
+  CONTACT_CREATE = 'contact:create',
+  CONTACT_UPDATE = 'contact:update',
+  CONTACT_ARCHIVE = 'contact:archive',
+
+  BOOKING_READ = 'booking:read',
+  BOOKING_CREATE = 'booking:create',
+  BOOKING_MANAGE = 'booking:manage',
+
+  PRODUCT_READ = 'product:read',
+  PRODUCT_CREATE = 'product:create',
+  PRODUCT_UPDATE = 'product:update',
+  PRODUCT_ARCHIVE = 'product:archive',
+
+  INVENTORY_READ = 'inventory:read',
+  INVENTORY_CREATE = 'inventory:create',
+  INVENTORY_MANAGE = 'inventory:manage',
+
+  ENQUIRY_READ = 'enquiry:read',
+  ENQUIRY_CREATE = 'enquiry:create',
+  ENQUIRY_MANAGE = 'enquiry:manage',
 }

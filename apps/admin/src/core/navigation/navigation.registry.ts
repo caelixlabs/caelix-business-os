@@ -80,6 +80,7 @@ export const CORE_NAV_GROUPS: NavigationGroup[] = [
         href: '/dashboard/enquiries',
         label: 'Enquiries',
         icon: ContactRound,
+        permission: 'enquiry:read',
         moduleKey: 'enquiries',
       },
     ],

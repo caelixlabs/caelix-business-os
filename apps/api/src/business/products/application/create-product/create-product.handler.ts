@@ -17,9 +17,9 @@ export class CreateProductHandler {
     private readonly repository: ProductRepository
   ) {}
 
-  async execute(dto: CreateProductDto): Promise<Product> {
+  async execute(organizationId: string, dto: CreateProductDto): Promise<Product> {
     const existingCode = await this.repository.findByCode(
-      dto.organizationId,
+      organizationId,
       dto.code
     );
 
@@ -30,7 +30,7 @@ export class CreateProductHandler {
     }
 
     const existingName = await this.repository.findByName(
-      dto.organizationId,
+      organizationId,
       dto.name
     );
 
@@ -47,7 +47,7 @@ export class CreateProductHandler {
     const product = Product.create({
       id: customUUID.generate(),
 
-      organizationId: dto.organizationId,
+      organizationId,
       name: dto.name,
       code: dto.code,
       description: dto.description,
