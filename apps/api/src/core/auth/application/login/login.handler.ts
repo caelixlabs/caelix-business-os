@@ -64,7 +64,15 @@ export class LoginHandler {
 
     user.recordLogin();
     const savedUser = await this.userRepository.update(user);
-    const session = await this.authSessionService.issueSession(savedUser);
+
+    // Valid credentials are sufficient proof of identity to start a new
+    // session — replace any stale refresh token (closed tab, cleared
+    // storage, another device) instead of locking the user out with
+    // "already logged in" and no way back in short of an admin revoking
+    // it by hand.
+    const session = await this.authSessionService.issueSession(savedUser, {
+      replaceExistingSession: true,
+    });
 
     return { user: savedUser, session };
   }

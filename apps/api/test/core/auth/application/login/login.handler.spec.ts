@@ -215,6 +215,7 @@ describe('LoginHandler', () => {
     expect(existingUser.lastLoginAt).toBeInstanceOf(Date);
     expect(authSessionService.issueSession).toHaveBeenCalledWith(
       existingUser,
+      { replaceExistingSession: true },
     );
     expect(result.session.accessToken).toBe('access-token');
   });
