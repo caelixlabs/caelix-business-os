@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Patch, Post } from "@nestjs/common";
 
 import { CurrentUser } from "@/core/auth/application/decorators";
 
@@ -11,6 +11,9 @@ import { PermissionCode } from "@/core/rbac/domain/enums";
 import { assertSameOrganization } from "@/core/audit/guards/assert-same-organization";
 
 import { MusicStudentService } from "../application/music-student.service";
+import { CreateMusicStudentDto } from "../application/dto/create-music-student.dto";
+import { UpdateMusicStudentDto } from "../application/dto/update-music-student.dto";
+import { MusicStudentResponseDto } from "../application/dto/music-student-response.dto";
 
 @Controller("organizations/:organizationId/music-org/students")
 export class MusicStudentController {
@@ -18,24 +21,25 @@ export class MusicStudentController {
 
   @Post()
   @RequirePermissions(PermissionCode.MUSIC_STUDENT_CREATE)
-  create(
+  async create(
     @Param("organizationId")
     organizationId: string,
 
     @Body()
-    body: any,
+    body: CreateMusicStudentDto,
 
     @CurrentUser()
     currentUser: AccessTokenPayload
   ) {
     assertSameOrganization(currentUser.organizationId, organizationId);
 
-    return this.service.create(organizationId, body);
+    const student = await this.service.create(organizationId, body);
+    return MusicStudentResponseDto.fromDomain(student);
   }
 
   @Get()
   @RequirePermissions(PermissionCode.MUSIC_STUDENT_READ)
-  list(
+  async list(
     @Param("organizationId")
     organizationId: string,
 
@@ -44,12 +48,13 @@ export class MusicStudentController {
   ) {
     assertSameOrganization(currentUser.organizationId, organizationId);
 
-    return this.service.list(organizationId);
+    const students = await this.service.list(organizationId);
+    return MusicStudentResponseDto.fromDomainList(students);
   }
 
   @Get(":id")
   @RequirePermissions(PermissionCode.MUSIC_STUDENT_READ)
-  get(
+  async get(
     @Param("organizationId")
     organizationId: string,
 
@@ -61,6 +66,28 @@ export class MusicStudentController {
   ) {
     assertSameOrganization(currentUser.organizationId, organizationId);
 
-    return this.service.get(organizationId, id);
+    const student = await this.service.get(organizationId, id);
+    return MusicStudentResponseDto.fromDomain(student);
+  }
+
+  @Patch(":id")
+  @RequirePermissions(PermissionCode.MUSIC_STUDENT_UPDATE)
+  async update(
+    @Param("organizationId")
+    organizationId: string,
+
+    @Param("id")
+    id: string,
+
+    @Body()
+    body: UpdateMusicStudentDto,
+
+    @CurrentUser()
+    currentUser: AccessTokenPayload
+  ) {
+    assertSameOrganization(currentUser.organizationId, organizationId);
+
+    const student = await this.service.update(organizationId, id, body);
+    return MusicStudentResponseDto.fromDomain(student);
   }
 }

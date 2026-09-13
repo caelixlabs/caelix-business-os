@@ -7,13 +7,13 @@ import { customUUID } from "@/kernel/utility/uuid";
 
 import { MusicAttendance } from "../domain/entities/music-attendance.entity";
 import type { MusicAttendanceRepository } from "../domain/repositories/music-attendance.repository";
-import { MUSIC_STUDENT_REPOSITORY } from "../../students/domain/repositories/music-student.token";
+import { MUSIC_ATTENDANCE_REPOSITORY } from "../domain/repositories/music-attendance.token";
 import { MusicAttendanceStatus } from "../domain/enums/music-attendance.enum";
 
 @Injectable()
 export class MusicAttendanceService {
   constructor(
-    @Inject(MUSIC_STUDENT_REPOSITORY)
+    @Inject(MUSIC_ATTENDANCE_REPOSITORY)
     private readonly repository: MusicAttendanceRepository,
 
     private readonly prisma: PrismaService
@@ -66,5 +66,9 @@ export class MusicAttendanceService {
 
   list(organizationId: string, batchId: string, date: string) {
     return this.repository.findByBatch(organizationId, batchId, new Date(date));
+  }
+
+  listByStudent(organizationId: string, studentId: string) {
+    return this.repository.findByStudent(organizationId, studentId);
   }
 }

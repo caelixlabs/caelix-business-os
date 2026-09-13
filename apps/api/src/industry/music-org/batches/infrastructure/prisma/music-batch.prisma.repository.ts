@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { PrismaService } from "@/common/prisma";
 
 import { MusicBatch } from "../../domain/entities/music-batch.entity";
-import { MusicBatchRepository } from "../../domain/repositories/music-batch.repository";
+import { MusicBatchRepository, MusicBatchFilters } from "../../domain/repositories/music-batch.repository";
 
 @Injectable()
 export class MusicBatchPrismaRepository implements MusicBatchRepository {
@@ -30,9 +30,13 @@ export class MusicBatchPrismaRepository implements MusicBatchRepository {
     return this.toDomain(row);
   }
 
-  async findByOrganization(organizationId: string) {
+  async findByOrganization(organizationId: string, filters?: MusicBatchFilters) {
     const rows = await this.prisma.client.musicBatch.findMany({
-      where: { organizationId },
+      where: {
+        organizationId,
+        courseId: filters?.courseId,
+        teacherUserId: filters?.teacherUserId,
+      },
       orderBy: {
         startDate: "asc",
       },
@@ -50,6 +54,26 @@ export class MusicBatchPrismaRepository implements MusicBatchRepository {
     });
 
     return row ? this.toDomain(row) : null;
+  }
+
+  async update(batch: MusicBatch) {
+    const row = await this.prisma.client.musicBatch.update({
+      where: {
+        id: batch.id,
+      },
+      data: {
+        teacherUserId: batch.teacherUserId,
+        name: batch.name,
+        capacity: batch.capacity,
+        endDate: batch.endDate,
+        days: batch.days,
+        startTime: batch.startTime,
+        endTime: batch.endTime,
+        status: batch.status,
+      },
+    });
+
+    return this.toDomain(row);
   }
 
   private toDomain(row: any) {

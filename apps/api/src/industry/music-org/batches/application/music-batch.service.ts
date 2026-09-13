@@ -4,9 +4,20 @@ import { PrismaService } from '@/common/prisma';
 import { customUUID } from "@/kernel/utility/uuid";
 
 import { MusicBatch } from "../domain/entities/music-batch.entity";
-import type { MusicBatchRepository } from "../domain/repositories/music-batch.repository";
+import type { MusicBatchFilters, MusicBatchRepository } from "../domain/repositories/music-batch.repository";
 import { MusicBatchStatus } from "../domain/enums/music-batch-status.enum";
 import { MUSIC_BATCH_REPOSITORY } from "../domain/repositories/music-batch.token";
+
+export interface UpdateMusicBatchInput {
+  teacherUserId?: string;
+  name?: string;
+  capacity?: number;
+  endDate?: string;
+  days?: string[];
+  startTime?: string;
+  endTime?: string;
+  status?: MusicBatchStatus;
+}
 
 @Injectable()
 export class MusicBatchService {
@@ -85,7 +96,56 @@ export class MusicBatchService {
     );
   }
 
-  list(organizationId: string) {
-    return this.repository.findByOrganization(organizationId);
+  list(organizationId: string, filters?: MusicBatchFilters) {
+    return this.repository.findByOrganization(organizationId, filters);
+  }
+
+  async get(organizationId: string, id: string) {
+    const batch = await this.repository.findById(id, organizationId);
+
+    if (!batch) {
+      throw new NotFoundException("Music batch not found.");
+    }
+
+    return batch;
+  }
+
+  async update(organizationId: string, id: string, input: UpdateMusicBatchInput) {
+    const existing = await this.repository.findById(id, organizationId);
+
+    if (!existing) {
+      throw new NotFoundException("Music batch not found.");
+    }
+
+    if (input.teacherUserId) {
+      const teacher = await this.prisma.client.user.findFirst({
+        where: {
+          id: input.teacherUserId,
+          organizationId,
+        },
+      });
+
+      if (!teacher) {
+        throw new NotFoundException("Teacher not found in this organization.");
+      }
+    }
+
+    return this.repository.update(
+      MusicBatch.create({
+        id: existing.id,
+        organizationId: existing.organizationId,
+        branchId: existing.branchId,
+        courseId: existing.courseId,
+        teacherUserId: input.teacherUserId ?? existing.teacherUserId,
+        name: input.name ?? existing.name,
+        capacity: input.capacity ?? existing.capacity,
+        startDate: existing.startDate,
+        endDate: input.endDate ? new Date(input.endDate) : existing.endDate,
+        days: input.days ?? existing.days,
+        startTime: input.startTime ?? existing.startTime,
+        endTime: input.endTime ?? existing.endTime,
+        status: input.status ?? existing.status,
+      })
+    );
   }
 }

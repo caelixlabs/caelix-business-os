@@ -7,9 +7,18 @@ import { cn } from '@/lib/utils';
 
 export const Select = SelectPrimitive.Root;
 
-export function SelectTrigger({ children, className }: { children: ReactNode; className?: string }) {
+export function SelectTrigger({
+  children,
+  className,
+  id,
+}: {
+  children: ReactNode;
+  className?: string;
+  id?: string;
+}) {
   return (
     <SelectPrimitive.Trigger
+      id={id}
       className={cn(
         'flex w-full items-center justify-between rounded-md border border-border bg-surface px-3 py-2 text-sm text-text outline-none transition-colors focus:border-accent cursor-pointer',
         className,

@@ -7,6 +7,7 @@ import { customUUID } from '@/kernel/utility/uuid';
 import { OrganizationCreatedEvent } from '@/core/organization/domain/events';
 import { RoleLevel } from '../../domain/enums';
 import { ROLE_PERMISSION_MATRIX } from '../../domain/role-permission-matrix';
+import { INDUSTRY_PERMISSION_MATRIX } from '../../domain/industry-permission-matrix';
 
 /**
  * Reacts to OrganizationCreatedEvent by seeding the five fixed system
@@ -24,6 +25,15 @@ export class SeedOrganizationRolesHandler implements IEventHandler<OrganizationC
   constructor(private readonly prisma: PrismaService) {}
 
   async handle(event: OrganizationCreatedEvent): Promise<void> {
+    const organization = await this.prisma.client.organization.findUnique({
+      where: { id: event.organizationId },
+      select: { industry: true },
+    });
+
+    const industryMatrix = organization
+      ? INDUSTRY_PERMISSION_MATRIX[organization.industry]
+      : undefined;
+
     const permissions = await this.prisma.client.permission.findMany();
     const permissionIdByCode = new Map(
       permissions.map((permission: { code: string; id: string }) => [
@@ -43,7 +53,10 @@ export class SeedOrganizationRolesHandler implements IEventHandler<OrganizationC
         },
       });
 
-      const grantedCodes = ROLE_PERMISSION_MATRIX[level] ?? [];
+      const grantedCodes = [
+        ...(ROLE_PERMISSION_MATRIX[level] ?? []),
+        ...(industryMatrix?.[level] ?? []),
+      ];
       const rolePermissionRows = grantedCodes
         .map((code) => permissionIdByCode.get(code))
         .filter((id): id is string => Boolean(id))

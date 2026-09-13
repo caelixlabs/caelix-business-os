@@ -19,12 +19,28 @@ export interface CreateMusicStudentInput {
     branchId?: string;
     email?: string;
     phone?: string;
-    dateOfBirth?: Date;
+    dateOfBirth?: string;
     guardianName?: string;
     guardianPhone?: string;
     guardianEmail?: string;
     instrument?: string;
     skillLevel?: MusicSkillLevel;
+    notes?: string;
+}
+
+export interface UpdateMusicStudentInput {
+    branchId?: string;
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    phone?: string;
+    dateOfBirth?: string;
+    guardianName?: string;
+    guardianPhone?: string;
+    guardianEmail?: string;
+    instrument?: string;
+    skillLevel?: MusicSkillLevel;
+    status?: MusicStudentStatus;
     notes?: string;
 }
 
@@ -58,7 +74,7 @@ export class MusicStudentService {
                 lastName: input.lastName,
                 email: input.email,
                 phone: input.phone,
-                dateOfBirth: input.dateOfBirth,
+                dateOfBirth: input.dateOfBirth ? new Date(input.dateOfBirth) : undefined,
                 guardianName: input.guardianName,
                 guardianPhone: input.guardianPhone,
                 guardianEmail: input.guardianEmail,
@@ -83,5 +99,35 @@ export class MusicStudentService {
         }
 
         return student;
+    }
+
+    async update(organizationId: string, id: string, input: UpdateMusicStudentInput) {
+        const existing = await this.repository.findById(id, organizationId);
+
+        if (!existing) {
+            throw new NotFoundException("Music student not found.");
+        }
+
+        return this.repository.update(
+            MusicStudent.create({
+                id: existing.id,
+                organizationId: existing.organizationId,
+                branchId: input.branchId ?? existing.branchId,
+                studentNo: existing.studentNo,
+                firstName: input.firstName ?? existing.firstName,
+                lastName: input.lastName ?? existing.lastName,
+                email: input.email ?? existing.email,
+                phone: input.phone ?? existing.phone,
+                dateOfBirth: input.dateOfBirth ? new Date(input.dateOfBirth) : existing.dateOfBirth,
+                guardianName: input.guardianName ?? existing.guardianName,
+                guardianPhone: input.guardianPhone ?? existing.guardianPhone,
+                guardianEmail: input.guardianEmail ?? existing.guardianEmail,
+                instrument: input.instrument ?? existing.instrument,
+                skillLevel: input.skillLevel ?? existing.skillLevel,
+                status: input.status ?? existing.status,
+                joinedAt: existing.joinedAt,
+                notes: input.notes ?? existing.notes,
+            })
+        );
     }
 }

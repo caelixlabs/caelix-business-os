@@ -9,7 +9,7 @@ import { PrismaService } from "@/common/prisma";
 import { customUUID } from "@/kernel/utility/uuid";
 
 import { MusicEnrollment } from "../domain/entities/music-enrollment.entity";
-import type { MusicEnrollmentRepository } from "../domain/repositories/music-enrollment.repository";
+import type { MusicEnrollmentFilters, MusicEnrollmentRepository } from "../domain/repositories/music-enrollment.repository";
 import { MusicEnrollmentStatus } from "../domain/enums/music-enrollment.enum";
 import { MUSIC_ENROLLMENT_REPOSITORY } from "../domain/repositories/music.enrollment.token";
 
@@ -92,7 +92,39 @@ export class MusicEnrollmentService {
     );
   }
 
-  list(organizationId: string) {
-    return this.repository.findByOrganization(organizationId);
+  list(organizationId: string, filters?: MusicEnrollmentFilters) {
+    return this.repository.findByOrganization(organizationId, filters);
+  }
+
+  async get(organizationId: string, id: string) {
+    const enrollment = await this.repository.findById(id, organizationId);
+
+    if (!enrollment) {
+      throw new NotFoundException("Music enrollment not found.");
+    }
+
+    return enrollment;
+  }
+
+  async updateStatus(organizationId: string, id: string, status: MusicEnrollmentStatus) {
+    const existing = await this.repository.findById(id, organizationId);
+
+    if (!existing) {
+      throw new NotFoundException("Music enrollment not found.");
+    }
+
+    return this.repository.update(
+      MusicEnrollment.create({
+        id: existing.id,
+        organizationId: existing.organizationId,
+        studentId: existing.studentId,
+        batchId: existing.batchId,
+        enrolledAt: existing.enrolledAt,
+        feeAmount: existing.feeAmount,
+        discountAmount: existing.discountAmount,
+        status,
+        notes: existing.notes,
+      })
+    );
   }
 }

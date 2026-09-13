@@ -1,5 +1,5 @@
-import { MusicModulePlaceholder } from '@/industries/music-org/views/MusicModulePlaceholder';
+import { TeachersListView } from '@/industries/music-org/teachers/TeachersListView';
 
 export default function MusicTeachersPage() {
-  return <MusicModulePlaceholder title="Teachers" description="Manage instructors, assignments and availability." />;
+  return <TeachersListView />;
 }

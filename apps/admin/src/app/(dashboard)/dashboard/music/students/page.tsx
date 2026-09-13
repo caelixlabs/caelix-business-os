@@ -1,5 +1,5 @@
-import { MusicModulePlaceholder } from '@/industries/music-org/views/MusicModulePlaceholder';
+import { StudentsListView } from '@/industries/music-org/students/StudentsListView';
 
 export default function MusicStudentsPage() {
-  return <MusicModulePlaceholder title="Students" description="Manage music students, profiles and enrolments." />;
+  return <StudentsListView />;
 }

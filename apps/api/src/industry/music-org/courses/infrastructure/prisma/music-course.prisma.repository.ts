@@ -47,6 +47,25 @@ export class MusicCoursePrismaRepository implements MusicCourseRepository {
     return row ? this.toDomain(row) : null;
   }
 
+  async update(course: MusicCourse) {
+    const row = await this.prisma.client.musicCourse.update({
+      where: {
+        id: course.id,
+      },
+      data: {
+        name: course.name,
+        description: course.description,
+        instrument: course.instrument,
+        skillLevel: course.skillLevel,
+        durationWeeks: course.durationWeeks,
+        classDurationMinutes: course.classDurationMinutes,
+        status: course.status,
+      },
+    });
+
+    return this.toDomain(row);
+  }
+
   private toDomain(row: any) {
     return MusicCourse.create({
       id: row.id,

@@ -63,20 +63,47 @@ export class MusicAttendancePrismaRepository
                 },
             });
 
-        return rows.map(
-            (row) =>
-                MusicAttendance.create({
-                    id: row.id,
-                    organizationId: row.organizationId,
-                    studentId: row.studentId,
-                    batchId: row.batchId,
-                    date: row.date,
+        return rows.map((row) => this.toDomain(row));
+    }
 
-                    status:
-                        row.status as MusicAttendanceStatus,
+    async findByStudent(
+        organizationId: string,
+        studentId: string,
+    ): Promise<MusicAttendance[]> {
+        const rows =
+            await this.prisma.client.musicAttendance.findMany({
+                where: {
+                    organizationId,
+                    studentId,
+                },
+                orderBy: {
+                    date: "desc",
+                },
+            });
 
-                    notes: row.notes ?? undefined,
-                }),
-        );
+        return rows.map((row) => this.toDomain(row));
+    }
+
+    private toDomain(row: {
+        id: string;
+        organizationId: string;
+        studentId: string;
+        batchId: string;
+        date: Date;
+        status: string;
+        notes: string | null;
+    }): MusicAttendance {
+        return MusicAttendance.create({
+            id: row.id,
+            organizationId: row.organizationId,
+            studentId: row.studentId,
+            batchId: row.batchId,
+            date: row.date,
+
+            status:
+                row.status as MusicAttendanceStatus,
+
+            notes: row.notes ?? undefined,
+        });
     }
 }

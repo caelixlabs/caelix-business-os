@@ -10,4 +10,9 @@ export interface MusicAttendanceRepository {
     batchId: string,
     date: Date,
   ): Promise<MusicAttendance[]>;
+
+  findByStudent(
+    organizationId: string,
+    studentId: string,
+  ): Promise<MusicAttendance[]>;
 }

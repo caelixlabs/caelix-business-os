@@ -11,6 +11,8 @@ import { PermissionCode } from "@/core/rbac/domain/enums";
 import { assertSameOrganization } from "@/core/audit/guards/assert-same-organization";
 
 import { MusicPracticeService } from "../application/music-practice.service";
+import { CreateMusicPracticeLogDto } from "../application/dto/create-music-practice-log.dto";
+import { MusicPracticeLogResponseDto } from "../application/dto/music-practice-log-response.dto";
 
 @Controller("organizations/:organizationId/music-org/practice")
 export class MusicPracticeController {
@@ -18,24 +20,25 @@ export class MusicPracticeController {
 
   @Post()
   @RequirePermissions(PermissionCode.MUSIC_PRACTICE_MANAGE)
-  create(
+  async create(
     @Param("organizationId")
     organizationId: string,
 
     @Body()
-    body: any,
+    body: CreateMusicPracticeLogDto,
 
     @CurrentUser()
     currentUser: AccessTokenPayload
   ) {
     assertSameOrganization(currentUser.organizationId, organizationId);
 
-    return this.service.create(organizationId, body);
+    const log = await this.service.create(organizationId, body);
+    return MusicPracticeLogResponseDto.fromDomain(log);
   }
 
   @Get(":studentId")
   @RequirePermissions(PermissionCode.MUSIC_PRACTICE_READ)
-  list(
+  async list(
     @Param("organizationId")
     organizationId: string,
 
@@ -47,6 +50,7 @@ export class MusicPracticeController {
   ) {
     assertSameOrganization(currentUser.organizationId, organizationId);
 
-    return this.service.list(organizationId, studentId);
+    const logs = await this.service.list(organizationId, studentId);
+    return MusicPracticeLogResponseDto.fromDomainList(logs);
   }
 }
