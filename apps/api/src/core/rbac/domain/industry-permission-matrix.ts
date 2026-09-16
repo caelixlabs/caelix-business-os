@@ -1,5 +1,6 @@
 import { IndustryType } from '@/core/organization/domain/enums/industry-type.enum';
 import { MUSIC_ORG_PERMISSIONS_BY_LEVEL } from '@/industry/music-org/music-org.permissions';
+import { GYM_PERMISSIONS_BY_LEVEL } from '@/industry/gym/gym.permissions';
 import { PermissionCode } from './enums/permission-code.enum';
 import { RoleLevel } from './enums/role-level.enum';
 
@@ -13,4 +14,5 @@ export const INDUSTRY_PERMISSION_MATRIX: Partial<
   Record<IndustryType, Record<RoleLevel, PermissionCode[]>>
 > = {
   [IndustryType.MUSIC_ORG]: MUSIC_ORG_PERMISSIONS_BY_LEVEL,
+  [IndustryType.GYM]: GYM_PERMISSIONS_BY_LEVEL,
 };

@@ -21,6 +21,7 @@ import { LogoutHandler } from './application/logout/logout.handler';
 
 import { JwtAuthGuard } from './application/guards/jwt-auth.guard';
 import { PermissionsGuard } from '@/core/rbac/application/guards/permissions.guard';
+import { IndustryGuard } from '@/core/organization/application/guards';
 import { OrganizationModule } from '../organization/organization.module';
 
 @Module({
@@ -45,10 +46,12 @@ import { OrganizationModule } from '../organization/organization.module';
       useClass: RefreshTokenPrismaRepository,
     },
     // Applied globally: every route requires a valid access token
-    // unless marked @Public(), and every route additionally requires
-    // its declared @RequirePermissions() (if any) to be satisfied.
+    // unless marked @Public(), every route additionally requires its
+    // declared @RequirePermissions() (if any) to be satisfied, and its
+    // declared @RequireIndustry() (if any) must match the caller's org.
     { provide: APP_GUARD, useClass: JwtAuthGuard },
     { provide: APP_GUARD, useClass: PermissionsGuard },
+    { provide: APP_GUARD, useClass: IndustryGuard },
   ],
 })
 export class AuthModule {}

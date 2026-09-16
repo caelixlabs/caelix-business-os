@@ -6,6 +6,9 @@ import type { AccessTokenPayload } from "@/core/auth/application/services/token.
 
 import { RequirePermissions } from "@/core/rbac/application/decorators";
 
+import { RequireIndustry } from "@/core/organization/application/decorators";
+import { IndustryType } from "@/core/organization/domain/enums/industry-type.enum";
+
 import { PermissionCode } from "@/core/rbac/domain/enums";
 
 import { assertSameOrganization } from "@/core/audit/guards/assert-same-organization";
@@ -16,6 +19,7 @@ import { UpdateMusicStudentDto } from "../application/dto/update-music-student.d
 import { MusicStudentResponseDto } from "../application/dto/music-student-response.dto";
 
 @Controller("organizations/:organizationId/music-org/students")
+@RequireIndustry(IndustryType.MUSIC_ORG)
 export class MusicStudentController {
   constructor(private readonly service: MusicStudentService) {}
 

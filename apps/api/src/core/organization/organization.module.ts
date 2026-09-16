@@ -7,7 +7,6 @@ import { UpdateOrganizationHandler } from './application/update-organization/upd
 import { ListOrganizationsHandler } from './application/list-organizations/list-organizations.handler';
 import { DeleteOrganizationHandler } from './application/delete-organization/delete-organizations.handler';
 import { ORGANIZATION_REPOSITORY } from './domain/repositories';
-import { SendWelcomeEmailHandler } from './application/event-handlers/send-welcome-email.handler';
 import {
   CreateDefaultBranchHandler,
   OrganizationAuditLogHandler,
@@ -25,7 +24,6 @@ import { NotificationModule } from '../notification/notification.module';
     UpdateOrganizationHandler,
     ListOrganizationsHandler,
     DeleteOrganizationHandler,
-    SendWelcomeEmailHandler,
     CreateDefaultBranchHandler,
     OrganizationAuditLogHandler,
     {

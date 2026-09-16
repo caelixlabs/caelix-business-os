@@ -39,6 +39,18 @@ const PERMISSIONS: Array<{ code: string; description: string; module: string }> 
   { code: 'music:practice-read', description: 'View music practice logs', module: 'music' },
   { code: 'music:practice-manage', description: 'Manage music practice logs', module: 'music' },
 
+  { code: 'gym:member-read', description: 'View gym members', module: 'gym' },
+  { code: 'gym:member-create', description: 'Create gym members', module: 'gym' },
+  { code: 'gym:member-update', description: 'Update gym members', module: 'gym' },
+  { code: 'gym:class-read', description: 'View gym classes', module: 'gym' },
+  { code: 'gym:class-manage', description: 'Manage gym classes', module: 'gym' },
+  { code: 'gym:trainer-read', description: 'View gym trainers', module: 'gym' },
+  { code: 'gym:trainer-manage', description: 'Manage gym trainers', module: 'gym' },
+  { code: 'gym:membership-read', description: 'View gym memberships', module: 'gym' },
+  { code: 'gym:membership-manage', description: 'Manage gym memberships', module: 'gym' },
+  { code: 'gym:attendance-read', description: 'View gym attendance', module: 'gym' },
+  { code: 'gym:attendance-manage', description: 'Manage gym attendance', module: 'gym' },
+
   { code: 'contact:read', description: 'View contacts', module: 'contacts' },
   { code: 'contact:create', description: 'Create contacts', module: 'contacts' },
   { code: 'contact:update', description: 'Update contacts', module: 'contacts' },
@@ -60,6 +72,28 @@ const PERMISSIONS: Array<{ code: string; description: string; module: string }> 
   { code: 'enquiry:read', description: 'View enquiries', module: 'enquiries' },
   { code: 'enquiry:create', description: 'Create enquiries', module: 'enquiries' },
   { code: 'enquiry:manage', description: 'Update enquiry status and assignment', module: 'enquiries' },
+
+  { code: 'invoice:read', description: 'View invoices', module: 'invoices' },
+  { code: 'invoice:create', description: 'Create invoices', module: 'invoices' },
+  { code: 'invoice:manage', description: 'Issue or void invoices', module: 'invoices' },
+
+  { code: 'payment:read', description: 'View payments', module: 'payments' },
+  { code: 'payment:record', description: 'Record a payment against an invoice', module: 'payments' },
+
+  { code: 'document:read', description: 'View and download documents', module: 'documents' },
+  { code: 'document:create', description: 'Upload documents', module: 'documents' },
+  { code: 'document:delete', description: 'Delete documents', module: 'documents' },
+
+  { code: 'report:read', description: 'View analytics and reports', module: 'reports' },
+
+  { code: 'membership:plan-read', description: 'View membership plans', module: 'memberships' },
+  { code: 'membership:plan-manage', description: 'Create and manage membership plans', module: 'memberships' },
+  { code: 'membership:subscription-read', description: 'View membership subscriptions', module: 'memberships' },
+  { code: 'membership:subscription-manage', description: 'Create and manage membership subscriptions', module: 'memberships' },
+
+  { code: 'pos:sell', description: 'Ring up a point-of-sale checkout', module: 'pos' },
+  { code: 'pos:read', description: 'View point-of-sale sales history', module: 'pos' },
+  { code: 'pos:refund', description: 'Refund a point-of-sale sale', module: 'pos' },
 ];
 
 async function main() {

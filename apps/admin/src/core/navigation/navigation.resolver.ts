@@ -3,7 +3,8 @@ import type { NavigationGroup, NavigationItem } from './navigation.types';
 
 function isModuleEnabled(moduleKey?: string) {
   if (!moduleKey) return true;
-  return MODULES[moduleKey as keyof typeof MODULES] !== false;
+  const enabled = MODULES[moduleKey as keyof typeof MODULES] as boolean;
+  return enabled !== false;
 }
 
 function resolveItem(

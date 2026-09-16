@@ -39,6 +39,28 @@ export const ROLE_PERMISSION_MATRIX: Record<string, PermissionCode[]> = {
     PermissionCode.ENQUIRY_READ,
     PermissionCode.ENQUIRY_CREATE,
     PermissionCode.ENQUIRY_MANAGE,
+
+    PermissionCode.INVOICE_READ,
+    PermissionCode.INVOICE_CREATE,
+    PermissionCode.INVOICE_MANAGE,
+
+    PermissionCode.PAYMENT_READ,
+    PermissionCode.PAYMENT_RECORD,
+
+    PermissionCode.DOCUMENT_READ,
+    PermissionCode.DOCUMENT_CREATE,
+    PermissionCode.DOCUMENT_DELETE,
+
+    PermissionCode.REPORT_READ,
+
+    PermissionCode.MEMBERSHIP_PLAN_READ,
+    PermissionCode.MEMBERSHIP_PLAN_MANAGE,
+    PermissionCode.MEMBERSHIP_SUBSCRIPTION_READ,
+    PermissionCode.MEMBERSHIP_SUBSCRIPTION_MANAGE,
+
+    PermissionCode.POS_SELL,
+    PermissionCode.POS_READ,
+    PermissionCode.POS_REFUND,
   ],
 
   ADMIN: [
@@ -78,6 +100,28 @@ export const ROLE_PERMISSION_MATRIX: Record<string, PermissionCode[]> = {
     PermissionCode.ENQUIRY_READ,
     PermissionCode.ENQUIRY_CREATE,
     PermissionCode.ENQUIRY_MANAGE,
+
+    PermissionCode.INVOICE_READ,
+    PermissionCode.INVOICE_CREATE,
+    PermissionCode.INVOICE_MANAGE,
+
+    PermissionCode.PAYMENT_READ,
+    PermissionCode.PAYMENT_RECORD,
+
+    PermissionCode.DOCUMENT_READ,
+    PermissionCode.DOCUMENT_CREATE,
+    PermissionCode.DOCUMENT_DELETE,
+
+    PermissionCode.REPORT_READ,
+
+    PermissionCode.MEMBERSHIP_PLAN_READ,
+    PermissionCode.MEMBERSHIP_PLAN_MANAGE,
+    PermissionCode.MEMBERSHIP_SUBSCRIPTION_READ,
+    PermissionCode.MEMBERSHIP_SUBSCRIPTION_MANAGE,
+
+    PermissionCode.POS_SELL,
+    PermissionCode.POS_READ,
+    PermissionCode.POS_REFUND,
   ],
 
   MANAGER: [
@@ -107,6 +151,27 @@ export const ROLE_PERMISSION_MATRIX: Record<string, PermissionCode[]> = {
     PermissionCode.ENQUIRY_READ,
     PermissionCode.ENQUIRY_CREATE,
     PermissionCode.ENQUIRY_MANAGE,
+
+    PermissionCode.INVOICE_READ,
+    PermissionCode.INVOICE_CREATE,
+    PermissionCode.INVOICE_MANAGE,
+
+    PermissionCode.PAYMENT_READ,
+    PermissionCode.PAYMENT_RECORD,
+
+    PermissionCode.DOCUMENT_READ,
+    PermissionCode.DOCUMENT_CREATE,
+
+    PermissionCode.REPORT_READ,
+
+    PermissionCode.MEMBERSHIP_PLAN_READ,
+    PermissionCode.MEMBERSHIP_PLAN_MANAGE,
+    PermissionCode.MEMBERSHIP_SUBSCRIPTION_READ,
+    PermissionCode.MEMBERSHIP_SUBSCRIPTION_MANAGE,
+
+    PermissionCode.POS_SELL,
+    PermissionCode.POS_READ,
+    PermissionCode.POS_REFUND,
   ],
 
   EMPLOYEE: [
@@ -129,6 +194,23 @@ export const ROLE_PERMISSION_MATRIX: Record<string, PermissionCode[]> = {
     PermissionCode.ENQUIRY_READ,
     PermissionCode.ENQUIRY_CREATE,
     PermissionCode.ENQUIRY_MANAGE,
+
+    PermissionCode.INVOICE_READ,
+    PermissionCode.INVOICE_CREATE,
+
+    PermissionCode.PAYMENT_READ,
+    PermissionCode.PAYMENT_RECORD,
+
+    PermissionCode.DOCUMENT_READ,
+    PermissionCode.DOCUMENT_CREATE,
+
+    PermissionCode.REPORT_READ,
+
+    PermissionCode.MEMBERSHIP_PLAN_READ,
+    PermissionCode.MEMBERSHIP_SUBSCRIPTION_READ,
+
+    PermissionCode.POS_SELL,
+    PermissionCode.POS_READ,
   ],
 
   VIEWER: [
@@ -140,5 +222,17 @@ export const ROLE_PERMISSION_MATRIX: Record<string, PermissionCode[]> = {
     PermissionCode.PRODUCT_READ,
     PermissionCode.INVENTORY_READ,
     PermissionCode.ENQUIRY_READ,
+
+    PermissionCode.INVOICE_READ,
+    PermissionCode.PAYMENT_READ,
+
+    PermissionCode.DOCUMENT_READ,
+
+    PermissionCode.REPORT_READ,
+
+    PermissionCode.MEMBERSHIP_PLAN_READ,
+    PermissionCode.MEMBERSHIP_SUBSCRIPTION_READ,
+
+    PermissionCode.POS_READ,
   ],
 };

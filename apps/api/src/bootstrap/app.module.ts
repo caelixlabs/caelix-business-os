@@ -15,11 +15,20 @@ import { AuthModule } from '@/core/auth/auth.module';
 import { SettingsModule } from '@/core/settings/settings.module';
 import { NotificationModule } from '@/core/notification/notification.module';
 import { MusicOrgModule } from '@/industry/music-org/music-org.module';
+import { GymModule } from '@/industry/gym/gym.module';
 import { BusinessModule } from '@/business/business.module';
 import { ProductsModule } from '@/business/products/products.module';
 import { InventoryModule } from '@/business/inventory/inventory.module';
 import { EnquiriesModule } from '@/business/enquiries/enquiries.module';
 import { BookingModule } from '@/business/booking/booking.module';
+import { InvoicesModule } from '@/business/invoices/invoices.module';
+import { ReportsModule } from '@/business/reports/reports.module';
+import { MailModule } from '@/capabilities/communication/mail/mail.module';
+import { DocumentsModule } from '@/capabilities/documents/documents.module';
+import { AttendanceModule } from '@/capabilities/attendance/attendance.module';
+import { MembershipsModule } from '@/capabilities/memberships/memberships.module';
+import { DashboardWidgetsModule } from '@/capabilities/dashboard-widgets/dashboard-widgets.module';
+import { PosModule } from '@/capabilities/pos/pos.module';
 
 @Module({
   imports: [
@@ -27,6 +36,7 @@ import { BookingModule } from '@/business/booking/booking.module';
     PrismaModule,
     KernelModule,
     EventsModule,
+    MailModule,
     OrganizationModule,
     BranchModule,
     OutboxModule,
@@ -42,6 +52,14 @@ import { BookingModule } from '@/business/booking/booking.module';
     InventoryModule,
     EnquiriesModule,
     BookingModule,
+    InvoicesModule,
+    DocumentsModule,
+    ReportsModule,
+    AttendanceModule,
+    MembershipsModule,
+    DashboardWidgetsModule,
+    PosModule,
+    GymModule,
   ],
 })
 export class AppModule {}

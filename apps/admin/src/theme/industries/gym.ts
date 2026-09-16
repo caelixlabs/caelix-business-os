@@ -1,16 +1,6 @@
+// See music-org.ts for why this only carries accent tokens.
 export const GYM_THEME = {
   accent: '#2563eb',
   accentSoft: '#eff6ff',
   accentInk: '#1d4ed8',
-  success: '#15803d',
-  successSoft: '#ecfdf3',
-  warning: '#b45309',
-  warningSoft: '#fff7ed',
-  danger: '#dc2626',
-  dangerSoft: '#fef2f2',
-  info: '#2563eb',
-  infoSoft: '#eff6ff',
-  canvas: '#f5f7fb',
-  surface: '#ffffff',
-  border: '#e1e7ef',
 };

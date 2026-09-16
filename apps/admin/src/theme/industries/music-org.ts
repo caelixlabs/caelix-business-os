@@ -1,16 +1,10 @@
+// Only the truly industry-specific tokens: canvas/surface/border/status
+// colors stay in globals.css, which already defines correct light AND
+// dark values for them. Setting them here too would inline-style
+// <html>, and inline styles beat the html[data-theme='dark'] stylesheet
+// rule regardless of theme — that was silently breaking dark mode.
 export const MUSIC_ORG_THEME = {
   accent: '#0eafa0',
   accentSoft: '#e6f7f4',
   accentInk: '#08796f',
-  success: '#1f8a5f',
-  successSoft: '#e7f5ef',
-  warning: '#9a6700',
-  warningSoft: '#fff6db',
-  danger: '#c4432b',
-  dangerSoft: '#fbeae6',
-  info: '#3d6b8a',
-  infoSoft: '#e8eff3',
-  canvas: '#f6f8fa',
-  surface: '#ffffff',
-  border: '#e5e9ee',
 };

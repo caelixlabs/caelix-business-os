@@ -6,6 +6,9 @@ import type { AccessTokenPayload } from "@/core/auth/application/services/token.
 
 import { RequirePermissions } from "@/core/rbac/application/decorators";
 
+import { RequireIndustry } from "@/core/organization/application/decorators";
+import { IndustryType } from "@/core/organization/domain/enums/industry-type.enum";
+
 import { PermissionCode } from "@/core/rbac/domain/enums";
 
 import { assertSameOrganization } from "@/core/audit/guards/assert-same-organization";
@@ -15,6 +18,7 @@ import { CreateMusicPracticeLogDto } from "../application/dto/create-music-pract
 import { MusicPracticeLogResponseDto } from "../application/dto/music-practice-log-response.dto";
 
 @Controller("organizations/:organizationId/music-org/practice")
+@RequireIndustry(IndustryType.MUSIC_ORG)
 export class MusicPracticeController {
   constructor(private readonly service: MusicPracticeService) {}
 

@@ -23,6 +23,8 @@ import { MUSIC_BATCH_REPOSITORY } from "./batches/domain/repositories/music-batc
 import { MUSIC_ENROLLMENT_REPOSITORY } from "./enrollments/domain/repositories/music.enrollment.token";
 import { MUSIC_ATTENDANCE_REPOSITORY } from "./attendance/domain/repositories/music-attendance.token";
 import { MUSIC_PRACTICE_LOG_REPOSITORY } from "./practice/domain/repositories/music-practice-log.token";
+import { MusicDashboardController } from "./dashboard/music-dashboard.controller";
+import { MusicDashboardService } from "./dashboard/music-dashboard.service";
 
 @Module({
   controllers: [
@@ -32,6 +34,7 @@ import { MUSIC_PRACTICE_LOG_REPOSITORY } from "./practice/domain/repositories/mu
     MusicEnrollmentController,
     MusicAttendanceController,
     MusicPracticeController,
+    MusicDashboardController,
   ],
 
   providers: [
@@ -41,6 +44,7 @@ import { MUSIC_PRACTICE_LOG_REPOSITORY } from "./practice/domain/repositories/mu
     MusicEnrollmentService,
     MusicAttendanceService,
     MusicPracticeService,
+    MusicDashboardService,
     MusicStudentPrismaRepository,
     MusicCoursePrismaRepository,
     MusicBatchPrismaRepository,

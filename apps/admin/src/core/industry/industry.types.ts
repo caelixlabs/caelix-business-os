@@ -1,3 +1,4 @@
 export type IndustryType =
   | 'MUSIC_ORG'
-  | 'GYM';
+  | 'GYM'
+  | 'SALON';

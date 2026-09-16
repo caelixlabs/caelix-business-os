@@ -36,6 +36,18 @@ export enum PermissionCode {
   MUSIC_PRACTICE_READ = 'music:practice-read',
   MUSIC_PRACTICE_MANAGE ='music:practice-manage',
 
+  GYM_MEMBER_READ = 'gym:member-read',
+  GYM_MEMBER_CREATE = 'gym:member-create',
+  GYM_MEMBER_UPDATE = 'gym:member-update',
+  GYM_CLASS_READ = 'gym:class-read',
+  GYM_CLASS_MANAGE = 'gym:class-manage',
+  GYM_TRAINER_READ = 'gym:trainer-read',
+  GYM_TRAINER_MANAGE = 'gym:trainer-manage',
+  GYM_MEMBERSHIP_READ = 'gym:membership-read',
+  GYM_MEMBERSHIP_MANAGE = 'gym:membership-manage',
+  GYM_ATTENDANCE_READ = 'gym:attendance-read',
+  GYM_ATTENDANCE_MANAGE = 'gym:attendance-manage',
+
   CONTACT_READ = 'contact:read',
   CONTACT_CREATE = 'contact:create',
   CONTACT_UPDATE = 'contact:update',
@@ -57,4 +69,26 @@ export enum PermissionCode {
   ENQUIRY_READ = 'enquiry:read',
   ENQUIRY_CREATE = 'enquiry:create',
   ENQUIRY_MANAGE = 'enquiry:manage',
+
+  INVOICE_READ = 'invoice:read',
+  INVOICE_CREATE = 'invoice:create',
+  INVOICE_MANAGE = 'invoice:manage',
+
+  PAYMENT_READ = 'payment:read',
+  PAYMENT_RECORD = 'payment:record',
+
+  DOCUMENT_READ = 'document:read',
+  DOCUMENT_CREATE = 'document:create',
+  DOCUMENT_DELETE = 'document:delete',
+
+  REPORT_READ = 'report:read',
+
+  MEMBERSHIP_PLAN_READ = 'membership:plan-read',
+  MEMBERSHIP_PLAN_MANAGE = 'membership:plan-manage',
+  MEMBERSHIP_SUBSCRIPTION_READ = 'membership:subscription-read',
+  MEMBERSHIP_SUBSCRIPTION_MANAGE = 'membership:subscription-manage',
+
+  POS_SELL = 'pos:sell',
+  POS_READ = 'pos:read',
+  POS_REFUND = 'pos:refund',
 }

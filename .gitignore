@@ -21,3 +21,4 @@ build/
 .idea/
 apps/api/src/**/*.js
 apps/api/src/**/*.js.map
+apps/api/uploads/

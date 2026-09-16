@@ -13,9 +13,11 @@ import {
   Mic2,
   Package,
   ScanLine,
+  Scissors,
   ScrollText,
   Settings,
   ShieldCheck,
+  ShoppingCart,
   UserCheck,
   Users,
   Users2,
@@ -54,9 +56,9 @@ export const CORE_NAV_GROUPS: NavigationGroup[] = [
       {
         key: 'payments',
         href: '/dashboard/payments',
-        label: 'Payments',
+        label: 'Invoices',
         icon: CreditCard,
-        permission: 'payment:read',
+        permission: 'invoice:read',
         moduleKey: 'payments',
       },
       {
@@ -257,6 +259,43 @@ export const GYM_NAV_GROUPS: NavigationGroup[] = [
         permission: 'gym:attendance-read',
         industry: 'GYM',
         moduleKey: 'gym',
+      },
+      {
+        key: 'pos',
+        href: PATHS.pos,
+        label: 'Point of sale',
+        icon: ShoppingCart,
+        permission: 'pos:sell',
+        industry: 'GYM',
+        moduleKey: 'gym',
+      },
+    ],
+  },
+  ...CORE_NAV_GROUPS,
+];
+
+export const SALON_NAV_GROUPS: NavigationGroup[] = [
+  {
+    key: 'salon',
+    label: 'Salon',
+    items: [
+      {
+        key: 'stylists',
+        href: PATHS.salon.stylists,
+        label: 'Stylists',
+        icon: Scissors,
+        permission: 'user:read',
+        industry: 'SALON',
+        moduleKey: 'salon',
+      },
+      {
+        key: 'pos',
+        href: PATHS.pos,
+        label: 'Checkout',
+        icon: ShoppingCart,
+        permission: 'pos:sell',
+        industry: 'SALON',
+        moduleKey: 'salon',
       },
     ],
   },

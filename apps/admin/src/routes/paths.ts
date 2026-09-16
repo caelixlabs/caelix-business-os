@@ -14,6 +14,7 @@ export const PATHS = {
   auditLog: `${DASHBOARD_ROOT}/audit-log`,
   notifications: `${DASHBOARD_ROOT}/notifications`,
   settings: `${DASHBOARD_ROOT}/settings`,
+  pos: `${DASHBOARD_ROOT}/pos`,
   music: {
     root: `${DASHBOARD_ROOT}/music`,
     calendar: `${DASHBOARD_ROOT}/music/calendar`,
@@ -31,5 +32,9 @@ export const PATHS = {
     trainers: `${DASHBOARD_ROOT}/gym/trainers`,
     memberships: `${DASHBOARD_ROOT}/gym/memberships`,
     attendance: `${DASHBOARD_ROOT}/gym/attendance`,
+  },
+  salon: {
+    root: `${DASHBOARD_ROOT}/salon`,
+    stylists: `${DASHBOARD_ROOT}/salon/stylists`,
   },
 } as const;

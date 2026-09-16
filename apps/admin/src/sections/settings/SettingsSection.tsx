@@ -6,6 +6,7 @@ import { Spinner } from '@/components/ui/spinner';
 import { PermissionGate } from '@/core/access/components/permission-gate';
 import { PreferencesForm } from '@/features/settings/components/preferences-form';
 import { OrganizationSettingsForm } from './components/OrganizationSettingsForm';
+import { DashboardWidgetsForm } from './components/DashboardWidgetsForm';
 
 export default function SettingsSection() {
   const { organization, isLoading } = useOrganizationContext();
@@ -21,6 +22,10 @@ export default function SettingsSection() {
             <PermissionGate permission="organization:update" fallback={<p className="text-sm text-text-secondary">You have read-only access to organization preferences.</p>}>
               <PreferencesForm organizationId={organization.id} />
             </PermissionGate>
+          </section>
+          <section>
+            <h2 className="mb-3 text-sm font-semibold text-text">Dashboard widgets</h2>
+            <DashboardWidgetsForm organizationId={organization.id} industry={organization.industry} />
           </section>
         </div>
       )}

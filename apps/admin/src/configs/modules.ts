@@ -1,13 +1,14 @@
 export const MODULES = {
   contacts: true,
   bookings: true,
-  payments: false,
+  payments: true,
   inventory: true,
-  reports: false,
+  reports: true,
   enquiries: true,
   notifications: true,
   auditLog: true,
   multiBranch: true,
   musicOrg: true,
   gym: true,
+  salon: true,
 } as const;

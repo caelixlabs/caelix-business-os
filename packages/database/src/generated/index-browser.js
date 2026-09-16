@@ -237,202 +237,12 @@ exports.Prisma.NotificationScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
-exports.Prisma.MusicInquiryScalarFieldEnum = {
-  id: 'id',
-  organizationId: 'organizationId',
-  branchId: 'branchId',
-  studentName: 'studentName',
-  guardianName: 'guardianName',
-  email: 'email',
-  phone: 'phone',
-  instrument: 'instrument',
-  skillLevel: 'skillLevel',
-  status: 'status',
-  trialSessionAt: 'trialSessionAt',
-  notes: 'notes',
-  assignedStaffId: 'assignedStaffId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.CourseScalarFieldEnum = {
-  id: 'id',
-  organizationId: 'organizationId',
-  title: 'title',
-  slug: 'slug',
-  instrument: 'instrument',
-  description: 'description',
-  skillLevel: 'skillLevel',
-  isIndividual: 'isIndividual',
-  maxCapacity: 'maxCapacity',
-  isActive: 'isActive',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.InstructorProfileScalarFieldEnum = {
-  id: 'id',
-  organizationId: 'organizationId',
-  userId: 'userId',
-  specialties: 'specialties',
-  hourlyRate: 'hourlyRate',
-  commissionRatePct: 'commissionRatePct',
-  workingHours: 'workingHours',
-  bio: 'bio',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.StudentProfileScalarFieldEnum = {
-  id: 'id',
-  organizationId: 'organizationId',
-  userId: 'userId',
-  fullName: 'fullName',
-  email: 'email',
-  phone: 'phone',
-  guardianName: 'guardianName',
-  guardianPhone: 'guardianPhone',
-  guardianEmail: 'guardianEmail',
-  emergencyContact: 'emergencyContact',
-  dob: 'dob',
-  registeredAt: 'registeredAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.MusicPackageScalarFieldEnum = {
-  id: 'id',
-  organizationId: 'organizationId',
-  courseId: 'courseId',
-  name: 'name',
-  description: 'description',
-  price: 'price',
-  discountPrice: 'discountPrice',
-  currency: 'currency',
-  totalSessions: 'totalSessions',
-  validityDays: 'validityDays',
-  isFeatured: 'isFeatured',
-  isActive: 'isActive',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.MusicDiscountScalarFieldEnum = {
-  id: 'id',
-  organizationId: 'organizationId',
-  code: 'code',
-  description: 'description',
-  type: 'type',
-  value: 'value',
-  startsAt: 'startsAt',
-  expiresAt: 'expiresAt',
-  maxUses: 'maxUses',
-  usedCount: 'usedCount',
-  isActive: 'isActive',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.MusicPackageDiscountScalarFieldEnum = {
-  packageId: 'packageId',
-  discountId: 'discountId'
-};
-
-exports.Prisma.MusicSubscriptionScalarFieldEnum = {
-  id: 'id',
-  organizationId: 'organizationId',
-  studentId: 'studentId',
-  packageId: 'packageId',
-  discountId: 'discountId',
-  status: 'status',
-  sessionsTotal: 'sessionsTotal',
-  sessionsRemaining: 'sessionsRemaining',
-  startsAt: 'startsAt',
-  expiresAt: 'expiresAt',
-  autoRenew: 'autoRenew',
-  renewalNotifiedAt: 'renewalNotifiedAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.LessonSessionScalarFieldEnum = {
-  id: 'id',
-  organizationId: 'organizationId',
-  branchId: 'branchId',
-  courseId: 'courseId',
-  instructorId: 'instructorId',
-  subscriptionId: 'subscriptionId',
-  title: 'title',
-  roomNumber: 'roomNumber',
-  startTime: 'startTime',
-  endTime: 'endTime',
-  status: 'status',
-  notes: 'notes',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.LessonAttendanceScalarFieldEnum = {
-  id: 'id',
-  organizationId: 'organizationId',
-  sessionId: 'sessionId',
-  studentId: 'studentId',
-  status: 'status',
-  markedAt: 'markedAt',
-  remarks: 'remarks',
-  homeworkAssigned: 'homeworkAssigned'
-};
-
-exports.Prisma.VideoLessonScalarFieldEnum = {
-  id: 'id',
-  organizationId: 'organizationId',
-  courseId: 'courseId',
-  title: 'title',
-  description: 'description',
-  videoUrl: 'videoUrl',
-  thumbnailUrl: 'thumbnailUrl',
-  durationSeconds: 'durationSeconds',
-  attachments: 'attachments',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.MusicInvoiceScalarFieldEnum = {
-  id: 'id',
-  organizationId: 'organizationId',
-  subscriptionId: 'subscriptionId',
-  invoiceNumber: 'invoiceNumber',
-  subtotal: 'subtotal',
-  discountAmount: 'discountAmount',
-  taxAmount: 'taxAmount',
-  totalAmount: 'totalAmount',
-  status: 'status',
-  dueDate: 'dueDate',
-  paidAt: 'paidAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.MusicPaymentScalarFieldEnum = {
-  id: 'id',
-  organizationId: 'organizationId',
-  invoiceId: 'invoiceId',
-  amount: 'amount',
-  paymentMethod: 'paymentMethod',
-  referenceId: 'referenceId',
-  paidAt: 'paidAt',
-  createdAt: 'createdAt'
-};
-
 exports.Prisma.MusicStudentScalarFieldEnum = {
   id: 'id',
   organizationId: 'organizationId',
   branchId: 'branchId',
+  contactId: 'contactId',
   studentNo: 'studentNo',
-  firstName: 'firstName',
-  lastName: 'lastName',
-  email: 'email',
-  phone: 'phone',
   dateOfBirth: 'dateOfBirth',
   guardianName: 'guardianName',
   guardianPhone: 'guardianPhone',
@@ -493,14 +303,45 @@ exports.Prisma.MusicEnrollmentScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.MusicAttendanceScalarFieldEnum = {
+exports.Prisma.AttendanceScalarFieldEnum = {
   id: 'id',
   organizationId: 'organizationId',
-  studentId: 'studentId',
-  batchId: 'batchId',
+  contactId: 'contactId',
+  context: 'context',
+  contextId: 'contextId',
   date: 'date',
   status: 'status',
   notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.GymMemberScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  contactId: 'contactId',
+  memberNo: 'memberNo',
+  status: 'status',
+  joinedAt: 'joinedAt',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.GymClassScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  trainerUserId: 'trainerUserId',
+  name: 'name',
+  capacity: 'capacity',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  days: 'days',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -590,6 +431,119 @@ exports.Prisma.BookingScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.InvoiceScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  contactId: 'contactId',
+  invoiceNumber: 'invoiceNumber',
+  status: 'status',
+  subtotal: 'subtotal',
+  discountAmount: 'discountAmount',
+  taxAmount: 'taxAmount',
+  totalAmount: 'totalAmount',
+  amountPaid: 'amountPaid',
+  currency: 'currency',
+  issuedAt: 'issuedAt',
+  dueDate: 'dueDate',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.InvoiceLineScalarFieldEnum = {
+  id: 'id',
+  invoiceId: 'invoiceId',
+  productId: 'productId',
+  description: 'description',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  taxRate: 'taxRate',
+  lineTotal: 'lineTotal',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.PaymentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  invoiceId: 'invoiceId',
+  amount: 'amount',
+  paymentMethod: 'paymentMethod',
+  referenceId: 'referenceId',
+  paidAt: 'paidAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.DocumentScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  sizeBytes: 'sizeBytes',
+  storageKey: 'storageKey',
+  uploadedByUserId: 'uploadedByUserId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.MembershipPlanScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  description: 'description',
+  price: 'price',
+  currency: 'currency',
+  durationDays: 'durationDays',
+  sessionsIncluded: 'sessionsIncluded',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MembershipSubscriptionScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  contactId: 'contactId',
+  planId: 'planId',
+  status: 'status',
+  sessionsRemaining: 'sessionsRemaining',
+  startsAt: 'startsAt',
+  expiresAt: 'expiresAt',
+  autoRenew: 'autoRenew',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SaleScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  branchId: 'branchId',
+  contactId: 'contactId',
+  soldByUserId: 'soldByUserId',
+  status: 'status',
+  subtotal: 'subtotal',
+  discountAmount: 'discountAmount',
+  taxAmount: 'taxAmount',
+  totalAmount: 'totalAmount',
+  paymentMethod: 'paymentMethod',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.SaleLineScalarFieldEnum = {
+  id: 'id',
+  saleId: 'saleId',
+  productId: 'productId',
+  description: 'description',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  lineTotal: 'lineTotal',
+  staffUserId: 'staffUserId',
+  commissionPct: 'commissionPct',
+  commissionAmount: 'commissionAmount'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -621,7 +575,8 @@ exports.Prisma.JsonNullValueFilter = {
 };
 exports.IndustryType = exports.$Enums.IndustryType = {
   MUSIC_ORG: 'MUSIC_ORG',
-  GYM: 'GYM'
+  GYM: 'GYM',
+  SALON: 'SALON'
 };
 
 exports.BranchType = exports.$Enums.BranchType = {
@@ -648,62 +603,6 @@ exports.RoleLevel = exports.$Enums.RoleLevel = {
   MANAGER: 'MANAGER',
   EMPLOYEE: 'EMPLOYEE',
   VIEWER: 'VIEWER'
-};
-
-exports.SkillLevel = exports.$Enums.SkillLevel = {
-  BEGINNER: 'BEGINNER',
-  INTERMEDIATE: 'INTERMEDIATE',
-  ADVANCED: 'ADVANCED'
-};
-
-exports.InquiryStatus = exports.$Enums.InquiryStatus = {
-  NEW: 'NEW',
-  CONTACTED: 'CONTACTED',
-  TRIAL_SCHEDULED: 'TRIAL_SCHEDULED',
-  ENROLLED: 'ENROLLED',
-  LOST: 'LOST'
-};
-
-exports.DiscountType = exports.$Enums.DiscountType = {
-  PERCENTAGE: 'PERCENTAGE',
-  FIXED_AMOUNT: 'FIXED_AMOUNT'
-};
-
-exports.SubscriptionStatus = exports.$Enums.SubscriptionStatus = {
-  ACTIVE: 'ACTIVE',
-  EXPIRED: 'EXPIRED',
-  CANCELLED: 'CANCELLED',
-  PAST_DUE: 'PAST_DUE'
-};
-
-exports.SessionStatus = exports.$Enums.SessionStatus = {
-  SCHEDULED: 'SCHEDULED',
-  COMPLETED: 'COMPLETED',
-  CANCELLED: 'CANCELLED',
-  RESCHEDULED: 'RESCHEDULED'
-};
-
-exports.AttendanceStatus = exports.$Enums.AttendanceStatus = {
-  PRESENT: 'PRESENT',
-  ABSENT: 'ABSENT',
-  EXCUSED: 'EXCUSED',
-  LATE: 'LATE'
-};
-
-exports.InvoiceStatus = exports.$Enums.InvoiceStatus = {
-  DRAFT: 'DRAFT',
-  ISSUED: 'ISSUED',
-  PAID: 'PAID',
-  OVERDUE: 'OVERDUE',
-  VOID: 'VOID'
-};
-
-exports.PaymentMethod = exports.$Enums.PaymentMethod = {
-  STRIPE: 'STRIPE',
-  CASH: 'CASH',
-  BANK_TRANSFER: 'BANK_TRANSFER',
-  UPI: 'UPI',
-  POS: 'POS'
 };
 
 exports.MusicSkillLevel = exports.$Enums.MusicSkillLevel = {
@@ -739,11 +638,23 @@ exports.MusicEnrollmentStatus = exports.$Enums.MusicEnrollmentStatus = {
   CANCELLED: 'CANCELLED'
 };
 
-exports.MusicAttendanceStatus = exports.$Enums.MusicAttendanceStatus = {
+exports.AttendanceStatus = exports.$Enums.AttendanceStatus = {
   PRESENT: 'PRESENT',
   ABSENT: 'ABSENT',
   LATE: 'LATE',
   EXCUSED: 'EXCUSED'
+};
+
+exports.GymMemberStatus = exports.$Enums.GymMemberStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  FROZEN: 'FROZEN',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.GymClassStatus = exports.$Enums.GymClassStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
 };
 
 exports.ContactType = exports.$Enums.ContactType = {
@@ -799,6 +710,39 @@ exports.BookingStatus = exports.$Enums.BookingStatus = {
   COMPLETED: 'COMPLETED'
 };
 
+exports.InvoiceStatus = exports.$Enums.InvoiceStatus = {
+  DRAFT: 'DRAFT',
+  ISSUED: 'ISSUED',
+  PAID: 'PAID',
+  OVERDUE: 'OVERDUE',
+  VOID: 'VOID'
+};
+
+exports.PaymentMethod = exports.$Enums.PaymentMethod = {
+  STRIPE: 'STRIPE',
+  CASH: 'CASH',
+  BANK_TRANSFER: 'BANK_TRANSFER',
+  UPI: 'UPI',
+  POS: 'POS'
+};
+
+exports.MembershipPlanStatus = exports.$Enums.MembershipPlanStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+};
+
+exports.MembershipSubscriptionStatus = exports.$Enums.MembershipSubscriptionStatus = {
+  ACTIVE: 'ACTIVE',
+  EXPIRED: 'EXPIRED',
+  CANCELLED: 'CANCELLED',
+  PAST_DUE: 'PAST_DUE'
+};
+
+exports.SaleStatus = exports.$Enums.SaleStatus = {
+  COMPLETED: 'COMPLETED',
+  REFUNDED: 'REFUNDED'
+};
+
 exports.Prisma.ModelName = {
   Organization: 'Organization',
   Branch: 'Branch',
@@ -812,30 +756,27 @@ exports.Prisma.ModelName = {
   AuditLog: 'AuditLog',
   OrganizationSetting: 'OrganizationSetting',
   Notification: 'Notification',
-  MusicInquiry: 'MusicInquiry',
-  Course: 'Course',
-  InstructorProfile: 'InstructorProfile',
-  StudentProfile: 'StudentProfile',
-  MusicPackage: 'MusicPackage',
-  MusicDiscount: 'MusicDiscount',
-  MusicPackageDiscount: 'MusicPackageDiscount',
-  MusicSubscription: 'MusicSubscription',
-  LessonSession: 'LessonSession',
-  LessonAttendance: 'LessonAttendance',
-  VideoLesson: 'VideoLesson',
-  MusicInvoice: 'MusicInvoice',
-  MusicPayment: 'MusicPayment',
   MusicStudent: 'MusicStudent',
   MusicCourse: 'MusicCourse',
   MusicBatch: 'MusicBatch',
   MusicEnrollment: 'MusicEnrollment',
-  MusicAttendance: 'MusicAttendance',
+  Attendance: 'Attendance',
+  GymMember: 'GymMember',
+  GymClass: 'GymClass',
   MusicPracticeLog: 'MusicPracticeLog',
   Contact: 'Contact',
   Product: 'Product',
   InventoryItem: 'InventoryItem',
   Enquiry: 'Enquiry',
-  Booking: 'Booking'
+  Booking: 'Booking',
+  Invoice: 'Invoice',
+  InvoiceLine: 'InvoiceLine',
+  Payment: 'Payment',
+  Document: 'Document',
+  MembershipPlan: 'MembershipPlan',
+  MembershipSubscription: 'MembershipSubscription',
+  Sale: 'Sale',
+  SaleLine: 'SaleLine'
 };
 
 /**

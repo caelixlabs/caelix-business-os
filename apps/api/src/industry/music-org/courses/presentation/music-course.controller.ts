@@ -2,6 +2,9 @@ import { Body, Controller, Get, Param, Patch, Post } from "@nestjs/common";
 import { CurrentUser } from "@/core/auth/application/decorators";
 import type { AccessTokenPayload } from "@/core/auth/application/services/token.service";
 import { RequirePermissions } from "@/core/rbac/application/decorators";
+
+import { RequireIndustry } from "@/core/organization/application/decorators";
+import { IndustryType } from "@/core/organization/domain/enums/industry-type.enum";
 import { PermissionCode } from "@/core/rbac/domain/enums";
 import { assertSameOrganization } from "@/core/audit/guards/assert-same-organization";
 import { MusicCourseService } from "../application/music-course.service";
@@ -10,6 +13,7 @@ import { UpdateMusicCourseDto } from "../application/dto/update-music-course.dto
 import { MusicCourseResponseDto } from "../application/dto/music-course-response.dto";
 
 @Controller("organizations/:organizationId/music-org/courses")
+@RequireIndustry(IndustryType.MUSIC_ORG)
 export class MusicCourseController {
   constructor(private readonly service: MusicCourseService) {}
 

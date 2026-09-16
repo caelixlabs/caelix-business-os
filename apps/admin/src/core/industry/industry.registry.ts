@@ -4,10 +4,12 @@ import type { NavigationGroup } from '@/core/navigation/navigation.types';
 import {
   GYM_NAV_GROUPS,
   MUSIC_ORG_NAV_GROUPS,
+  SALON_NAV_GROUPS,
 } from '@/core/navigation/navigation.registry';
 
 import { GYM_THEME } from '@/theme/industries/gym';
 import { MUSIC_ORG_THEME } from '@/theme/industries/music-org';
+import { SALON_THEME } from '@/theme/industries/salon';
 import type { IndustryType } from '@/core/industry/industry.types';
 
 export type { IndustryType };
@@ -60,6 +62,23 @@ export const INDUSTRY_REGISTRY: Record<
         '@/industries/gym/dashboard/GymDashboard'
       ).then((module) => ({
         default: module.GymDashboard,
+      })),
+  },
+
+  SALON: {
+    value: 'SALON',
+    label: 'Salon & Spa',
+    description:
+      'Hair, beauty, and wellness salons and spas',
+    icon: 'scissors',
+    themeKey: 'SALON',
+    theme: SALON_THEME,
+    navigationGroups: SALON_NAV_GROUPS,
+    dashboard: () =>
+      import(
+        '@/industries/salon/dashboard/SalonDashboard'
+      ).then((module) => ({
+        default: module.SalonDashboard,
       })),
   },
 };
