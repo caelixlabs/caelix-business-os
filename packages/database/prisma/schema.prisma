@@ -59,6 +59,10 @@ model Organization {
   invoices           Invoice[]
   payments           Payment[]
   documents          Document[]
+  automationRules    AutomationRule[]
+  messages           Message[]
+  messageTemplates   MessageTemplate[]
+  signatureRequests  SignatureRequest[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -661,6 +665,8 @@ model Contact {
   attendances  Attendance[]
   membershipSubscriptions MembershipSubscription[]
   sales                   Sale[]
+  messages                Message[]
+  signatureRequests       SignatureRequest[]
 
   @@index([organizationId])
   @@index([organizationId, branchId])
@@ -1071,4 +1077,137 @@ model SaleLine {
 
   @@index([saleId])
   @@index([staffUserId])
+}
+
+enum AutomationActionType {
+  NOTIFY_ADMINS
+  SEND_EMAIL_TO_CONTACT
+  SEND_SMS_TO_CONTACT
+  SEND_WHATSAPP_TO_CONTACT
+}
+
+model AutomationRule {
+  id String @id @db.Char(32)
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  name    String
+  enabled Boolean @default(true)
+
+  // Catalog key, e.g. "enquiry.created" — see capabilities/automations/automation-triggers.ts
+  trigger String
+  // Optional [{ field, equals }] checks against the event payload
+  conditions Json?
+
+  actionType   AutomationActionType
+  actionConfig Json
+
+  runCount  Int       @default(0)
+  lastRunAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId, trigger, enabled])
+}
+
+enum MessageChannel {
+  EMAIL
+  SMS
+  WHATSAPP
+}
+
+enum MessageStatus {
+  SENT
+  FAILED
+  LOGGED // no provider credentials configured — recorded but not delivered
+}
+
+model Message {
+  id String @id @db.Char(32)
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  contactId String?
+  contact   Contact? @relation(fields: [contactId], references: [id], onDelete: SetNull)
+
+  channel   MessageChannel
+  toAddress String
+  subject   String?
+  body      String
+  status    MessageStatus
+  error     String?
+
+  // Who or what sent it: "manual", "automation:<ruleId>", "esign:<requestId>"
+  source        String
+  sentByUserId  String?
+
+  createdAt DateTime @default(now())
+
+  @@index([organizationId, createdAt])
+  @@index([contactId])
+}
+
+model MessageTemplate {
+  id String @id @db.Char(32)
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  name    String
+  channel MessageChannel
+  subject String?
+  body    String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([organizationId, name])
+}
+
+enum SignatureStatus {
+  PENDING
+  SIGNED
+  DECLINED
+  EXPIRED
+  CANCELLED
+}
+
+model SignatureRequest {
+  id String @id @db.Char(32)
+
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  contactId String?
+  contact   Contact? @relation(fields: [contactId], references: [id], onDelete: SetNull)
+
+  title String
+  body  String
+  // SHA-256 of title + body when the request was created; kept as evidence of exactly what was signed
+  bodyHash String
+
+  signerName  String
+  signerEmail String
+
+  // Unguessable link secret the signer uses without an account
+  token String @unique
+
+  status    SignatureStatus @default(PENDING)
+  expiresAt DateTime
+
+  signedAt        DateTime?
+  signedName      String?
+  signerIp        String?
+  signerUserAgent String?
+  declineReason   String?
+
+  createdByUserId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([organizationId, status])
 }

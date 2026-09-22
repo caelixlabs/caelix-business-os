@@ -1,7 +1,18 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+export type CalendarViewMode = 'day' | 'week' | 'month';
+
+export interface CalendarPrefs {
+  view: CalendarViewMode;
+  weekStartsOn: 0 | 1;
+  dayStartHour: number;
+  dayEndHour: number;
+}
+
 interface UIState {
+  calendarPrefs: CalendarPrefs;
+  setCalendarPrefs: (prefs: Partial<CalendarPrefs>) => void;
   sidebarCollapsed: boolean;
   darkMode: boolean;
   commandPaletteOpen: boolean;
@@ -14,6 +25,8 @@ interface UIState {
 export const useUIStore = create<UIState>()(
   persist(
     (set) => ({
+      calendarPrefs: { view: 'week', weekStartsOn: 1, dayStartHour: 7, dayEndHour: 21 },
+      setCalendarPrefs: (prefs) => set((state) => ({ calendarPrefs: { ...state.calendarPrefs, ...prefs } })),
       sidebarCollapsed: false,
       darkMode: false,
       commandPaletteOpen: false,
@@ -29,6 +42,7 @@ export const useUIStore = create<UIState>()(
       partialize: (state) => ({
         sidebarCollapsed: state.sidebarCollapsed,
         darkMode: state.darkMode,
+        calendarPrefs: state.calendarPrefs,
       }),
     },
   ),

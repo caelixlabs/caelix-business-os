@@ -26,7 +26,7 @@ Next.js route
 - `sections/` — cross-industry admin views. If a view is materially different for Music and Gym, it belongs inside the corresponding industry folder instead.
 - `features/` — reusable application/domain capabilities and API contracts. A feature must not assume one industry.
 - `components/ui/` — primitive visual atoms.
-- `components/data/` — reusable data-display primitives such as `DataTable`, `StatCard`, `ChartPanel`, `ActivityFeed`, and `CalendarGrid`.
+- `components/data/` — reusable data-display primitives such as `DataTable`, `StatCard`, `ChartPanel`, `ActivityFeed`, and `Calendar` (day/week/month).
 - `components/forms/` — reusable form patterns.
 - `components/layout/` — visual shell pieces. These render resolved state; they do not decide business rules.
 - `theme/` — shared tokens and industry-specific token sets.

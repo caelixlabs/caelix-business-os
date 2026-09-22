@@ -29,6 +29,9 @@ import { AttendanceModule } from '@/capabilities/attendance/attendance.module';
 import { MembershipsModule } from '@/capabilities/memberships/memberships.module';
 import { DashboardWidgetsModule } from '@/capabilities/dashboard-widgets/dashboard-widgets.module';
 import { PosModule } from '@/capabilities/pos/pos.module';
+import { CommunicationModule } from '@/capabilities/communication/communication.module';
+import { SignaturesModule } from '@/capabilities/signatures/signatures.module';
+import { AutomationsModule } from '@/capabilities/automations/automations.module';
 
 @Module({
   imports: [
@@ -59,6 +62,9 @@ import { PosModule } from '@/capabilities/pos/pos.module';
     MembershipsModule,
     DashboardWidgetsModule,
     PosModule,
+    AutomationsModule,
+    SignaturesModule,
+    CommunicationModule,
     GymModule,
   ],
 })

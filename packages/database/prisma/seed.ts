@@ -94,6 +94,13 @@ const PERMISSIONS: Array<{ code: string; description: string; module: string }> 
   { code: 'pos:sell', description: 'Ring up a point-of-sale checkout', module: 'pos' },
   { code: 'pos:read', description: 'View point-of-sale sales history', module: 'pos' },
   { code: 'pos:refund', description: 'Refund a point-of-sale sale', module: 'pos' },
+  { code: 'automation:read', description: 'View automation rules', module: 'automation' },
+  { code: 'automation:manage', description: 'Create, edit and delete automation rules', module: 'automation' },
+  { code: 'communication:read', description: 'View sent messages', module: 'communication' },
+  { code: 'communication:send', description: 'Send email, SMS and WhatsApp messages', module: 'communication' },
+  { code: 'communication:manage', description: 'Manage message templates', module: 'communication' },
+  { code: 'signature:read', description: 'View e-signature requests', module: 'signature' },
+  { code: 'signature:manage', description: 'Request and cancel e-signatures', module: 'signature' },
 ];
 
 async function main() {

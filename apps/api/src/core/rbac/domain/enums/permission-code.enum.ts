@@ -91,4 +91,14 @@ export enum PermissionCode {
   POS_SELL = 'pos:sell',
   POS_READ = 'pos:read',
   POS_REFUND = 'pos:refund',
+
+  AUTOMATION_READ = 'automation:read',
+  AUTOMATION_MANAGE = 'automation:manage',
+
+  COMMUNICATION_READ = 'communication:read',
+  COMMUNICATION_SEND = 'communication:send',
+  COMMUNICATION_MANAGE = 'communication:manage',
+
+  SIGNATURE_READ = 'signature:read',
+  SIGNATURE_MANAGE = 'signature:manage',
 }

@@ -1,5 +1,8 @@
 import {
   BarChart3,
+  MessageSquare,
+  PenLine,
+  Zap,
   Bell,
   BookOpen,
   CalendarDays,
@@ -85,6 +88,22 @@ export const CORE_NAV_GROUPS: NavigationGroup[] = [
         permission: 'enquiry:read',
         moduleKey: 'enquiries',
       },
+      {
+        key: 'communication',
+        href: PATHS.communication,
+        label: 'Messages',
+        icon: MessageSquare,
+        permission: 'communication:read',
+        moduleKey: 'communication',
+      },
+      {
+        key: 'signatures',
+        href: PATHS.signatures,
+        label: 'E-signature',
+        icon: PenLine,
+        permission: 'signature:read',
+        moduleKey: 'signatures',
+      },
     ],
   },
   {
@@ -126,6 +145,14 @@ export const CORE_NAV_GROUPS: NavigationGroup[] = [
         icon: Bell,
         moduleKey: 'notifications',
         badge: 'count',
+      },
+      {
+        key: 'automations',
+        href: PATHS.automations,
+        label: 'Automations',
+        icon: Zap,
+        permission: 'automation:read',
+        moduleKey: 'automations',
       },
       {
         key: 'audit-log',
