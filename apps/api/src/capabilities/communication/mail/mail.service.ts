@@ -38,6 +38,10 @@ export class MailService implements OnModuleInit {
     });
   }
 
+  isConfigured(): boolean {
+    return Boolean(this.transporter);
+  }
+
   async send({ to, subject, html }: SendMailInput): Promise<void> {
     if (!this.transporter) {
       this.logger.log(`[dev mail, no SMTP_HOST set] to=${to} subject="${subject}"`);

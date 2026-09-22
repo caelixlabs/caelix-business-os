@@ -15,6 +15,9 @@ export const PATHS = {
   notifications: `${DASHBOARD_ROOT}/notifications`,
   settings: `${DASHBOARD_ROOT}/settings`,
   pos: `${DASHBOARD_ROOT}/pos`,
+  automations: `${DASHBOARD_ROOT}/automations`,
+  communication: `${DASHBOARD_ROOT}/communication`,
+  signatures: `${DASHBOARD_ROOT}/signatures`,
   music: {
     root: `${DASHBOARD_ROOT}/music`,
     calendar: `${DASHBOARD_ROOT}/music/calendar`,

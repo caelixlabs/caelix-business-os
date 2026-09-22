@@ -178,6 +178,26 @@ export type Sale = $Result.DefaultSelection<Prisma.$SalePayload>
  * 
  */
 export type SaleLine = $Result.DefaultSelection<Prisma.$SaleLinePayload>
+/**
+ * Model AutomationRule
+ * 
+ */
+export type AutomationRule = $Result.DefaultSelection<Prisma.$AutomationRulePayload>
+/**
+ * Model Message
+ * 
+ */
+export type Message = $Result.DefaultSelection<Prisma.$MessagePayload>
+/**
+ * Model MessageTemplate
+ * 
+ */
+export type MessageTemplate = $Result.DefaultSelection<Prisma.$MessageTemplatePayload>
+/**
+ * Model SignatureRequest
+ * 
+ */
+export type SignatureRequest = $Result.DefaultSelection<Prisma.$SignatureRequestPayload>
 
 /**
  * Enums
@@ -430,6 +450,45 @@ export const SaleStatus: {
 
 export type SaleStatus = (typeof SaleStatus)[keyof typeof SaleStatus]
 
+
+export const AutomationActionType: {
+  NOTIFY_ADMINS: 'NOTIFY_ADMINS',
+  SEND_EMAIL_TO_CONTACT: 'SEND_EMAIL_TO_CONTACT',
+  SEND_SMS_TO_CONTACT: 'SEND_SMS_TO_CONTACT',
+  SEND_WHATSAPP_TO_CONTACT: 'SEND_WHATSAPP_TO_CONTACT'
+};
+
+export type AutomationActionType = (typeof AutomationActionType)[keyof typeof AutomationActionType]
+
+
+export const MessageChannel: {
+  EMAIL: 'EMAIL',
+  SMS: 'SMS',
+  WHATSAPP: 'WHATSAPP'
+};
+
+export type MessageChannel = (typeof MessageChannel)[keyof typeof MessageChannel]
+
+
+export const MessageStatus: {
+  SENT: 'SENT',
+  FAILED: 'FAILED',
+  LOGGED: 'LOGGED'
+};
+
+export type MessageStatus = (typeof MessageStatus)[keyof typeof MessageStatus]
+
+
+export const SignatureStatus: {
+  PENDING: 'PENDING',
+  SIGNED: 'SIGNED',
+  DECLINED: 'DECLINED',
+  EXPIRED: 'EXPIRED',
+  CANCELLED: 'CANCELLED'
+};
+
+export type SignatureStatus = (typeof SignatureStatus)[keyof typeof SignatureStatus]
+
 }
 
 export type IndustryType = $Enums.IndustryType
@@ -535,6 +594,22 @@ export const MembershipSubscriptionStatus: typeof $Enums.MembershipSubscriptionS
 export type SaleStatus = $Enums.SaleStatus
 
 export const SaleStatus: typeof $Enums.SaleStatus
+
+export type AutomationActionType = $Enums.AutomationActionType
+
+export const AutomationActionType: typeof $Enums.AutomationActionType
+
+export type MessageChannel = $Enums.MessageChannel
+
+export const MessageChannel: typeof $Enums.MessageChannel
+
+export type MessageStatus = $Enums.MessageStatus
+
+export const MessageStatus: typeof $Enums.MessageStatus
+
+export type SignatureStatus = $Enums.SignatureStatus
+
+export const SignatureStatus: typeof $Enums.SignatureStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -983,6 +1058,46 @@ export class PrismaClient<
     * ```
     */
   get saleLine(): Prisma.SaleLineDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.automationRule`: Exposes CRUD operations for the **AutomationRule** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AutomationRules
+    * const automationRules = await prisma.automationRule.findMany()
+    * ```
+    */
+  get automationRule(): Prisma.AutomationRuleDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.message`: Exposes CRUD operations for the **Message** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Messages
+    * const messages = await prisma.message.findMany()
+    * ```
+    */
+  get message(): Prisma.MessageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.messageTemplate`: Exposes CRUD operations for the **MessageTemplate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MessageTemplates
+    * const messageTemplates = await prisma.messageTemplate.findMany()
+    * ```
+    */
+  get messageTemplate(): Prisma.MessageTemplateDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.signatureRequest`: Exposes CRUD operations for the **SignatureRequest** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SignatureRequests
+    * const signatureRequests = await prisma.signatureRequest.findMany()
+    * ```
+    */
+  get signatureRequest(): Prisma.SignatureRequestDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1456,7 +1571,11 @@ export namespace Prisma {
     MembershipPlan: 'MembershipPlan',
     MembershipSubscription: 'MembershipSubscription',
     Sale: 'Sale',
-    SaleLine: 'SaleLine'
+    SaleLine: 'SaleLine',
+    AutomationRule: 'AutomationRule',
+    Message: 'Message',
+    MessageTemplate: 'MessageTemplate',
+    SignatureRequest: 'SignatureRequest'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1475,7 +1594,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "organization" | "branch" | "domainEvent" | "user" | "refreshToken" | "role" | "permission" | "rolePermission" | "userRole" | "auditLog" | "organizationSetting" | "notification" | "musicStudent" | "musicCourse" | "musicBatch" | "musicEnrollment" | "attendance" | "gymMember" | "gymClass" | "musicPracticeLog" | "contact" | "product" | "inventoryItem" | "enquiry" | "booking" | "invoice" | "invoiceLine" | "payment" | "document" | "membershipPlan" | "membershipSubscription" | "sale" | "saleLine"
+      modelProps: "organization" | "branch" | "domainEvent" | "user" | "refreshToken" | "role" | "permission" | "rolePermission" | "userRole" | "auditLog" | "organizationSetting" | "notification" | "musicStudent" | "musicCourse" | "musicBatch" | "musicEnrollment" | "attendance" | "gymMember" | "gymClass" | "musicPracticeLog" | "contact" | "product" | "inventoryItem" | "enquiry" | "booking" | "invoice" | "invoiceLine" | "payment" | "document" | "membershipPlan" | "membershipSubscription" | "sale" | "saleLine" | "automationRule" | "message" | "messageTemplate" | "signatureRequest"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3921,6 +4040,302 @@ export namespace Prisma {
           }
         }
       }
+      AutomationRule: {
+        payload: Prisma.$AutomationRulePayload<ExtArgs>
+        fields: Prisma.AutomationRuleFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AutomationRuleFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AutomationRulePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AutomationRuleFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AutomationRulePayload>
+          }
+          findFirst: {
+            args: Prisma.AutomationRuleFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AutomationRulePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AutomationRuleFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AutomationRulePayload>
+          }
+          findMany: {
+            args: Prisma.AutomationRuleFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AutomationRulePayload>[]
+          }
+          create: {
+            args: Prisma.AutomationRuleCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AutomationRulePayload>
+          }
+          createMany: {
+            args: Prisma.AutomationRuleCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AutomationRuleCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AutomationRulePayload>[]
+          }
+          delete: {
+            args: Prisma.AutomationRuleDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AutomationRulePayload>
+          }
+          update: {
+            args: Prisma.AutomationRuleUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AutomationRulePayload>
+          }
+          deleteMany: {
+            args: Prisma.AutomationRuleDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AutomationRuleUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AutomationRuleUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AutomationRulePayload>[]
+          }
+          upsert: {
+            args: Prisma.AutomationRuleUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AutomationRulePayload>
+          }
+          aggregate: {
+            args: Prisma.AutomationRuleAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAutomationRule>
+          }
+          groupBy: {
+            args: Prisma.AutomationRuleGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AutomationRuleGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AutomationRuleCountArgs<ExtArgs>
+            result: $Utils.Optional<AutomationRuleCountAggregateOutputType> | number
+          }
+        }
+      }
+      Message: {
+        payload: Prisma.$MessagePayload<ExtArgs>
+        fields: Prisma.MessageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MessageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MessageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          findFirst: {
+            args: Prisma.MessageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MessageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          findMany: {
+            args: Prisma.MessageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>[]
+          }
+          create: {
+            args: Prisma.MessageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          createMany: {
+            args: Prisma.MessageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MessageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>[]
+          }
+          delete: {
+            args: Prisma.MessageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          update: {
+            args: Prisma.MessageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          deleteMany: {
+            args: Prisma.MessageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MessageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MessageUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>[]
+          }
+          upsert: {
+            args: Prisma.MessageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessagePayload>
+          }
+          aggregate: {
+            args: Prisma.MessageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMessage>
+          }
+          groupBy: {
+            args: Prisma.MessageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MessageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MessageCountArgs<ExtArgs>
+            result: $Utils.Optional<MessageCountAggregateOutputType> | number
+          }
+        }
+      }
+      MessageTemplate: {
+        payload: Prisma.$MessageTemplatePayload<ExtArgs>
+        fields: Prisma.MessageTemplateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MessageTemplateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessageTemplatePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MessageTemplateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessageTemplatePayload>
+          }
+          findFirst: {
+            args: Prisma.MessageTemplateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessageTemplatePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MessageTemplateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessageTemplatePayload>
+          }
+          findMany: {
+            args: Prisma.MessageTemplateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessageTemplatePayload>[]
+          }
+          create: {
+            args: Prisma.MessageTemplateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessageTemplatePayload>
+          }
+          createMany: {
+            args: Prisma.MessageTemplateCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MessageTemplateCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessageTemplatePayload>[]
+          }
+          delete: {
+            args: Prisma.MessageTemplateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessageTemplatePayload>
+          }
+          update: {
+            args: Prisma.MessageTemplateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessageTemplatePayload>
+          }
+          deleteMany: {
+            args: Prisma.MessageTemplateDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MessageTemplateUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MessageTemplateUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessageTemplatePayload>[]
+          }
+          upsert: {
+            args: Prisma.MessageTemplateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MessageTemplatePayload>
+          }
+          aggregate: {
+            args: Prisma.MessageTemplateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMessageTemplate>
+          }
+          groupBy: {
+            args: Prisma.MessageTemplateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MessageTemplateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MessageTemplateCountArgs<ExtArgs>
+            result: $Utils.Optional<MessageTemplateCountAggregateOutputType> | number
+          }
+        }
+      }
+      SignatureRequest: {
+        payload: Prisma.$SignatureRequestPayload<ExtArgs>
+        fields: Prisma.SignatureRequestFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SignatureRequestFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SignatureRequestPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SignatureRequestFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SignatureRequestPayload>
+          }
+          findFirst: {
+            args: Prisma.SignatureRequestFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SignatureRequestPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SignatureRequestFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SignatureRequestPayload>
+          }
+          findMany: {
+            args: Prisma.SignatureRequestFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SignatureRequestPayload>[]
+          }
+          create: {
+            args: Prisma.SignatureRequestCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SignatureRequestPayload>
+          }
+          createMany: {
+            args: Prisma.SignatureRequestCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SignatureRequestCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SignatureRequestPayload>[]
+          }
+          delete: {
+            args: Prisma.SignatureRequestDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SignatureRequestPayload>
+          }
+          update: {
+            args: Prisma.SignatureRequestUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SignatureRequestPayload>
+          }
+          deleteMany: {
+            args: Prisma.SignatureRequestDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SignatureRequestUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SignatureRequestUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SignatureRequestPayload>[]
+          }
+          upsert: {
+            args: Prisma.SignatureRequestUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SignatureRequestPayload>
+          }
+          aggregate: {
+            args: Prisma.SignatureRequestAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSignatureRequest>
+          }
+          groupBy: {
+            args: Prisma.SignatureRequestGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SignatureRequestGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SignatureRequestCountArgs<ExtArgs>
+            result: $Utils.Optional<SignatureRequestCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -4050,6 +4465,10 @@ export namespace Prisma {
     membershipSubscription?: MembershipSubscriptionOmit
     sale?: SaleOmit
     saleLine?: SaleLineOmit
+    automationRule?: AutomationRuleOmit
+    message?: MessageOmit
+    messageTemplate?: MessageTemplateOmit
+    signatureRequest?: SignatureRequestOmit
   }
 
   /* Types for Logging */
@@ -4155,6 +4574,10 @@ export namespace Prisma {
     invoices: number
     payments: number
     documents: number
+    automationRules: number
+    messages: number
+    messageTemplates: number
+    signatureRequests: number
   }
 
   export type OrganizationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4183,6 +4606,10 @@ export namespace Prisma {
     invoices?: boolean | OrganizationCountOutputTypeCountInvoicesArgs
     payments?: boolean | OrganizationCountOutputTypeCountPaymentsArgs
     documents?: boolean | OrganizationCountOutputTypeCountDocumentsArgs
+    automationRules?: boolean | OrganizationCountOutputTypeCountAutomationRulesArgs
+    messages?: boolean | OrganizationCountOutputTypeCountMessagesArgs
+    messageTemplates?: boolean | OrganizationCountOutputTypeCountMessageTemplatesArgs
+    signatureRequests?: boolean | OrganizationCountOutputTypeCountSignatureRequestsArgs
   }
 
   // Custom InputTypes
@@ -4369,6 +4796,34 @@ export namespace Prisma {
    */
   export type OrganizationCountOutputTypeCountDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DocumentWhereInput
+  }
+
+  /**
+   * OrganizationCountOutputType without action
+   */
+  export type OrganizationCountOutputTypeCountAutomationRulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AutomationRuleWhereInput
+  }
+
+  /**
+   * OrganizationCountOutputType without action
+   */
+  export type OrganizationCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MessageWhereInput
+  }
+
+  /**
+   * OrganizationCountOutputType without action
+   */
+  export type OrganizationCountOutputTypeCountMessageTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MessageTemplateWhereInput
+  }
+
+  /**
+   * OrganizationCountOutputType without action
+   */
+  export type OrganizationCountOutputTypeCountSignatureRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SignatureRequestWhereInput
   }
 
 
@@ -4789,6 +5244,8 @@ export namespace Prisma {
     attendances: number
     membershipSubscriptions: number
     sales: number
+    messages: number
+    signatureRequests: number
   }
 
   export type ContactCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4798,6 +5255,8 @@ export namespace Prisma {
     attendances?: boolean | ContactCountOutputTypeCountAttendancesArgs
     membershipSubscriptions?: boolean | ContactCountOutputTypeCountMembershipSubscriptionsArgs
     sales?: boolean | ContactCountOutputTypeCountSalesArgs
+    messages?: boolean | ContactCountOutputTypeCountMessagesArgs
+    signatureRequests?: boolean | ContactCountOutputTypeCountSignatureRequestsArgs
   }
 
   // Custom InputTypes
@@ -4851,6 +5310,20 @@ export namespace Prisma {
    */
   export type ContactCountOutputTypeCountSalesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SaleWhereInput
+  }
+
+  /**
+   * ContactCountOutputType without action
+   */
+  export type ContactCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MessageWhereInput
+  }
+
+  /**
+   * ContactCountOutputType without action
+   */
+  export type ContactCountOutputTypeCountSignatureRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SignatureRequestWhereInput
   }
 
 
@@ -5214,6 +5687,10 @@ export namespace Prisma {
     invoices?: boolean | Organization$invoicesArgs<ExtArgs>
     payments?: boolean | Organization$paymentsArgs<ExtArgs>
     documents?: boolean | Organization$documentsArgs<ExtArgs>
+    automationRules?: boolean | Organization$automationRulesArgs<ExtArgs>
+    messages?: boolean | Organization$messagesArgs<ExtArgs>
+    messageTemplates?: boolean | Organization$messageTemplatesArgs<ExtArgs>
+    signatureRequests?: boolean | Organization$signatureRequestsArgs<ExtArgs>
     _count?: boolean | OrganizationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["organization"]>
 
@@ -5274,6 +5751,10 @@ export namespace Prisma {
     invoices?: boolean | Organization$invoicesArgs<ExtArgs>
     payments?: boolean | Organization$paymentsArgs<ExtArgs>
     documents?: boolean | Organization$documentsArgs<ExtArgs>
+    automationRules?: boolean | Organization$automationRulesArgs<ExtArgs>
+    messages?: boolean | Organization$messagesArgs<ExtArgs>
+    messageTemplates?: boolean | Organization$messageTemplatesArgs<ExtArgs>
+    signatureRequests?: boolean | Organization$signatureRequestsArgs<ExtArgs>
     _count?: boolean | OrganizationCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type OrganizationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -5307,6 +5788,10 @@ export namespace Prisma {
       invoices: Prisma.$InvoicePayload<ExtArgs>[]
       payments: Prisma.$PaymentPayload<ExtArgs>[]
       documents: Prisma.$DocumentPayload<ExtArgs>[]
+      automationRules: Prisma.$AutomationRulePayload<ExtArgs>[]
+      messages: Prisma.$MessagePayload<ExtArgs>[]
+      messageTemplates: Prisma.$MessageTemplatePayload<ExtArgs>[]
+      signatureRequests: Prisma.$SignatureRequestPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5735,6 +6220,10 @@ export namespace Prisma {
     invoices<T extends Organization$invoicesArgs<ExtArgs> = {}>(args?: Subset<T, Organization$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     payments<T extends Organization$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, Organization$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     documents<T extends Organization$documentsArgs<ExtArgs> = {}>(args?: Subset<T, Organization$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    automationRules<T extends Organization$automationRulesArgs<ExtArgs> = {}>(args?: Subset<T, Organization$automationRulesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AutomationRulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    messages<T extends Organization$messagesArgs<ExtArgs> = {}>(args?: Subset<T, Organization$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    messageTemplates<T extends Organization$messageTemplatesArgs<ExtArgs> = {}>(args?: Subset<T, Organization$messageTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessageTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    signatureRequests<T extends Organization$signatureRequestsArgs<ExtArgs> = {}>(args?: Subset<T, Organization$signatureRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SignatureRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6756,6 +7245,102 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DocumentScalarFieldEnum | DocumentScalarFieldEnum[]
+  }
+
+  /**
+   * Organization.automationRules
+   */
+  export type Organization$automationRulesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AutomationRule
+     */
+    select?: AutomationRuleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AutomationRule
+     */
+    omit?: AutomationRuleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AutomationRuleInclude<ExtArgs> | null
+    where?: AutomationRuleWhereInput
+    orderBy?: AutomationRuleOrderByWithRelationInput | AutomationRuleOrderByWithRelationInput[]
+    cursor?: AutomationRuleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AutomationRuleScalarFieldEnum | AutomationRuleScalarFieldEnum[]
+  }
+
+  /**
+   * Organization.messages
+   */
+  export type Organization$messagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    where?: MessageWhereInput
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    cursor?: MessageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Organization.messageTemplates
+   */
+  export type Organization$messageTemplatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MessageTemplate
+     */
+    select?: MessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MessageTemplate
+     */
+    omit?: MessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageTemplateInclude<ExtArgs> | null
+    where?: MessageTemplateWhereInput
+    orderBy?: MessageTemplateOrderByWithRelationInput | MessageTemplateOrderByWithRelationInput[]
+    cursor?: MessageTemplateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MessageTemplateScalarFieldEnum | MessageTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * Organization.signatureRequests
+   */
+  export type Organization$signatureRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SignatureRequest
+     */
+    select?: SignatureRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SignatureRequest
+     */
+    omit?: SignatureRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SignatureRequestInclude<ExtArgs> | null
+    where?: SignatureRequestWhereInput
+    orderBy?: SignatureRequestOrderByWithRelationInput | SignatureRequestOrderByWithRelationInput[]
+    cursor?: SignatureRequestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SignatureRequestScalarFieldEnum | SignatureRequestScalarFieldEnum[]
   }
 
   /**
@@ -29256,6 +29841,8 @@ export namespace Prisma {
     attendances?: boolean | Contact$attendancesArgs<ExtArgs>
     membershipSubscriptions?: boolean | Contact$membershipSubscriptionsArgs<ExtArgs>
     sales?: boolean | Contact$salesArgs<ExtArgs>
+    messages?: boolean | Contact$messagesArgs<ExtArgs>
+    signatureRequests?: boolean | Contact$signatureRequestsArgs<ExtArgs>
     _count?: boolean | ContactCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contact"]>
 
@@ -29323,6 +29910,8 @@ export namespace Prisma {
     attendances?: boolean | Contact$attendancesArgs<ExtArgs>
     membershipSubscriptions?: boolean | Contact$membershipSubscriptionsArgs<ExtArgs>
     sales?: boolean | Contact$salesArgs<ExtArgs>
+    messages?: boolean | Contact$messagesArgs<ExtArgs>
+    signatureRequests?: boolean | Contact$signatureRequestsArgs<ExtArgs>
     _count?: boolean | ContactCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ContactIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -29347,6 +29936,8 @@ export namespace Prisma {
       attendances: Prisma.$AttendancePayload<ExtArgs>[]
       membershipSubscriptions: Prisma.$MembershipSubscriptionPayload<ExtArgs>[]
       sales: Prisma.$SalePayload<ExtArgs>[]
+      messages: Prisma.$MessagePayload<ExtArgs>[]
+      signatureRequests: Prisma.$SignatureRequestPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -29766,6 +30357,8 @@ export namespace Prisma {
     attendances<T extends Contact$attendancesArgs<ExtArgs> = {}>(args?: Subset<T, Contact$attendancesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     membershipSubscriptions<T extends Contact$membershipSubscriptionsArgs<ExtArgs> = {}>(args?: Subset<T, Contact$membershipSubscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MembershipSubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sales<T extends Contact$salesArgs<ExtArgs> = {}>(args?: Subset<T, Contact$salesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    messages<T extends Contact$messagesArgs<ExtArgs> = {}>(args?: Subset<T, Contact$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    signatureRequests<T extends Contact$signatureRequestsArgs<ExtArgs> = {}>(args?: Subset<T, Contact$signatureRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SignatureRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -30402,6 +30995,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SaleScalarFieldEnum | SaleScalarFieldEnum[]
+  }
+
+  /**
+   * Contact.messages
+   */
+  export type Contact$messagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    where?: MessageWhereInput
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    cursor?: MessageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Contact.signatureRequests
+   */
+  export type Contact$signatureRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SignatureRequest
+     */
+    select?: SignatureRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SignatureRequest
+     */
+    omit?: SignatureRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SignatureRequestInclude<ExtArgs> | null
+    where?: SignatureRequestWhereInput
+    orderBy?: SignatureRequestOrderByWithRelationInput | SignatureRequestOrderByWithRelationInput[]
+    cursor?: SignatureRequestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SignatureRequestScalarFieldEnum | SignatureRequestScalarFieldEnum[]
   }
 
   /**
@@ -45051,6 +45692,4721 @@ export namespace Prisma {
 
 
   /**
+   * Model AutomationRule
+   */
+
+  export type AggregateAutomationRule = {
+    _count: AutomationRuleCountAggregateOutputType | null
+    _avg: AutomationRuleAvgAggregateOutputType | null
+    _sum: AutomationRuleSumAggregateOutputType | null
+    _min: AutomationRuleMinAggregateOutputType | null
+    _max: AutomationRuleMaxAggregateOutputType | null
+  }
+
+  export type AutomationRuleAvgAggregateOutputType = {
+    runCount: number | null
+  }
+
+  export type AutomationRuleSumAggregateOutputType = {
+    runCount: number | null
+  }
+
+  export type AutomationRuleMinAggregateOutputType = {
+    id: string | null
+    organizationId: string | null
+    name: string | null
+    enabled: boolean | null
+    trigger: string | null
+    actionType: $Enums.AutomationActionType | null
+    runCount: number | null
+    lastRunAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AutomationRuleMaxAggregateOutputType = {
+    id: string | null
+    organizationId: string | null
+    name: string | null
+    enabled: boolean | null
+    trigger: string | null
+    actionType: $Enums.AutomationActionType | null
+    runCount: number | null
+    lastRunAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AutomationRuleCountAggregateOutputType = {
+    id: number
+    organizationId: number
+    name: number
+    enabled: number
+    trigger: number
+    conditions: number
+    actionType: number
+    actionConfig: number
+    runCount: number
+    lastRunAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AutomationRuleAvgAggregateInputType = {
+    runCount?: true
+  }
+
+  export type AutomationRuleSumAggregateInputType = {
+    runCount?: true
+  }
+
+  export type AutomationRuleMinAggregateInputType = {
+    id?: true
+    organizationId?: true
+    name?: true
+    enabled?: true
+    trigger?: true
+    actionType?: true
+    runCount?: true
+    lastRunAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AutomationRuleMaxAggregateInputType = {
+    id?: true
+    organizationId?: true
+    name?: true
+    enabled?: true
+    trigger?: true
+    actionType?: true
+    runCount?: true
+    lastRunAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AutomationRuleCountAggregateInputType = {
+    id?: true
+    organizationId?: true
+    name?: true
+    enabled?: true
+    trigger?: true
+    conditions?: true
+    actionType?: true
+    actionConfig?: true
+    runCount?: true
+    lastRunAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AutomationRuleAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AutomationRule to aggregate.
+     */
+    where?: AutomationRuleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AutomationRules to fetch.
+     */
+    orderBy?: AutomationRuleOrderByWithRelationInput | AutomationRuleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AutomationRuleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AutomationRules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AutomationRules.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AutomationRules
+    **/
+    _count?: true | AutomationRuleCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AutomationRuleAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AutomationRuleSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AutomationRuleMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AutomationRuleMaxAggregateInputType
+  }
+
+  export type GetAutomationRuleAggregateType<T extends AutomationRuleAggregateArgs> = {
+        [P in keyof T & keyof AggregateAutomationRule]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAutomationRule[P]>
+      : GetScalarType<T[P], AggregateAutomationRule[P]>
+  }
+
+
+
+
+  export type AutomationRuleGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AutomationRuleWhereInput
+    orderBy?: AutomationRuleOrderByWithAggregationInput | AutomationRuleOrderByWithAggregationInput[]
+    by: AutomationRuleScalarFieldEnum[] | AutomationRuleScalarFieldEnum
+    having?: AutomationRuleScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AutomationRuleCountAggregateInputType | true
+    _avg?: AutomationRuleAvgAggregateInputType
+    _sum?: AutomationRuleSumAggregateInputType
+    _min?: AutomationRuleMinAggregateInputType
+    _max?: AutomationRuleMaxAggregateInputType
+  }
+
+  export type AutomationRuleGroupByOutputType = {
+    id: string
+    organizationId: string
+    name: string
+    enabled: boolean
+    trigger: string
+    conditions: JsonValue | null
+    actionType: $Enums.AutomationActionType
+    actionConfig: JsonValue
+    runCount: number
+    lastRunAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: AutomationRuleCountAggregateOutputType | null
+    _avg: AutomationRuleAvgAggregateOutputType | null
+    _sum: AutomationRuleSumAggregateOutputType | null
+    _min: AutomationRuleMinAggregateOutputType | null
+    _max: AutomationRuleMaxAggregateOutputType | null
+  }
+
+  type GetAutomationRuleGroupByPayload<T extends AutomationRuleGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AutomationRuleGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AutomationRuleGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AutomationRuleGroupByOutputType[P]>
+            : GetScalarType<T[P], AutomationRuleGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AutomationRuleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    organizationId?: boolean
+    name?: boolean
+    enabled?: boolean
+    trigger?: boolean
+    conditions?: boolean
+    actionType?: boolean
+    actionConfig?: boolean
+    runCount?: boolean
+    lastRunAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["automationRule"]>
+
+  export type AutomationRuleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    organizationId?: boolean
+    name?: boolean
+    enabled?: boolean
+    trigger?: boolean
+    conditions?: boolean
+    actionType?: boolean
+    actionConfig?: boolean
+    runCount?: boolean
+    lastRunAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["automationRule"]>
+
+  export type AutomationRuleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    organizationId?: boolean
+    name?: boolean
+    enabled?: boolean
+    trigger?: boolean
+    conditions?: boolean
+    actionType?: boolean
+    actionConfig?: boolean
+    runCount?: boolean
+    lastRunAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["automationRule"]>
+
+  export type AutomationRuleSelectScalar = {
+    id?: boolean
+    organizationId?: boolean
+    name?: boolean
+    enabled?: boolean
+    trigger?: boolean
+    conditions?: boolean
+    actionType?: boolean
+    actionConfig?: boolean
+    runCount?: boolean
+    lastRunAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AutomationRuleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "organizationId" | "name" | "enabled" | "trigger" | "conditions" | "actionType" | "actionConfig" | "runCount" | "lastRunAt" | "createdAt" | "updatedAt", ExtArgs["result"]["automationRule"]>
+  export type AutomationRuleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }
+  export type AutomationRuleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }
+  export type AutomationRuleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }
+
+  export type $AutomationRulePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AutomationRule"
+    objects: {
+      organization: Prisma.$OrganizationPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      organizationId: string
+      name: string
+      enabled: boolean
+      trigger: string
+      conditions: Prisma.JsonValue | null
+      actionType: $Enums.AutomationActionType
+      actionConfig: Prisma.JsonValue
+      runCount: number
+      lastRunAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["automationRule"]>
+    composites: {}
+  }
+
+  type AutomationRuleGetPayload<S extends boolean | null | undefined | AutomationRuleDefaultArgs> = $Result.GetResult<Prisma.$AutomationRulePayload, S>
+
+  type AutomationRuleCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AutomationRuleFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AutomationRuleCountAggregateInputType | true
+    }
+
+  export interface AutomationRuleDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AutomationRule'], meta: { name: 'AutomationRule' } }
+    /**
+     * Find zero or one AutomationRule that matches the filter.
+     * @param {AutomationRuleFindUniqueArgs} args - Arguments to find a AutomationRule
+     * @example
+     * // Get one AutomationRule
+     * const automationRule = await prisma.automationRule.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AutomationRuleFindUniqueArgs>(args: SelectSubset<T, AutomationRuleFindUniqueArgs<ExtArgs>>): Prisma__AutomationRuleClient<$Result.GetResult<Prisma.$AutomationRulePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AutomationRule that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AutomationRuleFindUniqueOrThrowArgs} args - Arguments to find a AutomationRule
+     * @example
+     * // Get one AutomationRule
+     * const automationRule = await prisma.automationRule.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AutomationRuleFindUniqueOrThrowArgs>(args: SelectSubset<T, AutomationRuleFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AutomationRuleClient<$Result.GetResult<Prisma.$AutomationRulePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AutomationRule that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AutomationRuleFindFirstArgs} args - Arguments to find a AutomationRule
+     * @example
+     * // Get one AutomationRule
+     * const automationRule = await prisma.automationRule.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AutomationRuleFindFirstArgs>(args?: SelectSubset<T, AutomationRuleFindFirstArgs<ExtArgs>>): Prisma__AutomationRuleClient<$Result.GetResult<Prisma.$AutomationRulePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AutomationRule that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AutomationRuleFindFirstOrThrowArgs} args - Arguments to find a AutomationRule
+     * @example
+     * // Get one AutomationRule
+     * const automationRule = await prisma.automationRule.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AutomationRuleFindFirstOrThrowArgs>(args?: SelectSubset<T, AutomationRuleFindFirstOrThrowArgs<ExtArgs>>): Prisma__AutomationRuleClient<$Result.GetResult<Prisma.$AutomationRulePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AutomationRules that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AutomationRuleFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AutomationRules
+     * const automationRules = await prisma.automationRule.findMany()
+     * 
+     * // Get first 10 AutomationRules
+     * const automationRules = await prisma.automationRule.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const automationRuleWithIdOnly = await prisma.automationRule.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AutomationRuleFindManyArgs>(args?: SelectSubset<T, AutomationRuleFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AutomationRulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AutomationRule.
+     * @param {AutomationRuleCreateArgs} args - Arguments to create a AutomationRule.
+     * @example
+     * // Create one AutomationRule
+     * const AutomationRule = await prisma.automationRule.create({
+     *   data: {
+     *     // ... data to create a AutomationRule
+     *   }
+     * })
+     * 
+     */
+    create<T extends AutomationRuleCreateArgs>(args: SelectSubset<T, AutomationRuleCreateArgs<ExtArgs>>): Prisma__AutomationRuleClient<$Result.GetResult<Prisma.$AutomationRulePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AutomationRules.
+     * @param {AutomationRuleCreateManyArgs} args - Arguments to create many AutomationRules.
+     * @example
+     * // Create many AutomationRules
+     * const automationRule = await prisma.automationRule.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AutomationRuleCreateManyArgs>(args?: SelectSubset<T, AutomationRuleCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AutomationRules and returns the data saved in the database.
+     * @param {AutomationRuleCreateManyAndReturnArgs} args - Arguments to create many AutomationRules.
+     * @example
+     * // Create many AutomationRules
+     * const automationRule = await prisma.automationRule.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AutomationRules and only return the `id`
+     * const automationRuleWithIdOnly = await prisma.automationRule.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AutomationRuleCreateManyAndReturnArgs>(args?: SelectSubset<T, AutomationRuleCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AutomationRulePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AutomationRule.
+     * @param {AutomationRuleDeleteArgs} args - Arguments to delete one AutomationRule.
+     * @example
+     * // Delete one AutomationRule
+     * const AutomationRule = await prisma.automationRule.delete({
+     *   where: {
+     *     // ... filter to delete one AutomationRule
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AutomationRuleDeleteArgs>(args: SelectSubset<T, AutomationRuleDeleteArgs<ExtArgs>>): Prisma__AutomationRuleClient<$Result.GetResult<Prisma.$AutomationRulePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AutomationRule.
+     * @param {AutomationRuleUpdateArgs} args - Arguments to update one AutomationRule.
+     * @example
+     * // Update one AutomationRule
+     * const automationRule = await prisma.automationRule.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AutomationRuleUpdateArgs>(args: SelectSubset<T, AutomationRuleUpdateArgs<ExtArgs>>): Prisma__AutomationRuleClient<$Result.GetResult<Prisma.$AutomationRulePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AutomationRules.
+     * @param {AutomationRuleDeleteManyArgs} args - Arguments to filter AutomationRules to delete.
+     * @example
+     * // Delete a few AutomationRules
+     * const { count } = await prisma.automationRule.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AutomationRuleDeleteManyArgs>(args?: SelectSubset<T, AutomationRuleDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AutomationRules.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AutomationRuleUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AutomationRules
+     * const automationRule = await prisma.automationRule.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AutomationRuleUpdateManyArgs>(args: SelectSubset<T, AutomationRuleUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AutomationRules and returns the data updated in the database.
+     * @param {AutomationRuleUpdateManyAndReturnArgs} args - Arguments to update many AutomationRules.
+     * @example
+     * // Update many AutomationRules
+     * const automationRule = await prisma.automationRule.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AutomationRules and only return the `id`
+     * const automationRuleWithIdOnly = await prisma.automationRule.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AutomationRuleUpdateManyAndReturnArgs>(args: SelectSubset<T, AutomationRuleUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AutomationRulePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AutomationRule.
+     * @param {AutomationRuleUpsertArgs} args - Arguments to update or create a AutomationRule.
+     * @example
+     * // Update or create a AutomationRule
+     * const automationRule = await prisma.automationRule.upsert({
+     *   create: {
+     *     // ... data to create a AutomationRule
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AutomationRule we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AutomationRuleUpsertArgs>(args: SelectSubset<T, AutomationRuleUpsertArgs<ExtArgs>>): Prisma__AutomationRuleClient<$Result.GetResult<Prisma.$AutomationRulePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AutomationRules.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AutomationRuleCountArgs} args - Arguments to filter AutomationRules to count.
+     * @example
+     * // Count the number of AutomationRules
+     * const count = await prisma.automationRule.count({
+     *   where: {
+     *     // ... the filter for the AutomationRules we want to count
+     *   }
+     * })
+    **/
+    count<T extends AutomationRuleCountArgs>(
+      args?: Subset<T, AutomationRuleCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AutomationRuleCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AutomationRule.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AutomationRuleAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AutomationRuleAggregateArgs>(args: Subset<T, AutomationRuleAggregateArgs>): Prisma.PrismaPromise<GetAutomationRuleAggregateType<T>>
+
+    /**
+     * Group by AutomationRule.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AutomationRuleGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AutomationRuleGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AutomationRuleGroupByArgs['orderBy'] }
+        : { orderBy?: AutomationRuleGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AutomationRuleGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAutomationRuleGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AutomationRule model
+   */
+  readonly fields: AutomationRuleFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AutomationRule.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AutomationRuleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    organization<T extends OrganizationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrganizationDefaultArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AutomationRule model
+   */
+  interface AutomationRuleFieldRefs {
+    readonly id: FieldRef<"AutomationRule", 'String'>
+    readonly organizationId: FieldRef<"AutomationRule", 'String'>
+    readonly name: FieldRef<"AutomationRule", 'String'>
+    readonly enabled: FieldRef<"AutomationRule", 'Boolean'>
+    readonly trigger: FieldRef<"AutomationRule", 'String'>
+    readonly conditions: FieldRef<"AutomationRule", 'Json'>
+    readonly actionType: FieldRef<"AutomationRule", 'AutomationActionType'>
+    readonly actionConfig: FieldRef<"AutomationRule", 'Json'>
+    readonly runCount: FieldRef<"AutomationRule", 'Int'>
+    readonly lastRunAt: FieldRef<"AutomationRule", 'DateTime'>
+    readonly createdAt: FieldRef<"AutomationRule", 'DateTime'>
+    readonly updatedAt: FieldRef<"AutomationRule", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AutomationRule findUnique
+   */
+  export type AutomationRuleFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AutomationRule
+     */
+    select?: AutomationRuleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AutomationRule
+     */
+    omit?: AutomationRuleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AutomationRuleInclude<ExtArgs> | null
+    /**
+     * Filter, which AutomationRule to fetch.
+     */
+    where: AutomationRuleWhereUniqueInput
+  }
+
+  /**
+   * AutomationRule findUniqueOrThrow
+   */
+  export type AutomationRuleFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AutomationRule
+     */
+    select?: AutomationRuleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AutomationRule
+     */
+    omit?: AutomationRuleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AutomationRuleInclude<ExtArgs> | null
+    /**
+     * Filter, which AutomationRule to fetch.
+     */
+    where: AutomationRuleWhereUniqueInput
+  }
+
+  /**
+   * AutomationRule findFirst
+   */
+  export type AutomationRuleFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AutomationRule
+     */
+    select?: AutomationRuleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AutomationRule
+     */
+    omit?: AutomationRuleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AutomationRuleInclude<ExtArgs> | null
+    /**
+     * Filter, which AutomationRule to fetch.
+     */
+    where?: AutomationRuleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AutomationRules to fetch.
+     */
+    orderBy?: AutomationRuleOrderByWithRelationInput | AutomationRuleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AutomationRules.
+     */
+    cursor?: AutomationRuleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AutomationRules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AutomationRules.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AutomationRules.
+     */
+    distinct?: AutomationRuleScalarFieldEnum | AutomationRuleScalarFieldEnum[]
+  }
+
+  /**
+   * AutomationRule findFirstOrThrow
+   */
+  export type AutomationRuleFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AutomationRule
+     */
+    select?: AutomationRuleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AutomationRule
+     */
+    omit?: AutomationRuleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AutomationRuleInclude<ExtArgs> | null
+    /**
+     * Filter, which AutomationRule to fetch.
+     */
+    where?: AutomationRuleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AutomationRules to fetch.
+     */
+    orderBy?: AutomationRuleOrderByWithRelationInput | AutomationRuleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AutomationRules.
+     */
+    cursor?: AutomationRuleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AutomationRules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AutomationRules.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AutomationRules.
+     */
+    distinct?: AutomationRuleScalarFieldEnum | AutomationRuleScalarFieldEnum[]
+  }
+
+  /**
+   * AutomationRule findMany
+   */
+  export type AutomationRuleFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AutomationRule
+     */
+    select?: AutomationRuleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AutomationRule
+     */
+    omit?: AutomationRuleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AutomationRuleInclude<ExtArgs> | null
+    /**
+     * Filter, which AutomationRules to fetch.
+     */
+    where?: AutomationRuleWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AutomationRules to fetch.
+     */
+    orderBy?: AutomationRuleOrderByWithRelationInput | AutomationRuleOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AutomationRules.
+     */
+    cursor?: AutomationRuleWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AutomationRules from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AutomationRules.
+     */
+    skip?: number
+    distinct?: AutomationRuleScalarFieldEnum | AutomationRuleScalarFieldEnum[]
+  }
+
+  /**
+   * AutomationRule create
+   */
+  export type AutomationRuleCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AutomationRule
+     */
+    select?: AutomationRuleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AutomationRule
+     */
+    omit?: AutomationRuleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AutomationRuleInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AutomationRule.
+     */
+    data: XOR<AutomationRuleCreateInput, AutomationRuleUncheckedCreateInput>
+  }
+
+  /**
+   * AutomationRule createMany
+   */
+  export type AutomationRuleCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AutomationRules.
+     */
+    data: AutomationRuleCreateManyInput | AutomationRuleCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AutomationRule createManyAndReturn
+   */
+  export type AutomationRuleCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AutomationRule
+     */
+    select?: AutomationRuleSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AutomationRule
+     */
+    omit?: AutomationRuleOmit<ExtArgs> | null
+    /**
+     * The data used to create many AutomationRules.
+     */
+    data: AutomationRuleCreateManyInput | AutomationRuleCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AutomationRuleIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AutomationRule update
+   */
+  export type AutomationRuleUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AutomationRule
+     */
+    select?: AutomationRuleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AutomationRule
+     */
+    omit?: AutomationRuleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AutomationRuleInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AutomationRule.
+     */
+    data: XOR<AutomationRuleUpdateInput, AutomationRuleUncheckedUpdateInput>
+    /**
+     * Choose, which AutomationRule to update.
+     */
+    where: AutomationRuleWhereUniqueInput
+  }
+
+  /**
+   * AutomationRule updateMany
+   */
+  export type AutomationRuleUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AutomationRules.
+     */
+    data: XOR<AutomationRuleUpdateManyMutationInput, AutomationRuleUncheckedUpdateManyInput>
+    /**
+     * Filter which AutomationRules to update
+     */
+    where?: AutomationRuleWhereInput
+    /**
+     * Limit how many AutomationRules to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AutomationRule updateManyAndReturn
+   */
+  export type AutomationRuleUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AutomationRule
+     */
+    select?: AutomationRuleSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AutomationRule
+     */
+    omit?: AutomationRuleOmit<ExtArgs> | null
+    /**
+     * The data used to update AutomationRules.
+     */
+    data: XOR<AutomationRuleUpdateManyMutationInput, AutomationRuleUncheckedUpdateManyInput>
+    /**
+     * Filter which AutomationRules to update
+     */
+    where?: AutomationRuleWhereInput
+    /**
+     * Limit how many AutomationRules to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AutomationRuleIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AutomationRule upsert
+   */
+  export type AutomationRuleUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AutomationRule
+     */
+    select?: AutomationRuleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AutomationRule
+     */
+    omit?: AutomationRuleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AutomationRuleInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AutomationRule to update in case it exists.
+     */
+    where: AutomationRuleWhereUniqueInput
+    /**
+     * In case the AutomationRule found by the `where` argument doesn't exist, create a new AutomationRule with this data.
+     */
+    create: XOR<AutomationRuleCreateInput, AutomationRuleUncheckedCreateInput>
+    /**
+     * In case the AutomationRule was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AutomationRuleUpdateInput, AutomationRuleUncheckedUpdateInput>
+  }
+
+  /**
+   * AutomationRule delete
+   */
+  export type AutomationRuleDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AutomationRule
+     */
+    select?: AutomationRuleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AutomationRule
+     */
+    omit?: AutomationRuleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AutomationRuleInclude<ExtArgs> | null
+    /**
+     * Filter which AutomationRule to delete.
+     */
+    where: AutomationRuleWhereUniqueInput
+  }
+
+  /**
+   * AutomationRule deleteMany
+   */
+  export type AutomationRuleDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AutomationRules to delete
+     */
+    where?: AutomationRuleWhereInput
+    /**
+     * Limit how many AutomationRules to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AutomationRule without action
+   */
+  export type AutomationRuleDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AutomationRule
+     */
+    select?: AutomationRuleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AutomationRule
+     */
+    omit?: AutomationRuleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AutomationRuleInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Message
+   */
+
+  export type AggregateMessage = {
+    _count: MessageCountAggregateOutputType | null
+    _min: MessageMinAggregateOutputType | null
+    _max: MessageMaxAggregateOutputType | null
+  }
+
+  export type MessageMinAggregateOutputType = {
+    id: string | null
+    organizationId: string | null
+    contactId: string | null
+    channel: $Enums.MessageChannel | null
+    toAddress: string | null
+    subject: string | null
+    body: string | null
+    status: $Enums.MessageStatus | null
+    error: string | null
+    source: string | null
+    sentByUserId: string | null
+    createdAt: Date | null
+  }
+
+  export type MessageMaxAggregateOutputType = {
+    id: string | null
+    organizationId: string | null
+    contactId: string | null
+    channel: $Enums.MessageChannel | null
+    toAddress: string | null
+    subject: string | null
+    body: string | null
+    status: $Enums.MessageStatus | null
+    error: string | null
+    source: string | null
+    sentByUserId: string | null
+    createdAt: Date | null
+  }
+
+  export type MessageCountAggregateOutputType = {
+    id: number
+    organizationId: number
+    contactId: number
+    channel: number
+    toAddress: number
+    subject: number
+    body: number
+    status: number
+    error: number
+    source: number
+    sentByUserId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type MessageMinAggregateInputType = {
+    id?: true
+    organizationId?: true
+    contactId?: true
+    channel?: true
+    toAddress?: true
+    subject?: true
+    body?: true
+    status?: true
+    error?: true
+    source?: true
+    sentByUserId?: true
+    createdAt?: true
+  }
+
+  export type MessageMaxAggregateInputType = {
+    id?: true
+    organizationId?: true
+    contactId?: true
+    channel?: true
+    toAddress?: true
+    subject?: true
+    body?: true
+    status?: true
+    error?: true
+    source?: true
+    sentByUserId?: true
+    createdAt?: true
+  }
+
+  export type MessageCountAggregateInputType = {
+    id?: true
+    organizationId?: true
+    contactId?: true
+    channel?: true
+    toAddress?: true
+    subject?: true
+    body?: true
+    status?: true
+    error?: true
+    source?: true
+    sentByUserId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type MessageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Message to aggregate.
+     */
+    where?: MessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Messages to fetch.
+     */
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Messages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Messages
+    **/
+    _count?: true | MessageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MessageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MessageMaxAggregateInputType
+  }
+
+  export type GetMessageAggregateType<T extends MessageAggregateArgs> = {
+        [P in keyof T & keyof AggregateMessage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMessage[P]>
+      : GetScalarType<T[P], AggregateMessage[P]>
+  }
+
+
+
+
+  export type MessageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MessageWhereInput
+    orderBy?: MessageOrderByWithAggregationInput | MessageOrderByWithAggregationInput[]
+    by: MessageScalarFieldEnum[] | MessageScalarFieldEnum
+    having?: MessageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MessageCountAggregateInputType | true
+    _min?: MessageMinAggregateInputType
+    _max?: MessageMaxAggregateInputType
+  }
+
+  export type MessageGroupByOutputType = {
+    id: string
+    organizationId: string
+    contactId: string | null
+    channel: $Enums.MessageChannel
+    toAddress: string
+    subject: string | null
+    body: string
+    status: $Enums.MessageStatus
+    error: string | null
+    source: string
+    sentByUserId: string | null
+    createdAt: Date
+    _count: MessageCountAggregateOutputType | null
+    _min: MessageMinAggregateOutputType | null
+    _max: MessageMaxAggregateOutputType | null
+  }
+
+  type GetMessageGroupByPayload<T extends MessageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MessageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MessageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MessageGroupByOutputType[P]>
+            : GetScalarType<T[P], MessageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MessageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    organizationId?: boolean
+    contactId?: boolean
+    channel?: boolean
+    toAddress?: boolean
+    subject?: boolean
+    body?: boolean
+    status?: boolean
+    error?: boolean
+    source?: boolean
+    sentByUserId?: boolean
+    createdAt?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    contact?: boolean | Message$contactArgs<ExtArgs>
+  }, ExtArgs["result"]["message"]>
+
+  export type MessageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    organizationId?: boolean
+    contactId?: boolean
+    channel?: boolean
+    toAddress?: boolean
+    subject?: boolean
+    body?: boolean
+    status?: boolean
+    error?: boolean
+    source?: boolean
+    sentByUserId?: boolean
+    createdAt?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    contact?: boolean | Message$contactArgs<ExtArgs>
+  }, ExtArgs["result"]["message"]>
+
+  export type MessageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    organizationId?: boolean
+    contactId?: boolean
+    channel?: boolean
+    toAddress?: boolean
+    subject?: boolean
+    body?: boolean
+    status?: boolean
+    error?: boolean
+    source?: boolean
+    sentByUserId?: boolean
+    createdAt?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    contact?: boolean | Message$contactArgs<ExtArgs>
+  }, ExtArgs["result"]["message"]>
+
+  export type MessageSelectScalar = {
+    id?: boolean
+    organizationId?: boolean
+    contactId?: boolean
+    channel?: boolean
+    toAddress?: boolean
+    subject?: boolean
+    body?: boolean
+    status?: boolean
+    error?: boolean
+    source?: boolean
+    sentByUserId?: boolean
+    createdAt?: boolean
+  }
+
+  export type MessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "organizationId" | "contactId" | "channel" | "toAddress" | "subject" | "body" | "status" | "error" | "source" | "sentByUserId" | "createdAt", ExtArgs["result"]["message"]>
+  export type MessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    contact?: boolean | Message$contactArgs<ExtArgs>
+  }
+  export type MessageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    contact?: boolean | Message$contactArgs<ExtArgs>
+  }
+  export type MessageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    contact?: boolean | Message$contactArgs<ExtArgs>
+  }
+
+  export type $MessagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Message"
+    objects: {
+      organization: Prisma.$OrganizationPayload<ExtArgs>
+      contact: Prisma.$ContactPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      organizationId: string
+      contactId: string | null
+      channel: $Enums.MessageChannel
+      toAddress: string
+      subject: string | null
+      body: string
+      status: $Enums.MessageStatus
+      error: string | null
+      source: string
+      sentByUserId: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["message"]>
+    composites: {}
+  }
+
+  type MessageGetPayload<S extends boolean | null | undefined | MessageDefaultArgs> = $Result.GetResult<Prisma.$MessagePayload, S>
+
+  type MessageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MessageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MessageCountAggregateInputType | true
+    }
+
+  export interface MessageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Message'], meta: { name: 'Message' } }
+    /**
+     * Find zero or one Message that matches the filter.
+     * @param {MessageFindUniqueArgs} args - Arguments to find a Message
+     * @example
+     * // Get one Message
+     * const message = await prisma.message.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MessageFindUniqueArgs>(args: SelectSubset<T, MessageFindUniqueArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Message that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MessageFindUniqueOrThrowArgs} args - Arguments to find a Message
+     * @example
+     * // Get one Message
+     * const message = await prisma.message.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MessageFindUniqueOrThrowArgs>(args: SelectSubset<T, MessageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Message that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageFindFirstArgs} args - Arguments to find a Message
+     * @example
+     * // Get one Message
+     * const message = await prisma.message.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MessageFindFirstArgs>(args?: SelectSubset<T, MessageFindFirstArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Message that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageFindFirstOrThrowArgs} args - Arguments to find a Message
+     * @example
+     * // Get one Message
+     * const message = await prisma.message.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MessageFindFirstOrThrowArgs>(args?: SelectSubset<T, MessageFindFirstOrThrowArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Messages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Messages
+     * const messages = await prisma.message.findMany()
+     * 
+     * // Get first 10 Messages
+     * const messages = await prisma.message.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const messageWithIdOnly = await prisma.message.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MessageFindManyArgs>(args?: SelectSubset<T, MessageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Message.
+     * @param {MessageCreateArgs} args - Arguments to create a Message.
+     * @example
+     * // Create one Message
+     * const Message = await prisma.message.create({
+     *   data: {
+     *     // ... data to create a Message
+     *   }
+     * })
+     * 
+     */
+    create<T extends MessageCreateArgs>(args: SelectSubset<T, MessageCreateArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Messages.
+     * @param {MessageCreateManyArgs} args - Arguments to create many Messages.
+     * @example
+     * // Create many Messages
+     * const message = await prisma.message.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MessageCreateManyArgs>(args?: SelectSubset<T, MessageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Messages and returns the data saved in the database.
+     * @param {MessageCreateManyAndReturnArgs} args - Arguments to create many Messages.
+     * @example
+     * // Create many Messages
+     * const message = await prisma.message.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Messages and only return the `id`
+     * const messageWithIdOnly = await prisma.message.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MessageCreateManyAndReturnArgs>(args?: SelectSubset<T, MessageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Message.
+     * @param {MessageDeleteArgs} args - Arguments to delete one Message.
+     * @example
+     * // Delete one Message
+     * const Message = await prisma.message.delete({
+     *   where: {
+     *     // ... filter to delete one Message
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MessageDeleteArgs>(args: SelectSubset<T, MessageDeleteArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Message.
+     * @param {MessageUpdateArgs} args - Arguments to update one Message.
+     * @example
+     * // Update one Message
+     * const message = await prisma.message.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MessageUpdateArgs>(args: SelectSubset<T, MessageUpdateArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Messages.
+     * @param {MessageDeleteManyArgs} args - Arguments to filter Messages to delete.
+     * @example
+     * // Delete a few Messages
+     * const { count } = await prisma.message.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MessageDeleteManyArgs>(args?: SelectSubset<T, MessageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Messages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Messages
+     * const message = await prisma.message.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MessageUpdateManyArgs>(args: SelectSubset<T, MessageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Messages and returns the data updated in the database.
+     * @param {MessageUpdateManyAndReturnArgs} args - Arguments to update many Messages.
+     * @example
+     * // Update many Messages
+     * const message = await prisma.message.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Messages and only return the `id`
+     * const messageWithIdOnly = await prisma.message.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MessageUpdateManyAndReturnArgs>(args: SelectSubset<T, MessageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Message.
+     * @param {MessageUpsertArgs} args - Arguments to update or create a Message.
+     * @example
+     * // Update or create a Message
+     * const message = await prisma.message.upsert({
+     *   create: {
+     *     // ... data to create a Message
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Message we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MessageUpsertArgs>(args: SelectSubset<T, MessageUpsertArgs<ExtArgs>>): Prisma__MessageClient<$Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Messages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageCountArgs} args - Arguments to filter Messages to count.
+     * @example
+     * // Count the number of Messages
+     * const count = await prisma.message.count({
+     *   where: {
+     *     // ... the filter for the Messages we want to count
+     *   }
+     * })
+    **/
+    count<T extends MessageCountArgs>(
+      args?: Subset<T, MessageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MessageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Message.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MessageAggregateArgs>(args: Subset<T, MessageAggregateArgs>): Prisma.PrismaPromise<GetMessageAggregateType<T>>
+
+    /**
+     * Group by Message.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MessageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MessageGroupByArgs['orderBy'] }
+        : { orderBy?: MessageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MessageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMessageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Message model
+   */
+  readonly fields: MessageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Message.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MessageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    organization<T extends OrganizationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrganizationDefaultArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    contact<T extends Message$contactArgs<ExtArgs> = {}>(args?: Subset<T, Message$contactArgs<ExtArgs>>): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Message model
+   */
+  interface MessageFieldRefs {
+    readonly id: FieldRef<"Message", 'String'>
+    readonly organizationId: FieldRef<"Message", 'String'>
+    readonly contactId: FieldRef<"Message", 'String'>
+    readonly channel: FieldRef<"Message", 'MessageChannel'>
+    readonly toAddress: FieldRef<"Message", 'String'>
+    readonly subject: FieldRef<"Message", 'String'>
+    readonly body: FieldRef<"Message", 'String'>
+    readonly status: FieldRef<"Message", 'MessageStatus'>
+    readonly error: FieldRef<"Message", 'String'>
+    readonly source: FieldRef<"Message", 'String'>
+    readonly sentByUserId: FieldRef<"Message", 'String'>
+    readonly createdAt: FieldRef<"Message", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Message findUnique
+   */
+  export type MessageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Message to fetch.
+     */
+    where: MessageWhereUniqueInput
+  }
+
+  /**
+   * Message findUniqueOrThrow
+   */
+  export type MessageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Message to fetch.
+     */
+    where: MessageWhereUniqueInput
+  }
+
+  /**
+   * Message findFirst
+   */
+  export type MessageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Message to fetch.
+     */
+    where?: MessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Messages to fetch.
+     */
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Messages.
+     */
+    cursor?: MessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Messages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Messages.
+     */
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Message findFirstOrThrow
+   */
+  export type MessageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Message to fetch.
+     */
+    where?: MessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Messages to fetch.
+     */
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Messages.
+     */
+    cursor?: MessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Messages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Messages.
+     */
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Message findMany
+   */
+  export type MessageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter, which Messages to fetch.
+     */
+    where?: MessageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Messages to fetch.
+     */
+    orderBy?: MessageOrderByWithRelationInput | MessageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Messages.
+     */
+    cursor?: MessageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Messages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Messages.
+     */
+    skip?: number
+    distinct?: MessageScalarFieldEnum | MessageScalarFieldEnum[]
+  }
+
+  /**
+   * Message create
+   */
+  export type MessageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Message.
+     */
+    data: XOR<MessageCreateInput, MessageUncheckedCreateInput>
+  }
+
+  /**
+   * Message createMany
+   */
+  export type MessageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Messages.
+     */
+    data: MessageCreateManyInput | MessageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Message createManyAndReturn
+   */
+  export type MessageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * The data used to create many Messages.
+     */
+    data: MessageCreateManyInput | MessageCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Message update
+   */
+  export type MessageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Message.
+     */
+    data: XOR<MessageUpdateInput, MessageUncheckedUpdateInput>
+    /**
+     * Choose, which Message to update.
+     */
+    where: MessageWhereUniqueInput
+  }
+
+  /**
+   * Message updateMany
+   */
+  export type MessageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Messages.
+     */
+    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyInput>
+    /**
+     * Filter which Messages to update
+     */
+    where?: MessageWhereInput
+    /**
+     * Limit how many Messages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Message updateManyAndReturn
+   */
+  export type MessageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * The data used to update Messages.
+     */
+    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyInput>
+    /**
+     * Filter which Messages to update
+     */
+    where?: MessageWhereInput
+    /**
+     * Limit how many Messages to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Message upsert
+   */
+  export type MessageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Message to update in case it exists.
+     */
+    where: MessageWhereUniqueInput
+    /**
+     * In case the Message found by the `where` argument doesn't exist, create a new Message with this data.
+     */
+    create: XOR<MessageCreateInput, MessageUncheckedCreateInput>
+    /**
+     * In case the Message was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MessageUpdateInput, MessageUncheckedUpdateInput>
+  }
+
+  /**
+   * Message delete
+   */
+  export type MessageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+    /**
+     * Filter which Message to delete.
+     */
+    where: MessageWhereUniqueInput
+  }
+
+  /**
+   * Message deleteMany
+   */
+  export type MessageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Messages to delete
+     */
+    where?: MessageWhereInput
+    /**
+     * Limit how many Messages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Message.contact
+   */
+  export type Message$contactArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contact
+     */
+    select?: ContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contact
+     */
+    omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+    where?: ContactWhereInput
+  }
+
+  /**
+   * Message without action
+   */
+  export type MessageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Message
+     */
+    select?: MessageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Message
+     */
+    omit?: MessageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MessageTemplate
+   */
+
+  export type AggregateMessageTemplate = {
+    _count: MessageTemplateCountAggregateOutputType | null
+    _min: MessageTemplateMinAggregateOutputType | null
+    _max: MessageTemplateMaxAggregateOutputType | null
+  }
+
+  export type MessageTemplateMinAggregateOutputType = {
+    id: string | null
+    organizationId: string | null
+    name: string | null
+    channel: $Enums.MessageChannel | null
+    subject: string | null
+    body: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MessageTemplateMaxAggregateOutputType = {
+    id: string | null
+    organizationId: string | null
+    name: string | null
+    channel: $Enums.MessageChannel | null
+    subject: string | null
+    body: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MessageTemplateCountAggregateOutputType = {
+    id: number
+    organizationId: number
+    name: number
+    channel: number
+    subject: number
+    body: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type MessageTemplateMinAggregateInputType = {
+    id?: true
+    organizationId?: true
+    name?: true
+    channel?: true
+    subject?: true
+    body?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MessageTemplateMaxAggregateInputType = {
+    id?: true
+    organizationId?: true
+    name?: true
+    channel?: true
+    subject?: true
+    body?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MessageTemplateCountAggregateInputType = {
+    id?: true
+    organizationId?: true
+    name?: true
+    channel?: true
+    subject?: true
+    body?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type MessageTemplateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MessageTemplate to aggregate.
+     */
+    where?: MessageTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MessageTemplates to fetch.
+     */
+    orderBy?: MessageTemplateOrderByWithRelationInput | MessageTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MessageTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MessageTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MessageTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MessageTemplates
+    **/
+    _count?: true | MessageTemplateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MessageTemplateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MessageTemplateMaxAggregateInputType
+  }
+
+  export type GetMessageTemplateAggregateType<T extends MessageTemplateAggregateArgs> = {
+        [P in keyof T & keyof AggregateMessageTemplate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMessageTemplate[P]>
+      : GetScalarType<T[P], AggregateMessageTemplate[P]>
+  }
+
+
+
+
+  export type MessageTemplateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MessageTemplateWhereInput
+    orderBy?: MessageTemplateOrderByWithAggregationInput | MessageTemplateOrderByWithAggregationInput[]
+    by: MessageTemplateScalarFieldEnum[] | MessageTemplateScalarFieldEnum
+    having?: MessageTemplateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MessageTemplateCountAggregateInputType | true
+    _min?: MessageTemplateMinAggregateInputType
+    _max?: MessageTemplateMaxAggregateInputType
+  }
+
+  export type MessageTemplateGroupByOutputType = {
+    id: string
+    organizationId: string
+    name: string
+    channel: $Enums.MessageChannel
+    subject: string | null
+    body: string
+    createdAt: Date
+    updatedAt: Date
+    _count: MessageTemplateCountAggregateOutputType | null
+    _min: MessageTemplateMinAggregateOutputType | null
+    _max: MessageTemplateMaxAggregateOutputType | null
+  }
+
+  type GetMessageTemplateGroupByPayload<T extends MessageTemplateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MessageTemplateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MessageTemplateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MessageTemplateGroupByOutputType[P]>
+            : GetScalarType<T[P], MessageTemplateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MessageTemplateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    organizationId?: boolean
+    name?: boolean
+    channel?: boolean
+    subject?: boolean
+    body?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["messageTemplate"]>
+
+  export type MessageTemplateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    organizationId?: boolean
+    name?: boolean
+    channel?: boolean
+    subject?: boolean
+    body?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["messageTemplate"]>
+
+  export type MessageTemplateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    organizationId?: boolean
+    name?: boolean
+    channel?: boolean
+    subject?: boolean
+    body?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["messageTemplate"]>
+
+  export type MessageTemplateSelectScalar = {
+    id?: boolean
+    organizationId?: boolean
+    name?: boolean
+    channel?: boolean
+    subject?: boolean
+    body?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type MessageTemplateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "organizationId" | "name" | "channel" | "subject" | "body" | "createdAt" | "updatedAt", ExtArgs["result"]["messageTemplate"]>
+  export type MessageTemplateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }
+  export type MessageTemplateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }
+  export type MessageTemplateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+  }
+
+  export type $MessageTemplatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MessageTemplate"
+    objects: {
+      organization: Prisma.$OrganizationPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      organizationId: string
+      name: string
+      channel: $Enums.MessageChannel
+      subject: string | null
+      body: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["messageTemplate"]>
+    composites: {}
+  }
+
+  type MessageTemplateGetPayload<S extends boolean | null | undefined | MessageTemplateDefaultArgs> = $Result.GetResult<Prisma.$MessageTemplatePayload, S>
+
+  type MessageTemplateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MessageTemplateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MessageTemplateCountAggregateInputType | true
+    }
+
+  export interface MessageTemplateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MessageTemplate'], meta: { name: 'MessageTemplate' } }
+    /**
+     * Find zero or one MessageTemplate that matches the filter.
+     * @param {MessageTemplateFindUniqueArgs} args - Arguments to find a MessageTemplate
+     * @example
+     * // Get one MessageTemplate
+     * const messageTemplate = await prisma.messageTemplate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MessageTemplateFindUniqueArgs>(args: SelectSubset<T, MessageTemplateFindUniqueArgs<ExtArgs>>): Prisma__MessageTemplateClient<$Result.GetResult<Prisma.$MessageTemplatePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MessageTemplate that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MessageTemplateFindUniqueOrThrowArgs} args - Arguments to find a MessageTemplate
+     * @example
+     * // Get one MessageTemplate
+     * const messageTemplate = await prisma.messageTemplate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MessageTemplateFindUniqueOrThrowArgs>(args: SelectSubset<T, MessageTemplateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MessageTemplateClient<$Result.GetResult<Prisma.$MessageTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MessageTemplate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageTemplateFindFirstArgs} args - Arguments to find a MessageTemplate
+     * @example
+     * // Get one MessageTemplate
+     * const messageTemplate = await prisma.messageTemplate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MessageTemplateFindFirstArgs>(args?: SelectSubset<T, MessageTemplateFindFirstArgs<ExtArgs>>): Prisma__MessageTemplateClient<$Result.GetResult<Prisma.$MessageTemplatePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MessageTemplate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageTemplateFindFirstOrThrowArgs} args - Arguments to find a MessageTemplate
+     * @example
+     * // Get one MessageTemplate
+     * const messageTemplate = await prisma.messageTemplate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MessageTemplateFindFirstOrThrowArgs>(args?: SelectSubset<T, MessageTemplateFindFirstOrThrowArgs<ExtArgs>>): Prisma__MessageTemplateClient<$Result.GetResult<Prisma.$MessageTemplatePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MessageTemplates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageTemplateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MessageTemplates
+     * const messageTemplates = await prisma.messageTemplate.findMany()
+     * 
+     * // Get first 10 MessageTemplates
+     * const messageTemplates = await prisma.messageTemplate.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const messageTemplateWithIdOnly = await prisma.messageTemplate.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MessageTemplateFindManyArgs>(args?: SelectSubset<T, MessageTemplateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessageTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MessageTemplate.
+     * @param {MessageTemplateCreateArgs} args - Arguments to create a MessageTemplate.
+     * @example
+     * // Create one MessageTemplate
+     * const MessageTemplate = await prisma.messageTemplate.create({
+     *   data: {
+     *     // ... data to create a MessageTemplate
+     *   }
+     * })
+     * 
+     */
+    create<T extends MessageTemplateCreateArgs>(args: SelectSubset<T, MessageTemplateCreateArgs<ExtArgs>>): Prisma__MessageTemplateClient<$Result.GetResult<Prisma.$MessageTemplatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MessageTemplates.
+     * @param {MessageTemplateCreateManyArgs} args - Arguments to create many MessageTemplates.
+     * @example
+     * // Create many MessageTemplates
+     * const messageTemplate = await prisma.messageTemplate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MessageTemplateCreateManyArgs>(args?: SelectSubset<T, MessageTemplateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MessageTemplates and returns the data saved in the database.
+     * @param {MessageTemplateCreateManyAndReturnArgs} args - Arguments to create many MessageTemplates.
+     * @example
+     * // Create many MessageTemplates
+     * const messageTemplate = await prisma.messageTemplate.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MessageTemplates and only return the `id`
+     * const messageTemplateWithIdOnly = await prisma.messageTemplate.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MessageTemplateCreateManyAndReturnArgs>(args?: SelectSubset<T, MessageTemplateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessageTemplatePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MessageTemplate.
+     * @param {MessageTemplateDeleteArgs} args - Arguments to delete one MessageTemplate.
+     * @example
+     * // Delete one MessageTemplate
+     * const MessageTemplate = await prisma.messageTemplate.delete({
+     *   where: {
+     *     // ... filter to delete one MessageTemplate
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MessageTemplateDeleteArgs>(args: SelectSubset<T, MessageTemplateDeleteArgs<ExtArgs>>): Prisma__MessageTemplateClient<$Result.GetResult<Prisma.$MessageTemplatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MessageTemplate.
+     * @param {MessageTemplateUpdateArgs} args - Arguments to update one MessageTemplate.
+     * @example
+     * // Update one MessageTemplate
+     * const messageTemplate = await prisma.messageTemplate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MessageTemplateUpdateArgs>(args: SelectSubset<T, MessageTemplateUpdateArgs<ExtArgs>>): Prisma__MessageTemplateClient<$Result.GetResult<Prisma.$MessageTemplatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MessageTemplates.
+     * @param {MessageTemplateDeleteManyArgs} args - Arguments to filter MessageTemplates to delete.
+     * @example
+     * // Delete a few MessageTemplates
+     * const { count } = await prisma.messageTemplate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MessageTemplateDeleteManyArgs>(args?: SelectSubset<T, MessageTemplateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MessageTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageTemplateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MessageTemplates
+     * const messageTemplate = await prisma.messageTemplate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MessageTemplateUpdateManyArgs>(args: SelectSubset<T, MessageTemplateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MessageTemplates and returns the data updated in the database.
+     * @param {MessageTemplateUpdateManyAndReturnArgs} args - Arguments to update many MessageTemplates.
+     * @example
+     * // Update many MessageTemplates
+     * const messageTemplate = await prisma.messageTemplate.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MessageTemplates and only return the `id`
+     * const messageTemplateWithIdOnly = await prisma.messageTemplate.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MessageTemplateUpdateManyAndReturnArgs>(args: SelectSubset<T, MessageTemplateUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessageTemplatePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MessageTemplate.
+     * @param {MessageTemplateUpsertArgs} args - Arguments to update or create a MessageTemplate.
+     * @example
+     * // Update or create a MessageTemplate
+     * const messageTemplate = await prisma.messageTemplate.upsert({
+     *   create: {
+     *     // ... data to create a MessageTemplate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MessageTemplate we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MessageTemplateUpsertArgs>(args: SelectSubset<T, MessageTemplateUpsertArgs<ExtArgs>>): Prisma__MessageTemplateClient<$Result.GetResult<Prisma.$MessageTemplatePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MessageTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageTemplateCountArgs} args - Arguments to filter MessageTemplates to count.
+     * @example
+     * // Count the number of MessageTemplates
+     * const count = await prisma.messageTemplate.count({
+     *   where: {
+     *     // ... the filter for the MessageTemplates we want to count
+     *   }
+     * })
+    **/
+    count<T extends MessageTemplateCountArgs>(
+      args?: Subset<T, MessageTemplateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MessageTemplateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MessageTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageTemplateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MessageTemplateAggregateArgs>(args: Subset<T, MessageTemplateAggregateArgs>): Prisma.PrismaPromise<GetMessageTemplateAggregateType<T>>
+
+    /**
+     * Group by MessageTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MessageTemplateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MessageTemplateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MessageTemplateGroupByArgs['orderBy'] }
+        : { orderBy?: MessageTemplateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MessageTemplateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMessageTemplateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MessageTemplate model
+   */
+  readonly fields: MessageTemplateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MessageTemplate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MessageTemplateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    organization<T extends OrganizationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrganizationDefaultArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MessageTemplate model
+   */
+  interface MessageTemplateFieldRefs {
+    readonly id: FieldRef<"MessageTemplate", 'String'>
+    readonly organizationId: FieldRef<"MessageTemplate", 'String'>
+    readonly name: FieldRef<"MessageTemplate", 'String'>
+    readonly channel: FieldRef<"MessageTemplate", 'MessageChannel'>
+    readonly subject: FieldRef<"MessageTemplate", 'String'>
+    readonly body: FieldRef<"MessageTemplate", 'String'>
+    readonly createdAt: FieldRef<"MessageTemplate", 'DateTime'>
+    readonly updatedAt: FieldRef<"MessageTemplate", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MessageTemplate findUnique
+   */
+  export type MessageTemplateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MessageTemplate
+     */
+    select?: MessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MessageTemplate
+     */
+    omit?: MessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which MessageTemplate to fetch.
+     */
+    where: MessageTemplateWhereUniqueInput
+  }
+
+  /**
+   * MessageTemplate findUniqueOrThrow
+   */
+  export type MessageTemplateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MessageTemplate
+     */
+    select?: MessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MessageTemplate
+     */
+    omit?: MessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which MessageTemplate to fetch.
+     */
+    where: MessageTemplateWhereUniqueInput
+  }
+
+  /**
+   * MessageTemplate findFirst
+   */
+  export type MessageTemplateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MessageTemplate
+     */
+    select?: MessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MessageTemplate
+     */
+    omit?: MessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which MessageTemplate to fetch.
+     */
+    where?: MessageTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MessageTemplates to fetch.
+     */
+    orderBy?: MessageTemplateOrderByWithRelationInput | MessageTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MessageTemplates.
+     */
+    cursor?: MessageTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MessageTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MessageTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MessageTemplates.
+     */
+    distinct?: MessageTemplateScalarFieldEnum | MessageTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * MessageTemplate findFirstOrThrow
+   */
+  export type MessageTemplateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MessageTemplate
+     */
+    select?: MessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MessageTemplate
+     */
+    omit?: MessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which MessageTemplate to fetch.
+     */
+    where?: MessageTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MessageTemplates to fetch.
+     */
+    orderBy?: MessageTemplateOrderByWithRelationInput | MessageTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MessageTemplates.
+     */
+    cursor?: MessageTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MessageTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MessageTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MessageTemplates.
+     */
+    distinct?: MessageTemplateScalarFieldEnum | MessageTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * MessageTemplate findMany
+   */
+  export type MessageTemplateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MessageTemplate
+     */
+    select?: MessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MessageTemplate
+     */
+    omit?: MessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageTemplateInclude<ExtArgs> | null
+    /**
+     * Filter, which MessageTemplates to fetch.
+     */
+    where?: MessageTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MessageTemplates to fetch.
+     */
+    orderBy?: MessageTemplateOrderByWithRelationInput | MessageTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MessageTemplates.
+     */
+    cursor?: MessageTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MessageTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MessageTemplates.
+     */
+    skip?: number
+    distinct?: MessageTemplateScalarFieldEnum | MessageTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * MessageTemplate create
+   */
+  export type MessageTemplateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MessageTemplate
+     */
+    select?: MessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MessageTemplate
+     */
+    omit?: MessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageTemplateInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MessageTemplate.
+     */
+    data: XOR<MessageTemplateCreateInput, MessageTemplateUncheckedCreateInput>
+  }
+
+  /**
+   * MessageTemplate createMany
+   */
+  export type MessageTemplateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MessageTemplates.
+     */
+    data: MessageTemplateCreateManyInput | MessageTemplateCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MessageTemplate createManyAndReturn
+   */
+  export type MessageTemplateCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MessageTemplate
+     */
+    select?: MessageTemplateSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MessageTemplate
+     */
+    omit?: MessageTemplateOmit<ExtArgs> | null
+    /**
+     * The data used to create many MessageTemplates.
+     */
+    data: MessageTemplateCreateManyInput | MessageTemplateCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageTemplateIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MessageTemplate update
+   */
+  export type MessageTemplateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MessageTemplate
+     */
+    select?: MessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MessageTemplate
+     */
+    omit?: MessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageTemplateInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MessageTemplate.
+     */
+    data: XOR<MessageTemplateUpdateInput, MessageTemplateUncheckedUpdateInput>
+    /**
+     * Choose, which MessageTemplate to update.
+     */
+    where: MessageTemplateWhereUniqueInput
+  }
+
+  /**
+   * MessageTemplate updateMany
+   */
+  export type MessageTemplateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MessageTemplates.
+     */
+    data: XOR<MessageTemplateUpdateManyMutationInput, MessageTemplateUncheckedUpdateManyInput>
+    /**
+     * Filter which MessageTemplates to update
+     */
+    where?: MessageTemplateWhereInput
+    /**
+     * Limit how many MessageTemplates to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MessageTemplate updateManyAndReturn
+   */
+  export type MessageTemplateUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MessageTemplate
+     */
+    select?: MessageTemplateSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MessageTemplate
+     */
+    omit?: MessageTemplateOmit<ExtArgs> | null
+    /**
+     * The data used to update MessageTemplates.
+     */
+    data: XOR<MessageTemplateUpdateManyMutationInput, MessageTemplateUncheckedUpdateManyInput>
+    /**
+     * Filter which MessageTemplates to update
+     */
+    where?: MessageTemplateWhereInput
+    /**
+     * Limit how many MessageTemplates to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageTemplateIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MessageTemplate upsert
+   */
+  export type MessageTemplateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MessageTemplate
+     */
+    select?: MessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MessageTemplate
+     */
+    omit?: MessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageTemplateInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MessageTemplate to update in case it exists.
+     */
+    where: MessageTemplateWhereUniqueInput
+    /**
+     * In case the MessageTemplate found by the `where` argument doesn't exist, create a new MessageTemplate with this data.
+     */
+    create: XOR<MessageTemplateCreateInput, MessageTemplateUncheckedCreateInput>
+    /**
+     * In case the MessageTemplate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MessageTemplateUpdateInput, MessageTemplateUncheckedUpdateInput>
+  }
+
+  /**
+   * MessageTemplate delete
+   */
+  export type MessageTemplateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MessageTemplate
+     */
+    select?: MessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MessageTemplate
+     */
+    omit?: MessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageTemplateInclude<ExtArgs> | null
+    /**
+     * Filter which MessageTemplate to delete.
+     */
+    where: MessageTemplateWhereUniqueInput
+  }
+
+  /**
+   * MessageTemplate deleteMany
+   */
+  export type MessageTemplateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MessageTemplates to delete
+     */
+    where?: MessageTemplateWhereInput
+    /**
+     * Limit how many MessageTemplates to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MessageTemplate without action
+   */
+  export type MessageTemplateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MessageTemplate
+     */
+    select?: MessageTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MessageTemplate
+     */
+    omit?: MessageTemplateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MessageTemplateInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SignatureRequest
+   */
+
+  export type AggregateSignatureRequest = {
+    _count: SignatureRequestCountAggregateOutputType | null
+    _min: SignatureRequestMinAggregateOutputType | null
+    _max: SignatureRequestMaxAggregateOutputType | null
+  }
+
+  export type SignatureRequestMinAggregateOutputType = {
+    id: string | null
+    organizationId: string | null
+    contactId: string | null
+    title: string | null
+    body: string | null
+    bodyHash: string | null
+    signerName: string | null
+    signerEmail: string | null
+    token: string | null
+    status: $Enums.SignatureStatus | null
+    expiresAt: Date | null
+    signedAt: Date | null
+    signedName: string | null
+    signerIp: string | null
+    signerUserAgent: string | null
+    declineReason: string | null
+    createdByUserId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SignatureRequestMaxAggregateOutputType = {
+    id: string | null
+    organizationId: string | null
+    contactId: string | null
+    title: string | null
+    body: string | null
+    bodyHash: string | null
+    signerName: string | null
+    signerEmail: string | null
+    token: string | null
+    status: $Enums.SignatureStatus | null
+    expiresAt: Date | null
+    signedAt: Date | null
+    signedName: string | null
+    signerIp: string | null
+    signerUserAgent: string | null
+    declineReason: string | null
+    createdByUserId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SignatureRequestCountAggregateOutputType = {
+    id: number
+    organizationId: number
+    contactId: number
+    title: number
+    body: number
+    bodyHash: number
+    signerName: number
+    signerEmail: number
+    token: number
+    status: number
+    expiresAt: number
+    signedAt: number
+    signedName: number
+    signerIp: number
+    signerUserAgent: number
+    declineReason: number
+    createdByUserId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SignatureRequestMinAggregateInputType = {
+    id?: true
+    organizationId?: true
+    contactId?: true
+    title?: true
+    body?: true
+    bodyHash?: true
+    signerName?: true
+    signerEmail?: true
+    token?: true
+    status?: true
+    expiresAt?: true
+    signedAt?: true
+    signedName?: true
+    signerIp?: true
+    signerUserAgent?: true
+    declineReason?: true
+    createdByUserId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SignatureRequestMaxAggregateInputType = {
+    id?: true
+    organizationId?: true
+    contactId?: true
+    title?: true
+    body?: true
+    bodyHash?: true
+    signerName?: true
+    signerEmail?: true
+    token?: true
+    status?: true
+    expiresAt?: true
+    signedAt?: true
+    signedName?: true
+    signerIp?: true
+    signerUserAgent?: true
+    declineReason?: true
+    createdByUserId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SignatureRequestCountAggregateInputType = {
+    id?: true
+    organizationId?: true
+    contactId?: true
+    title?: true
+    body?: true
+    bodyHash?: true
+    signerName?: true
+    signerEmail?: true
+    token?: true
+    status?: true
+    expiresAt?: true
+    signedAt?: true
+    signedName?: true
+    signerIp?: true
+    signerUserAgent?: true
+    declineReason?: true
+    createdByUserId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SignatureRequestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SignatureRequest to aggregate.
+     */
+    where?: SignatureRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SignatureRequests to fetch.
+     */
+    orderBy?: SignatureRequestOrderByWithRelationInput | SignatureRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SignatureRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SignatureRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SignatureRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SignatureRequests
+    **/
+    _count?: true | SignatureRequestCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SignatureRequestMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SignatureRequestMaxAggregateInputType
+  }
+
+  export type GetSignatureRequestAggregateType<T extends SignatureRequestAggregateArgs> = {
+        [P in keyof T & keyof AggregateSignatureRequest]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSignatureRequest[P]>
+      : GetScalarType<T[P], AggregateSignatureRequest[P]>
+  }
+
+
+
+
+  export type SignatureRequestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SignatureRequestWhereInput
+    orderBy?: SignatureRequestOrderByWithAggregationInput | SignatureRequestOrderByWithAggregationInput[]
+    by: SignatureRequestScalarFieldEnum[] | SignatureRequestScalarFieldEnum
+    having?: SignatureRequestScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SignatureRequestCountAggregateInputType | true
+    _min?: SignatureRequestMinAggregateInputType
+    _max?: SignatureRequestMaxAggregateInputType
+  }
+
+  export type SignatureRequestGroupByOutputType = {
+    id: string
+    organizationId: string
+    contactId: string | null
+    title: string
+    body: string
+    bodyHash: string
+    signerName: string
+    signerEmail: string
+    token: string
+    status: $Enums.SignatureStatus
+    expiresAt: Date
+    signedAt: Date | null
+    signedName: string | null
+    signerIp: string | null
+    signerUserAgent: string | null
+    declineReason: string | null
+    createdByUserId: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: SignatureRequestCountAggregateOutputType | null
+    _min: SignatureRequestMinAggregateOutputType | null
+    _max: SignatureRequestMaxAggregateOutputType | null
+  }
+
+  type GetSignatureRequestGroupByPayload<T extends SignatureRequestGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SignatureRequestGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SignatureRequestGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SignatureRequestGroupByOutputType[P]>
+            : GetScalarType<T[P], SignatureRequestGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SignatureRequestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    organizationId?: boolean
+    contactId?: boolean
+    title?: boolean
+    body?: boolean
+    bodyHash?: boolean
+    signerName?: boolean
+    signerEmail?: boolean
+    token?: boolean
+    status?: boolean
+    expiresAt?: boolean
+    signedAt?: boolean
+    signedName?: boolean
+    signerIp?: boolean
+    signerUserAgent?: boolean
+    declineReason?: boolean
+    createdByUserId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    contact?: boolean | SignatureRequest$contactArgs<ExtArgs>
+  }, ExtArgs["result"]["signatureRequest"]>
+
+  export type SignatureRequestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    organizationId?: boolean
+    contactId?: boolean
+    title?: boolean
+    body?: boolean
+    bodyHash?: boolean
+    signerName?: boolean
+    signerEmail?: boolean
+    token?: boolean
+    status?: boolean
+    expiresAt?: boolean
+    signedAt?: boolean
+    signedName?: boolean
+    signerIp?: boolean
+    signerUserAgent?: boolean
+    declineReason?: boolean
+    createdByUserId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    contact?: boolean | SignatureRequest$contactArgs<ExtArgs>
+  }, ExtArgs["result"]["signatureRequest"]>
+
+  export type SignatureRequestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    organizationId?: boolean
+    contactId?: boolean
+    title?: boolean
+    body?: boolean
+    bodyHash?: boolean
+    signerName?: boolean
+    signerEmail?: boolean
+    token?: boolean
+    status?: boolean
+    expiresAt?: boolean
+    signedAt?: boolean
+    signedName?: boolean
+    signerIp?: boolean
+    signerUserAgent?: boolean
+    declineReason?: boolean
+    createdByUserId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    contact?: boolean | SignatureRequest$contactArgs<ExtArgs>
+  }, ExtArgs["result"]["signatureRequest"]>
+
+  export type SignatureRequestSelectScalar = {
+    id?: boolean
+    organizationId?: boolean
+    contactId?: boolean
+    title?: boolean
+    body?: boolean
+    bodyHash?: boolean
+    signerName?: boolean
+    signerEmail?: boolean
+    token?: boolean
+    status?: boolean
+    expiresAt?: boolean
+    signedAt?: boolean
+    signedName?: boolean
+    signerIp?: boolean
+    signerUserAgent?: boolean
+    declineReason?: boolean
+    createdByUserId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SignatureRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "organizationId" | "contactId" | "title" | "body" | "bodyHash" | "signerName" | "signerEmail" | "token" | "status" | "expiresAt" | "signedAt" | "signedName" | "signerIp" | "signerUserAgent" | "declineReason" | "createdByUserId" | "createdAt" | "updatedAt", ExtArgs["result"]["signatureRequest"]>
+  export type SignatureRequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    contact?: boolean | SignatureRequest$contactArgs<ExtArgs>
+  }
+  export type SignatureRequestIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    contact?: boolean | SignatureRequest$contactArgs<ExtArgs>
+  }
+  export type SignatureRequestIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    organization?: boolean | OrganizationDefaultArgs<ExtArgs>
+    contact?: boolean | SignatureRequest$contactArgs<ExtArgs>
+  }
+
+  export type $SignatureRequestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SignatureRequest"
+    objects: {
+      organization: Prisma.$OrganizationPayload<ExtArgs>
+      contact: Prisma.$ContactPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      organizationId: string
+      contactId: string | null
+      title: string
+      body: string
+      bodyHash: string
+      signerName: string
+      signerEmail: string
+      token: string
+      status: $Enums.SignatureStatus
+      expiresAt: Date
+      signedAt: Date | null
+      signedName: string | null
+      signerIp: string | null
+      signerUserAgent: string | null
+      declineReason: string | null
+      createdByUserId: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["signatureRequest"]>
+    composites: {}
+  }
+
+  type SignatureRequestGetPayload<S extends boolean | null | undefined | SignatureRequestDefaultArgs> = $Result.GetResult<Prisma.$SignatureRequestPayload, S>
+
+  type SignatureRequestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SignatureRequestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SignatureRequestCountAggregateInputType | true
+    }
+
+  export interface SignatureRequestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SignatureRequest'], meta: { name: 'SignatureRequest' } }
+    /**
+     * Find zero or one SignatureRequest that matches the filter.
+     * @param {SignatureRequestFindUniqueArgs} args - Arguments to find a SignatureRequest
+     * @example
+     * // Get one SignatureRequest
+     * const signatureRequest = await prisma.signatureRequest.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SignatureRequestFindUniqueArgs>(args: SelectSubset<T, SignatureRequestFindUniqueArgs<ExtArgs>>): Prisma__SignatureRequestClient<$Result.GetResult<Prisma.$SignatureRequestPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SignatureRequest that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SignatureRequestFindUniqueOrThrowArgs} args - Arguments to find a SignatureRequest
+     * @example
+     * // Get one SignatureRequest
+     * const signatureRequest = await prisma.signatureRequest.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SignatureRequestFindUniqueOrThrowArgs>(args: SelectSubset<T, SignatureRequestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SignatureRequestClient<$Result.GetResult<Prisma.$SignatureRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SignatureRequest that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SignatureRequestFindFirstArgs} args - Arguments to find a SignatureRequest
+     * @example
+     * // Get one SignatureRequest
+     * const signatureRequest = await prisma.signatureRequest.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SignatureRequestFindFirstArgs>(args?: SelectSubset<T, SignatureRequestFindFirstArgs<ExtArgs>>): Prisma__SignatureRequestClient<$Result.GetResult<Prisma.$SignatureRequestPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SignatureRequest that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SignatureRequestFindFirstOrThrowArgs} args - Arguments to find a SignatureRequest
+     * @example
+     * // Get one SignatureRequest
+     * const signatureRequest = await prisma.signatureRequest.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SignatureRequestFindFirstOrThrowArgs>(args?: SelectSubset<T, SignatureRequestFindFirstOrThrowArgs<ExtArgs>>): Prisma__SignatureRequestClient<$Result.GetResult<Prisma.$SignatureRequestPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SignatureRequests that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SignatureRequestFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SignatureRequests
+     * const signatureRequests = await prisma.signatureRequest.findMany()
+     * 
+     * // Get first 10 SignatureRequests
+     * const signatureRequests = await prisma.signatureRequest.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const signatureRequestWithIdOnly = await prisma.signatureRequest.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SignatureRequestFindManyArgs>(args?: SelectSubset<T, SignatureRequestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SignatureRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SignatureRequest.
+     * @param {SignatureRequestCreateArgs} args - Arguments to create a SignatureRequest.
+     * @example
+     * // Create one SignatureRequest
+     * const SignatureRequest = await prisma.signatureRequest.create({
+     *   data: {
+     *     // ... data to create a SignatureRequest
+     *   }
+     * })
+     * 
+     */
+    create<T extends SignatureRequestCreateArgs>(args: SelectSubset<T, SignatureRequestCreateArgs<ExtArgs>>): Prisma__SignatureRequestClient<$Result.GetResult<Prisma.$SignatureRequestPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SignatureRequests.
+     * @param {SignatureRequestCreateManyArgs} args - Arguments to create many SignatureRequests.
+     * @example
+     * // Create many SignatureRequests
+     * const signatureRequest = await prisma.signatureRequest.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SignatureRequestCreateManyArgs>(args?: SelectSubset<T, SignatureRequestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SignatureRequests and returns the data saved in the database.
+     * @param {SignatureRequestCreateManyAndReturnArgs} args - Arguments to create many SignatureRequests.
+     * @example
+     * // Create many SignatureRequests
+     * const signatureRequest = await prisma.signatureRequest.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SignatureRequests and only return the `id`
+     * const signatureRequestWithIdOnly = await prisma.signatureRequest.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SignatureRequestCreateManyAndReturnArgs>(args?: SelectSubset<T, SignatureRequestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SignatureRequestPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SignatureRequest.
+     * @param {SignatureRequestDeleteArgs} args - Arguments to delete one SignatureRequest.
+     * @example
+     * // Delete one SignatureRequest
+     * const SignatureRequest = await prisma.signatureRequest.delete({
+     *   where: {
+     *     // ... filter to delete one SignatureRequest
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SignatureRequestDeleteArgs>(args: SelectSubset<T, SignatureRequestDeleteArgs<ExtArgs>>): Prisma__SignatureRequestClient<$Result.GetResult<Prisma.$SignatureRequestPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SignatureRequest.
+     * @param {SignatureRequestUpdateArgs} args - Arguments to update one SignatureRequest.
+     * @example
+     * // Update one SignatureRequest
+     * const signatureRequest = await prisma.signatureRequest.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SignatureRequestUpdateArgs>(args: SelectSubset<T, SignatureRequestUpdateArgs<ExtArgs>>): Prisma__SignatureRequestClient<$Result.GetResult<Prisma.$SignatureRequestPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SignatureRequests.
+     * @param {SignatureRequestDeleteManyArgs} args - Arguments to filter SignatureRequests to delete.
+     * @example
+     * // Delete a few SignatureRequests
+     * const { count } = await prisma.signatureRequest.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SignatureRequestDeleteManyArgs>(args?: SelectSubset<T, SignatureRequestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SignatureRequests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SignatureRequestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SignatureRequests
+     * const signatureRequest = await prisma.signatureRequest.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SignatureRequestUpdateManyArgs>(args: SelectSubset<T, SignatureRequestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SignatureRequests and returns the data updated in the database.
+     * @param {SignatureRequestUpdateManyAndReturnArgs} args - Arguments to update many SignatureRequests.
+     * @example
+     * // Update many SignatureRequests
+     * const signatureRequest = await prisma.signatureRequest.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SignatureRequests and only return the `id`
+     * const signatureRequestWithIdOnly = await prisma.signatureRequest.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SignatureRequestUpdateManyAndReturnArgs>(args: SelectSubset<T, SignatureRequestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SignatureRequestPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SignatureRequest.
+     * @param {SignatureRequestUpsertArgs} args - Arguments to update or create a SignatureRequest.
+     * @example
+     * // Update or create a SignatureRequest
+     * const signatureRequest = await prisma.signatureRequest.upsert({
+     *   create: {
+     *     // ... data to create a SignatureRequest
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SignatureRequest we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SignatureRequestUpsertArgs>(args: SelectSubset<T, SignatureRequestUpsertArgs<ExtArgs>>): Prisma__SignatureRequestClient<$Result.GetResult<Prisma.$SignatureRequestPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SignatureRequests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SignatureRequestCountArgs} args - Arguments to filter SignatureRequests to count.
+     * @example
+     * // Count the number of SignatureRequests
+     * const count = await prisma.signatureRequest.count({
+     *   where: {
+     *     // ... the filter for the SignatureRequests we want to count
+     *   }
+     * })
+    **/
+    count<T extends SignatureRequestCountArgs>(
+      args?: Subset<T, SignatureRequestCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SignatureRequestCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SignatureRequest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SignatureRequestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SignatureRequestAggregateArgs>(args: Subset<T, SignatureRequestAggregateArgs>): Prisma.PrismaPromise<GetSignatureRequestAggregateType<T>>
+
+    /**
+     * Group by SignatureRequest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SignatureRequestGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SignatureRequestGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SignatureRequestGroupByArgs['orderBy'] }
+        : { orderBy?: SignatureRequestGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SignatureRequestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSignatureRequestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SignatureRequest model
+   */
+  readonly fields: SignatureRequestFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SignatureRequest.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SignatureRequestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    organization<T extends OrganizationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrganizationDefaultArgs<ExtArgs>>): Prisma__OrganizationClient<$Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    contact<T extends SignatureRequest$contactArgs<ExtArgs> = {}>(args?: Subset<T, SignatureRequest$contactArgs<ExtArgs>>): Prisma__ContactClient<$Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SignatureRequest model
+   */
+  interface SignatureRequestFieldRefs {
+    readonly id: FieldRef<"SignatureRequest", 'String'>
+    readonly organizationId: FieldRef<"SignatureRequest", 'String'>
+    readonly contactId: FieldRef<"SignatureRequest", 'String'>
+    readonly title: FieldRef<"SignatureRequest", 'String'>
+    readonly body: FieldRef<"SignatureRequest", 'String'>
+    readonly bodyHash: FieldRef<"SignatureRequest", 'String'>
+    readonly signerName: FieldRef<"SignatureRequest", 'String'>
+    readonly signerEmail: FieldRef<"SignatureRequest", 'String'>
+    readonly token: FieldRef<"SignatureRequest", 'String'>
+    readonly status: FieldRef<"SignatureRequest", 'SignatureStatus'>
+    readonly expiresAt: FieldRef<"SignatureRequest", 'DateTime'>
+    readonly signedAt: FieldRef<"SignatureRequest", 'DateTime'>
+    readonly signedName: FieldRef<"SignatureRequest", 'String'>
+    readonly signerIp: FieldRef<"SignatureRequest", 'String'>
+    readonly signerUserAgent: FieldRef<"SignatureRequest", 'String'>
+    readonly declineReason: FieldRef<"SignatureRequest", 'String'>
+    readonly createdByUserId: FieldRef<"SignatureRequest", 'String'>
+    readonly createdAt: FieldRef<"SignatureRequest", 'DateTime'>
+    readonly updatedAt: FieldRef<"SignatureRequest", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SignatureRequest findUnique
+   */
+  export type SignatureRequestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SignatureRequest
+     */
+    select?: SignatureRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SignatureRequest
+     */
+    omit?: SignatureRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SignatureRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which SignatureRequest to fetch.
+     */
+    where: SignatureRequestWhereUniqueInput
+  }
+
+  /**
+   * SignatureRequest findUniqueOrThrow
+   */
+  export type SignatureRequestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SignatureRequest
+     */
+    select?: SignatureRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SignatureRequest
+     */
+    omit?: SignatureRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SignatureRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which SignatureRequest to fetch.
+     */
+    where: SignatureRequestWhereUniqueInput
+  }
+
+  /**
+   * SignatureRequest findFirst
+   */
+  export type SignatureRequestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SignatureRequest
+     */
+    select?: SignatureRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SignatureRequest
+     */
+    omit?: SignatureRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SignatureRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which SignatureRequest to fetch.
+     */
+    where?: SignatureRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SignatureRequests to fetch.
+     */
+    orderBy?: SignatureRequestOrderByWithRelationInput | SignatureRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SignatureRequests.
+     */
+    cursor?: SignatureRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SignatureRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SignatureRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SignatureRequests.
+     */
+    distinct?: SignatureRequestScalarFieldEnum | SignatureRequestScalarFieldEnum[]
+  }
+
+  /**
+   * SignatureRequest findFirstOrThrow
+   */
+  export type SignatureRequestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SignatureRequest
+     */
+    select?: SignatureRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SignatureRequest
+     */
+    omit?: SignatureRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SignatureRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which SignatureRequest to fetch.
+     */
+    where?: SignatureRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SignatureRequests to fetch.
+     */
+    orderBy?: SignatureRequestOrderByWithRelationInput | SignatureRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SignatureRequests.
+     */
+    cursor?: SignatureRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SignatureRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SignatureRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SignatureRequests.
+     */
+    distinct?: SignatureRequestScalarFieldEnum | SignatureRequestScalarFieldEnum[]
+  }
+
+  /**
+   * SignatureRequest findMany
+   */
+  export type SignatureRequestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SignatureRequest
+     */
+    select?: SignatureRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SignatureRequest
+     */
+    omit?: SignatureRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SignatureRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which SignatureRequests to fetch.
+     */
+    where?: SignatureRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SignatureRequests to fetch.
+     */
+    orderBy?: SignatureRequestOrderByWithRelationInput | SignatureRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SignatureRequests.
+     */
+    cursor?: SignatureRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SignatureRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SignatureRequests.
+     */
+    skip?: number
+    distinct?: SignatureRequestScalarFieldEnum | SignatureRequestScalarFieldEnum[]
+  }
+
+  /**
+   * SignatureRequest create
+   */
+  export type SignatureRequestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SignatureRequest
+     */
+    select?: SignatureRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SignatureRequest
+     */
+    omit?: SignatureRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SignatureRequestInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SignatureRequest.
+     */
+    data: XOR<SignatureRequestCreateInput, SignatureRequestUncheckedCreateInput>
+  }
+
+  /**
+   * SignatureRequest createMany
+   */
+  export type SignatureRequestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SignatureRequests.
+     */
+    data: SignatureRequestCreateManyInput | SignatureRequestCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SignatureRequest createManyAndReturn
+   */
+  export type SignatureRequestCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SignatureRequest
+     */
+    select?: SignatureRequestSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SignatureRequest
+     */
+    omit?: SignatureRequestOmit<ExtArgs> | null
+    /**
+     * The data used to create many SignatureRequests.
+     */
+    data: SignatureRequestCreateManyInput | SignatureRequestCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SignatureRequestIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SignatureRequest update
+   */
+  export type SignatureRequestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SignatureRequest
+     */
+    select?: SignatureRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SignatureRequest
+     */
+    omit?: SignatureRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SignatureRequestInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SignatureRequest.
+     */
+    data: XOR<SignatureRequestUpdateInput, SignatureRequestUncheckedUpdateInput>
+    /**
+     * Choose, which SignatureRequest to update.
+     */
+    where: SignatureRequestWhereUniqueInput
+  }
+
+  /**
+   * SignatureRequest updateMany
+   */
+  export type SignatureRequestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SignatureRequests.
+     */
+    data: XOR<SignatureRequestUpdateManyMutationInput, SignatureRequestUncheckedUpdateManyInput>
+    /**
+     * Filter which SignatureRequests to update
+     */
+    where?: SignatureRequestWhereInput
+    /**
+     * Limit how many SignatureRequests to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SignatureRequest updateManyAndReturn
+   */
+  export type SignatureRequestUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SignatureRequest
+     */
+    select?: SignatureRequestSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SignatureRequest
+     */
+    omit?: SignatureRequestOmit<ExtArgs> | null
+    /**
+     * The data used to update SignatureRequests.
+     */
+    data: XOR<SignatureRequestUpdateManyMutationInput, SignatureRequestUncheckedUpdateManyInput>
+    /**
+     * Filter which SignatureRequests to update
+     */
+    where?: SignatureRequestWhereInput
+    /**
+     * Limit how many SignatureRequests to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SignatureRequestIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SignatureRequest upsert
+   */
+  export type SignatureRequestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SignatureRequest
+     */
+    select?: SignatureRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SignatureRequest
+     */
+    omit?: SignatureRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SignatureRequestInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SignatureRequest to update in case it exists.
+     */
+    where: SignatureRequestWhereUniqueInput
+    /**
+     * In case the SignatureRequest found by the `where` argument doesn't exist, create a new SignatureRequest with this data.
+     */
+    create: XOR<SignatureRequestCreateInput, SignatureRequestUncheckedCreateInput>
+    /**
+     * In case the SignatureRequest was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SignatureRequestUpdateInput, SignatureRequestUncheckedUpdateInput>
+  }
+
+  /**
+   * SignatureRequest delete
+   */
+  export type SignatureRequestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SignatureRequest
+     */
+    select?: SignatureRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SignatureRequest
+     */
+    omit?: SignatureRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SignatureRequestInclude<ExtArgs> | null
+    /**
+     * Filter which SignatureRequest to delete.
+     */
+    where: SignatureRequestWhereUniqueInput
+  }
+
+  /**
+   * SignatureRequest deleteMany
+   */
+  export type SignatureRequestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SignatureRequests to delete
+     */
+    where?: SignatureRequestWhereInput
+    /**
+     * Limit how many SignatureRequests to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SignatureRequest.contact
+   */
+  export type SignatureRequest$contactArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contact
+     */
+    select?: ContactSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contact
+     */
+    omit?: ContactOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContactInclude<ExtArgs> | null
+    where?: ContactWhereInput
+  }
+
+  /**
+   * SignatureRequest without action
+   */
+  export type SignatureRequestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SignatureRequest
+     */
+    select?: SignatureRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SignatureRequest
+     */
+    omit?: SignatureRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SignatureRequestInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -45586,6 +50942,81 @@ export namespace Prisma {
   export type SaleLineScalarFieldEnum = (typeof SaleLineScalarFieldEnum)[keyof typeof SaleLineScalarFieldEnum]
 
 
+  export const AutomationRuleScalarFieldEnum: {
+    id: 'id',
+    organizationId: 'organizationId',
+    name: 'name',
+    enabled: 'enabled',
+    trigger: 'trigger',
+    conditions: 'conditions',
+    actionType: 'actionType',
+    actionConfig: 'actionConfig',
+    runCount: 'runCount',
+    lastRunAt: 'lastRunAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AutomationRuleScalarFieldEnum = (typeof AutomationRuleScalarFieldEnum)[keyof typeof AutomationRuleScalarFieldEnum]
+
+
+  export const MessageScalarFieldEnum: {
+    id: 'id',
+    organizationId: 'organizationId',
+    contactId: 'contactId',
+    channel: 'channel',
+    toAddress: 'toAddress',
+    subject: 'subject',
+    body: 'body',
+    status: 'status',
+    error: 'error',
+    source: 'source',
+    sentByUserId: 'sentByUserId',
+    createdAt: 'createdAt'
+  };
+
+  export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+  export const MessageTemplateScalarFieldEnum: {
+    id: 'id',
+    organizationId: 'organizationId',
+    name: 'name',
+    channel: 'channel',
+    subject: 'subject',
+    body: 'body',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type MessageTemplateScalarFieldEnum = (typeof MessageTemplateScalarFieldEnum)[keyof typeof MessageTemplateScalarFieldEnum]
+
+
+  export const SignatureRequestScalarFieldEnum: {
+    id: 'id',
+    organizationId: 'organizationId',
+    contactId: 'contactId',
+    title: 'title',
+    body: 'body',
+    bodyHash: 'bodyHash',
+    signerName: 'signerName',
+    signerEmail: 'signerEmail',
+    token: 'token',
+    status: 'status',
+    expiresAt: 'expiresAt',
+    signedAt: 'signedAt',
+    signedName: 'signedName',
+    signerIp: 'signerIp',
+    signerUserAgent: 'signerUserAgent',
+    declineReason: 'declineReason',
+    createdByUserId: 'createdByUserId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SignatureRequestScalarFieldEnum = (typeof SignatureRequestScalarFieldEnum)[keyof typeof SignatureRequestScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -46081,6 +51512,62 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'AutomationActionType'
+   */
+  export type EnumAutomationActionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AutomationActionType'>
+    
+
+
+  /**
+   * Reference to a field of type 'AutomationActionType[]'
+   */
+  export type ListEnumAutomationActionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AutomationActionType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'MessageChannel'
+   */
+  export type EnumMessageChannelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageChannel'>
+    
+
+
+  /**
+   * Reference to a field of type 'MessageChannel[]'
+   */
+  export type ListEnumMessageChannelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageChannel[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'MessageStatus'
+   */
+  export type EnumMessageStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'MessageStatus[]'
+   */
+  export type ListEnumMessageStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MessageStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'SignatureStatus'
+   */
+  export type EnumSignatureStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SignatureStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'SignatureStatus[]'
+   */
+  export type ListEnumSignatureStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SignatureStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -46133,6 +51620,10 @@ export namespace Prisma {
     invoices?: InvoiceListRelationFilter
     payments?: PaymentListRelationFilter
     documents?: DocumentListRelationFilter
+    automationRules?: AutomationRuleListRelationFilter
+    messages?: MessageListRelationFilter
+    messageTemplates?: MessageTemplateListRelationFilter
+    signatureRequests?: SignatureRequestListRelationFilter
   }
 
   export type OrganizationOrderByWithRelationInput = {
@@ -46168,6 +51659,10 @@ export namespace Prisma {
     invoices?: InvoiceOrderByRelationAggregateInput
     payments?: PaymentOrderByRelationAggregateInput
     documents?: DocumentOrderByRelationAggregateInput
+    automationRules?: AutomationRuleOrderByRelationAggregateInput
+    messages?: MessageOrderByRelationAggregateInput
+    messageTemplates?: MessageTemplateOrderByRelationAggregateInput
+    signatureRequests?: SignatureRequestOrderByRelationAggregateInput
   }
 
   export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
@@ -46206,6 +51701,10 @@ export namespace Prisma {
     invoices?: InvoiceListRelationFilter
     payments?: PaymentListRelationFilter
     documents?: DocumentListRelationFilter
+    automationRules?: AutomationRuleListRelationFilter
+    messages?: MessageListRelationFilter
+    messageTemplates?: MessageTemplateListRelationFilter
+    signatureRequests?: SignatureRequestListRelationFilter
   }, "id" | "slug">
 
   export type OrganizationOrderByWithAggregationInput = {
@@ -47847,6 +53346,8 @@ export namespace Prisma {
     attendances?: AttendanceListRelationFilter
     membershipSubscriptions?: MembershipSubscriptionListRelationFilter
     sales?: SaleListRelationFilter
+    messages?: MessageListRelationFilter
+    signatureRequests?: SignatureRequestListRelationFilter
   }
 
   export type ContactOrderByWithRelationInput = {
@@ -47873,6 +53374,8 @@ export namespace Prisma {
     attendances?: AttendanceOrderByRelationAggregateInput
     membershipSubscriptions?: MembershipSubscriptionOrderByRelationAggregateInput
     sales?: SaleOrderByRelationAggregateInput
+    messages?: MessageOrderByRelationAggregateInput
+    signatureRequests?: SignatureRequestOrderByRelationAggregateInput
   }
 
   export type ContactWhereUniqueInput = Prisma.AtLeast<{
@@ -47902,6 +53405,8 @@ export namespace Prisma {
     attendances?: AttendanceListRelationFilter
     membershipSubscriptions?: MembershipSubscriptionListRelationFilter
     sales?: SaleListRelationFilter
+    messages?: MessageListRelationFilter
+    signatureRequests?: SignatureRequestListRelationFilter
   }, "id">
 
   export type ContactOrderByWithAggregationInput = {
@@ -49062,6 +54567,390 @@ export namespace Prisma {
     commissionAmount?: DecimalNullableWithAggregatesFilter<"SaleLine"> | Decimal | DecimalJsLike | number | string | null
   }
 
+  export type AutomationRuleWhereInput = {
+    AND?: AutomationRuleWhereInput | AutomationRuleWhereInput[]
+    OR?: AutomationRuleWhereInput[]
+    NOT?: AutomationRuleWhereInput | AutomationRuleWhereInput[]
+    id?: StringFilter<"AutomationRule"> | string
+    organizationId?: StringFilter<"AutomationRule"> | string
+    name?: StringFilter<"AutomationRule"> | string
+    enabled?: BoolFilter<"AutomationRule"> | boolean
+    trigger?: StringFilter<"AutomationRule"> | string
+    conditions?: JsonNullableFilter<"AutomationRule">
+    actionType?: EnumAutomationActionTypeFilter<"AutomationRule"> | $Enums.AutomationActionType
+    actionConfig?: JsonFilter<"AutomationRule">
+    runCount?: IntFilter<"AutomationRule"> | number
+    lastRunAt?: DateTimeNullableFilter<"AutomationRule"> | Date | string | null
+    createdAt?: DateTimeFilter<"AutomationRule"> | Date | string
+    updatedAt?: DateTimeFilter<"AutomationRule"> | Date | string
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
+  }
+
+  export type AutomationRuleOrderByWithRelationInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    name?: SortOrder
+    enabled?: SortOrder
+    trigger?: SortOrder
+    conditions?: SortOrderInput | SortOrder
+    actionType?: SortOrder
+    actionConfig?: SortOrder
+    runCount?: SortOrder
+    lastRunAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    organization?: OrganizationOrderByWithRelationInput
+  }
+
+  export type AutomationRuleWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AutomationRuleWhereInput | AutomationRuleWhereInput[]
+    OR?: AutomationRuleWhereInput[]
+    NOT?: AutomationRuleWhereInput | AutomationRuleWhereInput[]
+    organizationId?: StringFilter<"AutomationRule"> | string
+    name?: StringFilter<"AutomationRule"> | string
+    enabled?: BoolFilter<"AutomationRule"> | boolean
+    trigger?: StringFilter<"AutomationRule"> | string
+    conditions?: JsonNullableFilter<"AutomationRule">
+    actionType?: EnumAutomationActionTypeFilter<"AutomationRule"> | $Enums.AutomationActionType
+    actionConfig?: JsonFilter<"AutomationRule">
+    runCount?: IntFilter<"AutomationRule"> | number
+    lastRunAt?: DateTimeNullableFilter<"AutomationRule"> | Date | string | null
+    createdAt?: DateTimeFilter<"AutomationRule"> | Date | string
+    updatedAt?: DateTimeFilter<"AutomationRule"> | Date | string
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
+  }, "id">
+
+  export type AutomationRuleOrderByWithAggregationInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    name?: SortOrder
+    enabled?: SortOrder
+    trigger?: SortOrder
+    conditions?: SortOrderInput | SortOrder
+    actionType?: SortOrder
+    actionConfig?: SortOrder
+    runCount?: SortOrder
+    lastRunAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AutomationRuleCountOrderByAggregateInput
+    _avg?: AutomationRuleAvgOrderByAggregateInput
+    _max?: AutomationRuleMaxOrderByAggregateInput
+    _min?: AutomationRuleMinOrderByAggregateInput
+    _sum?: AutomationRuleSumOrderByAggregateInput
+  }
+
+  export type AutomationRuleScalarWhereWithAggregatesInput = {
+    AND?: AutomationRuleScalarWhereWithAggregatesInput | AutomationRuleScalarWhereWithAggregatesInput[]
+    OR?: AutomationRuleScalarWhereWithAggregatesInput[]
+    NOT?: AutomationRuleScalarWhereWithAggregatesInput | AutomationRuleScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AutomationRule"> | string
+    organizationId?: StringWithAggregatesFilter<"AutomationRule"> | string
+    name?: StringWithAggregatesFilter<"AutomationRule"> | string
+    enabled?: BoolWithAggregatesFilter<"AutomationRule"> | boolean
+    trigger?: StringWithAggregatesFilter<"AutomationRule"> | string
+    conditions?: JsonNullableWithAggregatesFilter<"AutomationRule">
+    actionType?: EnumAutomationActionTypeWithAggregatesFilter<"AutomationRule"> | $Enums.AutomationActionType
+    actionConfig?: JsonWithAggregatesFilter<"AutomationRule">
+    runCount?: IntWithAggregatesFilter<"AutomationRule"> | number
+    lastRunAt?: DateTimeNullableWithAggregatesFilter<"AutomationRule"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"AutomationRule"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"AutomationRule"> | Date | string
+  }
+
+  export type MessageWhereInput = {
+    AND?: MessageWhereInput | MessageWhereInput[]
+    OR?: MessageWhereInput[]
+    NOT?: MessageWhereInput | MessageWhereInput[]
+    id?: StringFilter<"Message"> | string
+    organizationId?: StringFilter<"Message"> | string
+    contactId?: StringNullableFilter<"Message"> | string | null
+    channel?: EnumMessageChannelFilter<"Message"> | $Enums.MessageChannel
+    toAddress?: StringFilter<"Message"> | string
+    subject?: StringNullableFilter<"Message"> | string | null
+    body?: StringFilter<"Message"> | string
+    status?: EnumMessageStatusFilter<"Message"> | $Enums.MessageStatus
+    error?: StringNullableFilter<"Message"> | string | null
+    source?: StringFilter<"Message"> | string
+    sentByUserId?: StringNullableFilter<"Message"> | string | null
+    createdAt?: DateTimeFilter<"Message"> | Date | string
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
+    contact?: XOR<ContactNullableScalarRelationFilter, ContactWhereInput> | null
+  }
+
+  export type MessageOrderByWithRelationInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    contactId?: SortOrderInput | SortOrder
+    channel?: SortOrder
+    toAddress?: SortOrder
+    subject?: SortOrderInput | SortOrder
+    body?: SortOrder
+    status?: SortOrder
+    error?: SortOrderInput | SortOrder
+    source?: SortOrder
+    sentByUserId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    organization?: OrganizationOrderByWithRelationInput
+    contact?: ContactOrderByWithRelationInput
+  }
+
+  export type MessageWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MessageWhereInput | MessageWhereInput[]
+    OR?: MessageWhereInput[]
+    NOT?: MessageWhereInput | MessageWhereInput[]
+    organizationId?: StringFilter<"Message"> | string
+    contactId?: StringNullableFilter<"Message"> | string | null
+    channel?: EnumMessageChannelFilter<"Message"> | $Enums.MessageChannel
+    toAddress?: StringFilter<"Message"> | string
+    subject?: StringNullableFilter<"Message"> | string | null
+    body?: StringFilter<"Message"> | string
+    status?: EnumMessageStatusFilter<"Message"> | $Enums.MessageStatus
+    error?: StringNullableFilter<"Message"> | string | null
+    source?: StringFilter<"Message"> | string
+    sentByUserId?: StringNullableFilter<"Message"> | string | null
+    createdAt?: DateTimeFilter<"Message"> | Date | string
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
+    contact?: XOR<ContactNullableScalarRelationFilter, ContactWhereInput> | null
+  }, "id">
+
+  export type MessageOrderByWithAggregationInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    contactId?: SortOrderInput | SortOrder
+    channel?: SortOrder
+    toAddress?: SortOrder
+    subject?: SortOrderInput | SortOrder
+    body?: SortOrder
+    status?: SortOrder
+    error?: SortOrderInput | SortOrder
+    source?: SortOrder
+    sentByUserId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: MessageCountOrderByAggregateInput
+    _max?: MessageMaxOrderByAggregateInput
+    _min?: MessageMinOrderByAggregateInput
+  }
+
+  export type MessageScalarWhereWithAggregatesInput = {
+    AND?: MessageScalarWhereWithAggregatesInput | MessageScalarWhereWithAggregatesInput[]
+    OR?: MessageScalarWhereWithAggregatesInput[]
+    NOT?: MessageScalarWhereWithAggregatesInput | MessageScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Message"> | string
+    organizationId?: StringWithAggregatesFilter<"Message"> | string
+    contactId?: StringNullableWithAggregatesFilter<"Message"> | string | null
+    channel?: EnumMessageChannelWithAggregatesFilter<"Message"> | $Enums.MessageChannel
+    toAddress?: StringWithAggregatesFilter<"Message"> | string
+    subject?: StringNullableWithAggregatesFilter<"Message"> | string | null
+    body?: StringWithAggregatesFilter<"Message"> | string
+    status?: EnumMessageStatusWithAggregatesFilter<"Message"> | $Enums.MessageStatus
+    error?: StringNullableWithAggregatesFilter<"Message"> | string | null
+    source?: StringWithAggregatesFilter<"Message"> | string
+    sentByUserId?: StringNullableWithAggregatesFilter<"Message"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
+  }
+
+  export type MessageTemplateWhereInput = {
+    AND?: MessageTemplateWhereInput | MessageTemplateWhereInput[]
+    OR?: MessageTemplateWhereInput[]
+    NOT?: MessageTemplateWhereInput | MessageTemplateWhereInput[]
+    id?: StringFilter<"MessageTemplate"> | string
+    organizationId?: StringFilter<"MessageTemplate"> | string
+    name?: StringFilter<"MessageTemplate"> | string
+    channel?: EnumMessageChannelFilter<"MessageTemplate"> | $Enums.MessageChannel
+    subject?: StringNullableFilter<"MessageTemplate"> | string | null
+    body?: StringFilter<"MessageTemplate"> | string
+    createdAt?: DateTimeFilter<"MessageTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"MessageTemplate"> | Date | string
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
+  }
+
+  export type MessageTemplateOrderByWithRelationInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    name?: SortOrder
+    channel?: SortOrder
+    subject?: SortOrderInput | SortOrder
+    body?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    organization?: OrganizationOrderByWithRelationInput
+  }
+
+  export type MessageTemplateWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    organizationId_name?: MessageTemplateOrganizationIdNameCompoundUniqueInput
+    AND?: MessageTemplateWhereInput | MessageTemplateWhereInput[]
+    OR?: MessageTemplateWhereInput[]
+    NOT?: MessageTemplateWhereInput | MessageTemplateWhereInput[]
+    organizationId?: StringFilter<"MessageTemplate"> | string
+    name?: StringFilter<"MessageTemplate"> | string
+    channel?: EnumMessageChannelFilter<"MessageTemplate"> | $Enums.MessageChannel
+    subject?: StringNullableFilter<"MessageTemplate"> | string | null
+    body?: StringFilter<"MessageTemplate"> | string
+    createdAt?: DateTimeFilter<"MessageTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"MessageTemplate"> | Date | string
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
+  }, "id" | "organizationId_name">
+
+  export type MessageTemplateOrderByWithAggregationInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    name?: SortOrder
+    channel?: SortOrder
+    subject?: SortOrderInput | SortOrder
+    body?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: MessageTemplateCountOrderByAggregateInput
+    _max?: MessageTemplateMaxOrderByAggregateInput
+    _min?: MessageTemplateMinOrderByAggregateInput
+  }
+
+  export type MessageTemplateScalarWhereWithAggregatesInput = {
+    AND?: MessageTemplateScalarWhereWithAggregatesInput | MessageTemplateScalarWhereWithAggregatesInput[]
+    OR?: MessageTemplateScalarWhereWithAggregatesInput[]
+    NOT?: MessageTemplateScalarWhereWithAggregatesInput | MessageTemplateScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MessageTemplate"> | string
+    organizationId?: StringWithAggregatesFilter<"MessageTemplate"> | string
+    name?: StringWithAggregatesFilter<"MessageTemplate"> | string
+    channel?: EnumMessageChannelWithAggregatesFilter<"MessageTemplate"> | $Enums.MessageChannel
+    subject?: StringNullableWithAggregatesFilter<"MessageTemplate"> | string | null
+    body?: StringWithAggregatesFilter<"MessageTemplate"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"MessageTemplate"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"MessageTemplate"> | Date | string
+  }
+
+  export type SignatureRequestWhereInput = {
+    AND?: SignatureRequestWhereInput | SignatureRequestWhereInput[]
+    OR?: SignatureRequestWhereInput[]
+    NOT?: SignatureRequestWhereInput | SignatureRequestWhereInput[]
+    id?: StringFilter<"SignatureRequest"> | string
+    organizationId?: StringFilter<"SignatureRequest"> | string
+    contactId?: StringNullableFilter<"SignatureRequest"> | string | null
+    title?: StringFilter<"SignatureRequest"> | string
+    body?: StringFilter<"SignatureRequest"> | string
+    bodyHash?: StringFilter<"SignatureRequest"> | string
+    signerName?: StringFilter<"SignatureRequest"> | string
+    signerEmail?: StringFilter<"SignatureRequest"> | string
+    token?: StringFilter<"SignatureRequest"> | string
+    status?: EnumSignatureStatusFilter<"SignatureRequest"> | $Enums.SignatureStatus
+    expiresAt?: DateTimeFilter<"SignatureRequest"> | Date | string
+    signedAt?: DateTimeNullableFilter<"SignatureRequest"> | Date | string | null
+    signedName?: StringNullableFilter<"SignatureRequest"> | string | null
+    signerIp?: StringNullableFilter<"SignatureRequest"> | string | null
+    signerUserAgent?: StringNullableFilter<"SignatureRequest"> | string | null
+    declineReason?: StringNullableFilter<"SignatureRequest"> | string | null
+    createdByUserId?: StringNullableFilter<"SignatureRequest"> | string | null
+    createdAt?: DateTimeFilter<"SignatureRequest"> | Date | string
+    updatedAt?: DateTimeFilter<"SignatureRequest"> | Date | string
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
+    contact?: XOR<ContactNullableScalarRelationFilter, ContactWhereInput> | null
+  }
+
+  export type SignatureRequestOrderByWithRelationInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    contactId?: SortOrderInput | SortOrder
+    title?: SortOrder
+    body?: SortOrder
+    bodyHash?: SortOrder
+    signerName?: SortOrder
+    signerEmail?: SortOrder
+    token?: SortOrder
+    status?: SortOrder
+    expiresAt?: SortOrder
+    signedAt?: SortOrderInput | SortOrder
+    signedName?: SortOrderInput | SortOrder
+    signerIp?: SortOrderInput | SortOrder
+    signerUserAgent?: SortOrderInput | SortOrder
+    declineReason?: SortOrderInput | SortOrder
+    createdByUserId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    organization?: OrganizationOrderByWithRelationInput
+    contact?: ContactOrderByWithRelationInput
+  }
+
+  export type SignatureRequestWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    token?: string
+    AND?: SignatureRequestWhereInput | SignatureRequestWhereInput[]
+    OR?: SignatureRequestWhereInput[]
+    NOT?: SignatureRequestWhereInput | SignatureRequestWhereInput[]
+    organizationId?: StringFilter<"SignatureRequest"> | string
+    contactId?: StringNullableFilter<"SignatureRequest"> | string | null
+    title?: StringFilter<"SignatureRequest"> | string
+    body?: StringFilter<"SignatureRequest"> | string
+    bodyHash?: StringFilter<"SignatureRequest"> | string
+    signerName?: StringFilter<"SignatureRequest"> | string
+    signerEmail?: StringFilter<"SignatureRequest"> | string
+    status?: EnumSignatureStatusFilter<"SignatureRequest"> | $Enums.SignatureStatus
+    expiresAt?: DateTimeFilter<"SignatureRequest"> | Date | string
+    signedAt?: DateTimeNullableFilter<"SignatureRequest"> | Date | string | null
+    signedName?: StringNullableFilter<"SignatureRequest"> | string | null
+    signerIp?: StringNullableFilter<"SignatureRequest"> | string | null
+    signerUserAgent?: StringNullableFilter<"SignatureRequest"> | string | null
+    declineReason?: StringNullableFilter<"SignatureRequest"> | string | null
+    createdByUserId?: StringNullableFilter<"SignatureRequest"> | string | null
+    createdAt?: DateTimeFilter<"SignatureRequest"> | Date | string
+    updatedAt?: DateTimeFilter<"SignatureRequest"> | Date | string
+    organization?: XOR<OrganizationScalarRelationFilter, OrganizationWhereInput>
+    contact?: XOR<ContactNullableScalarRelationFilter, ContactWhereInput> | null
+  }, "id" | "token">
+
+  export type SignatureRequestOrderByWithAggregationInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    contactId?: SortOrderInput | SortOrder
+    title?: SortOrder
+    body?: SortOrder
+    bodyHash?: SortOrder
+    signerName?: SortOrder
+    signerEmail?: SortOrder
+    token?: SortOrder
+    status?: SortOrder
+    expiresAt?: SortOrder
+    signedAt?: SortOrderInput | SortOrder
+    signedName?: SortOrderInput | SortOrder
+    signerIp?: SortOrderInput | SortOrder
+    signerUserAgent?: SortOrderInput | SortOrder
+    declineReason?: SortOrderInput | SortOrder
+    createdByUserId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SignatureRequestCountOrderByAggregateInput
+    _max?: SignatureRequestMaxOrderByAggregateInput
+    _min?: SignatureRequestMinOrderByAggregateInput
+  }
+
+  export type SignatureRequestScalarWhereWithAggregatesInput = {
+    AND?: SignatureRequestScalarWhereWithAggregatesInput | SignatureRequestScalarWhereWithAggregatesInput[]
+    OR?: SignatureRequestScalarWhereWithAggregatesInput[]
+    NOT?: SignatureRequestScalarWhereWithAggregatesInput | SignatureRequestScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SignatureRequest"> | string
+    organizationId?: StringWithAggregatesFilter<"SignatureRequest"> | string
+    contactId?: StringNullableWithAggregatesFilter<"SignatureRequest"> | string | null
+    title?: StringWithAggregatesFilter<"SignatureRequest"> | string
+    body?: StringWithAggregatesFilter<"SignatureRequest"> | string
+    bodyHash?: StringWithAggregatesFilter<"SignatureRequest"> | string
+    signerName?: StringWithAggregatesFilter<"SignatureRequest"> | string
+    signerEmail?: StringWithAggregatesFilter<"SignatureRequest"> | string
+    token?: StringWithAggregatesFilter<"SignatureRequest"> | string
+    status?: EnumSignatureStatusWithAggregatesFilter<"SignatureRequest"> | $Enums.SignatureStatus
+    expiresAt?: DateTimeWithAggregatesFilter<"SignatureRequest"> | Date | string
+    signedAt?: DateTimeNullableWithAggregatesFilter<"SignatureRequest"> | Date | string | null
+    signedName?: StringNullableWithAggregatesFilter<"SignatureRequest"> | string | null
+    signerIp?: StringNullableWithAggregatesFilter<"SignatureRequest"> | string | null
+    signerUserAgent?: StringNullableWithAggregatesFilter<"SignatureRequest"> | string | null
+    declineReason?: StringNullableWithAggregatesFilter<"SignatureRequest"> | string | null
+    createdByUserId?: StringNullableWithAggregatesFilter<"SignatureRequest"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"SignatureRequest"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SignatureRequest"> | Date | string
+  }
+
   export type OrganizationCreateInput = {
     id: string
     name: string
@@ -49095,6 +54984,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateInput = {
@@ -49130,6 +55023,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUpdateInput = {
@@ -49165,6 +55062,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateInput = {
@@ -49200,6 +55101,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationCreateManyInput = {
@@ -50943,6 +56848,8 @@ export namespace Prisma {
     attendances?: AttendanceCreateNestedManyWithoutContactInput
     membershipSubscriptions?: MembershipSubscriptionCreateNestedManyWithoutContactInput
     sales?: SaleCreateNestedManyWithoutContactInput
+    messages?: MessageCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutContactInput
   }
 
   export type ContactUncheckedCreateInput = {
@@ -50967,6 +56874,8 @@ export namespace Prisma {
     attendances?: AttendanceUncheckedCreateNestedManyWithoutContactInput
     membershipSubscriptions?: MembershipSubscriptionUncheckedCreateNestedManyWithoutContactInput
     sales?: SaleUncheckedCreateNestedManyWithoutContactInput
+    messages?: MessageUncheckedCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutContactInput
   }
 
   export type ContactUpdateInput = {
@@ -50991,6 +56900,8 @@ export namespace Prisma {
     attendances?: AttendanceUpdateManyWithoutContactNestedInput
     membershipSubscriptions?: MembershipSubscriptionUpdateManyWithoutContactNestedInput
     sales?: SaleUpdateManyWithoutContactNestedInput
+    messages?: MessageUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateInput = {
@@ -51015,6 +56926,8 @@ export namespace Prisma {
     attendances?: AttendanceUncheckedUpdateManyWithoutContactNestedInput
     membershipSubscriptions?: MembershipSubscriptionUncheckedUpdateManyWithoutContactNestedInput
     sales?: SaleUncheckedUpdateManyWithoutContactNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutContactNestedInput
   }
 
   export type ContactCreateManyInput = {
@@ -52228,6 +58141,441 @@ export namespace Prisma {
     commissionAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
   }
 
+  export type AutomationRuleCreateInput = {
+    id: string
+    name: string
+    enabled?: boolean
+    trigger: string
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    actionType: $Enums.AutomationActionType
+    actionConfig: JsonNullValueInput | InputJsonValue
+    runCount?: number
+    lastRunAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organization: OrganizationCreateNestedOneWithoutAutomationRulesInput
+  }
+
+  export type AutomationRuleUncheckedCreateInput = {
+    id: string
+    organizationId: string
+    name: string
+    enabled?: boolean
+    trigger: string
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    actionType: $Enums.AutomationActionType
+    actionConfig: JsonNullValueInput | InputJsonValue
+    runCount?: number
+    lastRunAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AutomationRuleUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    trigger?: StringFieldUpdateOperationsInput | string
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    actionType?: EnumAutomationActionTypeFieldUpdateOperationsInput | $Enums.AutomationActionType
+    actionConfig?: JsonNullValueInput | InputJsonValue
+    runCount?: IntFieldUpdateOperationsInput | number
+    lastRunAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutAutomationRulesNestedInput
+  }
+
+  export type AutomationRuleUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    trigger?: StringFieldUpdateOperationsInput | string
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    actionType?: EnumAutomationActionTypeFieldUpdateOperationsInput | $Enums.AutomationActionType
+    actionConfig?: JsonNullValueInput | InputJsonValue
+    runCount?: IntFieldUpdateOperationsInput | number
+    lastRunAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AutomationRuleCreateManyInput = {
+    id: string
+    organizationId: string
+    name: string
+    enabled?: boolean
+    trigger: string
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    actionType: $Enums.AutomationActionType
+    actionConfig: JsonNullValueInput | InputJsonValue
+    runCount?: number
+    lastRunAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AutomationRuleUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    trigger?: StringFieldUpdateOperationsInput | string
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    actionType?: EnumAutomationActionTypeFieldUpdateOperationsInput | $Enums.AutomationActionType
+    actionConfig?: JsonNullValueInput | InputJsonValue
+    runCount?: IntFieldUpdateOperationsInput | number
+    lastRunAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AutomationRuleUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    trigger?: StringFieldUpdateOperationsInput | string
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    actionType?: EnumAutomationActionTypeFieldUpdateOperationsInput | $Enums.AutomationActionType
+    actionConfig?: JsonNullValueInput | InputJsonValue
+    runCount?: IntFieldUpdateOperationsInput | number
+    lastRunAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageCreateInput = {
+    id: string
+    channel: $Enums.MessageChannel
+    toAddress: string
+    subject?: string | null
+    body: string
+    status: $Enums.MessageStatus
+    error?: string | null
+    source: string
+    sentByUserId?: string | null
+    createdAt?: Date | string
+    organization: OrganizationCreateNestedOneWithoutMessagesInput
+    contact?: ContactCreateNestedOneWithoutMessagesInput
+  }
+
+  export type MessageUncheckedCreateInput = {
+    id: string
+    organizationId: string
+    contactId?: string | null
+    channel: $Enums.MessageChannel
+    toAddress: string
+    subject?: string | null
+    body: string
+    status: $Enums.MessageStatus
+    error?: string | null
+    source: string
+    sentByUserId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type MessageUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    channel?: EnumMessageChannelFieldUpdateOperationsInput | $Enums.MessageChannel
+    toAddress?: StringFieldUpdateOperationsInput | string
+    subject?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: StringFieldUpdateOperationsInput | string
+    status?: EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
+    error?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: StringFieldUpdateOperationsInput | string
+    sentByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutMessagesNestedInput
+    contact?: ContactUpdateOneWithoutMessagesNestedInput
+  }
+
+  export type MessageUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    contactId?: NullableStringFieldUpdateOperationsInput | string | null
+    channel?: EnumMessageChannelFieldUpdateOperationsInput | $Enums.MessageChannel
+    toAddress?: StringFieldUpdateOperationsInput | string
+    subject?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: StringFieldUpdateOperationsInput | string
+    status?: EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
+    error?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: StringFieldUpdateOperationsInput | string
+    sentByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageCreateManyInput = {
+    id: string
+    organizationId: string
+    contactId?: string | null
+    channel: $Enums.MessageChannel
+    toAddress: string
+    subject?: string | null
+    body: string
+    status: $Enums.MessageStatus
+    error?: string | null
+    source: string
+    sentByUserId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type MessageUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    channel?: EnumMessageChannelFieldUpdateOperationsInput | $Enums.MessageChannel
+    toAddress?: StringFieldUpdateOperationsInput | string
+    subject?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: StringFieldUpdateOperationsInput | string
+    status?: EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
+    error?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: StringFieldUpdateOperationsInput | string
+    sentByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    contactId?: NullableStringFieldUpdateOperationsInput | string | null
+    channel?: EnumMessageChannelFieldUpdateOperationsInput | $Enums.MessageChannel
+    toAddress?: StringFieldUpdateOperationsInput | string
+    subject?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: StringFieldUpdateOperationsInput | string
+    status?: EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
+    error?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: StringFieldUpdateOperationsInput | string
+    sentByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageTemplateCreateInput = {
+    id: string
+    name: string
+    channel: $Enums.MessageChannel
+    subject?: string | null
+    body: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organization: OrganizationCreateNestedOneWithoutMessageTemplatesInput
+  }
+
+  export type MessageTemplateUncheckedCreateInput = {
+    id: string
+    organizationId: string
+    name: string
+    channel: $Enums.MessageChannel
+    subject?: string | null
+    body: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MessageTemplateUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    channel?: EnumMessageChannelFieldUpdateOperationsInput | $Enums.MessageChannel
+    subject?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutMessageTemplatesNestedInput
+  }
+
+  export type MessageTemplateUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    channel?: EnumMessageChannelFieldUpdateOperationsInput | $Enums.MessageChannel
+    subject?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageTemplateCreateManyInput = {
+    id: string
+    organizationId: string
+    name: string
+    channel: $Enums.MessageChannel
+    subject?: string | null
+    body: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MessageTemplateUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    channel?: EnumMessageChannelFieldUpdateOperationsInput | $Enums.MessageChannel
+    subject?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageTemplateUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    channel?: EnumMessageChannelFieldUpdateOperationsInput | $Enums.MessageChannel
+    subject?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SignatureRequestCreateInput = {
+    id: string
+    title: string
+    body: string
+    bodyHash: string
+    signerName: string
+    signerEmail: string
+    token: string
+    status?: $Enums.SignatureStatus
+    expiresAt: Date | string
+    signedAt?: Date | string | null
+    signedName?: string | null
+    signerIp?: string | null
+    signerUserAgent?: string | null
+    declineReason?: string | null
+    createdByUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organization: OrganizationCreateNestedOneWithoutSignatureRequestsInput
+    contact?: ContactCreateNestedOneWithoutSignatureRequestsInput
+  }
+
+  export type SignatureRequestUncheckedCreateInput = {
+    id: string
+    organizationId: string
+    contactId?: string | null
+    title: string
+    body: string
+    bodyHash: string
+    signerName: string
+    signerEmail: string
+    token: string
+    status?: $Enums.SignatureStatus
+    expiresAt: Date | string
+    signedAt?: Date | string | null
+    signedName?: string | null
+    signerIp?: string | null
+    signerUserAgent?: string | null
+    declineReason?: string | null
+    createdByUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SignatureRequestUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    bodyHash?: StringFieldUpdateOperationsInput | string
+    signerName?: StringFieldUpdateOperationsInput | string
+    signerEmail?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumSignatureStatusFieldUpdateOperationsInput | $Enums.SignatureStatus
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    signedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    signedName?: NullableStringFieldUpdateOperationsInput | string | null
+    signerIp?: NullableStringFieldUpdateOperationsInput | string | null
+    signerUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    declineReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutSignatureRequestsNestedInput
+    contact?: ContactUpdateOneWithoutSignatureRequestsNestedInput
+  }
+
+  export type SignatureRequestUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    contactId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    bodyHash?: StringFieldUpdateOperationsInput | string
+    signerName?: StringFieldUpdateOperationsInput | string
+    signerEmail?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumSignatureStatusFieldUpdateOperationsInput | $Enums.SignatureStatus
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    signedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    signedName?: NullableStringFieldUpdateOperationsInput | string | null
+    signerIp?: NullableStringFieldUpdateOperationsInput | string | null
+    signerUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    declineReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SignatureRequestCreateManyInput = {
+    id: string
+    organizationId: string
+    contactId?: string | null
+    title: string
+    body: string
+    bodyHash: string
+    signerName: string
+    signerEmail: string
+    token: string
+    status?: $Enums.SignatureStatus
+    expiresAt: Date | string
+    signedAt?: Date | string | null
+    signedName?: string | null
+    signerIp?: string | null
+    signerUserAgent?: string | null
+    declineReason?: string | null
+    createdByUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SignatureRequestUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    bodyHash?: StringFieldUpdateOperationsInput | string
+    signerName?: StringFieldUpdateOperationsInput | string
+    signerEmail?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumSignatureStatusFieldUpdateOperationsInput | $Enums.SignatureStatus
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    signedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    signedName?: NullableStringFieldUpdateOperationsInput | string | null
+    signerIp?: NullableStringFieldUpdateOperationsInput | string | null
+    signerUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    declineReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SignatureRequestUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    contactId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    bodyHash?: StringFieldUpdateOperationsInput | string
+    signerName?: StringFieldUpdateOperationsInput | string
+    signerEmail?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumSignatureStatusFieldUpdateOperationsInput | $Enums.SignatureStatus
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    signedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    signedName?: NullableStringFieldUpdateOperationsInput | string | null
+    signerIp?: NullableStringFieldUpdateOperationsInput | string | null
+    signerUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    declineReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -52426,6 +58774,30 @@ export namespace Prisma {
     none?: DocumentWhereInput
   }
 
+  export type AutomationRuleListRelationFilter = {
+    every?: AutomationRuleWhereInput
+    some?: AutomationRuleWhereInput
+    none?: AutomationRuleWhereInput
+  }
+
+  export type MessageListRelationFilter = {
+    every?: MessageWhereInput
+    some?: MessageWhereInput
+    none?: MessageWhereInput
+  }
+
+  export type MessageTemplateListRelationFilter = {
+    every?: MessageTemplateWhereInput
+    some?: MessageTemplateWhereInput
+    none?: MessageTemplateWhereInput
+  }
+
+  export type SignatureRequestListRelationFilter = {
+    every?: SignatureRequestWhereInput
+    some?: SignatureRequestWhereInput
+    none?: SignatureRequestWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -52528,6 +58900,22 @@ export namespace Prisma {
   }
 
   export type DocumentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AutomationRuleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MessageOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MessageTemplateOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SignatureRequestOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -54922,6 +61310,272 @@ export namespace Prisma {
     commissionAmount?: SortOrder
   }
 
+  export type EnumAutomationActionTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.AutomationActionType | EnumAutomationActionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.AutomationActionType[] | ListEnumAutomationActionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AutomationActionType[] | ListEnumAutomationActionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumAutomationActionTypeFilter<$PrismaModel> | $Enums.AutomationActionType
+  }
+
+  export type AutomationRuleCountOrderByAggregateInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    name?: SortOrder
+    enabled?: SortOrder
+    trigger?: SortOrder
+    conditions?: SortOrder
+    actionType?: SortOrder
+    actionConfig?: SortOrder
+    runCount?: SortOrder
+    lastRunAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AutomationRuleAvgOrderByAggregateInput = {
+    runCount?: SortOrder
+  }
+
+  export type AutomationRuleMaxOrderByAggregateInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    name?: SortOrder
+    enabled?: SortOrder
+    trigger?: SortOrder
+    actionType?: SortOrder
+    runCount?: SortOrder
+    lastRunAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AutomationRuleMinOrderByAggregateInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    name?: SortOrder
+    enabled?: SortOrder
+    trigger?: SortOrder
+    actionType?: SortOrder
+    runCount?: SortOrder
+    lastRunAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AutomationRuleSumOrderByAggregateInput = {
+    runCount?: SortOrder
+  }
+
+  export type EnumAutomationActionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AutomationActionType | EnumAutomationActionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.AutomationActionType[] | ListEnumAutomationActionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AutomationActionType[] | ListEnumAutomationActionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumAutomationActionTypeWithAggregatesFilter<$PrismaModel> | $Enums.AutomationActionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAutomationActionTypeFilter<$PrismaModel>
+    _max?: NestedEnumAutomationActionTypeFilter<$PrismaModel>
+  }
+
+  export type EnumMessageChannelFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageChannel | EnumMessageChannelFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageChannel[] | ListEnumMessageChannelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageChannel[] | ListEnumMessageChannelFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageChannelFilter<$PrismaModel> | $Enums.MessageChannel
+  }
+
+  export type EnumMessageStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageStatus | EnumMessageStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageStatus[] | ListEnumMessageStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageStatus[] | ListEnumMessageStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageStatusFilter<$PrismaModel> | $Enums.MessageStatus
+  }
+
+  export type MessageCountOrderByAggregateInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    contactId?: SortOrder
+    channel?: SortOrder
+    toAddress?: SortOrder
+    subject?: SortOrder
+    body?: SortOrder
+    status?: SortOrder
+    error?: SortOrder
+    source?: SortOrder
+    sentByUserId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MessageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    contactId?: SortOrder
+    channel?: SortOrder
+    toAddress?: SortOrder
+    subject?: SortOrder
+    body?: SortOrder
+    status?: SortOrder
+    error?: SortOrder
+    source?: SortOrder
+    sentByUserId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MessageMinOrderByAggregateInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    contactId?: SortOrder
+    channel?: SortOrder
+    toAddress?: SortOrder
+    subject?: SortOrder
+    body?: SortOrder
+    status?: SortOrder
+    error?: SortOrder
+    source?: SortOrder
+    sentByUserId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnumMessageChannelWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageChannel | EnumMessageChannelFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageChannel[] | ListEnumMessageChannelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageChannel[] | ListEnumMessageChannelFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageChannelWithAggregatesFilter<$PrismaModel> | $Enums.MessageChannel
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMessageChannelFilter<$PrismaModel>
+    _max?: NestedEnumMessageChannelFilter<$PrismaModel>
+  }
+
+  export type EnumMessageStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageStatus | EnumMessageStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageStatus[] | ListEnumMessageStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageStatus[] | ListEnumMessageStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageStatusWithAggregatesFilter<$PrismaModel> | $Enums.MessageStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMessageStatusFilter<$PrismaModel>
+    _max?: NestedEnumMessageStatusFilter<$PrismaModel>
+  }
+
+  export type MessageTemplateOrganizationIdNameCompoundUniqueInput = {
+    organizationId: string
+    name: string
+  }
+
+  export type MessageTemplateCountOrderByAggregateInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    name?: SortOrder
+    channel?: SortOrder
+    subject?: SortOrder
+    body?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MessageTemplateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    name?: SortOrder
+    channel?: SortOrder
+    subject?: SortOrder
+    body?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MessageTemplateMinOrderByAggregateInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    name?: SortOrder
+    channel?: SortOrder
+    subject?: SortOrder
+    body?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumSignatureStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SignatureStatus | EnumSignatureStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SignatureStatus[] | ListEnumSignatureStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SignatureStatus[] | ListEnumSignatureStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSignatureStatusFilter<$PrismaModel> | $Enums.SignatureStatus
+  }
+
+  export type SignatureRequestCountOrderByAggregateInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    contactId?: SortOrder
+    title?: SortOrder
+    body?: SortOrder
+    bodyHash?: SortOrder
+    signerName?: SortOrder
+    signerEmail?: SortOrder
+    token?: SortOrder
+    status?: SortOrder
+    expiresAt?: SortOrder
+    signedAt?: SortOrder
+    signedName?: SortOrder
+    signerIp?: SortOrder
+    signerUserAgent?: SortOrder
+    declineReason?: SortOrder
+    createdByUserId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SignatureRequestMaxOrderByAggregateInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    contactId?: SortOrder
+    title?: SortOrder
+    body?: SortOrder
+    bodyHash?: SortOrder
+    signerName?: SortOrder
+    signerEmail?: SortOrder
+    token?: SortOrder
+    status?: SortOrder
+    expiresAt?: SortOrder
+    signedAt?: SortOrder
+    signedName?: SortOrder
+    signerIp?: SortOrder
+    signerUserAgent?: SortOrder
+    declineReason?: SortOrder
+    createdByUserId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SignatureRequestMinOrderByAggregateInput = {
+    id?: SortOrder
+    organizationId?: SortOrder
+    contactId?: SortOrder
+    title?: SortOrder
+    body?: SortOrder
+    bodyHash?: SortOrder
+    signerName?: SortOrder
+    signerEmail?: SortOrder
+    token?: SortOrder
+    status?: SortOrder
+    expiresAt?: SortOrder
+    signedAt?: SortOrder
+    signedName?: SortOrder
+    signerIp?: SortOrder
+    signerUserAgent?: SortOrder
+    declineReason?: SortOrder
+    createdByUserId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumSignatureStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SignatureStatus | EnumSignatureStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SignatureStatus[] | ListEnumSignatureStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SignatureStatus[] | ListEnumSignatureStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSignatureStatusWithAggregatesFilter<$PrismaModel> | $Enums.SignatureStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSignatureStatusFilter<$PrismaModel>
+    _max?: NestedEnumSignatureStatusFilter<$PrismaModel>
+  }
+
   export type BranchCreateNestedManyWithoutOrganizationInput = {
     create?: XOR<BranchCreateWithoutOrganizationInput, BranchUncheckedCreateWithoutOrganizationInput> | BranchCreateWithoutOrganizationInput[] | BranchUncheckedCreateWithoutOrganizationInput[]
     connectOrCreate?: BranchCreateOrConnectWithoutOrganizationInput | BranchCreateOrConnectWithoutOrganizationInput[]
@@ -55097,6 +61751,34 @@ export namespace Prisma {
     connect?: DocumentWhereUniqueInput | DocumentWhereUniqueInput[]
   }
 
+  export type AutomationRuleCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<AutomationRuleCreateWithoutOrganizationInput, AutomationRuleUncheckedCreateWithoutOrganizationInput> | AutomationRuleCreateWithoutOrganizationInput[] | AutomationRuleUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: AutomationRuleCreateOrConnectWithoutOrganizationInput | AutomationRuleCreateOrConnectWithoutOrganizationInput[]
+    createMany?: AutomationRuleCreateManyOrganizationInputEnvelope
+    connect?: AutomationRuleWhereUniqueInput | AutomationRuleWhereUniqueInput[]
+  }
+
+  export type MessageCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<MessageCreateWithoutOrganizationInput, MessageUncheckedCreateWithoutOrganizationInput> | MessageCreateWithoutOrganizationInput[] | MessageUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutOrganizationInput | MessageCreateOrConnectWithoutOrganizationInput[]
+    createMany?: MessageCreateManyOrganizationInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type MessageTemplateCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<MessageTemplateCreateWithoutOrganizationInput, MessageTemplateUncheckedCreateWithoutOrganizationInput> | MessageTemplateCreateWithoutOrganizationInput[] | MessageTemplateUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: MessageTemplateCreateOrConnectWithoutOrganizationInput | MessageTemplateCreateOrConnectWithoutOrganizationInput[]
+    createMany?: MessageTemplateCreateManyOrganizationInputEnvelope
+    connect?: MessageTemplateWhereUniqueInput | MessageTemplateWhereUniqueInput[]
+  }
+
+  export type SignatureRequestCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<SignatureRequestCreateWithoutOrganizationInput, SignatureRequestUncheckedCreateWithoutOrganizationInput> | SignatureRequestCreateWithoutOrganizationInput[] | SignatureRequestUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: SignatureRequestCreateOrConnectWithoutOrganizationInput | SignatureRequestCreateOrConnectWithoutOrganizationInput[]
+    createMany?: SignatureRequestCreateManyOrganizationInputEnvelope
+    connect?: SignatureRequestWhereUniqueInput | SignatureRequestWhereUniqueInput[]
+  }
+
   export type BranchUncheckedCreateNestedManyWithoutOrganizationInput = {
     create?: XOR<BranchCreateWithoutOrganizationInput, BranchUncheckedCreateWithoutOrganizationInput> | BranchCreateWithoutOrganizationInput[] | BranchUncheckedCreateWithoutOrganizationInput[]
     connectOrCreate?: BranchCreateOrConnectWithoutOrganizationInput | BranchCreateOrConnectWithoutOrganizationInput[]
@@ -55270,6 +61952,34 @@ export namespace Prisma {
     connectOrCreate?: DocumentCreateOrConnectWithoutOrganizationInput | DocumentCreateOrConnectWithoutOrganizationInput[]
     createMany?: DocumentCreateManyOrganizationInputEnvelope
     connect?: DocumentWhereUniqueInput | DocumentWhereUniqueInput[]
+  }
+
+  export type AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<AutomationRuleCreateWithoutOrganizationInput, AutomationRuleUncheckedCreateWithoutOrganizationInput> | AutomationRuleCreateWithoutOrganizationInput[] | AutomationRuleUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: AutomationRuleCreateOrConnectWithoutOrganizationInput | AutomationRuleCreateOrConnectWithoutOrganizationInput[]
+    createMany?: AutomationRuleCreateManyOrganizationInputEnvelope
+    connect?: AutomationRuleWhereUniqueInput | AutomationRuleWhereUniqueInput[]
+  }
+
+  export type MessageUncheckedCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<MessageCreateWithoutOrganizationInput, MessageUncheckedCreateWithoutOrganizationInput> | MessageCreateWithoutOrganizationInput[] | MessageUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutOrganizationInput | MessageCreateOrConnectWithoutOrganizationInput[]
+    createMany?: MessageCreateManyOrganizationInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<MessageTemplateCreateWithoutOrganizationInput, MessageTemplateUncheckedCreateWithoutOrganizationInput> | MessageTemplateCreateWithoutOrganizationInput[] | MessageTemplateUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: MessageTemplateCreateOrConnectWithoutOrganizationInput | MessageTemplateCreateOrConnectWithoutOrganizationInput[]
+    createMany?: MessageTemplateCreateManyOrganizationInputEnvelope
+    connect?: MessageTemplateWhereUniqueInput | MessageTemplateWhereUniqueInput[]
+  }
+
+  export type SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput = {
+    create?: XOR<SignatureRequestCreateWithoutOrganizationInput, SignatureRequestUncheckedCreateWithoutOrganizationInput> | SignatureRequestCreateWithoutOrganizationInput[] | SignatureRequestUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: SignatureRequestCreateOrConnectWithoutOrganizationInput | SignatureRequestCreateOrConnectWithoutOrganizationInput[]
+    createMany?: SignatureRequestCreateManyOrganizationInputEnvelope
+    connect?: SignatureRequestWhereUniqueInput | SignatureRequestWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -55638,6 +62348,62 @@ export namespace Prisma {
     deleteMany?: DocumentScalarWhereInput | DocumentScalarWhereInput[]
   }
 
+  export type AutomationRuleUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<AutomationRuleCreateWithoutOrganizationInput, AutomationRuleUncheckedCreateWithoutOrganizationInput> | AutomationRuleCreateWithoutOrganizationInput[] | AutomationRuleUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: AutomationRuleCreateOrConnectWithoutOrganizationInput | AutomationRuleCreateOrConnectWithoutOrganizationInput[]
+    upsert?: AutomationRuleUpsertWithWhereUniqueWithoutOrganizationInput | AutomationRuleUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: AutomationRuleCreateManyOrganizationInputEnvelope
+    set?: AutomationRuleWhereUniqueInput | AutomationRuleWhereUniqueInput[]
+    disconnect?: AutomationRuleWhereUniqueInput | AutomationRuleWhereUniqueInput[]
+    delete?: AutomationRuleWhereUniqueInput | AutomationRuleWhereUniqueInput[]
+    connect?: AutomationRuleWhereUniqueInput | AutomationRuleWhereUniqueInput[]
+    update?: AutomationRuleUpdateWithWhereUniqueWithoutOrganizationInput | AutomationRuleUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: AutomationRuleUpdateManyWithWhereWithoutOrganizationInput | AutomationRuleUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: AutomationRuleScalarWhereInput | AutomationRuleScalarWhereInput[]
+  }
+
+  export type MessageUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<MessageCreateWithoutOrganizationInput, MessageUncheckedCreateWithoutOrganizationInput> | MessageCreateWithoutOrganizationInput[] | MessageUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutOrganizationInput | MessageCreateOrConnectWithoutOrganizationInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutOrganizationInput | MessageUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: MessageCreateManyOrganizationInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutOrganizationInput | MessageUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutOrganizationInput | MessageUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type MessageTemplateUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<MessageTemplateCreateWithoutOrganizationInput, MessageTemplateUncheckedCreateWithoutOrganizationInput> | MessageTemplateCreateWithoutOrganizationInput[] | MessageTemplateUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: MessageTemplateCreateOrConnectWithoutOrganizationInput | MessageTemplateCreateOrConnectWithoutOrganizationInput[]
+    upsert?: MessageTemplateUpsertWithWhereUniqueWithoutOrganizationInput | MessageTemplateUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: MessageTemplateCreateManyOrganizationInputEnvelope
+    set?: MessageTemplateWhereUniqueInput | MessageTemplateWhereUniqueInput[]
+    disconnect?: MessageTemplateWhereUniqueInput | MessageTemplateWhereUniqueInput[]
+    delete?: MessageTemplateWhereUniqueInput | MessageTemplateWhereUniqueInput[]
+    connect?: MessageTemplateWhereUniqueInput | MessageTemplateWhereUniqueInput[]
+    update?: MessageTemplateUpdateWithWhereUniqueWithoutOrganizationInput | MessageTemplateUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: MessageTemplateUpdateManyWithWhereWithoutOrganizationInput | MessageTemplateUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: MessageTemplateScalarWhereInput | MessageTemplateScalarWhereInput[]
+  }
+
+  export type SignatureRequestUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<SignatureRequestCreateWithoutOrganizationInput, SignatureRequestUncheckedCreateWithoutOrganizationInput> | SignatureRequestCreateWithoutOrganizationInput[] | SignatureRequestUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: SignatureRequestCreateOrConnectWithoutOrganizationInput | SignatureRequestCreateOrConnectWithoutOrganizationInput[]
+    upsert?: SignatureRequestUpsertWithWhereUniqueWithoutOrganizationInput | SignatureRequestUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: SignatureRequestCreateManyOrganizationInputEnvelope
+    set?: SignatureRequestWhereUniqueInput | SignatureRequestWhereUniqueInput[]
+    disconnect?: SignatureRequestWhereUniqueInput | SignatureRequestWhereUniqueInput[]
+    delete?: SignatureRequestWhereUniqueInput | SignatureRequestWhereUniqueInput[]
+    connect?: SignatureRequestWhereUniqueInput | SignatureRequestWhereUniqueInput[]
+    update?: SignatureRequestUpdateWithWhereUniqueWithoutOrganizationInput | SignatureRequestUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: SignatureRequestUpdateManyWithWhereWithoutOrganizationInput | SignatureRequestUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: SignatureRequestScalarWhereInput | SignatureRequestScalarWhereInput[]
+  }
+
   export type BranchUncheckedUpdateManyWithoutOrganizationNestedInput = {
     create?: XOR<BranchCreateWithoutOrganizationInput, BranchUncheckedCreateWithoutOrganizationInput> | BranchCreateWithoutOrganizationInput[] | BranchUncheckedCreateWithoutOrganizationInput[]
     connectOrCreate?: BranchCreateOrConnectWithoutOrganizationInput | BranchCreateOrConnectWithoutOrganizationInput[]
@@ -55986,6 +62752,62 @@ export namespace Prisma {
     update?: DocumentUpdateWithWhereUniqueWithoutOrganizationInput | DocumentUpdateWithWhereUniqueWithoutOrganizationInput[]
     updateMany?: DocumentUpdateManyWithWhereWithoutOrganizationInput | DocumentUpdateManyWithWhereWithoutOrganizationInput[]
     deleteMany?: DocumentScalarWhereInput | DocumentScalarWhereInput[]
+  }
+
+  export type AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<AutomationRuleCreateWithoutOrganizationInput, AutomationRuleUncheckedCreateWithoutOrganizationInput> | AutomationRuleCreateWithoutOrganizationInput[] | AutomationRuleUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: AutomationRuleCreateOrConnectWithoutOrganizationInput | AutomationRuleCreateOrConnectWithoutOrganizationInput[]
+    upsert?: AutomationRuleUpsertWithWhereUniqueWithoutOrganizationInput | AutomationRuleUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: AutomationRuleCreateManyOrganizationInputEnvelope
+    set?: AutomationRuleWhereUniqueInput | AutomationRuleWhereUniqueInput[]
+    disconnect?: AutomationRuleWhereUniqueInput | AutomationRuleWhereUniqueInput[]
+    delete?: AutomationRuleWhereUniqueInput | AutomationRuleWhereUniqueInput[]
+    connect?: AutomationRuleWhereUniqueInput | AutomationRuleWhereUniqueInput[]
+    update?: AutomationRuleUpdateWithWhereUniqueWithoutOrganizationInput | AutomationRuleUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: AutomationRuleUpdateManyWithWhereWithoutOrganizationInput | AutomationRuleUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: AutomationRuleScalarWhereInput | AutomationRuleScalarWhereInput[]
+  }
+
+  export type MessageUncheckedUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<MessageCreateWithoutOrganizationInput, MessageUncheckedCreateWithoutOrganizationInput> | MessageCreateWithoutOrganizationInput[] | MessageUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutOrganizationInput | MessageCreateOrConnectWithoutOrganizationInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutOrganizationInput | MessageUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: MessageCreateManyOrganizationInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutOrganizationInput | MessageUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutOrganizationInput | MessageUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<MessageTemplateCreateWithoutOrganizationInput, MessageTemplateUncheckedCreateWithoutOrganizationInput> | MessageTemplateCreateWithoutOrganizationInput[] | MessageTemplateUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: MessageTemplateCreateOrConnectWithoutOrganizationInput | MessageTemplateCreateOrConnectWithoutOrganizationInput[]
+    upsert?: MessageTemplateUpsertWithWhereUniqueWithoutOrganizationInput | MessageTemplateUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: MessageTemplateCreateManyOrganizationInputEnvelope
+    set?: MessageTemplateWhereUniqueInput | MessageTemplateWhereUniqueInput[]
+    disconnect?: MessageTemplateWhereUniqueInput | MessageTemplateWhereUniqueInput[]
+    delete?: MessageTemplateWhereUniqueInput | MessageTemplateWhereUniqueInput[]
+    connect?: MessageTemplateWhereUniqueInput | MessageTemplateWhereUniqueInput[]
+    update?: MessageTemplateUpdateWithWhereUniqueWithoutOrganizationInput | MessageTemplateUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: MessageTemplateUpdateManyWithWhereWithoutOrganizationInput | MessageTemplateUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: MessageTemplateScalarWhereInput | MessageTemplateScalarWhereInput[]
+  }
+
+  export type SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput = {
+    create?: XOR<SignatureRequestCreateWithoutOrganizationInput, SignatureRequestUncheckedCreateWithoutOrganizationInput> | SignatureRequestCreateWithoutOrganizationInput[] | SignatureRequestUncheckedCreateWithoutOrganizationInput[]
+    connectOrCreate?: SignatureRequestCreateOrConnectWithoutOrganizationInput | SignatureRequestCreateOrConnectWithoutOrganizationInput[]
+    upsert?: SignatureRequestUpsertWithWhereUniqueWithoutOrganizationInput | SignatureRequestUpsertWithWhereUniqueWithoutOrganizationInput[]
+    createMany?: SignatureRequestCreateManyOrganizationInputEnvelope
+    set?: SignatureRequestWhereUniqueInput | SignatureRequestWhereUniqueInput[]
+    disconnect?: SignatureRequestWhereUniqueInput | SignatureRequestWhereUniqueInput[]
+    delete?: SignatureRequestWhereUniqueInput | SignatureRequestWhereUniqueInput[]
+    connect?: SignatureRequestWhereUniqueInput | SignatureRequestWhereUniqueInput[]
+    update?: SignatureRequestUpdateWithWhereUniqueWithoutOrganizationInput | SignatureRequestUpdateWithWhereUniqueWithoutOrganizationInput[]
+    updateMany?: SignatureRequestUpdateManyWithWhereWithoutOrganizationInput | SignatureRequestUpdateManyWithWhereWithoutOrganizationInput[]
+    deleteMany?: SignatureRequestScalarWhereInput | SignatureRequestScalarWhereInput[]
   }
 
   export type OrganizationCreateNestedOneWithoutBranchesInput = {
@@ -57808,6 +64630,20 @@ export namespace Prisma {
     connect?: SaleWhereUniqueInput | SaleWhereUniqueInput[]
   }
 
+  export type MessageCreateNestedManyWithoutContactInput = {
+    create?: XOR<MessageCreateWithoutContactInput, MessageUncheckedCreateWithoutContactInput> | MessageCreateWithoutContactInput[] | MessageUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutContactInput | MessageCreateOrConnectWithoutContactInput[]
+    createMany?: MessageCreateManyContactInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type SignatureRequestCreateNestedManyWithoutContactInput = {
+    create?: XOR<SignatureRequestCreateWithoutContactInput, SignatureRequestUncheckedCreateWithoutContactInput> | SignatureRequestCreateWithoutContactInput[] | SignatureRequestUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: SignatureRequestCreateOrConnectWithoutContactInput | SignatureRequestCreateOrConnectWithoutContactInput[]
+    createMany?: SignatureRequestCreateManyContactInputEnvelope
+    connect?: SignatureRequestWhereUniqueInput | SignatureRequestWhereUniqueInput[]
+  }
+
   export type EnquiryUncheckedCreateNestedManyWithoutContactInput = {
     create?: XOR<EnquiryCreateWithoutContactInput, EnquiryUncheckedCreateWithoutContactInput> | EnquiryCreateWithoutContactInput[] | EnquiryUncheckedCreateWithoutContactInput[]
     connectOrCreate?: EnquiryCreateOrConnectWithoutContactInput | EnquiryCreateOrConnectWithoutContactInput[]
@@ -57860,6 +64696,20 @@ export namespace Prisma {
     connectOrCreate?: SaleCreateOrConnectWithoutContactInput | SaleCreateOrConnectWithoutContactInput[]
     createMany?: SaleCreateManyContactInputEnvelope
     connect?: SaleWhereUniqueInput | SaleWhereUniqueInput[]
+  }
+
+  export type MessageUncheckedCreateNestedManyWithoutContactInput = {
+    create?: XOR<MessageCreateWithoutContactInput, MessageUncheckedCreateWithoutContactInput> | MessageCreateWithoutContactInput[] | MessageUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutContactInput | MessageCreateOrConnectWithoutContactInput[]
+    createMany?: MessageCreateManyContactInputEnvelope
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+  }
+
+  export type SignatureRequestUncheckedCreateNestedManyWithoutContactInput = {
+    create?: XOR<SignatureRequestCreateWithoutContactInput, SignatureRequestUncheckedCreateWithoutContactInput> | SignatureRequestCreateWithoutContactInput[] | SignatureRequestUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: SignatureRequestCreateOrConnectWithoutContactInput | SignatureRequestCreateOrConnectWithoutContactInput[]
+    createMany?: SignatureRequestCreateManyContactInputEnvelope
+    connect?: SignatureRequestWhereUniqueInput | SignatureRequestWhereUniqueInput[]
   }
 
   export type EnumContactTypeFieldUpdateOperationsInput = {
@@ -57992,6 +64842,34 @@ export namespace Prisma {
     deleteMany?: SaleScalarWhereInput | SaleScalarWhereInput[]
   }
 
+  export type MessageUpdateManyWithoutContactNestedInput = {
+    create?: XOR<MessageCreateWithoutContactInput, MessageUncheckedCreateWithoutContactInput> | MessageCreateWithoutContactInput[] | MessageUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutContactInput | MessageCreateOrConnectWithoutContactInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutContactInput | MessageUpsertWithWhereUniqueWithoutContactInput[]
+    createMany?: MessageCreateManyContactInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutContactInput | MessageUpdateWithWhereUniqueWithoutContactInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutContactInput | MessageUpdateManyWithWhereWithoutContactInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type SignatureRequestUpdateManyWithoutContactNestedInput = {
+    create?: XOR<SignatureRequestCreateWithoutContactInput, SignatureRequestUncheckedCreateWithoutContactInput> | SignatureRequestCreateWithoutContactInput[] | SignatureRequestUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: SignatureRequestCreateOrConnectWithoutContactInput | SignatureRequestCreateOrConnectWithoutContactInput[]
+    upsert?: SignatureRequestUpsertWithWhereUniqueWithoutContactInput | SignatureRequestUpsertWithWhereUniqueWithoutContactInput[]
+    createMany?: SignatureRequestCreateManyContactInputEnvelope
+    set?: SignatureRequestWhereUniqueInput | SignatureRequestWhereUniqueInput[]
+    disconnect?: SignatureRequestWhereUniqueInput | SignatureRequestWhereUniqueInput[]
+    delete?: SignatureRequestWhereUniqueInput | SignatureRequestWhereUniqueInput[]
+    connect?: SignatureRequestWhereUniqueInput | SignatureRequestWhereUniqueInput[]
+    update?: SignatureRequestUpdateWithWhereUniqueWithoutContactInput | SignatureRequestUpdateWithWhereUniqueWithoutContactInput[]
+    updateMany?: SignatureRequestUpdateManyWithWhereWithoutContactInput | SignatureRequestUpdateManyWithWhereWithoutContactInput[]
+    deleteMany?: SignatureRequestScalarWhereInput | SignatureRequestScalarWhereInput[]
+  }
+
   export type EnquiryUncheckedUpdateManyWithoutContactNestedInput = {
     create?: XOR<EnquiryCreateWithoutContactInput, EnquiryUncheckedCreateWithoutContactInput> | EnquiryCreateWithoutContactInput[] | EnquiryUncheckedCreateWithoutContactInput[]
     connectOrCreate?: EnquiryCreateOrConnectWithoutContactInput | EnquiryCreateOrConnectWithoutContactInput[]
@@ -58094,6 +64972,34 @@ export namespace Prisma {
     update?: SaleUpdateWithWhereUniqueWithoutContactInput | SaleUpdateWithWhereUniqueWithoutContactInput[]
     updateMany?: SaleUpdateManyWithWhereWithoutContactInput | SaleUpdateManyWithWhereWithoutContactInput[]
     deleteMany?: SaleScalarWhereInput | SaleScalarWhereInput[]
+  }
+
+  export type MessageUncheckedUpdateManyWithoutContactNestedInput = {
+    create?: XOR<MessageCreateWithoutContactInput, MessageUncheckedCreateWithoutContactInput> | MessageCreateWithoutContactInput[] | MessageUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: MessageCreateOrConnectWithoutContactInput | MessageCreateOrConnectWithoutContactInput[]
+    upsert?: MessageUpsertWithWhereUniqueWithoutContactInput | MessageUpsertWithWhereUniqueWithoutContactInput[]
+    createMany?: MessageCreateManyContactInputEnvelope
+    set?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    disconnect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    delete?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    connect?: MessageWhereUniqueInput | MessageWhereUniqueInput[]
+    update?: MessageUpdateWithWhereUniqueWithoutContactInput | MessageUpdateWithWhereUniqueWithoutContactInput[]
+    updateMany?: MessageUpdateManyWithWhereWithoutContactInput | MessageUpdateManyWithWhereWithoutContactInput[]
+    deleteMany?: MessageScalarWhereInput | MessageScalarWhereInput[]
+  }
+
+  export type SignatureRequestUncheckedUpdateManyWithoutContactNestedInput = {
+    create?: XOR<SignatureRequestCreateWithoutContactInput, SignatureRequestUncheckedCreateWithoutContactInput> | SignatureRequestCreateWithoutContactInput[] | SignatureRequestUncheckedCreateWithoutContactInput[]
+    connectOrCreate?: SignatureRequestCreateOrConnectWithoutContactInput | SignatureRequestCreateOrConnectWithoutContactInput[]
+    upsert?: SignatureRequestUpsertWithWhereUniqueWithoutContactInput | SignatureRequestUpsertWithWhereUniqueWithoutContactInput[]
+    createMany?: SignatureRequestCreateManyContactInputEnvelope
+    set?: SignatureRequestWhereUniqueInput | SignatureRequestWhereUniqueInput[]
+    disconnect?: SignatureRequestWhereUniqueInput | SignatureRequestWhereUniqueInput[]
+    delete?: SignatureRequestWhereUniqueInput | SignatureRequestWhereUniqueInput[]
+    connect?: SignatureRequestWhereUniqueInput | SignatureRequestWhereUniqueInput[]
+    update?: SignatureRequestUpdateWithWhereUniqueWithoutContactInput | SignatureRequestUpdateWithWhereUniqueWithoutContactInput[]
+    updateMany?: SignatureRequestUpdateManyWithWhereWithoutContactInput | SignatureRequestUpdateManyWithWhereWithoutContactInput[]
+    deleteMany?: SignatureRequestScalarWhereInput | SignatureRequestScalarWhereInput[]
   }
 
   export type OrganizationCreateNestedOneWithoutProductsInput = {
@@ -58922,6 +65828,110 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSaleLinesStaffedInput, UserUpdateWithoutSaleLinesStaffedInput>, UserUncheckedUpdateWithoutSaleLinesStaffedInput>
   }
 
+  export type OrganizationCreateNestedOneWithoutAutomationRulesInput = {
+    create?: XOR<OrganizationCreateWithoutAutomationRulesInput, OrganizationUncheckedCreateWithoutAutomationRulesInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutAutomationRulesInput
+    connect?: OrganizationWhereUniqueInput
+  }
+
+  export type EnumAutomationActionTypeFieldUpdateOperationsInput = {
+    set?: $Enums.AutomationActionType
+  }
+
+  export type OrganizationUpdateOneRequiredWithoutAutomationRulesNestedInput = {
+    create?: XOR<OrganizationCreateWithoutAutomationRulesInput, OrganizationUncheckedCreateWithoutAutomationRulesInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutAutomationRulesInput
+    upsert?: OrganizationUpsertWithoutAutomationRulesInput
+    connect?: OrganizationWhereUniqueInput
+    update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutAutomationRulesInput, OrganizationUpdateWithoutAutomationRulesInput>, OrganizationUncheckedUpdateWithoutAutomationRulesInput>
+  }
+
+  export type OrganizationCreateNestedOneWithoutMessagesInput = {
+    create?: XOR<OrganizationCreateWithoutMessagesInput, OrganizationUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutMessagesInput
+    connect?: OrganizationWhereUniqueInput
+  }
+
+  export type ContactCreateNestedOneWithoutMessagesInput = {
+    create?: XOR<ContactCreateWithoutMessagesInput, ContactUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: ContactCreateOrConnectWithoutMessagesInput
+    connect?: ContactWhereUniqueInput
+  }
+
+  export type EnumMessageChannelFieldUpdateOperationsInput = {
+    set?: $Enums.MessageChannel
+  }
+
+  export type EnumMessageStatusFieldUpdateOperationsInput = {
+    set?: $Enums.MessageStatus
+  }
+
+  export type OrganizationUpdateOneRequiredWithoutMessagesNestedInput = {
+    create?: XOR<OrganizationCreateWithoutMessagesInput, OrganizationUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutMessagesInput
+    upsert?: OrganizationUpsertWithoutMessagesInput
+    connect?: OrganizationWhereUniqueInput
+    update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutMessagesInput, OrganizationUpdateWithoutMessagesInput>, OrganizationUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type ContactUpdateOneWithoutMessagesNestedInput = {
+    create?: XOR<ContactCreateWithoutMessagesInput, ContactUncheckedCreateWithoutMessagesInput>
+    connectOrCreate?: ContactCreateOrConnectWithoutMessagesInput
+    upsert?: ContactUpsertWithoutMessagesInput
+    disconnect?: ContactWhereInput | boolean
+    delete?: ContactWhereInput | boolean
+    connect?: ContactWhereUniqueInput
+    update?: XOR<XOR<ContactUpdateToOneWithWhereWithoutMessagesInput, ContactUpdateWithoutMessagesInput>, ContactUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type OrganizationCreateNestedOneWithoutMessageTemplatesInput = {
+    create?: XOR<OrganizationCreateWithoutMessageTemplatesInput, OrganizationUncheckedCreateWithoutMessageTemplatesInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutMessageTemplatesInput
+    connect?: OrganizationWhereUniqueInput
+  }
+
+  export type OrganizationUpdateOneRequiredWithoutMessageTemplatesNestedInput = {
+    create?: XOR<OrganizationCreateWithoutMessageTemplatesInput, OrganizationUncheckedCreateWithoutMessageTemplatesInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutMessageTemplatesInput
+    upsert?: OrganizationUpsertWithoutMessageTemplatesInput
+    connect?: OrganizationWhereUniqueInput
+    update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutMessageTemplatesInput, OrganizationUpdateWithoutMessageTemplatesInput>, OrganizationUncheckedUpdateWithoutMessageTemplatesInput>
+  }
+
+  export type OrganizationCreateNestedOneWithoutSignatureRequestsInput = {
+    create?: XOR<OrganizationCreateWithoutSignatureRequestsInput, OrganizationUncheckedCreateWithoutSignatureRequestsInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutSignatureRequestsInput
+    connect?: OrganizationWhereUniqueInput
+  }
+
+  export type ContactCreateNestedOneWithoutSignatureRequestsInput = {
+    create?: XOR<ContactCreateWithoutSignatureRequestsInput, ContactUncheckedCreateWithoutSignatureRequestsInput>
+    connectOrCreate?: ContactCreateOrConnectWithoutSignatureRequestsInput
+    connect?: ContactWhereUniqueInput
+  }
+
+  export type EnumSignatureStatusFieldUpdateOperationsInput = {
+    set?: $Enums.SignatureStatus
+  }
+
+  export type OrganizationUpdateOneRequiredWithoutSignatureRequestsNestedInput = {
+    create?: XOR<OrganizationCreateWithoutSignatureRequestsInput, OrganizationUncheckedCreateWithoutSignatureRequestsInput>
+    connectOrCreate?: OrganizationCreateOrConnectWithoutSignatureRequestsInput
+    upsert?: OrganizationUpsertWithoutSignatureRequestsInput
+    connect?: OrganizationWhereUniqueInput
+    update?: XOR<XOR<OrganizationUpdateToOneWithWhereWithoutSignatureRequestsInput, OrganizationUpdateWithoutSignatureRequestsInput>, OrganizationUncheckedUpdateWithoutSignatureRequestsInput>
+  }
+
+  export type ContactUpdateOneWithoutSignatureRequestsNestedInput = {
+    create?: XOR<ContactCreateWithoutSignatureRequestsInput, ContactUncheckedCreateWithoutSignatureRequestsInput>
+    connectOrCreate?: ContactCreateOrConnectWithoutSignatureRequestsInput
+    upsert?: ContactUpsertWithoutSignatureRequestsInput
+    disconnect?: ContactWhereInput | boolean
+    delete?: ContactWhereInput | boolean
+    connect?: ContactWhereUniqueInput
+    update?: XOR<XOR<ContactUpdateToOneWithWhereWithoutSignatureRequestsInput, ContactUpdateWithoutSignatureRequestsInput>, ContactUncheckedUpdateWithoutSignatureRequestsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -59665,6 +66675,74 @@ export namespace Prisma {
     _max?: NestedEnumSaleStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumAutomationActionTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.AutomationActionType | EnumAutomationActionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.AutomationActionType[] | ListEnumAutomationActionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AutomationActionType[] | ListEnumAutomationActionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumAutomationActionTypeFilter<$PrismaModel> | $Enums.AutomationActionType
+  }
+
+  export type NestedEnumAutomationActionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AutomationActionType | EnumAutomationActionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.AutomationActionType[] | ListEnumAutomationActionTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AutomationActionType[] | ListEnumAutomationActionTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumAutomationActionTypeWithAggregatesFilter<$PrismaModel> | $Enums.AutomationActionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAutomationActionTypeFilter<$PrismaModel>
+    _max?: NestedEnumAutomationActionTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumMessageChannelFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageChannel | EnumMessageChannelFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageChannel[] | ListEnumMessageChannelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageChannel[] | ListEnumMessageChannelFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageChannelFilter<$PrismaModel> | $Enums.MessageChannel
+  }
+
+  export type NestedEnumMessageStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageStatus | EnumMessageStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageStatus[] | ListEnumMessageStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageStatus[] | ListEnumMessageStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageStatusFilter<$PrismaModel> | $Enums.MessageStatus
+  }
+
+  export type NestedEnumMessageChannelWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageChannel | EnumMessageChannelFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageChannel[] | ListEnumMessageChannelFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageChannel[] | ListEnumMessageChannelFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageChannelWithAggregatesFilter<$PrismaModel> | $Enums.MessageChannel
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMessageChannelFilter<$PrismaModel>
+    _max?: NestedEnumMessageChannelFilter<$PrismaModel>
+  }
+
+  export type NestedEnumMessageStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MessageStatus | EnumMessageStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MessageStatus[] | ListEnumMessageStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MessageStatus[] | ListEnumMessageStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMessageStatusWithAggregatesFilter<$PrismaModel> | $Enums.MessageStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMessageStatusFilter<$PrismaModel>
+    _max?: NestedEnumMessageStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSignatureStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.SignatureStatus | EnumSignatureStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SignatureStatus[] | ListEnumSignatureStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SignatureStatus[] | ListEnumSignatureStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSignatureStatusFilter<$PrismaModel> | $Enums.SignatureStatus
+  }
+
+  export type NestedEnumSignatureStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SignatureStatus | EnumSignatureStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.SignatureStatus[] | ListEnumSignatureStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SignatureStatus[] | ListEnumSignatureStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumSignatureStatusWithAggregatesFilter<$PrismaModel> | $Enums.SignatureStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSignatureStatusFilter<$PrismaModel>
+    _max?: NestedEnumSignatureStatusFilter<$PrismaModel>
+  }
+
   export type BranchCreateWithoutOrganizationInput = {
     id: string
     name: string
@@ -60350,6 +67428,8 @@ export namespace Prisma {
     attendances?: AttendanceCreateNestedManyWithoutContactInput
     membershipSubscriptions?: MembershipSubscriptionCreateNestedManyWithoutContactInput
     sales?: SaleCreateNestedManyWithoutContactInput
+    messages?: MessageCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutContactInput
   }
 
   export type ContactUncheckedCreateWithoutOrganizationInput = {
@@ -60373,6 +67453,8 @@ export namespace Prisma {
     attendances?: AttendanceUncheckedCreateNestedManyWithoutContactInput
     membershipSubscriptions?: MembershipSubscriptionUncheckedCreateNestedManyWithoutContactInput
     sales?: SaleUncheckedCreateNestedManyWithoutContactInput
+    messages?: MessageUncheckedCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutContactInput
   }
 
   export type ContactCreateOrConnectWithoutOrganizationInput = {
@@ -60646,6 +67728,164 @@ export namespace Prisma {
 
   export type DocumentCreateManyOrganizationInputEnvelope = {
     data: DocumentCreateManyOrganizationInput | DocumentCreateManyOrganizationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AutomationRuleCreateWithoutOrganizationInput = {
+    id: string
+    name: string
+    enabled?: boolean
+    trigger: string
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    actionType: $Enums.AutomationActionType
+    actionConfig: JsonNullValueInput | InputJsonValue
+    runCount?: number
+    lastRunAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AutomationRuleUncheckedCreateWithoutOrganizationInput = {
+    id: string
+    name: string
+    enabled?: boolean
+    trigger: string
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    actionType: $Enums.AutomationActionType
+    actionConfig: JsonNullValueInput | InputJsonValue
+    runCount?: number
+    lastRunAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AutomationRuleCreateOrConnectWithoutOrganizationInput = {
+    where: AutomationRuleWhereUniqueInput
+    create: XOR<AutomationRuleCreateWithoutOrganizationInput, AutomationRuleUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type AutomationRuleCreateManyOrganizationInputEnvelope = {
+    data: AutomationRuleCreateManyOrganizationInput | AutomationRuleCreateManyOrganizationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MessageCreateWithoutOrganizationInput = {
+    id: string
+    channel: $Enums.MessageChannel
+    toAddress: string
+    subject?: string | null
+    body: string
+    status: $Enums.MessageStatus
+    error?: string | null
+    source: string
+    sentByUserId?: string | null
+    createdAt?: Date | string
+    contact?: ContactCreateNestedOneWithoutMessagesInput
+  }
+
+  export type MessageUncheckedCreateWithoutOrganizationInput = {
+    id: string
+    contactId?: string | null
+    channel: $Enums.MessageChannel
+    toAddress: string
+    subject?: string | null
+    body: string
+    status: $Enums.MessageStatus
+    error?: string | null
+    source: string
+    sentByUserId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type MessageCreateOrConnectWithoutOrganizationInput = {
+    where: MessageWhereUniqueInput
+    create: XOR<MessageCreateWithoutOrganizationInput, MessageUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type MessageCreateManyOrganizationInputEnvelope = {
+    data: MessageCreateManyOrganizationInput | MessageCreateManyOrganizationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MessageTemplateCreateWithoutOrganizationInput = {
+    id: string
+    name: string
+    channel: $Enums.MessageChannel
+    subject?: string | null
+    body: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MessageTemplateUncheckedCreateWithoutOrganizationInput = {
+    id: string
+    name: string
+    channel: $Enums.MessageChannel
+    subject?: string | null
+    body: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MessageTemplateCreateOrConnectWithoutOrganizationInput = {
+    where: MessageTemplateWhereUniqueInput
+    create: XOR<MessageTemplateCreateWithoutOrganizationInput, MessageTemplateUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type MessageTemplateCreateManyOrganizationInputEnvelope = {
+    data: MessageTemplateCreateManyOrganizationInput | MessageTemplateCreateManyOrganizationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SignatureRequestCreateWithoutOrganizationInput = {
+    id: string
+    title: string
+    body: string
+    bodyHash: string
+    signerName: string
+    signerEmail: string
+    token: string
+    status?: $Enums.SignatureStatus
+    expiresAt: Date | string
+    signedAt?: Date | string | null
+    signedName?: string | null
+    signerIp?: string | null
+    signerUserAgent?: string | null
+    declineReason?: string | null
+    createdByUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contact?: ContactCreateNestedOneWithoutSignatureRequestsInput
+  }
+
+  export type SignatureRequestUncheckedCreateWithoutOrganizationInput = {
+    id: string
+    contactId?: string | null
+    title: string
+    body: string
+    bodyHash: string
+    signerName: string
+    signerEmail: string
+    token: string
+    status?: $Enums.SignatureStatus
+    expiresAt: Date | string
+    signedAt?: Date | string | null
+    signedName?: string | null
+    signerIp?: string | null
+    signerUserAgent?: string | null
+    declineReason?: string | null
+    createdByUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SignatureRequestCreateOrConnectWithoutOrganizationInput = {
+    where: SignatureRequestWhereUniqueInput
+    create: XOR<SignatureRequestCreateWithoutOrganizationInput, SignatureRequestUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type SignatureRequestCreateManyOrganizationInputEnvelope = {
+    data: SignatureRequestCreateManyOrganizationInput | SignatureRequestCreateManyOrganizationInput[]
     skipDuplicates?: boolean
   }
 
@@ -61474,6 +68714,145 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Document"> | Date | string
   }
 
+  export type AutomationRuleUpsertWithWhereUniqueWithoutOrganizationInput = {
+    where: AutomationRuleWhereUniqueInput
+    update: XOR<AutomationRuleUpdateWithoutOrganizationInput, AutomationRuleUncheckedUpdateWithoutOrganizationInput>
+    create: XOR<AutomationRuleCreateWithoutOrganizationInput, AutomationRuleUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type AutomationRuleUpdateWithWhereUniqueWithoutOrganizationInput = {
+    where: AutomationRuleWhereUniqueInput
+    data: XOR<AutomationRuleUpdateWithoutOrganizationInput, AutomationRuleUncheckedUpdateWithoutOrganizationInput>
+  }
+
+  export type AutomationRuleUpdateManyWithWhereWithoutOrganizationInput = {
+    where: AutomationRuleScalarWhereInput
+    data: XOR<AutomationRuleUpdateManyMutationInput, AutomationRuleUncheckedUpdateManyWithoutOrganizationInput>
+  }
+
+  export type AutomationRuleScalarWhereInput = {
+    AND?: AutomationRuleScalarWhereInput | AutomationRuleScalarWhereInput[]
+    OR?: AutomationRuleScalarWhereInput[]
+    NOT?: AutomationRuleScalarWhereInput | AutomationRuleScalarWhereInput[]
+    id?: StringFilter<"AutomationRule"> | string
+    organizationId?: StringFilter<"AutomationRule"> | string
+    name?: StringFilter<"AutomationRule"> | string
+    enabled?: BoolFilter<"AutomationRule"> | boolean
+    trigger?: StringFilter<"AutomationRule"> | string
+    conditions?: JsonNullableFilter<"AutomationRule">
+    actionType?: EnumAutomationActionTypeFilter<"AutomationRule"> | $Enums.AutomationActionType
+    actionConfig?: JsonFilter<"AutomationRule">
+    runCount?: IntFilter<"AutomationRule"> | number
+    lastRunAt?: DateTimeNullableFilter<"AutomationRule"> | Date | string | null
+    createdAt?: DateTimeFilter<"AutomationRule"> | Date | string
+    updatedAt?: DateTimeFilter<"AutomationRule"> | Date | string
+  }
+
+  export type MessageUpsertWithWhereUniqueWithoutOrganizationInput = {
+    where: MessageWhereUniqueInput
+    update: XOR<MessageUpdateWithoutOrganizationInput, MessageUncheckedUpdateWithoutOrganizationInput>
+    create: XOR<MessageCreateWithoutOrganizationInput, MessageUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type MessageUpdateWithWhereUniqueWithoutOrganizationInput = {
+    where: MessageWhereUniqueInput
+    data: XOR<MessageUpdateWithoutOrganizationInput, MessageUncheckedUpdateWithoutOrganizationInput>
+  }
+
+  export type MessageUpdateManyWithWhereWithoutOrganizationInput = {
+    where: MessageScalarWhereInput
+    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutOrganizationInput>
+  }
+
+  export type MessageScalarWhereInput = {
+    AND?: MessageScalarWhereInput | MessageScalarWhereInput[]
+    OR?: MessageScalarWhereInput[]
+    NOT?: MessageScalarWhereInput | MessageScalarWhereInput[]
+    id?: StringFilter<"Message"> | string
+    organizationId?: StringFilter<"Message"> | string
+    contactId?: StringNullableFilter<"Message"> | string | null
+    channel?: EnumMessageChannelFilter<"Message"> | $Enums.MessageChannel
+    toAddress?: StringFilter<"Message"> | string
+    subject?: StringNullableFilter<"Message"> | string | null
+    body?: StringFilter<"Message"> | string
+    status?: EnumMessageStatusFilter<"Message"> | $Enums.MessageStatus
+    error?: StringNullableFilter<"Message"> | string | null
+    source?: StringFilter<"Message"> | string
+    sentByUserId?: StringNullableFilter<"Message"> | string | null
+    createdAt?: DateTimeFilter<"Message"> | Date | string
+  }
+
+  export type MessageTemplateUpsertWithWhereUniqueWithoutOrganizationInput = {
+    where: MessageTemplateWhereUniqueInput
+    update: XOR<MessageTemplateUpdateWithoutOrganizationInput, MessageTemplateUncheckedUpdateWithoutOrganizationInput>
+    create: XOR<MessageTemplateCreateWithoutOrganizationInput, MessageTemplateUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type MessageTemplateUpdateWithWhereUniqueWithoutOrganizationInput = {
+    where: MessageTemplateWhereUniqueInput
+    data: XOR<MessageTemplateUpdateWithoutOrganizationInput, MessageTemplateUncheckedUpdateWithoutOrganizationInput>
+  }
+
+  export type MessageTemplateUpdateManyWithWhereWithoutOrganizationInput = {
+    where: MessageTemplateScalarWhereInput
+    data: XOR<MessageTemplateUpdateManyMutationInput, MessageTemplateUncheckedUpdateManyWithoutOrganizationInput>
+  }
+
+  export type MessageTemplateScalarWhereInput = {
+    AND?: MessageTemplateScalarWhereInput | MessageTemplateScalarWhereInput[]
+    OR?: MessageTemplateScalarWhereInput[]
+    NOT?: MessageTemplateScalarWhereInput | MessageTemplateScalarWhereInput[]
+    id?: StringFilter<"MessageTemplate"> | string
+    organizationId?: StringFilter<"MessageTemplate"> | string
+    name?: StringFilter<"MessageTemplate"> | string
+    channel?: EnumMessageChannelFilter<"MessageTemplate"> | $Enums.MessageChannel
+    subject?: StringNullableFilter<"MessageTemplate"> | string | null
+    body?: StringFilter<"MessageTemplate"> | string
+    createdAt?: DateTimeFilter<"MessageTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"MessageTemplate"> | Date | string
+  }
+
+  export type SignatureRequestUpsertWithWhereUniqueWithoutOrganizationInput = {
+    where: SignatureRequestWhereUniqueInput
+    update: XOR<SignatureRequestUpdateWithoutOrganizationInput, SignatureRequestUncheckedUpdateWithoutOrganizationInput>
+    create: XOR<SignatureRequestCreateWithoutOrganizationInput, SignatureRequestUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type SignatureRequestUpdateWithWhereUniqueWithoutOrganizationInput = {
+    where: SignatureRequestWhereUniqueInput
+    data: XOR<SignatureRequestUpdateWithoutOrganizationInput, SignatureRequestUncheckedUpdateWithoutOrganizationInput>
+  }
+
+  export type SignatureRequestUpdateManyWithWhereWithoutOrganizationInput = {
+    where: SignatureRequestScalarWhereInput
+    data: XOR<SignatureRequestUpdateManyMutationInput, SignatureRequestUncheckedUpdateManyWithoutOrganizationInput>
+  }
+
+  export type SignatureRequestScalarWhereInput = {
+    AND?: SignatureRequestScalarWhereInput | SignatureRequestScalarWhereInput[]
+    OR?: SignatureRequestScalarWhereInput[]
+    NOT?: SignatureRequestScalarWhereInput | SignatureRequestScalarWhereInput[]
+    id?: StringFilter<"SignatureRequest"> | string
+    organizationId?: StringFilter<"SignatureRequest"> | string
+    contactId?: StringNullableFilter<"SignatureRequest"> | string | null
+    title?: StringFilter<"SignatureRequest"> | string
+    body?: StringFilter<"SignatureRequest"> | string
+    bodyHash?: StringFilter<"SignatureRequest"> | string
+    signerName?: StringFilter<"SignatureRequest"> | string
+    signerEmail?: StringFilter<"SignatureRequest"> | string
+    token?: StringFilter<"SignatureRequest"> | string
+    status?: EnumSignatureStatusFilter<"SignatureRequest"> | $Enums.SignatureStatus
+    expiresAt?: DateTimeFilter<"SignatureRequest"> | Date | string
+    signedAt?: DateTimeNullableFilter<"SignatureRequest"> | Date | string | null
+    signedName?: StringNullableFilter<"SignatureRequest"> | string | null
+    signerIp?: StringNullableFilter<"SignatureRequest"> | string | null
+    signerUserAgent?: StringNullableFilter<"SignatureRequest"> | string | null
+    declineReason?: StringNullableFilter<"SignatureRequest"> | string | null
+    createdByUserId?: StringNullableFilter<"SignatureRequest"> | string | null
+    createdAt?: DateTimeFilter<"SignatureRequest"> | Date | string
+    updatedAt?: DateTimeFilter<"SignatureRequest"> | Date | string
+  }
+
   export type OrganizationCreateWithoutBranchesInput = {
     id: string
     name: string
@@ -61506,6 +68885,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutBranchesInput = {
@@ -61540,6 +68923,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutBranchesInput = {
@@ -61622,6 +69009,8 @@ export namespace Prisma {
     attendances?: AttendanceCreateNestedManyWithoutContactInput
     membershipSubscriptions?: MembershipSubscriptionCreateNestedManyWithoutContactInput
     sales?: SaleCreateNestedManyWithoutContactInput
+    messages?: MessageCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutContactInput
   }
 
   export type ContactUncheckedCreateWithoutBranchInput = {
@@ -61645,6 +69034,8 @@ export namespace Prisma {
     attendances?: AttendanceUncheckedCreateNestedManyWithoutContactInput
     membershipSubscriptions?: MembershipSubscriptionUncheckedCreateNestedManyWithoutContactInput
     sales?: SaleUncheckedCreateNestedManyWithoutContactInput
+    messages?: MessageUncheckedCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutContactInput
   }
 
   export type ContactCreateOrConnectWithoutBranchInput = {
@@ -62102,6 +69493,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutBranchesInput = {
@@ -62136,6 +69531,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type UserUpsertWithWhereUniqueWithoutBranchInput = {
@@ -62362,6 +69761,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutUsersInput = {
@@ -62396,6 +69799,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutUsersInput = {
@@ -62809,6 +70216,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutUsersInput = {
@@ -62843,6 +70254,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type BranchUpsertWithoutUsersInput = {
@@ -63219,6 +70634,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutRolesInput = {
@@ -63253,6 +70672,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutRolesInput = {
@@ -63341,6 +70764,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutRolesInput = {
@@ -63375,6 +70802,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type RolePermissionUpsertWithWhereUniqueWithoutRoleInput = {
@@ -63755,6 +71186,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutAuditLogsInput = {
@@ -63789,6 +71224,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutAuditLogsInput = {
@@ -63839,6 +71278,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutAuditLogsInput = {
@@ -63873,6 +71316,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationCreateWithoutSettingsInput = {
@@ -63907,6 +71354,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutSettingsInput = {
@@ -63941,6 +71392,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutSettingsInput = {
@@ -63991,6 +71446,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutSettingsInput = {
@@ -64025,6 +71484,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationCreateWithoutNotificationsInput = {
@@ -64059,6 +71522,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutNotificationsInput = {
@@ -64093,6 +71560,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutNotificationsInput = {
@@ -64192,6 +71663,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutNotificationsInput = {
@@ -64226,6 +71701,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type UserUpsertWithoutNotificationsInput = {
@@ -64315,6 +71794,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutMusicStudentsInput = {
@@ -64349,6 +71832,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutMusicStudentsInput = {
@@ -64428,6 +71915,8 @@ export namespace Prisma {
     attendances?: AttendanceCreateNestedManyWithoutContactInput
     membershipSubscriptions?: MembershipSubscriptionCreateNestedManyWithoutContactInput
     sales?: SaleCreateNestedManyWithoutContactInput
+    messages?: MessageCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutContactInput
   }
 
   export type ContactUncheckedCreateWithoutMusicStudentInput = {
@@ -64451,6 +71940,8 @@ export namespace Prisma {
     attendances?: AttendanceUncheckedCreateNestedManyWithoutContactInput
     membershipSubscriptions?: MembershipSubscriptionUncheckedCreateNestedManyWithoutContactInput
     sales?: SaleUncheckedCreateNestedManyWithoutContactInput
+    messages?: MessageUncheckedCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutContactInput
   }
 
   export type ContactCreateOrConnectWithoutMusicStudentInput = {
@@ -64575,6 +72066,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutMusicStudentsInput = {
@@ -64609,6 +72104,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type BranchUpsertWithoutMusicStudentsInput = {
@@ -64700,6 +72199,8 @@ export namespace Prisma {
     attendances?: AttendanceUpdateManyWithoutContactNestedInput
     membershipSubscriptions?: MembershipSubscriptionUpdateManyWithoutContactNestedInput
     sales?: SaleUpdateManyWithoutContactNestedInput
+    messages?: MessageUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateWithoutMusicStudentInput = {
@@ -64723,6 +72224,8 @@ export namespace Prisma {
     attendances?: AttendanceUncheckedUpdateManyWithoutContactNestedInput
     membershipSubscriptions?: MembershipSubscriptionUncheckedUpdateManyWithoutContactNestedInput
     sales?: SaleUncheckedUpdateManyWithoutContactNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutContactNestedInput
   }
 
   export type MusicEnrollmentUpsertWithWhereUniqueWithoutStudentInput = {
@@ -64789,6 +72292,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutMusicCoursesInput = {
@@ -64823,6 +72330,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutMusicCoursesInput = {
@@ -64919,6 +72430,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutMusicCoursesInput = {
@@ -64953,6 +72468,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type MusicBatchUpsertWithWhereUniqueWithoutCourseInput = {
@@ -65003,6 +72522,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutMusicBatchesInput = {
@@ -65037,6 +72560,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutMusicBatchesInput = {
@@ -65258,6 +72785,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutMusicBatchesInput = {
@@ -65292,6 +72823,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type BranchUpsertWithoutMusicBatchesInput = {
@@ -65495,6 +73030,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutMusicEnrollmentsInput = {
@@ -65529,6 +73068,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutMusicEnrollmentsInput = {
@@ -65665,6 +73208,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutMusicEnrollmentsInput = {
@@ -65699,6 +73246,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type MusicStudentUpsertWithoutEnrollmentsInput = {
@@ -65831,6 +73382,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutAttendancesInput = {
@@ -65865,6 +73420,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutAttendancesInput = {
@@ -65893,6 +73452,8 @@ export namespace Prisma {
     gymMember?: GymMemberCreateNestedOneWithoutContactInput
     membershipSubscriptions?: MembershipSubscriptionCreateNestedManyWithoutContactInput
     sales?: SaleCreateNestedManyWithoutContactInput
+    messages?: MessageCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutContactInput
   }
 
   export type ContactUncheckedCreateWithoutAttendancesInput = {
@@ -65916,6 +73477,8 @@ export namespace Prisma {
     gymMember?: GymMemberUncheckedCreateNestedOneWithoutContactInput
     membershipSubscriptions?: MembershipSubscriptionUncheckedCreateNestedManyWithoutContactInput
     sales?: SaleUncheckedCreateNestedManyWithoutContactInput
+    messages?: MessageUncheckedCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutContactInput
   }
 
   export type ContactCreateOrConnectWithoutAttendancesInput = {
@@ -65966,6 +73529,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutAttendancesInput = {
@@ -66000,6 +73567,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type ContactUpsertWithoutAttendancesInput = {
@@ -66034,6 +73605,8 @@ export namespace Prisma {
     gymMember?: GymMemberUpdateOneWithoutContactNestedInput
     membershipSubscriptions?: MembershipSubscriptionUpdateManyWithoutContactNestedInput
     sales?: SaleUpdateManyWithoutContactNestedInput
+    messages?: MessageUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateWithoutAttendancesInput = {
@@ -66057,6 +73630,8 @@ export namespace Prisma {
     gymMember?: GymMemberUncheckedUpdateOneWithoutContactNestedInput
     membershipSubscriptions?: MembershipSubscriptionUncheckedUpdateManyWithoutContactNestedInput
     sales?: SaleUncheckedUpdateManyWithoutContactNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutContactNestedInput
   }
 
   export type OrganizationCreateWithoutGymMembersInput = {
@@ -66091,6 +73666,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutGymMembersInput = {
@@ -66125,6 +73704,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutGymMembersInput = {
@@ -66204,6 +73787,8 @@ export namespace Prisma {
     attendances?: AttendanceCreateNestedManyWithoutContactInput
     membershipSubscriptions?: MembershipSubscriptionCreateNestedManyWithoutContactInput
     sales?: SaleCreateNestedManyWithoutContactInput
+    messages?: MessageCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutContactInput
   }
 
   export type ContactUncheckedCreateWithoutGymMemberInput = {
@@ -66227,6 +73812,8 @@ export namespace Prisma {
     attendances?: AttendanceUncheckedCreateNestedManyWithoutContactInput
     membershipSubscriptions?: MembershipSubscriptionUncheckedCreateNestedManyWithoutContactInput
     sales?: SaleUncheckedCreateNestedManyWithoutContactInput
+    messages?: MessageUncheckedCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutContactInput
   }
 
   export type ContactCreateOrConnectWithoutGymMemberInput = {
@@ -66277,6 +73864,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutGymMembersInput = {
@@ -66311,6 +73902,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type BranchUpsertWithoutGymMembersInput = {
@@ -66402,6 +73997,8 @@ export namespace Prisma {
     attendances?: AttendanceUpdateManyWithoutContactNestedInput
     membershipSubscriptions?: MembershipSubscriptionUpdateManyWithoutContactNestedInput
     sales?: SaleUpdateManyWithoutContactNestedInput
+    messages?: MessageUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateWithoutGymMemberInput = {
@@ -66425,6 +74022,8 @@ export namespace Prisma {
     attendances?: AttendanceUncheckedUpdateManyWithoutContactNestedInput
     membershipSubscriptions?: MembershipSubscriptionUncheckedUpdateManyWithoutContactNestedInput
     sales?: SaleUncheckedUpdateManyWithoutContactNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutContactNestedInput
   }
 
   export type OrganizationCreateWithoutGymClassesInput = {
@@ -66459,6 +74058,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutGymClassesInput = {
@@ -66493,6 +74096,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutGymClassesInput = {
@@ -66643,6 +74250,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutGymClassesInput = {
@@ -66677,6 +74288,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type BranchUpsertWithoutGymClassesInput = {
@@ -66823,6 +74438,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutMusicPracticeLogsInput = {
@@ -66857,6 +74476,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutMusicPracticeLogsInput = {
@@ -66952,6 +74575,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutMusicPracticeLogsInput = {
@@ -66986,6 +74613,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type MusicStudentUpsertWithoutPracticeLogsInput = {
@@ -67071,6 +74702,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutContactsInput = {
@@ -67105,6 +74740,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutContactsInput = {
@@ -67467,6 +75106,96 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type MessageCreateWithoutContactInput = {
+    id: string
+    channel: $Enums.MessageChannel
+    toAddress: string
+    subject?: string | null
+    body: string
+    status: $Enums.MessageStatus
+    error?: string | null
+    source: string
+    sentByUserId?: string | null
+    createdAt?: Date | string
+    organization: OrganizationCreateNestedOneWithoutMessagesInput
+  }
+
+  export type MessageUncheckedCreateWithoutContactInput = {
+    id: string
+    organizationId: string
+    channel: $Enums.MessageChannel
+    toAddress: string
+    subject?: string | null
+    body: string
+    status: $Enums.MessageStatus
+    error?: string | null
+    source: string
+    sentByUserId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type MessageCreateOrConnectWithoutContactInput = {
+    where: MessageWhereUniqueInput
+    create: XOR<MessageCreateWithoutContactInput, MessageUncheckedCreateWithoutContactInput>
+  }
+
+  export type MessageCreateManyContactInputEnvelope = {
+    data: MessageCreateManyContactInput | MessageCreateManyContactInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SignatureRequestCreateWithoutContactInput = {
+    id: string
+    title: string
+    body: string
+    bodyHash: string
+    signerName: string
+    signerEmail: string
+    token: string
+    status?: $Enums.SignatureStatus
+    expiresAt: Date | string
+    signedAt?: Date | string | null
+    signedName?: string | null
+    signerIp?: string | null
+    signerUserAgent?: string | null
+    declineReason?: string | null
+    createdByUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organization: OrganizationCreateNestedOneWithoutSignatureRequestsInput
+  }
+
+  export type SignatureRequestUncheckedCreateWithoutContactInput = {
+    id: string
+    organizationId: string
+    title: string
+    body: string
+    bodyHash: string
+    signerName: string
+    signerEmail: string
+    token: string
+    status?: $Enums.SignatureStatus
+    expiresAt: Date | string
+    signedAt?: Date | string | null
+    signedName?: string | null
+    signerIp?: string | null
+    signerUserAgent?: string | null
+    declineReason?: string | null
+    createdByUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SignatureRequestCreateOrConnectWithoutContactInput = {
+    where: SignatureRequestWhereUniqueInput
+    create: XOR<SignatureRequestCreateWithoutContactInput, SignatureRequestUncheckedCreateWithoutContactInput>
+  }
+
+  export type SignatureRequestCreateManyContactInputEnvelope = {
+    data: SignatureRequestCreateManyContactInput | SignatureRequestCreateManyContactInput[]
+    skipDuplicates?: boolean
+  }
+
   export type OrganizationUpsertWithoutContactsInput = {
     update: XOR<OrganizationUpdateWithoutContactsInput, OrganizationUncheckedUpdateWithoutContactsInput>
     create: XOR<OrganizationCreateWithoutContactsInput, OrganizationUncheckedCreateWithoutContactsInput>
@@ -67510,6 +75239,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutContactsInput = {
@@ -67544,6 +75277,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type BranchUpsertWithoutContactsInput = {
@@ -67785,6 +75522,38 @@ export namespace Prisma {
     data: XOR<SaleUpdateManyMutationInput, SaleUncheckedUpdateManyWithoutContactInput>
   }
 
+  export type MessageUpsertWithWhereUniqueWithoutContactInput = {
+    where: MessageWhereUniqueInput
+    update: XOR<MessageUpdateWithoutContactInput, MessageUncheckedUpdateWithoutContactInput>
+    create: XOR<MessageCreateWithoutContactInput, MessageUncheckedCreateWithoutContactInput>
+  }
+
+  export type MessageUpdateWithWhereUniqueWithoutContactInput = {
+    where: MessageWhereUniqueInput
+    data: XOR<MessageUpdateWithoutContactInput, MessageUncheckedUpdateWithoutContactInput>
+  }
+
+  export type MessageUpdateManyWithWhereWithoutContactInput = {
+    where: MessageScalarWhereInput
+    data: XOR<MessageUpdateManyMutationInput, MessageUncheckedUpdateManyWithoutContactInput>
+  }
+
+  export type SignatureRequestUpsertWithWhereUniqueWithoutContactInput = {
+    where: SignatureRequestWhereUniqueInput
+    update: XOR<SignatureRequestUpdateWithoutContactInput, SignatureRequestUncheckedUpdateWithoutContactInput>
+    create: XOR<SignatureRequestCreateWithoutContactInput, SignatureRequestUncheckedCreateWithoutContactInput>
+  }
+
+  export type SignatureRequestUpdateWithWhereUniqueWithoutContactInput = {
+    where: SignatureRequestWhereUniqueInput
+    data: XOR<SignatureRequestUpdateWithoutContactInput, SignatureRequestUncheckedUpdateWithoutContactInput>
+  }
+
+  export type SignatureRequestUpdateManyWithWhereWithoutContactInput = {
+    where: SignatureRequestScalarWhereInput
+    data: XOR<SignatureRequestUpdateManyMutationInput, SignatureRequestUncheckedUpdateManyWithoutContactInput>
+  }
+
   export type OrganizationCreateWithoutProductsInput = {
     id: string
     name: string
@@ -67817,6 +75586,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutProductsInput = {
@@ -67851,6 +75624,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutProductsInput = {
@@ -68001,6 +75778,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutProductsInput = {
@@ -68035,6 +75816,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type InventoryItemUpsertWithWhereUniqueWithoutProductInput = {
@@ -68132,6 +75917,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutInventoryInput = {
@@ -68166,6 +75955,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutInventoryInput = {
@@ -68306,6 +76099,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutInventoryInput = {
@@ -68340,6 +76137,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type BranchUpsertWithoutInventoryInput = {
@@ -68476,6 +76277,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutEnquiriesInput = {
@@ -68510,6 +76315,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutEnquiriesInput = {
@@ -68589,6 +76398,8 @@ export namespace Prisma {
     attendances?: AttendanceCreateNestedManyWithoutContactInput
     membershipSubscriptions?: MembershipSubscriptionCreateNestedManyWithoutContactInput
     sales?: SaleCreateNestedManyWithoutContactInput
+    messages?: MessageCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutContactInput
   }
 
   export type ContactUncheckedCreateWithoutEnquiriesInput = {
@@ -68612,6 +76423,8 @@ export namespace Prisma {
     attendances?: AttendanceUncheckedCreateNestedManyWithoutContactInput
     membershipSubscriptions?: MembershipSubscriptionUncheckedCreateNestedManyWithoutContactInput
     sales?: SaleUncheckedCreateNestedManyWithoutContactInput
+    messages?: MessageUncheckedCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutContactInput
   }
 
   export type ContactCreateOrConnectWithoutEnquiriesInput = {
@@ -68711,6 +76524,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutEnquiriesInput = {
@@ -68745,6 +76562,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type BranchUpsertWithoutEnquiriesInput = {
@@ -68836,6 +76657,8 @@ export namespace Prisma {
     attendances?: AttendanceUpdateManyWithoutContactNestedInput
     membershipSubscriptions?: MembershipSubscriptionUpdateManyWithoutContactNestedInput
     sales?: SaleUpdateManyWithoutContactNestedInput
+    messages?: MessageUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateWithoutEnquiriesInput = {
@@ -68859,6 +76682,8 @@ export namespace Prisma {
     attendances?: AttendanceUncheckedUpdateManyWithoutContactNestedInput
     membershipSubscriptions?: MembershipSubscriptionUncheckedUpdateManyWithoutContactNestedInput
     sales?: SaleUncheckedUpdateManyWithoutContactNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutContactNestedInput
   }
 
   export type UserUpsertWithoutEnquiriesInput = {
@@ -68948,6 +76773,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutBookingsInput = {
@@ -68982,6 +76811,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutBookingsInput = {
@@ -69061,6 +76894,8 @@ export namespace Prisma {
     attendances?: AttendanceCreateNestedManyWithoutContactInput
     membershipSubscriptions?: MembershipSubscriptionCreateNestedManyWithoutContactInput
     sales?: SaleCreateNestedManyWithoutContactInput
+    messages?: MessageCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutContactInput
   }
 
   export type ContactUncheckedCreateWithoutBookingsInput = {
@@ -69084,6 +76919,8 @@ export namespace Prisma {
     attendances?: AttendanceUncheckedCreateNestedManyWithoutContactInput
     membershipSubscriptions?: MembershipSubscriptionUncheckedCreateNestedManyWithoutContactInput
     sales?: SaleUncheckedCreateNestedManyWithoutContactInput
+    messages?: MessageUncheckedCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutContactInput
   }
 
   export type ContactCreateOrConnectWithoutBookingsInput = {
@@ -69134,6 +76971,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutBookingsInput = {
@@ -69168,6 +77009,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type BranchUpsertWithoutBookingsInput = {
@@ -69259,6 +77104,8 @@ export namespace Prisma {
     attendances?: AttendanceUpdateManyWithoutContactNestedInput
     membershipSubscriptions?: MembershipSubscriptionUpdateManyWithoutContactNestedInput
     sales?: SaleUpdateManyWithoutContactNestedInput
+    messages?: MessageUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateWithoutBookingsInput = {
@@ -69282,6 +77129,8 @@ export namespace Prisma {
     attendances?: AttendanceUncheckedUpdateManyWithoutContactNestedInput
     membershipSubscriptions?: MembershipSubscriptionUncheckedUpdateManyWithoutContactNestedInput
     sales?: SaleUncheckedUpdateManyWithoutContactNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutContactNestedInput
   }
 
   export type OrganizationCreateWithoutInvoicesInput = {
@@ -69316,6 +77165,10 @@ export namespace Prisma {
     bookings?: BookingCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutInvoicesInput = {
@@ -69350,6 +77203,10 @@ export namespace Prisma {
     bookings?: BookingUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutInvoicesInput = {
@@ -69429,6 +77286,8 @@ export namespace Prisma {
     attendances?: AttendanceCreateNestedManyWithoutContactInput
     membershipSubscriptions?: MembershipSubscriptionCreateNestedManyWithoutContactInput
     sales?: SaleCreateNestedManyWithoutContactInput
+    messages?: MessageCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutContactInput
   }
 
   export type ContactUncheckedCreateWithoutInvoicesInput = {
@@ -69452,6 +77311,8 @@ export namespace Prisma {
     attendances?: AttendanceUncheckedCreateNestedManyWithoutContactInput
     membershipSubscriptions?: MembershipSubscriptionUncheckedCreateNestedManyWithoutContactInput
     sales?: SaleUncheckedCreateNestedManyWithoutContactInput
+    messages?: MessageUncheckedCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutContactInput
   }
 
   export type ContactCreateOrConnectWithoutInvoicesInput = {
@@ -69564,6 +77425,10 @@ export namespace Prisma {
     bookings?: BookingUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutInvoicesInput = {
@@ -69598,6 +77463,10 @@ export namespace Prisma {
     bookings?: BookingUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type BranchUpsertWithoutInvoicesInput = {
@@ -69689,6 +77558,8 @@ export namespace Prisma {
     attendances?: AttendanceUpdateManyWithoutContactNestedInput
     membershipSubscriptions?: MembershipSubscriptionUpdateManyWithoutContactNestedInput
     sales?: SaleUpdateManyWithoutContactNestedInput
+    messages?: MessageUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateWithoutInvoicesInput = {
@@ -69712,6 +77583,8 @@ export namespace Prisma {
     attendances?: AttendanceUncheckedUpdateManyWithoutContactNestedInput
     membershipSubscriptions?: MembershipSubscriptionUncheckedUpdateManyWithoutContactNestedInput
     sales?: SaleUncheckedUpdateManyWithoutContactNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutContactNestedInput
   }
 
   export type InvoiceLineUpsertWithWhereUniqueWithoutInvoiceInput = {
@@ -69962,6 +77835,10 @@ export namespace Prisma {
     bookings?: BookingCreateNestedManyWithoutOrganizationInput
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutPaymentsInput = {
@@ -69996,6 +77873,10 @@ export namespace Prisma {
     bookings?: BookingUncheckedCreateNestedManyWithoutOrganizationInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutPaymentsInput = {
@@ -70093,6 +77974,10 @@ export namespace Prisma {
     bookings?: BookingUpdateManyWithoutOrganizationNestedInput
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutPaymentsInput = {
@@ -70127,6 +78012,10 @@ export namespace Prisma {
     bookings?: BookingUncheckedUpdateManyWithoutOrganizationNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type InvoiceUpsertWithoutPaymentsInput = {
@@ -70214,6 +78103,10 @@ export namespace Prisma {
     bookings?: BookingCreateNestedManyWithoutOrganizationInput
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutDocumentsInput = {
@@ -70248,6 +78141,10 @@ export namespace Prisma {
     bookings?: BookingUncheckedCreateNestedManyWithoutOrganizationInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutDocumentsInput = {
@@ -70398,6 +78295,10 @@ export namespace Prisma {
     bookings?: BookingUpdateManyWithoutOrganizationNestedInput
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutDocumentsInput = {
@@ -70432,6 +78333,10 @@ export namespace Prisma {
     bookings?: BookingUncheckedUpdateManyWithoutOrganizationNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type BranchUpsertWithoutDocumentsInput = {
@@ -70578,6 +78483,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutMembershipPlansInput = {
@@ -70612,6 +78521,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutMembershipPlansInput = {
@@ -70698,6 +78611,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutMembershipPlansInput = {
@@ -70732,6 +78649,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type MembershipSubscriptionUpsertWithWhereUniqueWithoutPlanInput = {
@@ -70782,6 +78703,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutMembershipSubscriptionsInput = {
@@ -70816,6 +78741,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutMembershipSubscriptionsInput = {
@@ -70844,6 +78773,8 @@ export namespace Prisma {
     gymMember?: GymMemberCreateNestedOneWithoutContactInput
     attendances?: AttendanceCreateNestedManyWithoutContactInput
     sales?: SaleCreateNestedManyWithoutContactInput
+    messages?: MessageCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutContactInput
   }
 
   export type ContactUncheckedCreateWithoutMembershipSubscriptionsInput = {
@@ -70867,6 +78798,8 @@ export namespace Prisma {
     gymMember?: GymMemberUncheckedCreateNestedOneWithoutContactInput
     attendances?: AttendanceUncheckedCreateNestedManyWithoutContactInput
     sales?: SaleUncheckedCreateNestedManyWithoutContactInput
+    messages?: MessageUncheckedCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutContactInput
   }
 
   export type ContactCreateOrConnectWithoutMembershipSubscriptionsInput = {
@@ -70950,6 +78883,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutMembershipSubscriptionsInput = {
@@ -70984,6 +78921,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type ContactUpsertWithoutMembershipSubscriptionsInput = {
@@ -71018,6 +78959,8 @@ export namespace Prisma {
     gymMember?: GymMemberUpdateOneWithoutContactNestedInput
     attendances?: AttendanceUpdateManyWithoutContactNestedInput
     sales?: SaleUpdateManyWithoutContactNestedInput
+    messages?: MessageUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateWithoutMembershipSubscriptionsInput = {
@@ -71041,6 +78984,8 @@ export namespace Prisma {
     gymMember?: GymMemberUncheckedUpdateOneWithoutContactNestedInput
     attendances?: AttendanceUncheckedUpdateManyWithoutContactNestedInput
     sales?: SaleUncheckedUpdateManyWithoutContactNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutContactNestedInput
   }
 
   export type MembershipPlanUpsertWithoutSubscriptionsInput = {
@@ -71114,6 +79059,10 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
     payments?: PaymentCreateNestedManyWithoutOrganizationInput
     documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationUncheckedCreateWithoutSalesInput = {
@@ -71148,6 +79097,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
     payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
     documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
   }
 
   export type OrganizationCreateOrConnectWithoutSalesInput = {
@@ -71227,6 +79180,8 @@ export namespace Prisma {
     gymMember?: GymMemberCreateNestedOneWithoutContactInput
     attendances?: AttendanceCreateNestedManyWithoutContactInput
     membershipSubscriptions?: MembershipSubscriptionCreateNestedManyWithoutContactInput
+    messages?: MessageCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutContactInput
   }
 
   export type ContactUncheckedCreateWithoutSalesInput = {
@@ -71250,6 +79205,8 @@ export namespace Prisma {
     gymMember?: GymMemberUncheckedCreateNestedOneWithoutContactInput
     attendances?: AttendanceUncheckedCreateNestedManyWithoutContactInput
     membershipSubscriptions?: MembershipSubscriptionUncheckedCreateNestedManyWithoutContactInput
+    messages?: MessageUncheckedCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutContactInput
   }
 
   export type ContactCreateOrConnectWithoutSalesInput = {
@@ -71383,6 +79340,10 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
   }
 
   export type OrganizationUncheckedUpdateWithoutSalesInput = {
@@ -71417,6 +79378,10 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
     documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
   }
 
   export type BranchUpsertWithoutSalesInput = {
@@ -71508,6 +79473,8 @@ export namespace Prisma {
     gymMember?: GymMemberUpdateOneWithoutContactNestedInput
     attendances?: AttendanceUpdateManyWithoutContactNestedInput
     membershipSubscriptions?: MembershipSubscriptionUpdateManyWithoutContactNestedInput
+    messages?: MessageUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateWithoutSalesInput = {
@@ -71531,6 +79498,8 @@ export namespace Prisma {
     gymMember?: GymMemberUncheckedUpdateOneWithoutContactNestedInput
     attendances?: AttendanceUncheckedUpdateManyWithoutContactNestedInput
     membershipSubscriptions?: MembershipSubscriptionUncheckedUpdateManyWithoutContactNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutContactNestedInput
   }
 
   export type UserUpsertWithoutSalesSoldInput = {
@@ -71868,6 +79837,910 @@ export namespace Prisma {
     salesSold?: SaleUncheckedUpdateManyWithoutSoldByUserNestedInput
   }
 
+  export type OrganizationCreateWithoutAutomationRulesInput = {
+    id: string
+    name: string
+    slug: string
+    description?: string | null
+    industry: $Enums.IndustryType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    branches?: BranchCreateNestedManyWithoutOrganizationInput
+    users?: UserCreateNestedManyWithoutOrganizationInput
+    roles?: RoleCreateNestedManyWithoutOrganizationInput
+    auditLogs?: AuditLogCreateNestedManyWithoutOrganizationInput
+    settings?: OrganizationSettingCreateNestedManyWithoutOrganizationInput
+    notifications?: NotificationCreateNestedManyWithoutOrganizationInput
+    musicStudents?: MusicStudentCreateNestedManyWithoutOrganizationInput
+    musicCourses?: MusicCourseCreateNestedManyWithoutOrganizationInput
+    musicBatches?: MusicBatchCreateNestedManyWithoutOrganizationInput
+    musicEnrollments?: MusicEnrollmentCreateNestedManyWithoutOrganizationInput
+    musicPracticeLogs?: MusicPracticeLogCreateNestedManyWithoutOrganizationInput
+    gymMembers?: GymMemberCreateNestedManyWithoutOrganizationInput
+    gymClasses?: GymClassCreateNestedManyWithoutOrganizationInput
+    attendances?: AttendanceCreateNestedManyWithoutOrganizationInput
+    membershipPlans?: MembershipPlanCreateNestedManyWithoutOrganizationInput
+    membershipSubscriptions?: MembershipSubscriptionCreateNestedManyWithoutOrganizationInput
+    sales?: SaleCreateNestedManyWithoutOrganizationInput
+    contacts?: ContactCreateNestedManyWithoutOrganizationInput
+    products?: ProductCreateNestedManyWithoutOrganizationInput
+    inventory?: InventoryItemCreateNestedManyWithoutOrganizationInput
+    enquiries?: EnquiryCreateNestedManyWithoutOrganizationInput
+    bookings?: BookingCreateNestedManyWithoutOrganizationInput
+    invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
+    payments?: PaymentCreateNestedManyWithoutOrganizationInput
+    documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationUncheckedCreateWithoutAutomationRulesInput = {
+    id: string
+    name: string
+    slug: string
+    description?: string | null
+    industry: $Enums.IndustryType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    branches?: BranchUncheckedCreateNestedManyWithoutOrganizationInput
+    users?: UserUncheckedCreateNestedManyWithoutOrganizationInput
+    roles?: RoleUncheckedCreateNestedManyWithoutOrganizationInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+    settings?: OrganizationSettingUncheckedCreateNestedManyWithoutOrganizationInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+    musicStudents?: MusicStudentUncheckedCreateNestedManyWithoutOrganizationInput
+    musicCourses?: MusicCourseUncheckedCreateNestedManyWithoutOrganizationInput
+    musicBatches?: MusicBatchUncheckedCreateNestedManyWithoutOrganizationInput
+    musicEnrollments?: MusicEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+    musicPracticeLogs?: MusicPracticeLogUncheckedCreateNestedManyWithoutOrganizationInput
+    gymMembers?: GymMemberUncheckedCreateNestedManyWithoutOrganizationInput
+    gymClasses?: GymClassUncheckedCreateNestedManyWithoutOrganizationInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutOrganizationInput
+    membershipPlans?: MembershipPlanUncheckedCreateNestedManyWithoutOrganizationInput
+    membershipSubscriptions?: MembershipSubscriptionUncheckedCreateNestedManyWithoutOrganizationInput
+    sales?: SaleUncheckedCreateNestedManyWithoutOrganizationInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutOrganizationInput
+    products?: ProductUncheckedCreateNestedManyWithoutOrganizationInput
+    inventory?: InventoryItemUncheckedCreateNestedManyWithoutOrganizationInput
+    enquiries?: EnquiryUncheckedCreateNestedManyWithoutOrganizationInput
+    bookings?: BookingUncheckedCreateNestedManyWithoutOrganizationInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
+    documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationCreateOrConnectWithoutAutomationRulesInput = {
+    where: OrganizationWhereUniqueInput
+    create: XOR<OrganizationCreateWithoutAutomationRulesInput, OrganizationUncheckedCreateWithoutAutomationRulesInput>
+  }
+
+  export type OrganizationUpsertWithoutAutomationRulesInput = {
+    update: XOR<OrganizationUpdateWithoutAutomationRulesInput, OrganizationUncheckedUpdateWithoutAutomationRulesInput>
+    create: XOR<OrganizationCreateWithoutAutomationRulesInput, OrganizationUncheckedCreateWithoutAutomationRulesInput>
+    where?: OrganizationWhereInput
+  }
+
+  export type OrganizationUpdateToOneWithWhereWithoutAutomationRulesInput = {
+    where?: OrganizationWhereInput
+    data: XOR<OrganizationUpdateWithoutAutomationRulesInput, OrganizationUncheckedUpdateWithoutAutomationRulesInput>
+  }
+
+  export type OrganizationUpdateWithoutAutomationRulesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    industry?: EnumIndustryTypeFieldUpdateOperationsInput | $Enums.IndustryType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branches?: BranchUpdateManyWithoutOrganizationNestedInput
+    users?: UserUpdateManyWithoutOrganizationNestedInput
+    roles?: RoleUpdateManyWithoutOrganizationNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutOrganizationNestedInput
+    settings?: OrganizationSettingUpdateManyWithoutOrganizationNestedInput
+    notifications?: NotificationUpdateManyWithoutOrganizationNestedInput
+    musicStudents?: MusicStudentUpdateManyWithoutOrganizationNestedInput
+    musicCourses?: MusicCourseUpdateManyWithoutOrganizationNestedInput
+    musicBatches?: MusicBatchUpdateManyWithoutOrganizationNestedInput
+    musicEnrollments?: MusicEnrollmentUpdateManyWithoutOrganizationNestedInput
+    musicPracticeLogs?: MusicPracticeLogUpdateManyWithoutOrganizationNestedInput
+    gymMembers?: GymMemberUpdateManyWithoutOrganizationNestedInput
+    gymClasses?: GymClassUpdateManyWithoutOrganizationNestedInput
+    attendances?: AttendanceUpdateManyWithoutOrganizationNestedInput
+    membershipPlans?: MembershipPlanUpdateManyWithoutOrganizationNestedInput
+    membershipSubscriptions?: MembershipSubscriptionUpdateManyWithoutOrganizationNestedInput
+    sales?: SaleUpdateManyWithoutOrganizationNestedInput
+    contacts?: ContactUpdateManyWithoutOrganizationNestedInput
+    products?: ProductUpdateManyWithoutOrganizationNestedInput
+    inventory?: InventoryItemUpdateManyWithoutOrganizationNestedInput
+    enquiries?: EnquiryUpdateManyWithoutOrganizationNestedInput
+    bookings?: BookingUpdateManyWithoutOrganizationNestedInput
+    invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
+    payments?: PaymentUpdateManyWithoutOrganizationNestedInput
+    documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type OrganizationUncheckedUpdateWithoutAutomationRulesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    industry?: EnumIndustryTypeFieldUpdateOperationsInput | $Enums.IndustryType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branches?: BranchUncheckedUpdateManyWithoutOrganizationNestedInput
+    users?: UserUncheckedUpdateManyWithoutOrganizationNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+    settings?: OrganizationSettingUncheckedUpdateManyWithoutOrganizationNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+    musicStudents?: MusicStudentUncheckedUpdateManyWithoutOrganizationNestedInput
+    musicCourses?: MusicCourseUncheckedUpdateManyWithoutOrganizationNestedInput
+    musicBatches?: MusicBatchUncheckedUpdateManyWithoutOrganizationNestedInput
+    musicEnrollments?: MusicEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+    musicPracticeLogs?: MusicPracticeLogUncheckedUpdateManyWithoutOrganizationNestedInput
+    gymMembers?: GymMemberUncheckedUpdateManyWithoutOrganizationNestedInput
+    gymClasses?: GymClassUncheckedUpdateManyWithoutOrganizationNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutOrganizationNestedInput
+    membershipPlans?: MembershipPlanUncheckedUpdateManyWithoutOrganizationNestedInput
+    membershipSubscriptions?: MembershipSubscriptionUncheckedUpdateManyWithoutOrganizationNestedInput
+    sales?: SaleUncheckedUpdateManyWithoutOrganizationNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+    products?: ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+    inventory?: InventoryItemUncheckedUpdateManyWithoutOrganizationNestedInput
+    enquiries?: EnquiryUncheckedUpdateManyWithoutOrganizationNestedInput
+    bookings?: BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
+    documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type OrganizationCreateWithoutMessagesInput = {
+    id: string
+    name: string
+    slug: string
+    description?: string | null
+    industry: $Enums.IndustryType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    branches?: BranchCreateNestedManyWithoutOrganizationInput
+    users?: UserCreateNestedManyWithoutOrganizationInput
+    roles?: RoleCreateNestedManyWithoutOrganizationInput
+    auditLogs?: AuditLogCreateNestedManyWithoutOrganizationInput
+    settings?: OrganizationSettingCreateNestedManyWithoutOrganizationInput
+    notifications?: NotificationCreateNestedManyWithoutOrganizationInput
+    musicStudents?: MusicStudentCreateNestedManyWithoutOrganizationInput
+    musicCourses?: MusicCourseCreateNestedManyWithoutOrganizationInput
+    musicBatches?: MusicBatchCreateNestedManyWithoutOrganizationInput
+    musicEnrollments?: MusicEnrollmentCreateNestedManyWithoutOrganizationInput
+    musicPracticeLogs?: MusicPracticeLogCreateNestedManyWithoutOrganizationInput
+    gymMembers?: GymMemberCreateNestedManyWithoutOrganizationInput
+    gymClasses?: GymClassCreateNestedManyWithoutOrganizationInput
+    attendances?: AttendanceCreateNestedManyWithoutOrganizationInput
+    membershipPlans?: MembershipPlanCreateNestedManyWithoutOrganizationInput
+    membershipSubscriptions?: MembershipSubscriptionCreateNestedManyWithoutOrganizationInput
+    sales?: SaleCreateNestedManyWithoutOrganizationInput
+    contacts?: ContactCreateNestedManyWithoutOrganizationInput
+    products?: ProductCreateNestedManyWithoutOrganizationInput
+    inventory?: InventoryItemCreateNestedManyWithoutOrganizationInput
+    enquiries?: EnquiryCreateNestedManyWithoutOrganizationInput
+    bookings?: BookingCreateNestedManyWithoutOrganizationInput
+    invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
+    payments?: PaymentCreateNestedManyWithoutOrganizationInput
+    documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationUncheckedCreateWithoutMessagesInput = {
+    id: string
+    name: string
+    slug: string
+    description?: string | null
+    industry: $Enums.IndustryType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    branches?: BranchUncheckedCreateNestedManyWithoutOrganizationInput
+    users?: UserUncheckedCreateNestedManyWithoutOrganizationInput
+    roles?: RoleUncheckedCreateNestedManyWithoutOrganizationInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+    settings?: OrganizationSettingUncheckedCreateNestedManyWithoutOrganizationInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+    musicStudents?: MusicStudentUncheckedCreateNestedManyWithoutOrganizationInput
+    musicCourses?: MusicCourseUncheckedCreateNestedManyWithoutOrganizationInput
+    musicBatches?: MusicBatchUncheckedCreateNestedManyWithoutOrganizationInput
+    musicEnrollments?: MusicEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+    musicPracticeLogs?: MusicPracticeLogUncheckedCreateNestedManyWithoutOrganizationInput
+    gymMembers?: GymMemberUncheckedCreateNestedManyWithoutOrganizationInput
+    gymClasses?: GymClassUncheckedCreateNestedManyWithoutOrganizationInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutOrganizationInput
+    membershipPlans?: MembershipPlanUncheckedCreateNestedManyWithoutOrganizationInput
+    membershipSubscriptions?: MembershipSubscriptionUncheckedCreateNestedManyWithoutOrganizationInput
+    sales?: SaleUncheckedCreateNestedManyWithoutOrganizationInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutOrganizationInput
+    products?: ProductUncheckedCreateNestedManyWithoutOrganizationInput
+    inventory?: InventoryItemUncheckedCreateNestedManyWithoutOrganizationInput
+    enquiries?: EnquiryUncheckedCreateNestedManyWithoutOrganizationInput
+    bookings?: BookingUncheckedCreateNestedManyWithoutOrganizationInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
+    documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationCreateOrConnectWithoutMessagesInput = {
+    where: OrganizationWhereUniqueInput
+    create: XOR<OrganizationCreateWithoutMessagesInput, OrganizationUncheckedCreateWithoutMessagesInput>
+  }
+
+  export type ContactCreateWithoutMessagesInput = {
+    id: string
+    type: $Enums.ContactType
+    status?: $Enums.ContactStatus
+    firstName?: string | null
+    lastName?: string | null
+    companyName?: string | null
+    email?: string | null
+    phone?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organization: OrganizationCreateNestedOneWithoutContactsInput
+    branch?: BranchCreateNestedOneWithoutContactsInput
+    enquiries?: EnquiryCreateNestedManyWithoutContactInput
+    bookings?: BookingCreateNestedManyWithoutContactInput
+    invoices?: InvoiceCreateNestedManyWithoutContactInput
+    musicStudent?: MusicStudentCreateNestedOneWithoutContactInput
+    gymMember?: GymMemberCreateNestedOneWithoutContactInput
+    attendances?: AttendanceCreateNestedManyWithoutContactInput
+    membershipSubscriptions?: MembershipSubscriptionCreateNestedManyWithoutContactInput
+    sales?: SaleCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutContactInput
+  }
+
+  export type ContactUncheckedCreateWithoutMessagesInput = {
+    id: string
+    organizationId: string
+    branchId?: string | null
+    type: $Enums.ContactType
+    status?: $Enums.ContactStatus
+    firstName?: string | null
+    lastName?: string | null
+    companyName?: string | null
+    email?: string | null
+    phone?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    enquiries?: EnquiryUncheckedCreateNestedManyWithoutContactInput
+    bookings?: BookingUncheckedCreateNestedManyWithoutContactInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutContactInput
+    musicStudent?: MusicStudentUncheckedCreateNestedOneWithoutContactInput
+    gymMember?: GymMemberUncheckedCreateNestedOneWithoutContactInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutContactInput
+    membershipSubscriptions?: MembershipSubscriptionUncheckedCreateNestedManyWithoutContactInput
+    sales?: SaleUncheckedCreateNestedManyWithoutContactInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutContactInput
+  }
+
+  export type ContactCreateOrConnectWithoutMessagesInput = {
+    where: ContactWhereUniqueInput
+    create: XOR<ContactCreateWithoutMessagesInput, ContactUncheckedCreateWithoutMessagesInput>
+  }
+
+  export type OrganizationUpsertWithoutMessagesInput = {
+    update: XOR<OrganizationUpdateWithoutMessagesInput, OrganizationUncheckedUpdateWithoutMessagesInput>
+    create: XOR<OrganizationCreateWithoutMessagesInput, OrganizationUncheckedCreateWithoutMessagesInput>
+    where?: OrganizationWhereInput
+  }
+
+  export type OrganizationUpdateToOneWithWhereWithoutMessagesInput = {
+    where?: OrganizationWhereInput
+    data: XOR<OrganizationUpdateWithoutMessagesInput, OrganizationUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type OrganizationUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    industry?: EnumIndustryTypeFieldUpdateOperationsInput | $Enums.IndustryType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branches?: BranchUpdateManyWithoutOrganizationNestedInput
+    users?: UserUpdateManyWithoutOrganizationNestedInput
+    roles?: RoleUpdateManyWithoutOrganizationNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutOrganizationNestedInput
+    settings?: OrganizationSettingUpdateManyWithoutOrganizationNestedInput
+    notifications?: NotificationUpdateManyWithoutOrganizationNestedInput
+    musicStudents?: MusicStudentUpdateManyWithoutOrganizationNestedInput
+    musicCourses?: MusicCourseUpdateManyWithoutOrganizationNestedInput
+    musicBatches?: MusicBatchUpdateManyWithoutOrganizationNestedInput
+    musicEnrollments?: MusicEnrollmentUpdateManyWithoutOrganizationNestedInput
+    musicPracticeLogs?: MusicPracticeLogUpdateManyWithoutOrganizationNestedInput
+    gymMembers?: GymMemberUpdateManyWithoutOrganizationNestedInput
+    gymClasses?: GymClassUpdateManyWithoutOrganizationNestedInput
+    attendances?: AttendanceUpdateManyWithoutOrganizationNestedInput
+    membershipPlans?: MembershipPlanUpdateManyWithoutOrganizationNestedInput
+    membershipSubscriptions?: MembershipSubscriptionUpdateManyWithoutOrganizationNestedInput
+    sales?: SaleUpdateManyWithoutOrganizationNestedInput
+    contacts?: ContactUpdateManyWithoutOrganizationNestedInput
+    products?: ProductUpdateManyWithoutOrganizationNestedInput
+    inventory?: InventoryItemUpdateManyWithoutOrganizationNestedInput
+    enquiries?: EnquiryUpdateManyWithoutOrganizationNestedInput
+    bookings?: BookingUpdateManyWithoutOrganizationNestedInput
+    invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
+    payments?: PaymentUpdateManyWithoutOrganizationNestedInput
+    documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type OrganizationUncheckedUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    industry?: EnumIndustryTypeFieldUpdateOperationsInput | $Enums.IndustryType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branches?: BranchUncheckedUpdateManyWithoutOrganizationNestedInput
+    users?: UserUncheckedUpdateManyWithoutOrganizationNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+    settings?: OrganizationSettingUncheckedUpdateManyWithoutOrganizationNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+    musicStudents?: MusicStudentUncheckedUpdateManyWithoutOrganizationNestedInput
+    musicCourses?: MusicCourseUncheckedUpdateManyWithoutOrganizationNestedInput
+    musicBatches?: MusicBatchUncheckedUpdateManyWithoutOrganizationNestedInput
+    musicEnrollments?: MusicEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+    musicPracticeLogs?: MusicPracticeLogUncheckedUpdateManyWithoutOrganizationNestedInput
+    gymMembers?: GymMemberUncheckedUpdateManyWithoutOrganizationNestedInput
+    gymClasses?: GymClassUncheckedUpdateManyWithoutOrganizationNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutOrganizationNestedInput
+    membershipPlans?: MembershipPlanUncheckedUpdateManyWithoutOrganizationNestedInput
+    membershipSubscriptions?: MembershipSubscriptionUncheckedUpdateManyWithoutOrganizationNestedInput
+    sales?: SaleUncheckedUpdateManyWithoutOrganizationNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+    products?: ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+    inventory?: InventoryItemUncheckedUpdateManyWithoutOrganizationNestedInput
+    enquiries?: EnquiryUncheckedUpdateManyWithoutOrganizationNestedInput
+    bookings?: BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
+    documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type ContactUpsertWithoutMessagesInput = {
+    update: XOR<ContactUpdateWithoutMessagesInput, ContactUncheckedUpdateWithoutMessagesInput>
+    create: XOR<ContactCreateWithoutMessagesInput, ContactUncheckedCreateWithoutMessagesInput>
+    where?: ContactWhereInput
+  }
+
+  export type ContactUpdateToOneWithWhereWithoutMessagesInput = {
+    where?: ContactWhereInput
+    data: XOR<ContactUpdateWithoutMessagesInput, ContactUncheckedUpdateWithoutMessagesInput>
+  }
+
+  export type ContactUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumContactTypeFieldUpdateOperationsInput | $Enums.ContactType
+    status?: EnumContactStatusFieldUpdateOperationsInput | $Enums.ContactStatus
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutContactsNestedInput
+    branch?: BranchUpdateOneWithoutContactsNestedInput
+    enquiries?: EnquiryUpdateManyWithoutContactNestedInput
+    bookings?: BookingUpdateManyWithoutContactNestedInput
+    invoices?: InvoiceUpdateManyWithoutContactNestedInput
+    musicStudent?: MusicStudentUpdateOneWithoutContactNestedInput
+    gymMember?: GymMemberUpdateOneWithoutContactNestedInput
+    attendances?: AttendanceUpdateManyWithoutContactNestedInput
+    membershipSubscriptions?: MembershipSubscriptionUpdateManyWithoutContactNestedInput
+    sales?: SaleUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutContactNestedInput
+  }
+
+  export type ContactUncheckedUpdateWithoutMessagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    branchId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumContactTypeFieldUpdateOperationsInput | $Enums.ContactType
+    status?: EnumContactStatusFieldUpdateOperationsInput | $Enums.ContactStatus
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enquiries?: EnquiryUncheckedUpdateManyWithoutContactNestedInput
+    bookings?: BookingUncheckedUpdateManyWithoutContactNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutContactNestedInput
+    musicStudent?: MusicStudentUncheckedUpdateOneWithoutContactNestedInput
+    gymMember?: GymMemberUncheckedUpdateOneWithoutContactNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutContactNestedInput
+    membershipSubscriptions?: MembershipSubscriptionUncheckedUpdateManyWithoutContactNestedInput
+    sales?: SaleUncheckedUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutContactNestedInput
+  }
+
+  export type OrganizationCreateWithoutMessageTemplatesInput = {
+    id: string
+    name: string
+    slug: string
+    description?: string | null
+    industry: $Enums.IndustryType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    branches?: BranchCreateNestedManyWithoutOrganizationInput
+    users?: UserCreateNestedManyWithoutOrganizationInput
+    roles?: RoleCreateNestedManyWithoutOrganizationInput
+    auditLogs?: AuditLogCreateNestedManyWithoutOrganizationInput
+    settings?: OrganizationSettingCreateNestedManyWithoutOrganizationInput
+    notifications?: NotificationCreateNestedManyWithoutOrganizationInput
+    musicStudents?: MusicStudentCreateNestedManyWithoutOrganizationInput
+    musicCourses?: MusicCourseCreateNestedManyWithoutOrganizationInput
+    musicBatches?: MusicBatchCreateNestedManyWithoutOrganizationInput
+    musicEnrollments?: MusicEnrollmentCreateNestedManyWithoutOrganizationInput
+    musicPracticeLogs?: MusicPracticeLogCreateNestedManyWithoutOrganizationInput
+    gymMembers?: GymMemberCreateNestedManyWithoutOrganizationInput
+    gymClasses?: GymClassCreateNestedManyWithoutOrganizationInput
+    attendances?: AttendanceCreateNestedManyWithoutOrganizationInput
+    membershipPlans?: MembershipPlanCreateNestedManyWithoutOrganizationInput
+    membershipSubscriptions?: MembershipSubscriptionCreateNestedManyWithoutOrganizationInput
+    sales?: SaleCreateNestedManyWithoutOrganizationInput
+    contacts?: ContactCreateNestedManyWithoutOrganizationInput
+    products?: ProductCreateNestedManyWithoutOrganizationInput
+    inventory?: InventoryItemCreateNestedManyWithoutOrganizationInput
+    enquiries?: EnquiryCreateNestedManyWithoutOrganizationInput
+    bookings?: BookingCreateNestedManyWithoutOrganizationInput
+    invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
+    payments?: PaymentCreateNestedManyWithoutOrganizationInput
+    documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationUncheckedCreateWithoutMessageTemplatesInput = {
+    id: string
+    name: string
+    slug: string
+    description?: string | null
+    industry: $Enums.IndustryType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    branches?: BranchUncheckedCreateNestedManyWithoutOrganizationInput
+    users?: UserUncheckedCreateNestedManyWithoutOrganizationInput
+    roles?: RoleUncheckedCreateNestedManyWithoutOrganizationInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+    settings?: OrganizationSettingUncheckedCreateNestedManyWithoutOrganizationInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+    musicStudents?: MusicStudentUncheckedCreateNestedManyWithoutOrganizationInput
+    musicCourses?: MusicCourseUncheckedCreateNestedManyWithoutOrganizationInput
+    musicBatches?: MusicBatchUncheckedCreateNestedManyWithoutOrganizationInput
+    musicEnrollments?: MusicEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+    musicPracticeLogs?: MusicPracticeLogUncheckedCreateNestedManyWithoutOrganizationInput
+    gymMembers?: GymMemberUncheckedCreateNestedManyWithoutOrganizationInput
+    gymClasses?: GymClassUncheckedCreateNestedManyWithoutOrganizationInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutOrganizationInput
+    membershipPlans?: MembershipPlanUncheckedCreateNestedManyWithoutOrganizationInput
+    membershipSubscriptions?: MembershipSubscriptionUncheckedCreateNestedManyWithoutOrganizationInput
+    sales?: SaleUncheckedCreateNestedManyWithoutOrganizationInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutOrganizationInput
+    products?: ProductUncheckedCreateNestedManyWithoutOrganizationInput
+    inventory?: InventoryItemUncheckedCreateNestedManyWithoutOrganizationInput
+    enquiries?: EnquiryUncheckedCreateNestedManyWithoutOrganizationInput
+    bookings?: BookingUncheckedCreateNestedManyWithoutOrganizationInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
+    documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    signatureRequests?: SignatureRequestUncheckedCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationCreateOrConnectWithoutMessageTemplatesInput = {
+    where: OrganizationWhereUniqueInput
+    create: XOR<OrganizationCreateWithoutMessageTemplatesInput, OrganizationUncheckedCreateWithoutMessageTemplatesInput>
+  }
+
+  export type OrganizationUpsertWithoutMessageTemplatesInput = {
+    update: XOR<OrganizationUpdateWithoutMessageTemplatesInput, OrganizationUncheckedUpdateWithoutMessageTemplatesInput>
+    create: XOR<OrganizationCreateWithoutMessageTemplatesInput, OrganizationUncheckedCreateWithoutMessageTemplatesInput>
+    where?: OrganizationWhereInput
+  }
+
+  export type OrganizationUpdateToOneWithWhereWithoutMessageTemplatesInput = {
+    where?: OrganizationWhereInput
+    data: XOR<OrganizationUpdateWithoutMessageTemplatesInput, OrganizationUncheckedUpdateWithoutMessageTemplatesInput>
+  }
+
+  export type OrganizationUpdateWithoutMessageTemplatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    industry?: EnumIndustryTypeFieldUpdateOperationsInput | $Enums.IndustryType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branches?: BranchUpdateManyWithoutOrganizationNestedInput
+    users?: UserUpdateManyWithoutOrganizationNestedInput
+    roles?: RoleUpdateManyWithoutOrganizationNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutOrganizationNestedInput
+    settings?: OrganizationSettingUpdateManyWithoutOrganizationNestedInput
+    notifications?: NotificationUpdateManyWithoutOrganizationNestedInput
+    musicStudents?: MusicStudentUpdateManyWithoutOrganizationNestedInput
+    musicCourses?: MusicCourseUpdateManyWithoutOrganizationNestedInput
+    musicBatches?: MusicBatchUpdateManyWithoutOrganizationNestedInput
+    musicEnrollments?: MusicEnrollmentUpdateManyWithoutOrganizationNestedInput
+    musicPracticeLogs?: MusicPracticeLogUpdateManyWithoutOrganizationNestedInput
+    gymMembers?: GymMemberUpdateManyWithoutOrganizationNestedInput
+    gymClasses?: GymClassUpdateManyWithoutOrganizationNestedInput
+    attendances?: AttendanceUpdateManyWithoutOrganizationNestedInput
+    membershipPlans?: MembershipPlanUpdateManyWithoutOrganizationNestedInput
+    membershipSubscriptions?: MembershipSubscriptionUpdateManyWithoutOrganizationNestedInput
+    sales?: SaleUpdateManyWithoutOrganizationNestedInput
+    contacts?: ContactUpdateManyWithoutOrganizationNestedInput
+    products?: ProductUpdateManyWithoutOrganizationNestedInput
+    inventory?: InventoryItemUpdateManyWithoutOrganizationNestedInput
+    enquiries?: EnquiryUpdateManyWithoutOrganizationNestedInput
+    bookings?: BookingUpdateManyWithoutOrganizationNestedInput
+    invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
+    payments?: PaymentUpdateManyWithoutOrganizationNestedInput
+    documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type OrganizationUncheckedUpdateWithoutMessageTemplatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    industry?: EnumIndustryTypeFieldUpdateOperationsInput | $Enums.IndustryType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branches?: BranchUncheckedUpdateManyWithoutOrganizationNestedInput
+    users?: UserUncheckedUpdateManyWithoutOrganizationNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+    settings?: OrganizationSettingUncheckedUpdateManyWithoutOrganizationNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+    musicStudents?: MusicStudentUncheckedUpdateManyWithoutOrganizationNestedInput
+    musicCourses?: MusicCourseUncheckedUpdateManyWithoutOrganizationNestedInput
+    musicBatches?: MusicBatchUncheckedUpdateManyWithoutOrganizationNestedInput
+    musicEnrollments?: MusicEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+    musicPracticeLogs?: MusicPracticeLogUncheckedUpdateManyWithoutOrganizationNestedInput
+    gymMembers?: GymMemberUncheckedUpdateManyWithoutOrganizationNestedInput
+    gymClasses?: GymClassUncheckedUpdateManyWithoutOrganizationNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutOrganizationNestedInput
+    membershipPlans?: MembershipPlanUncheckedUpdateManyWithoutOrganizationNestedInput
+    membershipSubscriptions?: MembershipSubscriptionUncheckedUpdateManyWithoutOrganizationNestedInput
+    sales?: SaleUncheckedUpdateManyWithoutOrganizationNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+    products?: ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+    inventory?: InventoryItemUncheckedUpdateManyWithoutOrganizationNestedInput
+    enquiries?: EnquiryUncheckedUpdateManyWithoutOrganizationNestedInput
+    bookings?: BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
+    documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type OrganizationCreateWithoutSignatureRequestsInput = {
+    id: string
+    name: string
+    slug: string
+    description?: string | null
+    industry: $Enums.IndustryType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    branches?: BranchCreateNestedManyWithoutOrganizationInput
+    users?: UserCreateNestedManyWithoutOrganizationInput
+    roles?: RoleCreateNestedManyWithoutOrganizationInput
+    auditLogs?: AuditLogCreateNestedManyWithoutOrganizationInput
+    settings?: OrganizationSettingCreateNestedManyWithoutOrganizationInput
+    notifications?: NotificationCreateNestedManyWithoutOrganizationInput
+    musicStudents?: MusicStudentCreateNestedManyWithoutOrganizationInput
+    musicCourses?: MusicCourseCreateNestedManyWithoutOrganizationInput
+    musicBatches?: MusicBatchCreateNestedManyWithoutOrganizationInput
+    musicEnrollments?: MusicEnrollmentCreateNestedManyWithoutOrganizationInput
+    musicPracticeLogs?: MusicPracticeLogCreateNestedManyWithoutOrganizationInput
+    gymMembers?: GymMemberCreateNestedManyWithoutOrganizationInput
+    gymClasses?: GymClassCreateNestedManyWithoutOrganizationInput
+    attendances?: AttendanceCreateNestedManyWithoutOrganizationInput
+    membershipPlans?: MembershipPlanCreateNestedManyWithoutOrganizationInput
+    membershipSubscriptions?: MembershipSubscriptionCreateNestedManyWithoutOrganizationInput
+    sales?: SaleCreateNestedManyWithoutOrganizationInput
+    contacts?: ContactCreateNestedManyWithoutOrganizationInput
+    products?: ProductCreateNestedManyWithoutOrganizationInput
+    inventory?: InventoryItemCreateNestedManyWithoutOrganizationInput
+    enquiries?: EnquiryCreateNestedManyWithoutOrganizationInput
+    bookings?: BookingCreateNestedManyWithoutOrganizationInput
+    invoices?: InvoiceCreateNestedManyWithoutOrganizationInput
+    payments?: PaymentCreateNestedManyWithoutOrganizationInput
+    documents?: DocumentCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleCreateNestedManyWithoutOrganizationInput
+    messages?: MessageCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationUncheckedCreateWithoutSignatureRequestsInput = {
+    id: string
+    name: string
+    slug: string
+    description?: string | null
+    industry: $Enums.IndustryType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    branches?: BranchUncheckedCreateNestedManyWithoutOrganizationInput
+    users?: UserUncheckedCreateNestedManyWithoutOrganizationInput
+    roles?: RoleUncheckedCreateNestedManyWithoutOrganizationInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutOrganizationInput
+    settings?: OrganizationSettingUncheckedCreateNestedManyWithoutOrganizationInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutOrganizationInput
+    musicStudents?: MusicStudentUncheckedCreateNestedManyWithoutOrganizationInput
+    musicCourses?: MusicCourseUncheckedCreateNestedManyWithoutOrganizationInput
+    musicBatches?: MusicBatchUncheckedCreateNestedManyWithoutOrganizationInput
+    musicEnrollments?: MusicEnrollmentUncheckedCreateNestedManyWithoutOrganizationInput
+    musicPracticeLogs?: MusicPracticeLogUncheckedCreateNestedManyWithoutOrganizationInput
+    gymMembers?: GymMemberUncheckedCreateNestedManyWithoutOrganizationInput
+    gymClasses?: GymClassUncheckedCreateNestedManyWithoutOrganizationInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutOrganizationInput
+    membershipPlans?: MembershipPlanUncheckedCreateNestedManyWithoutOrganizationInput
+    membershipSubscriptions?: MembershipSubscriptionUncheckedCreateNestedManyWithoutOrganizationInput
+    sales?: SaleUncheckedCreateNestedManyWithoutOrganizationInput
+    contacts?: ContactUncheckedCreateNestedManyWithoutOrganizationInput
+    products?: ProductUncheckedCreateNestedManyWithoutOrganizationInput
+    inventory?: InventoryItemUncheckedCreateNestedManyWithoutOrganizationInput
+    enquiries?: EnquiryUncheckedCreateNestedManyWithoutOrganizationInput
+    bookings?: BookingUncheckedCreateNestedManyWithoutOrganizationInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutOrganizationInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutOrganizationInput
+    documents?: DocumentUncheckedCreateNestedManyWithoutOrganizationInput
+    automationRules?: AutomationRuleUncheckedCreateNestedManyWithoutOrganizationInput
+    messages?: MessageUncheckedCreateNestedManyWithoutOrganizationInput
+    messageTemplates?: MessageTemplateUncheckedCreateNestedManyWithoutOrganizationInput
+  }
+
+  export type OrganizationCreateOrConnectWithoutSignatureRequestsInput = {
+    where: OrganizationWhereUniqueInput
+    create: XOR<OrganizationCreateWithoutSignatureRequestsInput, OrganizationUncheckedCreateWithoutSignatureRequestsInput>
+  }
+
+  export type ContactCreateWithoutSignatureRequestsInput = {
+    id: string
+    type: $Enums.ContactType
+    status?: $Enums.ContactStatus
+    firstName?: string | null
+    lastName?: string | null
+    companyName?: string | null
+    email?: string | null
+    phone?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    organization: OrganizationCreateNestedOneWithoutContactsInput
+    branch?: BranchCreateNestedOneWithoutContactsInput
+    enquiries?: EnquiryCreateNestedManyWithoutContactInput
+    bookings?: BookingCreateNestedManyWithoutContactInput
+    invoices?: InvoiceCreateNestedManyWithoutContactInput
+    musicStudent?: MusicStudentCreateNestedOneWithoutContactInput
+    gymMember?: GymMemberCreateNestedOneWithoutContactInput
+    attendances?: AttendanceCreateNestedManyWithoutContactInput
+    membershipSubscriptions?: MembershipSubscriptionCreateNestedManyWithoutContactInput
+    sales?: SaleCreateNestedManyWithoutContactInput
+    messages?: MessageCreateNestedManyWithoutContactInput
+  }
+
+  export type ContactUncheckedCreateWithoutSignatureRequestsInput = {
+    id: string
+    organizationId: string
+    branchId?: string | null
+    type: $Enums.ContactType
+    status?: $Enums.ContactStatus
+    firstName?: string | null
+    lastName?: string | null
+    companyName?: string | null
+    email?: string | null
+    phone?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    enquiries?: EnquiryUncheckedCreateNestedManyWithoutContactInput
+    bookings?: BookingUncheckedCreateNestedManyWithoutContactInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutContactInput
+    musicStudent?: MusicStudentUncheckedCreateNestedOneWithoutContactInput
+    gymMember?: GymMemberUncheckedCreateNestedOneWithoutContactInput
+    attendances?: AttendanceUncheckedCreateNestedManyWithoutContactInput
+    membershipSubscriptions?: MembershipSubscriptionUncheckedCreateNestedManyWithoutContactInput
+    sales?: SaleUncheckedCreateNestedManyWithoutContactInput
+    messages?: MessageUncheckedCreateNestedManyWithoutContactInput
+  }
+
+  export type ContactCreateOrConnectWithoutSignatureRequestsInput = {
+    where: ContactWhereUniqueInput
+    create: XOR<ContactCreateWithoutSignatureRequestsInput, ContactUncheckedCreateWithoutSignatureRequestsInput>
+  }
+
+  export type OrganizationUpsertWithoutSignatureRequestsInput = {
+    update: XOR<OrganizationUpdateWithoutSignatureRequestsInput, OrganizationUncheckedUpdateWithoutSignatureRequestsInput>
+    create: XOR<OrganizationCreateWithoutSignatureRequestsInput, OrganizationUncheckedCreateWithoutSignatureRequestsInput>
+    where?: OrganizationWhereInput
+  }
+
+  export type OrganizationUpdateToOneWithWhereWithoutSignatureRequestsInput = {
+    where?: OrganizationWhereInput
+    data: XOR<OrganizationUpdateWithoutSignatureRequestsInput, OrganizationUncheckedUpdateWithoutSignatureRequestsInput>
+  }
+
+  export type OrganizationUpdateWithoutSignatureRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    industry?: EnumIndustryTypeFieldUpdateOperationsInput | $Enums.IndustryType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branches?: BranchUpdateManyWithoutOrganizationNestedInput
+    users?: UserUpdateManyWithoutOrganizationNestedInput
+    roles?: RoleUpdateManyWithoutOrganizationNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutOrganizationNestedInput
+    settings?: OrganizationSettingUpdateManyWithoutOrganizationNestedInput
+    notifications?: NotificationUpdateManyWithoutOrganizationNestedInput
+    musicStudents?: MusicStudentUpdateManyWithoutOrganizationNestedInput
+    musicCourses?: MusicCourseUpdateManyWithoutOrganizationNestedInput
+    musicBatches?: MusicBatchUpdateManyWithoutOrganizationNestedInput
+    musicEnrollments?: MusicEnrollmentUpdateManyWithoutOrganizationNestedInput
+    musicPracticeLogs?: MusicPracticeLogUpdateManyWithoutOrganizationNestedInput
+    gymMembers?: GymMemberUpdateManyWithoutOrganizationNestedInput
+    gymClasses?: GymClassUpdateManyWithoutOrganizationNestedInput
+    attendances?: AttendanceUpdateManyWithoutOrganizationNestedInput
+    membershipPlans?: MembershipPlanUpdateManyWithoutOrganizationNestedInput
+    membershipSubscriptions?: MembershipSubscriptionUpdateManyWithoutOrganizationNestedInput
+    sales?: SaleUpdateManyWithoutOrganizationNestedInput
+    contacts?: ContactUpdateManyWithoutOrganizationNestedInput
+    products?: ProductUpdateManyWithoutOrganizationNestedInput
+    inventory?: InventoryItemUpdateManyWithoutOrganizationNestedInput
+    enquiries?: EnquiryUpdateManyWithoutOrganizationNestedInput
+    bookings?: BookingUpdateManyWithoutOrganizationNestedInput
+    invoices?: InvoiceUpdateManyWithoutOrganizationNestedInput
+    payments?: PaymentUpdateManyWithoutOrganizationNestedInput
+    documents?: DocumentUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type OrganizationUncheckedUpdateWithoutSignatureRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    industry?: EnumIndustryTypeFieldUpdateOperationsInput | $Enums.IndustryType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    branches?: BranchUncheckedUpdateManyWithoutOrganizationNestedInput
+    users?: UserUncheckedUpdateManyWithoutOrganizationNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutOrganizationNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutOrganizationNestedInput
+    settings?: OrganizationSettingUncheckedUpdateManyWithoutOrganizationNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutOrganizationNestedInput
+    musicStudents?: MusicStudentUncheckedUpdateManyWithoutOrganizationNestedInput
+    musicCourses?: MusicCourseUncheckedUpdateManyWithoutOrganizationNestedInput
+    musicBatches?: MusicBatchUncheckedUpdateManyWithoutOrganizationNestedInput
+    musicEnrollments?: MusicEnrollmentUncheckedUpdateManyWithoutOrganizationNestedInput
+    musicPracticeLogs?: MusicPracticeLogUncheckedUpdateManyWithoutOrganizationNestedInput
+    gymMembers?: GymMemberUncheckedUpdateManyWithoutOrganizationNestedInput
+    gymClasses?: GymClassUncheckedUpdateManyWithoutOrganizationNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutOrganizationNestedInput
+    membershipPlans?: MembershipPlanUncheckedUpdateManyWithoutOrganizationNestedInput
+    membershipSubscriptions?: MembershipSubscriptionUncheckedUpdateManyWithoutOrganizationNestedInput
+    sales?: SaleUncheckedUpdateManyWithoutOrganizationNestedInput
+    contacts?: ContactUncheckedUpdateManyWithoutOrganizationNestedInput
+    products?: ProductUncheckedUpdateManyWithoutOrganizationNestedInput
+    inventory?: InventoryItemUncheckedUpdateManyWithoutOrganizationNestedInput
+    enquiries?: EnquiryUncheckedUpdateManyWithoutOrganizationNestedInput
+    bookings?: BookingUncheckedUpdateManyWithoutOrganizationNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutOrganizationNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutOrganizationNestedInput
+    documents?: DocumentUncheckedUpdateManyWithoutOrganizationNestedInput
+    automationRules?: AutomationRuleUncheckedUpdateManyWithoutOrganizationNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutOrganizationNestedInput
+    messageTemplates?: MessageTemplateUncheckedUpdateManyWithoutOrganizationNestedInput
+  }
+
+  export type ContactUpsertWithoutSignatureRequestsInput = {
+    update: XOR<ContactUpdateWithoutSignatureRequestsInput, ContactUncheckedUpdateWithoutSignatureRequestsInput>
+    create: XOR<ContactCreateWithoutSignatureRequestsInput, ContactUncheckedCreateWithoutSignatureRequestsInput>
+    where?: ContactWhereInput
+  }
+
+  export type ContactUpdateToOneWithWhereWithoutSignatureRequestsInput = {
+    where?: ContactWhereInput
+    data: XOR<ContactUpdateWithoutSignatureRequestsInput, ContactUncheckedUpdateWithoutSignatureRequestsInput>
+  }
+
+  export type ContactUpdateWithoutSignatureRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumContactTypeFieldUpdateOperationsInput | $Enums.ContactType
+    status?: EnumContactStatusFieldUpdateOperationsInput | $Enums.ContactStatus
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutContactsNestedInput
+    branch?: BranchUpdateOneWithoutContactsNestedInput
+    enquiries?: EnquiryUpdateManyWithoutContactNestedInput
+    bookings?: BookingUpdateManyWithoutContactNestedInput
+    invoices?: InvoiceUpdateManyWithoutContactNestedInput
+    musicStudent?: MusicStudentUpdateOneWithoutContactNestedInput
+    gymMember?: GymMemberUpdateOneWithoutContactNestedInput
+    attendances?: AttendanceUpdateManyWithoutContactNestedInput
+    membershipSubscriptions?: MembershipSubscriptionUpdateManyWithoutContactNestedInput
+    sales?: SaleUpdateManyWithoutContactNestedInput
+    messages?: MessageUpdateManyWithoutContactNestedInput
+  }
+
+  export type ContactUncheckedUpdateWithoutSignatureRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    branchId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumContactTypeFieldUpdateOperationsInput | $Enums.ContactType
+    status?: EnumContactStatusFieldUpdateOperationsInput | $Enums.ContactStatus
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enquiries?: EnquiryUncheckedUpdateManyWithoutContactNestedInput
+    bookings?: BookingUncheckedUpdateManyWithoutContactNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutContactNestedInput
+    musicStudent?: MusicStudentUncheckedUpdateOneWithoutContactNestedInput
+    gymMember?: GymMemberUncheckedUpdateOneWithoutContactNestedInput
+    attendances?: AttendanceUncheckedUpdateManyWithoutContactNestedInput
+    membershipSubscriptions?: MembershipSubscriptionUncheckedUpdateManyWithoutContactNestedInput
+    sales?: SaleUncheckedUpdateManyWithoutContactNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutContactNestedInput
+  }
+
   export type BranchCreateManyOrganizationInput = {
     id: string
     name: string
@@ -72191,6 +81064,65 @@ export namespace Prisma {
     storageKey: string
     uploadedByUserId?: string | null
     createdAt?: Date | string
+  }
+
+  export type AutomationRuleCreateManyOrganizationInput = {
+    id: string
+    name: string
+    enabled?: boolean
+    trigger: string
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    actionType: $Enums.AutomationActionType
+    actionConfig: JsonNullValueInput | InputJsonValue
+    runCount?: number
+    lastRunAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MessageCreateManyOrganizationInput = {
+    id: string
+    contactId?: string | null
+    channel: $Enums.MessageChannel
+    toAddress: string
+    subject?: string | null
+    body: string
+    status: $Enums.MessageStatus
+    error?: string | null
+    source: string
+    sentByUserId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type MessageTemplateCreateManyOrganizationInput = {
+    id: string
+    name: string
+    channel: $Enums.MessageChannel
+    subject?: string | null
+    body: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SignatureRequestCreateManyOrganizationInput = {
+    id: string
+    contactId?: string | null
+    title: string
+    body: string
+    bodyHash: string
+    signerName: string
+    signerEmail: string
+    token: string
+    status?: $Enums.SignatureStatus
+    expiresAt: Date | string
+    signedAt?: Date | string | null
+    signedName?: string | null
+    signerIp?: string | null
+    signerUserAgent?: string | null
+    declineReason?: string | null
+    createdByUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type BranchUpdateWithoutOrganizationInput = {
@@ -72926,6 +81858,8 @@ export namespace Prisma {
     attendances?: AttendanceUpdateManyWithoutContactNestedInput
     membershipSubscriptions?: MembershipSubscriptionUpdateManyWithoutContactNestedInput
     sales?: SaleUpdateManyWithoutContactNestedInput
+    messages?: MessageUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateWithoutOrganizationInput = {
@@ -72949,6 +81883,8 @@ export namespace Prisma {
     attendances?: AttendanceUncheckedUpdateManyWithoutContactNestedInput
     membershipSubscriptions?: MembershipSubscriptionUncheckedUpdateManyWithoutContactNestedInput
     sales?: SaleUncheckedUpdateManyWithoutContactNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateManyWithoutOrganizationInput = {
@@ -73252,6 +82188,183 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type AutomationRuleUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    trigger?: StringFieldUpdateOperationsInput | string
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    actionType?: EnumAutomationActionTypeFieldUpdateOperationsInput | $Enums.AutomationActionType
+    actionConfig?: JsonNullValueInput | InputJsonValue
+    runCount?: IntFieldUpdateOperationsInput | number
+    lastRunAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AutomationRuleUncheckedUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    trigger?: StringFieldUpdateOperationsInput | string
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    actionType?: EnumAutomationActionTypeFieldUpdateOperationsInput | $Enums.AutomationActionType
+    actionConfig?: JsonNullValueInput | InputJsonValue
+    runCount?: IntFieldUpdateOperationsInput | number
+    lastRunAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AutomationRuleUncheckedUpdateManyWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    trigger?: StringFieldUpdateOperationsInput | string
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    actionType?: EnumAutomationActionTypeFieldUpdateOperationsInput | $Enums.AutomationActionType
+    actionConfig?: JsonNullValueInput | InputJsonValue
+    runCount?: IntFieldUpdateOperationsInput | number
+    lastRunAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    channel?: EnumMessageChannelFieldUpdateOperationsInput | $Enums.MessageChannel
+    toAddress?: StringFieldUpdateOperationsInput | string
+    subject?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: StringFieldUpdateOperationsInput | string
+    status?: EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
+    error?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: StringFieldUpdateOperationsInput | string
+    sentByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contact?: ContactUpdateOneWithoutMessagesNestedInput
+  }
+
+  export type MessageUncheckedUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contactId?: NullableStringFieldUpdateOperationsInput | string | null
+    channel?: EnumMessageChannelFieldUpdateOperationsInput | $Enums.MessageChannel
+    toAddress?: StringFieldUpdateOperationsInput | string
+    subject?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: StringFieldUpdateOperationsInput | string
+    status?: EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
+    error?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: StringFieldUpdateOperationsInput | string
+    sentByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageUncheckedUpdateManyWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contactId?: NullableStringFieldUpdateOperationsInput | string | null
+    channel?: EnumMessageChannelFieldUpdateOperationsInput | $Enums.MessageChannel
+    toAddress?: StringFieldUpdateOperationsInput | string
+    subject?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: StringFieldUpdateOperationsInput | string
+    status?: EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
+    error?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: StringFieldUpdateOperationsInput | string
+    sentByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageTemplateUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    channel?: EnumMessageChannelFieldUpdateOperationsInput | $Enums.MessageChannel
+    subject?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageTemplateUncheckedUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    channel?: EnumMessageChannelFieldUpdateOperationsInput | $Enums.MessageChannel
+    subject?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageTemplateUncheckedUpdateManyWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    channel?: EnumMessageChannelFieldUpdateOperationsInput | $Enums.MessageChannel
+    subject?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SignatureRequestUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    bodyHash?: StringFieldUpdateOperationsInput | string
+    signerName?: StringFieldUpdateOperationsInput | string
+    signerEmail?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumSignatureStatusFieldUpdateOperationsInput | $Enums.SignatureStatus
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    signedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    signedName?: NullableStringFieldUpdateOperationsInput | string | null
+    signerIp?: NullableStringFieldUpdateOperationsInput | string | null
+    signerUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    declineReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contact?: ContactUpdateOneWithoutSignatureRequestsNestedInput
+  }
+
+  export type SignatureRequestUncheckedUpdateWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contactId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    bodyHash?: StringFieldUpdateOperationsInput | string
+    signerName?: StringFieldUpdateOperationsInput | string
+    signerEmail?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumSignatureStatusFieldUpdateOperationsInput | $Enums.SignatureStatus
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    signedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    signedName?: NullableStringFieldUpdateOperationsInput | string | null
+    signerIp?: NullableStringFieldUpdateOperationsInput | string | null
+    signerUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    declineReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SignatureRequestUncheckedUpdateManyWithoutOrganizationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    contactId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    bodyHash?: StringFieldUpdateOperationsInput | string
+    signerName?: StringFieldUpdateOperationsInput | string
+    signerEmail?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumSignatureStatusFieldUpdateOperationsInput | $Enums.SignatureStatus
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    signedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    signedName?: NullableStringFieldUpdateOperationsInput | string | null
+    signerIp?: NullableStringFieldUpdateOperationsInput | string | null
+    signerUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    declineReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateManyBranchInput = {
     id: string
     organizationId: string
@@ -73503,6 +82616,8 @@ export namespace Prisma {
     attendances?: AttendanceUpdateManyWithoutContactNestedInput
     membershipSubscriptions?: MembershipSubscriptionUpdateManyWithoutContactNestedInput
     sales?: SaleUpdateManyWithoutContactNestedInput
+    messages?: MessageUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUpdateManyWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateWithoutBranchInput = {
@@ -73526,6 +82641,8 @@ export namespace Prisma {
     attendances?: AttendanceUncheckedUpdateManyWithoutContactNestedInput
     membershipSubscriptions?: MembershipSubscriptionUncheckedUpdateManyWithoutContactNestedInput
     sales?: SaleUncheckedUpdateManyWithoutContactNestedInput
+    messages?: MessageUncheckedUpdateManyWithoutContactNestedInput
+    signatureRequests?: SignatureRequestUncheckedUpdateManyWithoutContactNestedInput
   }
 
   export type ContactUncheckedUpdateManyWithoutBranchInput = {
@@ -74794,6 +83911,41 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type MessageCreateManyContactInput = {
+    id: string
+    organizationId: string
+    channel: $Enums.MessageChannel
+    toAddress: string
+    subject?: string | null
+    body: string
+    status: $Enums.MessageStatus
+    error?: string | null
+    source: string
+    sentByUserId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type SignatureRequestCreateManyContactInput = {
+    id: string
+    organizationId: string
+    title: string
+    body: string
+    bodyHash: string
+    signerName: string
+    signerEmail: string
+    token: string
+    status?: $Enums.SignatureStatus
+    expiresAt: Date | string
+    signedAt?: Date | string | null
+    signedName?: string | null
+    signerIp?: string | null
+    signerUserAgent?: string | null
+    declineReason?: string | null
+    createdByUserId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type EnquiryUpdateWithoutContactInput = {
     id?: StringFieldUpdateOperationsInput | string
     source?: EnumEnquirySourceFieldUpdateOperationsInput | $Enums.EnquirySource
@@ -75044,6 +84196,111 @@ export namespace Prisma {
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     paymentMethod?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageUpdateWithoutContactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    channel?: EnumMessageChannelFieldUpdateOperationsInput | $Enums.MessageChannel
+    toAddress?: StringFieldUpdateOperationsInput | string
+    subject?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: StringFieldUpdateOperationsInput | string
+    status?: EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
+    error?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: StringFieldUpdateOperationsInput | string
+    sentByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutMessagesNestedInput
+  }
+
+  export type MessageUncheckedUpdateWithoutContactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    channel?: EnumMessageChannelFieldUpdateOperationsInput | $Enums.MessageChannel
+    toAddress?: StringFieldUpdateOperationsInput | string
+    subject?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: StringFieldUpdateOperationsInput | string
+    status?: EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
+    error?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: StringFieldUpdateOperationsInput | string
+    sentByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MessageUncheckedUpdateManyWithoutContactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    channel?: EnumMessageChannelFieldUpdateOperationsInput | $Enums.MessageChannel
+    toAddress?: StringFieldUpdateOperationsInput | string
+    subject?: NullableStringFieldUpdateOperationsInput | string | null
+    body?: StringFieldUpdateOperationsInput | string
+    status?: EnumMessageStatusFieldUpdateOperationsInput | $Enums.MessageStatus
+    error?: NullableStringFieldUpdateOperationsInput | string | null
+    source?: StringFieldUpdateOperationsInput | string
+    sentByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SignatureRequestUpdateWithoutContactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    bodyHash?: StringFieldUpdateOperationsInput | string
+    signerName?: StringFieldUpdateOperationsInput | string
+    signerEmail?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumSignatureStatusFieldUpdateOperationsInput | $Enums.SignatureStatus
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    signedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    signedName?: NullableStringFieldUpdateOperationsInput | string | null
+    signerIp?: NullableStringFieldUpdateOperationsInput | string | null
+    signerUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    declineReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    organization?: OrganizationUpdateOneRequiredWithoutSignatureRequestsNestedInput
+  }
+
+  export type SignatureRequestUncheckedUpdateWithoutContactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    bodyHash?: StringFieldUpdateOperationsInput | string
+    signerName?: StringFieldUpdateOperationsInput | string
+    signerEmail?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumSignatureStatusFieldUpdateOperationsInput | $Enums.SignatureStatus
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    signedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    signedName?: NullableStringFieldUpdateOperationsInput | string | null
+    signerIp?: NullableStringFieldUpdateOperationsInput | string | null
+    signerUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    declineReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SignatureRequestUncheckedUpdateManyWithoutContactInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    organizationId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    bodyHash?: StringFieldUpdateOperationsInput | string
+    signerName?: StringFieldUpdateOperationsInput | string
+    signerEmail?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
+    status?: EnumSignatureStatusFieldUpdateOperationsInput | $Enums.SignatureStatus
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    signedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    signedName?: NullableStringFieldUpdateOperationsInput | string | null
+    signerIp?: NullableStringFieldUpdateOperationsInput | string | null
+    signerUserAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    declineReason?: NullableStringFieldUpdateOperationsInput | string | null
+    createdByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type InventoryItemCreateManyProductInput = {

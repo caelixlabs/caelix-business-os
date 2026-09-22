@@ -61,6 +61,13 @@ export const ROLE_PERMISSION_MATRIX: Record<string, PermissionCode[]> = {
     PermissionCode.POS_SELL,
     PermissionCode.POS_READ,
     PermissionCode.POS_REFUND,
+    PermissionCode.AUTOMATION_READ,
+    PermissionCode.AUTOMATION_MANAGE,
+    PermissionCode.COMMUNICATION_READ,
+    PermissionCode.COMMUNICATION_SEND,
+    PermissionCode.COMMUNICATION_MANAGE,
+    PermissionCode.SIGNATURE_READ,
+    PermissionCode.SIGNATURE_MANAGE,
   ],
 
   ADMIN: [
@@ -122,6 +129,13 @@ export const ROLE_PERMISSION_MATRIX: Record<string, PermissionCode[]> = {
     PermissionCode.POS_SELL,
     PermissionCode.POS_READ,
     PermissionCode.POS_REFUND,
+    PermissionCode.AUTOMATION_READ,
+    PermissionCode.AUTOMATION_MANAGE,
+    PermissionCode.COMMUNICATION_READ,
+    PermissionCode.COMMUNICATION_SEND,
+    PermissionCode.COMMUNICATION_MANAGE,
+    PermissionCode.SIGNATURE_READ,
+    PermissionCode.SIGNATURE_MANAGE,
   ],
 
   MANAGER: [
@@ -172,6 +186,11 @@ export const ROLE_PERMISSION_MATRIX: Record<string, PermissionCode[]> = {
     PermissionCode.POS_SELL,
     PermissionCode.POS_READ,
     PermissionCode.POS_REFUND,
+    PermissionCode.AUTOMATION_READ,
+    PermissionCode.COMMUNICATION_READ,
+    PermissionCode.COMMUNICATION_SEND,
+    PermissionCode.SIGNATURE_READ,
+    PermissionCode.SIGNATURE_MANAGE,
   ],
 
   EMPLOYEE: [
@@ -211,6 +230,9 @@ export const ROLE_PERMISSION_MATRIX: Record<string, PermissionCode[]> = {
 
     PermissionCode.POS_SELL,
     PermissionCode.POS_READ,
+    PermissionCode.COMMUNICATION_READ,
+    PermissionCode.COMMUNICATION_SEND,
+    PermissionCode.SIGNATURE_READ,
   ],
 
   VIEWER: [

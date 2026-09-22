@@ -544,6 +544,69 @@ exports.Prisma.SaleLineScalarFieldEnum = {
   commissionAmount: 'commissionAmount'
 };
 
+exports.Prisma.AutomationRuleScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  enabled: 'enabled',
+  trigger: 'trigger',
+  conditions: 'conditions',
+  actionType: 'actionType',
+  actionConfig: 'actionConfig',
+  runCount: 'runCount',
+  lastRunAt: 'lastRunAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MessageScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  contactId: 'contactId',
+  channel: 'channel',
+  toAddress: 'toAddress',
+  subject: 'subject',
+  body: 'body',
+  status: 'status',
+  error: 'error',
+  source: 'source',
+  sentByUserId: 'sentByUserId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.MessageTemplateScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  name: 'name',
+  channel: 'channel',
+  subject: 'subject',
+  body: 'body',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SignatureRequestScalarFieldEnum = {
+  id: 'id',
+  organizationId: 'organizationId',
+  contactId: 'contactId',
+  title: 'title',
+  body: 'body',
+  bodyHash: 'bodyHash',
+  signerName: 'signerName',
+  signerEmail: 'signerEmail',
+  token: 'token',
+  status: 'status',
+  expiresAt: 'expiresAt',
+  signedAt: 'signedAt',
+  signedName: 'signedName',
+  signerIp: 'signerIp',
+  signerUserAgent: 'signerUserAgent',
+  declineReason: 'declineReason',
+  createdByUserId: 'createdByUserId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -743,6 +806,33 @@ exports.SaleStatus = exports.$Enums.SaleStatus = {
   REFUNDED: 'REFUNDED'
 };
 
+exports.AutomationActionType = exports.$Enums.AutomationActionType = {
+  NOTIFY_ADMINS: 'NOTIFY_ADMINS',
+  SEND_EMAIL_TO_CONTACT: 'SEND_EMAIL_TO_CONTACT',
+  SEND_SMS_TO_CONTACT: 'SEND_SMS_TO_CONTACT',
+  SEND_WHATSAPP_TO_CONTACT: 'SEND_WHATSAPP_TO_CONTACT'
+};
+
+exports.MessageChannel = exports.$Enums.MessageChannel = {
+  EMAIL: 'EMAIL',
+  SMS: 'SMS',
+  WHATSAPP: 'WHATSAPP'
+};
+
+exports.MessageStatus = exports.$Enums.MessageStatus = {
+  SENT: 'SENT',
+  FAILED: 'FAILED',
+  LOGGED: 'LOGGED'
+};
+
+exports.SignatureStatus = exports.$Enums.SignatureStatus = {
+  PENDING: 'PENDING',
+  SIGNED: 'SIGNED',
+  DECLINED: 'DECLINED',
+  EXPIRED: 'EXPIRED',
+  CANCELLED: 'CANCELLED'
+};
+
 exports.Prisma.ModelName = {
   Organization: 'Organization',
   Branch: 'Branch',
@@ -776,7 +866,11 @@ exports.Prisma.ModelName = {
   MembershipPlan: 'MembershipPlan',
   MembershipSubscription: 'MembershipSubscription',
   Sale: 'Sale',
-  SaleLine: 'SaleLine'
+  SaleLine: 'SaleLine',
+  AutomationRule: 'AutomationRule',
+  Message: 'Message',
+  MessageTemplate: 'MessageTemplate',
+  SignatureRequest: 'SignatureRequest'
 };
 
 /**

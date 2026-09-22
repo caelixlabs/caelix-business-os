@@ -10,6 +10,9 @@ const SESSION_FLAG_COOKIE = 'caelix_session';
 export function proxy(request: NextRequest) {
   const hasSessionFlag = request.cookies.has(SESSION_FLAG_COOKIE);
   const { pathname } = request.nextUrl;
+  // Signing links are opened by people with no account, and by staff who may already be signed in.
+  if (pathname.startsWith('/sign/')) return NextResponse.next();
+
   const isPublicRoute = PUBLIC_ROUTES.some((route) => pathname.startsWith(route));
 
   if (isPublicRoute) {
